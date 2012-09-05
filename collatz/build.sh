@@ -18,10 +18,10 @@ git log > Collatz.log
 
 echo RUNNING DOXYGEN...
 #doxygen -g
-# EXTRACT_ALL            = YES
-# EXTRACT_PRIVATE        = YES
-# EXTRACT_STATIC         = YES
-# GENERATE_LATEX         = NO
+# EXTRACT_ALL			= YES
+# EXTRACT_PRIVATE		= YES
+# EXTRACT_STATIC		= YES
+# GENERATE_LATEX		= NO
 doxygen Doxyfile
 
 zip Collatz README.txt html/* Collatz.h Collatz.log TestCollatz.c++ TestCollatz.out

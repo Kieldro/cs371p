@@ -9,8 +9,9 @@ Last Name: Buitrago
 EID: ib
 E-mail: kieldro@gmail
 Estimated number of hours: 6
-Actual number of hours:
-7:30p - 
+Actual number of hours: .5
+7:30p - 8p
+11:30 - 
 
 Turnin CS Username: keo
 GitHub ID: kieldro
