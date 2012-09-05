@@ -18,6 +18,7 @@ GitHub ID: kieldro
 GitHub Repository Name: cs371p
 
 Comments:
+-compiling unittests also causes source file to be compiled, why?
 
 ---------------
 Code of Conduct

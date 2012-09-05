@@ -1,15 +1,15 @@
 # file variables
 source="Collatz.h"
 unitFile="TestCollatz.c++"
-outFile="TestCollatz.out"
 
 clear
 echo COMPILING $source and $unitFile...
-g++ -O -ansi -pedantic -ldl -Wall \
+g++ -pedantic -ldl -Wall -std=c++0x\
 	$unitFile -lcppunit -o $unitFile.app
 	if ([ $? == 0 ]); then
+
 echo RUNNING UNIT TESTS...
-valgrind ./$unitFile.app #>& $outFile
+valgrind ./$unitFile.app #>& $unitFile.out
 	fi
 
 <<MULTICOMMENT

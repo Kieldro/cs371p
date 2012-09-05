@@ -12,7 +12,8 @@ To test the program:
 	...
 	% locate libcppunit.a
 	/usr/lib/libcppunit.a
-	% g++ -pedantic -std=c++0x -lcppunit -ldl -Wall TestCollatz.c++ -o TestCollatz.c++.app
+	% g++ -pedantic -std=c++0x -lcppunit -ldl -Wall\
+		TestCollatz.c++ -o TestCollatz.c++.app
 	% valgrind TestCollatz.c++.app >& TestCollatz.c++.out
 */
 
@@ -28,19 +29,54 @@ To test the program:
 
 #include "Collatz.h"
 
+using std::istringstream;
+using std::ostringstream;
+
 // -----------
 // TestCollatz
 struct TestCollatz : CppUnit::TestFixture {
 	// ----
 	// read
-	void test_read () {
-		std::istringstream r("1 10\n");
+	void test_read_0 () {
+		istringstream r("1 10\n");
 		int i;
 		int j;
 		const bool b = collatz_read(r, i, j);
+		
 		CPPUNIT_ASSERT(b == true);
 		CPPUNIT_ASSERT(i ==	1);
-		CPPUNIT_ASSERT(j ==   10);}
+		CPPUNIT_ASSERT(j == 10);
+	}
+	
+	// -----------
+	// cycleLength
+	void test_cycleLength_0(){
+		int n = 1;
+		int c = cycleLength(n);
+		
+		CPPUNIT_ASSERT(c == 1);
+	}
+	
+	void test_cycleLength_1(){
+		int n = 2;
+		int c = cycleLength(n);
+		
+		CPPUNIT_ASSERT(c == 2);
+	}
+	
+	void test_cycleLength_2(){
+		int n = 3;
+		int c = cycleLength(n);
+		
+		CPPUNIT_ASSERT(c == 8);
+	}
+	
+	void test_cycleLength_3(){
+		int n = 20;
+		int c = cycleLength(n);
+		
+		CPPUNIT_ASSERT(c == 8);
+	}
 
 	// ----
 	// eval
@@ -63,28 +99,35 @@ struct TestCollatz : CppUnit::TestFixture {
 	// -----
 	// print
 	void test_print () {
-		std::ostringstream w;
+		ostringstream w;
 		collatz_print(w, 1, 10, 20);
 		CPPUNIT_ASSERT(w.str() == "1 10 20\n");}
 
 	// -----
 	// solve
 	void test_solve () {
-		std::istringstream r("1 10\n100 200\n201 210\n900 1000\n");
-		std::ostringstream w;
+		istringstream r("1 10\n100 200\n201 210\n900 1000\n");
+		ostringstream w;
 		collatz_solve(r, w);
 		CPPUNIT_ASSERT(w.str() == "1 10 20\n100 200 125\n201 210 89\n900 1000 174\n");}
 
 	// -----
 	// suite
 	CPPUNIT_TEST_SUITE(TestCollatz);
-	CPPUNIT_TEST(test_read);
+	
+	CPPUNIT_TEST(test_read_0);
+	CPPUNIT_TEST(test_cycleLength_0);
+	CPPUNIT_TEST(test_cycleLength_1);
+	CPPUNIT_TEST(test_cycleLength_2);
+	CPPUNIT_TEST(test_cycleLength_3);
+	
 	CPPUNIT_TEST(test_eval_1);
 	CPPUNIT_TEST(test_eval_2);
 	CPPUNIT_TEST(test_eval_3);
 	CPPUNIT_TEST(test_eval_4);
 	CPPUNIT_TEST(test_print);
 	CPPUNIT_TEST(test_solve);
+	
 	CPPUNIT_TEST_SUITE_END();};
 
 // ----
