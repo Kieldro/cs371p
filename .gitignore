@@ -10,6 +10,7 @@
 .nfs*
 a.out
 *.sublime-*
+*.gch
 
 # repo specific
 *.app

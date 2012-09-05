@@ -1,7 +1,6 @@
 using namespace std;
 
 #include <iostream>
-
 int cycleLength(int n){
 	int v = 1;
 	
@@ -16,16 +15,17 @@ int cycleLength(int n){
 	
 	return v;
 }
+
 int main(){
 	int maxLen = 0;
 	
-	for (int i = 0; i < 1000; ++i){
+	for (int i = 1; i < 1000; ++i){
+		cout << "BOOYAKASHA!" << endl;
 		int cLen = cycleLength(i);
 		maxLen = std::max(maxLen, cLen);		
 	
 		cout << "cycle length of " << i << " = " << cLen << endl;
 	}
-	
 	
 	return 0;
 }
