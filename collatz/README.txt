@@ -1,26 +1,22 @@
-Course Name: CS378
-Unique: 91060
+Project #1: Collatz
+Date: Wed, 12 Sep 2012
+
+Course Name: cs371p
+Unique: 53060
 
 First Name: Ian
 Last Name: Buitrago
 EID: ib
-E-mail: kieldro@gmail.com
-Estimated number of hours: 25
-Actual    number of hours: 1
+E-mail: kieldro@gmail
+Estimated number of hours: 6
+Actual number of hours:
+7:30p - 
 
 Turnin CS Username: keo
-GitHub ID: Kieldro
-GitHub Repository Name: cs378-graph
+GitHub ID: kieldro
+GitHub Repository Name: cs371p
 
 Comments:
-
-----------------
-Pair Programming
-----------------
-
-I attest to that fact that, of the time spent working on this project,
-at least seventy-five (75) percent was spent working with the person
-listed above in pair programming.
 
 ---------------
 Code of Conduct
