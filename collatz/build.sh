@@ -1,15 +1,15 @@
 # file variables
-source="Collatz.h"
+source="metaCacheGen.h"
 unitFile="TestCollatz.c++"
+source=$unitFile
 
 clear
-echo COMPILING $source and $unitFile...
-g++ -pedantic -ldl -Wall -std=c++0x\
-	$unitFile -lcppunit -o $unitFile.app
-	if ([ $? == 0 ]); then
+echo COMPILING $source...
+g++ -pedantic -ldl -Wall -std=c++0x $source -lcppunit -o $source.app
 
+	if ([ $? == 0 ]); then
 echo RUNNING UNIT TESTS...
-valgrind ./$unitFile.app #>& $unitFile.out
+valgrind ./$source.app #>& $unitFile.out
 	fi
 
 <<MULTICOMMENT

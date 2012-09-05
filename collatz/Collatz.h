@@ -4,10 +4,13 @@
 // Glenn P. Downing
 // --------------------------
 
+
 // --------
 // includes
 #include <cassert>  // assert
 #include <iostream> // endl, istream, ostream
+
+int cache [1000];
 
 // ------------
 // collatz_read
@@ -39,11 +42,12 @@ int cycleLength(int n){
 	
 	while(n != 1){
 		if(n & 1){		// odd
-			n = (3*n + 1) / 2;
+			//n = (3*n + 1) / 2;
+			n = n + (n >> 1) + 1;
 			++v;
 		}else			// even
 			n /= 2;
-	++v;
+		++v;
 	}
 	
 	return v;
@@ -61,6 +65,9 @@ int collatz_eval (int i, int j) {
 	assert(j > 0);
 	
 	i = std::max(i, j/2);
+	if(i > j)
+		std::swap(i, j);
+	
 	int v = 0;
 	
 	for(int k = i; k <= j; ++k){
@@ -104,3 +111,17 @@ void collatz_solve (std::istream& r, std::ostream& w) {
 	}
 
 }
+
+// -------
+// defines
+#ifdef ONLINE_JUDGE
+	#define NDEBUG
+	// ----
+	// main
+	int main () {
+		using namespace std;
+		ios_base::sync_with_stdio(false);
+		collatz_solve(cin, cout);
+		return 0;
+	}
+#endif
