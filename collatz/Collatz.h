@@ -4,13 +4,12 @@
 // Glenn P. Downing
 // --------------------------
 
+#define DEBUG true
 
 // --------
 // includes
 #include <cassert>  // assert
 #include <iostream> // endl, istream, ostream
-
-int cache [1000];
 
 // ------------
 // collatz_read
@@ -37,10 +36,19 @@ bool collatz_read (std::istream& r, int& i, int& j) {
  * @param n positive number
  * @return the cycle length of n
  */
-int cycleLength(int n){
+//static 
+int cycleLength(unsigned long n){
+	assert(n < 1000000);
 	int v = 1;
-	
+	const int CACHE_SIZE = 1000;
+	int cache [CACHE_SIZE];
+		
 	while(n != 1){
+		if(n < CACHE_SIZE and cache[n] > 0){
+			;//v += cache[n] - 1;
+			//break;
+		}
+		
 		if(n & 1){		// odd
 			//n = (3*n + 1) / 2;
 			n = n + (n >> 1) + 1;
@@ -50,6 +58,8 @@ int cycleLength(int n){
 		++v;
 	}
 	
+	if(n < CACHE_SIZE)
+		cache[n] = v;
 	return v;
 }
 

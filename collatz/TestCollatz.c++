@@ -31,6 +31,9 @@ To test the program:
 
 using std::istringstream;
 using std::ostringstream;
+using std::cerr;
+using std::cout;
+using std::endl;
 
 // -----------
 // TestCollatz
@@ -82,18 +85,22 @@ struct TestCollatz : CppUnit::TestFixture {
 	// eval
 	void test_eval_1 () {
 		const int v = collatz_eval(1, 10);
+		if(DEBUG) cerr << "v = " << v << endl;
 		CPPUNIT_ASSERT(v == 20);}
 
 	void test_eval_2 () {
 		const int v = collatz_eval(100, 200);
+		if(DEBUG) cerr << "v = " << v << endl;
 		CPPUNIT_ASSERT(v == 125);}
 
 	void test_eval_3 () {
 		const int v = collatz_eval(201, 210);
+		if(DEBUG) cerr << "v = " << v << endl;
 		CPPUNIT_ASSERT(v == 89);}
 
 	void test_eval_4 () {
 		const int v = collatz_eval(900, 1000);
+		if(DEBUG) cerr << "v = " << v << endl;
 		CPPUNIT_ASSERT(v == 174);}
 
 	// -----
