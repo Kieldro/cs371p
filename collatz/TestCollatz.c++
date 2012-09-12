@@ -178,8 +178,9 @@ struct TestCollatz : CppUnit::TestFixture {
 		if(DEBUG) cerr << "w.str(): " << w.str() << endl;
 		CPPUNIT_ASSERT(w.str() == "1 999999 525\n");
 		int t1 = clock();
-		//int i = 0; i++;
+		int i = 0; i++;
 		if(DEBUG) cerr << "time: " << (t1 - t0) << endl;
+		if(DEBUG) cerr << "clock per sec: " << CLOCKS_PER_SEC	 << endl;
 		
 	}
 

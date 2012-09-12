@@ -69,6 +69,7 @@ int cycleLength(unsigned long x){
 	
 	if(x < CACHE_SIZE)
 		cache[x] = v;
+	if(DEBUG and v == 525) cerr << "x " << x << endl;
 	return v;
 }
 
