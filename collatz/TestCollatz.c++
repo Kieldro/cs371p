@@ -51,6 +51,28 @@ struct TestCollatz : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(j == 10);
 	}
 	
+	void test_read_1 () {
+		istringstream r("0 1 2 34\n");
+		int i;
+		int j;
+		const bool b = collatz_read(r, i, j);
+		
+		CPPUNIT_ASSERT(b == true);
+		CPPUNIT_ASSERT(i ==	1);
+		CPPUNIT_ASSERT(j == 2);
+	}
+	
+	void test_read_2 () {
+		istringstream r("1 10\n");
+		int i;
+		int j;
+		const bool b = collatz_read(r, i, j);
+		
+		CPPUNIT_ASSERT(b == true);
+		CPPUNIT_ASSERT(i ==	1);
+		CPPUNIT_ASSERT(j == 10);
+	}
+	
 	// -----------
 	// cycleLength
 	void test_cycleLength_0(){

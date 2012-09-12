@@ -9,6 +9,7 @@
 // --------
 // includes
 #include <cassert>  // assert
+#include <vector>
 #include <iostream> // endl, istream, ostream
 
 // ------------
@@ -40,13 +41,15 @@ bool collatz_read (std::istream& r, int& i, int& j) {
 int cycleLength(unsigned long n){
 	assert(n < 1000000);
 	int v = 1;
-	const int CACHE_SIZE = 1000;
+	const unsigned int CACHE_SIZE = 1000;
 	int cache [CACHE_SIZE];
+	//std::vector<int> cache(CACHE_SIZE);
+	std::fill(cache, cache + CACHE_SIZE, 0);
 		
 	while(n != 1){
 		if(n < CACHE_SIZE and cache[n] > 0){
-			;//v += cache[n] - 1;
-			//break;
+			v += cache[n] - 1;
+			break;
 		}
 		
 		if(n & 1){		// odd

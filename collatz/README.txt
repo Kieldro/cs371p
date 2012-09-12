@@ -11,7 +11,8 @@ E-mail: kieldro@gmail
 Estimated number of hours: 6
 Actual number of hours: .5
 7:30p - 8p
-11:30 - 
+11:30 - 12
+2:30p - 
 
 Turnin CS Username: keo
 GitHub ID: kieldro
@@ -19,6 +20,7 @@ GitHub Repository Name: cs371p
 
 Comments:
 -compiling unittests also causes source file to be compiled, why?
+-why is it dangerous to compare signed and unsigned?
 
 ---------------
 Code of Conduct
