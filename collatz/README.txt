@@ -12,7 +12,8 @@ Estimated number of hours: 6
 Actual number of hours: .5
 7:30p - 8p
 11:30 - 12
-2:30p - 
+2:30p - 3p
+11:30a - 2p
 
 Turnin CS Username: keo
 GitHub ID: kieldro

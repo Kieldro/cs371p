@@ -52,25 +52,25 @@ struct TestCollatz : CppUnit::TestFixture {
 	}
 	
 	void test_read_1 () {
-		istringstream r("0 1 2 34\n");
+		istringstream r("4 1 2 34\n");
 		int i;
 		int j;
 		const bool b = collatz_read(r, i, j);
 		
 		CPPUNIT_ASSERT(b == true);
-		CPPUNIT_ASSERT(i ==	1);
-		CPPUNIT_ASSERT(j == 2);
+		CPPUNIT_ASSERT(i ==	4);
+		CPPUNIT_ASSERT(j == 1);
 	}
 	
 	void test_read_2 () {
-		istringstream r("1 10\n");
+		istringstream r("1 20\n");
 		int i;
 		int j;
 		const bool b = collatz_read(r, i, j);
 		
 		CPPUNIT_ASSERT(b == true);
 		CPPUNIT_ASSERT(i ==	1);
-		CPPUNIT_ASSERT(j == 10);
+		CPPUNIT_ASSERT(j == 20);
 	}
 	
 	// -----------
@@ -127,37 +127,71 @@ struct TestCollatz : CppUnit::TestFixture {
 
 	// -----
 	// print
-	void test_print () {
+	void test_print_0 () {
 		ostringstream w;
 		collatz_print(w, 1, 10, 20);
-		CPPUNIT_ASSERT(w.str() == "1 10 20\n");}
+		CPPUNIT_ASSERT(w.str() == "1 10 20\n");
+	}
+	
+	void test_print_1 () {
+		ostringstream w;
+		collatz_print(w, 3, 2, 4);
+		CPPUNIT_ASSERT(w.str() == "3 2 4\n");
+	}
+	
+	void test_print_2 () {
+		ostringstream w;
+		collatz_print(w, 132, 123, 42);
+		CPPUNIT_ASSERT(w.str() == "132 123 42\n");
+	}
 
 	// -----
 	// solve
-	void test_solve () {
+	void test_solve_0 () {
+		istringstream r("1 10");
+		ostringstream w;
+		collatz_solve(r, w);
+		CPPUNIT_ASSERT(w.str() == "1 10 20\n");
+	}
+	
+	void test_solve_1 () {
+		istringstream r("1 10\n100 200\n201 210\n");
+		ostringstream w;
+		collatz_solve(r, w);
+		CPPUNIT_ASSERT(w.str() == "1 10 20\n100 200 125\n201 210 89\n");
+	}
+	
+	void test_solve_2 () {
 		istringstream r("1 10\n100 200\n201 210\n900 1000\n");
 		ostringstream w;
 		collatz_solve(r, w);
-		CPPUNIT_ASSERT(w.str() == "1 10 20\n100 200 125\n201 210 89\n900 1000 174\n");}
+		CPPUNIT_ASSERT(w.str() == "1 10 20\n100 200 125\n201 210 89\n900 1000 174\n");
+	}
 
 	// -----
 	// suite
 	CPPUNIT_TEST_SUITE(TestCollatz);
 	
 	CPPUNIT_TEST(test_read_0);
+	CPPUNIT_TEST(test_read_1);
+	CPPUNIT_TEST(test_read_2);
 	CPPUNIT_TEST(test_cycleLength_0);
 	CPPUNIT_TEST(test_cycleLength_1);
 	CPPUNIT_TEST(test_cycleLength_2);
 	CPPUNIT_TEST(test_cycleLength_3);
-	
 	CPPUNIT_TEST(test_eval_1);
 	CPPUNIT_TEST(test_eval_2);
 	CPPUNIT_TEST(test_eval_3);
 	CPPUNIT_TEST(test_eval_4);
-	CPPUNIT_TEST(test_print);
-	CPPUNIT_TEST(test_solve);
+	CPPUNIT_TEST(test_print_0);
+	CPPUNIT_TEST(test_print_1);
+	CPPUNIT_TEST(test_print_2);
+	CPPUNIT_TEST(test_solve_0);
+	CPPUNIT_TEST(test_solve_1);
+	CPPUNIT_TEST(test_solve_2);
 	
-	CPPUNIT_TEST_SUITE_END();};
+	CPPUNIT_TEST_SUITE_END();
+};
 
 // ----
 // main

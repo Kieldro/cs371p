@@ -12,9 +12,6 @@
 #include <vector>
 #include <iostream> // endl, istream, ostream
 
-const unsigned int CACHE_SIZE = 1000000;
-int cache [CACHE_SIZE];
-//std::vector<int> cache(CACHE_SIZE);
 // ------------
 // collatz_read
 /**
@@ -41,10 +38,13 @@ bool collatz_read (std::istream& r, int& i, int& j) {
  * @return the cycle length of n
  */
 //static 
-int cycleLength(unsigned long x){
-	assert(x < 1000000);
+int cycleLength(unsigned long n){
+	assert(n < 1000000);
 	int v = 1;
-	unsigned long n = x;
+	const unsigned int CACHE_SIZE = 1000;
+	int cache [CACHE_SIZE];
+	//std::vector<int> cache(CACHE_SIZE);
+	std::fill(cache, cache + CACHE_SIZE, 0);
 		
 	while(n != 1){
 		if(n < CACHE_SIZE and cache[n] > 0){
@@ -53,6 +53,7 @@ int cycleLength(unsigned long x){
 		}
 		
 		if(n & 1){		// odd
+			//n = (3*n + 1) / 2;
 			n = n + (n >> 1) + 1;
 			++v;
 		}else			// even
@@ -60,8 +61,8 @@ int cycleLength(unsigned long x){
 		++v;
 	}
 	
-	if(x < CACHE_SIZE)
-		cache[x] = v;
+	if(n < CACHE_SIZE)
+		cache[n] = v;
 	return v;
 }
 
@@ -76,10 +77,9 @@ int collatz_eval (int i, int j) {
 	assert(i > 0);
 	assert(j > 0);
 	
+	i = std::max(i, j/2);
 	if(i > j)
 		std::swap(i, j);
-	i = std::max(i, j/2);
-	
 	
 	int v = 0;
 	
@@ -118,12 +118,11 @@ void collatz_print (std::ostream& w, int i, int j, int v) {
 void collatz_solve (std::istream& r, std::ostream& w) {
 	int i;
 	int j;
-	std::fill(cache, cache + CACHE_SIZE, 0);
-	
 	while (collatz_read(r, i, j)) {
 		const int v = collatz_eval(i, j);
 		collatz_print(w, i, j, v);
 	}
+
 }
 
 // -------

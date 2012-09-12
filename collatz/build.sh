@@ -1,6 +1,6 @@
 # file variables
 source="metaCacheGen.h"
-unitFile="TestCollatz.c++"
+unitFile="RunCollatz.c++"
 source=$unitFile
 
 clear
@@ -9,10 +9,13 @@ g++ -pedantic -ldl -Wall -std=c++0x $source -lcppunit -o $source.app
 
 	if ([ $? == 0 ]); then
 echo RUNNING UNIT TESTS...
-valgrind ./$source.app #>& $unitFile.out
+#valgrind \
+./$source.app #>& $unitFile.out
 	fi
 
 <<MULTICOMMENT
+echo DIFF 
+
 echo GENERATING COMMIT LOG...
 git log > Collatz.log
 
@@ -24,8 +27,15 @@ echo RUNNING DOXYGEN...
 # GENERATE_LATEX		= NO
 doxygen Doxyfile
 
-zip Collatz README.txt html/* Collatz.h Collatz.log TestCollatz.c++ TestCollatz.out
+echo CREATING SPHERE FILE...
+cp Collatz.h SphereCollatz.c++
 
+echo ZIPPING FILES...
+zip Collatz README.txt html/* Collatz.h Collatz.log \
+  RunCollatz.c++ RunCollatz.in RunCollatz.out \
+ SphereCollatz.c++ TestCollatz.c++ TestCollatz.c++.out
+
+	
 turnin --submit reza cs371ppj1 Collatz.zip
 turnin --list   reza cs371ppj1
 turnin --verify reza cs371ppj1
