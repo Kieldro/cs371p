@@ -13,8 +13,8 @@ valgrind \
 ./$source.app #>& RunCollatz.out < RunCollatz.in
 	fi
 echo EXECUTION COMPLETE.
-
 <<MULTICOMMENT
+
 echo GENERATING COMMIT LOG...
 git log > Collatz.log
 
