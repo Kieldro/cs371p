@@ -29,12 +29,6 @@ To test the program:
 
 #include "Collatz.h"
 
-using std::istringstream;
-using std::ostringstream;
-using std::cerr;
-using std::cout;
-using std::endl;
-
 // -----------
 // TestCollatz
 struct TestCollatz : CppUnit::TestFixture {
@@ -167,6 +161,27 @@ struct TestCollatz : CppUnit::TestFixture {
 		collatz_solve(r, w);
 		CPPUNIT_ASSERT(w.str() == "1 10 20\n100 200 125\n201 210 89\n900 1000 174\n");
 	}
+	
+	void test_solve_3 () {
+		istringstream r("1 10000\n");
+		ostringstream w;
+		collatz_solve(r, w);
+		if(DEBUG) cerr << "w.str(): " << w.str() << endl;
+		CPPUNIT_ASSERT(w.str() == "1 10000 262\n");
+	}
+	
+	void test_solve_4 () {
+		int t0 = clock();
+		istringstream r("1 999999\n");
+		ostringstream w;
+		collatz_solve(r, w);
+		if(DEBUG) cerr << "w.str(): " << w.str() << endl;
+		CPPUNIT_ASSERT(w.str() == "1 999999 525\n");
+		int t1 = clock();
+		//int i = 0; i++;
+		if(DEBUG) cerr << "time: " << (t1 - t0) << endl;
+		
+	}
 
 	// -----
 	// suite
@@ -189,6 +204,8 @@ struct TestCollatz : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_solve_0);
 	CPPUNIT_TEST(test_solve_1);
 	CPPUNIT_TEST(test_solve_2);
+	CPPUNIT_TEST(test_solve_3);
+	CPPUNIT_TEST(test_solve_4);
 	
 	CPPUNIT_TEST_SUITE_END();
 };

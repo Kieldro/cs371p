@@ -1,6 +1,6 @@
 # file variables
 source="metaCacheGen.h"
-unitFile="RunCollatz.c++"
+unitFile="TestCollatz.c++"
 source=$unitFile
 
 clear

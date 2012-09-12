@@ -9,10 +9,17 @@
 // --------
 // includes
 #include <cassert>  // assert
+#include <ctime>
 #include <vector>
 #include <iostream> // endl, istream, ostream
 
-const unsigned int CACHE_SIZE = 1000000;
+using std::istringstream;
+using std::ostringstream;
+using std::cerr;
+using std::cout;
+using std::endl;
+
+const unsigned int CACHE_SIZE = 999999;
 int cache [CACHE_SIZE];
 //std::vector<int> cache(CACHE_SIZE);
 // ------------
@@ -117,12 +124,13 @@ void collatz_print (std::ostream& w, int i, int j, int v) {
  */
 void collatz_solve (std::istream& r, std::ostream& w) {
 	int i;
-	int j;
+	int j, k = 0;
 	std::fill(cache, cache + CACHE_SIZE, 0);
 	
 	while (collatz_read(r, i, j)) {
 		const int v = collatz_eval(i, j);
 		collatz_print(w, i, j, v);
+		if(DEBUG) cerr << k++ << endl;
 	}
 }
 
