@@ -4,7 +4,7 @@
 // Glenn P. Downing
 // --------------------------
 
-#define DEBUG true
+#define DEBUG !true
 
 // --------
 // includes

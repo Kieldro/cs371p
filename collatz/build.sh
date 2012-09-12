@@ -1,5 +1,5 @@
 # file variables
-source="metaCacheGen.h"
+#source="metaCacheGen.h"
 unitFile="TestCollatz.c++"
 source=$unitFile
 
@@ -9,13 +9,12 @@ g++ -pedantic -ldl -Wall -std=c++0x $source -lcppunit -o $source.app
 
 	if ([ $? == 0 ]); then
 echo RUNNING UNIT TESTS...
-#valgrind \
-./$source.app #>& $unitFile.out
+valgrind \
+./$source.app #>& RunCollatz.out < RunCollatz.in
 	fi
+echo EXECUTION COMPLETE.
 
 <<MULTICOMMENT
-echo DIFF 
-
 echo GENERATING COMMIT LOG...
 git log > Collatz.log
 
