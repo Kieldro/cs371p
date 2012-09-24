@@ -9,24 +9,29 @@
 
 #include "Voting.h"
 
+using std::istringstream;
+
+
 // -----------
 // TestVoting
 struct TestVoting : CppUnit::TestFixture {
 	// ----
 	// read
 	void test_read_0 () {
-		istringstream r("1 10\n");
-		int i;
-		int j;
-		const bool b = read(r, i, j);
+		istringstream r("1\n\n" "2\n" "Obama\nMittens\n" "1 2\n" "1 2\n" "2 1\n");
+		int cases;
+		int candidates;
 		
-		CPPUNIT_ASSERT(b == true);
-		CPPUNIT_ASSERT(i ==	1);
-		CPPUNIT_ASSERT(j == 10);
+		const bool b = read(r, cases, candidates);
+		
+		CPPUNIT_ASSERT(b);
+		CPPUNIT_ASSERT(cases == 1);
+		CPPUNIT_ASSERT(candidates == 2);
+		//CPPUNIT_ASSERT(j == 10);
 	}
 	
 	void test_solve_4 () {
-		int t0 = clock();
+	/*	int t0 = clock();
 		istringstream r("1 999999\n");
 		ostringstream w;
 		solve(r, w);
@@ -36,7 +41,7 @@ struct TestVoting : CppUnit::TestFixture {
 		int i = 0; i++;
 		if(DEBUG) cerr << "time: " << (t1 - t0) << endl;
 		if(DEBUG) cerr << "clock per sec: " << CLOCKS_PER_SEC	 << endl;
-		
+	*/	
 	}
 
 	// -----
@@ -66,6 +71,6 @@ int main () {
 	tr.addTest(TestVoting::suite());
 	tr.run();
 
-	cout << "Done." << endl;
+	cout << "Unit tests done." << endl;
 	return 0;
 }

@@ -1,14 +1,13 @@
 # file variables
-#source="metaCacheGen.h"
-unitFile="TestVoting.c++"
-source=$unitFile
+source="TestVoting.c++"
 
 clear
-echo COMPILING $source...
-g++ -pedantic -ldl -Wall -std=c++0x $source -lcppunit -o $source.app
+echo MAKE...
+make
+#g++ -pedantic -ldl -Wall -std=c++0x $source -lcppunit -o $source.app
 
 	if ([ $? == 0 ]); then
-echo RUNNING UNIT TESTS...
+echo EXECTUING...
 valgrind \
 ./$source.app #>& RunVoting.out < RunVoting.in
 	fi

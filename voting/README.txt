@@ -10,7 +10,8 @@ EID: ib
 E-mail: kieldro@gmail
 Estimated number of hours: 8
 Actual    number of hours: 
-11:20a - 
+11:20a - 11:40
+11:10a - 
 
 Partner First Name:
 Partner Last Name:

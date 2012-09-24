@@ -1,54 +1,76 @@
-#define DEBUG !true
+#define DEBUG true
 
 // includes
+#include <string>
+#include <vector>
 #include <cassert>  // assert
 #include <ctime>
-#include <vector>
 #include <iostream> // endl, istream, ostream
 
-// read
-/**
- * reads two ints into i and j
- * @param r a  std::istream
- * @param i an int by reference
- * @param j an int by reference
- * @return true if that succeeds, false otherwise
- */
-bool read (std::istream& r, int& i, int& j) {
-	r >> i;
-	if (!r)
-		return false;
-	r >> j;
-	assert(i > 0);
-	assert(j > 0);
+using std::cout;
+using std::cerr;
+using std::endl;
+using std::istream;
+using std::string;
+using std::vector;
+
+/*
+CRC
+ballot: store preferences: NA
+election: inputs ballots, candidates : everything
+
+*/
+
+bool read(istream& in, int& cases, int& candidates){
+	in >> cases;
+	if(DEBUG) cerr << "cases: " << cases << endl;
+	
+	for(int i = 0; i < cases; ++i){
+		Election e();
+		
+		in >> candidates;
+		if(DEBUG) cerr << "# candidates: " << candidates << endl;
+		vector<string> names(candidates);
+		
+		Ballot b(candidates);
+		b.input(in);
+		
+		
+		string b;
+		in >> b;
+		if(DEBUG) cerr << "b: " << b << endl;
+	}
+	
 	return true;
 }
 
-// print
-/**
- * prints the values of i, j, and v
- * @param w a std::ostream
- * @param i the beginning of the range, inclusive
- * @param j the end       of the range, inclusive
- * @param v the max cycle length
- */
-void print (std::ostream& w, int i, int j, int v) {
-	assert(i > 0);
-	assert(j > 0);
-	assert(v > 0);
-	w << i << " " << j << " " << v << std::endl;
-}
-
-
-// defines
-#ifdef ONLINE_JUDGE
-	#define NDEBUG
-	// main
-	int main () {
-		//using namespace std;
-		//ios_base::sync_with_stdio(false);
-		solve(cin, cout);
+class Ballot{
+	private:
+	vector<int> choices();
+	const int numCandidiates;
+	
+	public:
+	Ballot(const int numCan) : choices(numCan), numCandidiates(numCan){
 		
-		return 0;
 	}
-#endif
+	
+	void input(istream& in){
+		for(int i = 0; i < numCandidiates; ++i)
+			int c;
+			in << c;
+			choices[i] = atoi(c);
+			if(DEBUG) cerr << "choices[i]: " << choices[i] << endl;
+			
+		
+	}
+};
+
+class Election{
+	private:
+	vector<Ballot> ballots();
+	
+	void input(){
+		;
+		
+	}
+};
