@@ -3,6 +3,7 @@ SHELL = /bin/sh
 CC = g++
 CPPFLAGS = -pedantic -ldl -Wall -std=c++0x
 SOURCE = RunVoting.c++
+GEN = TestGen.c++
 
 
 all: test run
@@ -20,7 +21,6 @@ test: TestVoting.c++
 run: RunVoting
 	./$(SOURCE).app
 
-GEN = something
-gen: TestGen.c++
-	$(CC) -std=c++0x TestGen.c++ -o TestGen.c++.app
-	./TestGen.c++.app
+gen: $(GEN)
+	$(CC) -std=c++0x $(GEN) -o $(GEN).app
+	./$(GEN).app
