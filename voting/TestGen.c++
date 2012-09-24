@@ -1,9 +1,12 @@
 #include <iostream>
+#include <list>
+#include <iterator>
+#include <cassert>
 
-//using namespace std;
 using std::cout;
 using std::endl;
-
+using std::list;
+using std::advance;
 
 void ballot(int);
 void election();
@@ -14,8 +17,6 @@ const int LINES = 1000;
 int totalLines = 0;
 
 int main(){
-	
-	
 	cout << cases << endl;
 	totalLines += 1;
 	
@@ -25,6 +26,7 @@ int main(){
 		election();
 	}
 	
+	assert(totalLines >= LINES);
 	return 0;
 }
 
@@ -33,7 +35,7 @@ void election(){
 	cout << numCan << endl;
 	++totalLines;
 	
-	for(int j = 0; j < numCan; ++j){
+	for(int j = 1; j <= numCan; ++j){
 		cout << "Candidate" << j << endl;
 		++totalLines;
 	}
@@ -45,12 +47,17 @@ void election(){
 }
 
 void ballot(int numCan){
+	list<int> choices;
+	for(int i = 1; i <= numCan; ++i){
+		choices.push_back(i);
+	}
 	
 	for(int i = 0; i < numCan; ++i){
-		
-		cout << i << " ";
+		auto a = choices.begin();
+		advance(a, rand() % choices.size());
+		cout << *a << " ";
+		auto it = choices.erase(a);
 	}
 	cout << endl;
 	++totalLines;
 }
-

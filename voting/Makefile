@@ -23,4 +23,5 @@ run: RunVoting
 
 gen: $(GEN)
 	$(CC) -std=c++0x $(GEN) -o $(GEN).app
-	./$(GEN).app
+	./$(GEN).app > RunVoting.in
+	cat RunVoting.in
