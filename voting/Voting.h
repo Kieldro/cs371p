@@ -13,6 +13,7 @@ using std::endl;
 using std::istream;
 using std::string;
 using std::vector;
+using std::getline;
 
 /*
 CRC
@@ -28,7 +29,7 @@ class Ballot;
 class Ballot{
 	private:
 	vector<int> choices;
-	const int numCandidiates;
+	int numCandidiates;		// can't use const
 	
 	public:
 	Ballot(const int numCan);
@@ -44,16 +45,16 @@ Ballot::Ballot(const int numCan) :
 
 // inputs a line of numbers
 void Ballot::input(istream& in){
+	int j;
 	for(int i = 0; i < numCandidiates; ++i){
 		in >> choices[i];
-		if(DEBUG) cerr << "choices[i]: " << choices[i] << endl;
+		if(DEBUG) cerr << "choices i " << choices[i] << endl;
 	}
-	
 }
 
 class Election{
 	private:
-	vector<Ballot> ballots();
+	vector<Ballot> ballots;
 	vector<string> candidates;
 	int numCan;
 	istream& in;
@@ -64,7 +65,7 @@ class Election{
 };
 
 Election::Election(istream& i):
-	in(i), candidates(){
+	in(i), candidates(), ballots(){
 	if(DEBUG) cerr << "size " << candidates.size() << endl;
 }
 
@@ -73,15 +74,26 @@ void Election::input(){
 	if(DEBUG) cerr << "# numCan: " << numCan << endl;
 	candidates.resize(numCan);
 	
+	//if(DEBUG) cerr << "in.peek(): " << in.peek() << endl;
+	in.ignore();	//
 	for(int i = 0; i < numCan; ++i){
-		in >> candidates[i];
+		getline(in, candidates[i]);
 		if(DEBUG) cerr << "candidate i: " << candidates[i] << endl;
 	}
 	
 	string str;
-	while(std::getLine(in, str) && in){
-		Ballot b(str);
+	while(in)
+	{
+		Ballot b(numCan);
+		b.input(in);
 		ballots.push_back(b);
+		//if(DEBUG) cerr << "i: " << i << endl;
+		string s;
+		getline(in, s);
+		if (in.peek() == 10){		// check for blank line
+			break;
+		}
+		//if(DEBUG) cerr << "in.peek(): " << in.peek() << endl;
 	}
 		
 }
@@ -95,7 +107,7 @@ void Election::input(){
 	int main (){
 		int cases;
 		cin >> cases;
-		if(DEBUG) cerr << "cases: " << cases << endl;
+		if(DEBUG) cerr << "BOOYAKASHAcases: " << cases << endl;
 		
 		for(int i = 0; i < cases; ++i){
 			Election e(cin);

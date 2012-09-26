@@ -17,7 +17,7 @@ using std::istringstream;
 struct TestVoting : CppUnit::TestFixture {
 	// ----
 	// read
-	void test_read_0 () {
+	void test_ballot_0 () {
 	/*	istringstream r("1\n\n" "2\n" "Obama\nMittens\n" "1 2\n" "1 2\n" "2 1\n");
 		int cases;
 		int candidates;
@@ -48,7 +48,7 @@ struct TestVoting : CppUnit::TestFixture {
 	// suite
 	CPPUNIT_TEST_SUITE(TestVoting);
 	
-	CPPUNIT_TEST(test_read_0);
+	//CPPUNIT_TEST(test_read_0);
 	/*CPPUNIT_TEST(test_read_1);
 	CPPUNIT_TEST(test_read_2);
 	CPPUNIT_TEST(test_solve_0);
