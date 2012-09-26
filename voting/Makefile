@@ -1,7 +1,7 @@
 SHELL = /bin/sh
 
 CC = g++
-CPPFLAGS = -pedantic -ldl -Wall -std=c++0x
+CPPFLAGS = -O2
 SOURCE = RunVoting.c++
 GEN = TestGen.c++
 
@@ -15,11 +15,12 @@ RunVoting: $(SOURCE)
 	$(CC) $(CPPFLAGS) $(SOURCE) -o $(SOURCE).app
 
 test: TestVoting.c++
+	clear
 	$(CC) $(CPPFLAGS) TestVoting.c++ -lcppunit -o TestVoting.c++.app
 	./TestVoting.c++.app
 
 run: RunVoting
-	./$(SOURCE).app
+	./$(SOURCE).app < RunVoting.in
 
 gen: $(GEN)
 	$(CC) -std=c++0x $(GEN) -o $(GEN).app

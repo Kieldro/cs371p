@@ -21,56 +21,86 @@ election: inputs ballots, candidates : everything
 
 */
 
-bool read(istream& in, int& cases, int& candidates){
-	in >> cases;
-	if(DEBUG) cerr << "cases: " << cases << endl;
-	
-	for(int i = 0; i < cases; ++i){
-		Election e();
-		
-		in >> candidates;
-		if(DEBUG) cerr << "# candidates: " << candidates << endl;
-		vector<string> names(candidates);
-		
-		Ballot b(candidates);
-		b.input(in);
-		
-		
-		string b;
-		in >> b;
-		if(DEBUG) cerr << "b: " << b << endl;
-	}
-	
-	return true;
-}
+// prototypes
+class Election;
+class Ballot;
 
 class Ballot{
 	private:
-	vector<int> choices();
+	vector<int> choices;
 	const int numCandidiates;
 	
 	public:
-	Ballot(const int numCan) : choices(numCan), numCandidiates(numCan){
+	Ballot(const int numCan);
+	void input(istream&);
+};
+
+// Constructor
+Ballot::Ballot(const int numCan) :
+	choices(numCan), numCandidiates(numCan){
 		
+}
+
+
+// inputs a line of numbers
+void Ballot::input(istream& in){
+	for(int i = 0; i < numCandidiates; ++i){
+		in >> choices[i];
+		if(DEBUG) cerr << "choices[i]: " << choices[i] << endl;
 	}
 	
-	void input(istream& in){
-		for(int i = 0; i < numCandidiates; ++i)
-			int c;
-			in << c;
-			choices[i] = atoi(c);
-			if(DEBUG) cerr << "choices[i]: " << choices[i] << endl;
-			
-		
-	}
-};
+}
 
 class Election{
 	private:
 	vector<Ballot> ballots();
+	vector<string> candidates;
+	int numCan;
+	istream& in;
 	
-	void input(){
-		;
-		
-	}
+	public:
+	Election(istream& in);
+	void input();
 };
+
+Election::Election(istream& i):
+	in(i), candidates(){
+	if(DEBUG) cerr << "size " << candidates.size() << endl;
+}
+
+void Election::input(){
+	in >> numCan;
+	if(DEBUG) cerr << "# numCan: " << numCan << endl;
+	candidates.resize(numCan);
+	
+	for(int i = 0; i < numCan; ++i){
+		in >> candidates[i];
+		if(DEBUG) cerr << "candidate i: " << candidates[i] << endl;
+	}
+	
+	string str;
+	while(std::getLine(in, str) && in){
+		Ballot b(str);
+		ballots.push_back(b);
+	}
+		
+}
+
+// -------
+// defines
+#ifdef ONLINE_JUDGE
+	#define NDEBUG
+	using std::cin;
+
+	int main (){
+		int cases;
+		cin >> cases;
+		if(DEBUG) cerr << "cases: " << cases << endl;
+		
+		for(int i = 0; i < cases; ++i){
+			Election e(cin);
+			e.input();
+		}
+		return 0;
+	}
+#endif
