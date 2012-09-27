@@ -13,7 +13,6 @@ int main (){
 		RunElection();
 	}
 	
-	
 	return 0;
 }
 

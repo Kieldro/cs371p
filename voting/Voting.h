@@ -64,7 +64,9 @@ void Ballot::input(istream& in){
 	int j;
 	for(int i = 0; i < numCandidiates; ++i){
 		in >> choices[i];
-		if(DEBUG) cerr << choices[i];
+		assert(choices[i] <= 20);
+		assert(choices[i] >= 1);
+		if(DEBUG) cerr << choices[i] << " ";
 	}
 	if(DEBUG) cerr << " choices" << endl;
 }
@@ -104,7 +106,6 @@ Election::Election(istream& i):
 	in(i), candidates(), lowIdx()
 {
 	Ballot::total = 0;
-	if(DEBUG) cerr << "Ballot::total: " << Ballot::total << endl;
 }
 
 /**
@@ -135,14 +136,13 @@ void Election::input(){
 			break;
 		}
 	}
+	if(DEBUG) cerr << "Ballot::total: " << Ballot::total << endl;
 }
 
 /**
 Finds the winner or losers.
 */
 void Election::solve(){
-	if(DEBUG) cerr << "Total ballots: " << Ballot::total << endl;
-	
 	// base cases
 	if(Ballot::total == 0 || candidates.size() == 0)
 		return;
@@ -163,7 +163,7 @@ void Election::solve(){
 			}
 			
 			// look for losers
-			if(candidates[i].votes.size() < lowest){
+			if(candidates[i].votes.size() != 0 and candidates[i].votes.size() < lowest){
 				lowest = candidates[i].votes.size();
 				lowIdx.clear();
 			}
@@ -174,6 +174,8 @@ void Election::solve(){
 			if(DEBUG) cerr << candidates[i].name << " " << candidates[i].votes.size() << endl;
 		}
 		
+		if(DEBUG) cerr << "lowest: " << lowest << endl;
+		if(DEBUG) cerr << "Total ballots: " << Ballot::total << endl;
 		// Remove losers
 		redistribute();
 	}
@@ -183,27 +185,37 @@ void Election::solve(){
 Gives all the losers' ballots to other candidates.
 */
 void Election::redistribute(){
+	if(DEBUG) cerr << "redistribute..." << endl;
+	if(DEBUG) cerr << "lowIdx.size " << lowIdx.size() << endl;
+	
 	for(;lowIdx.size() != 0; lowIdx.pop_back()){
 		Candidate& loser = candidates[lowIdx.back()];
 		assert(&loser == &candidates[lowIdx.back()]);
+		if(DEBUG) cerr << "can: " << loser.name << endl;
+		if(DEBUG) cerr << "lowidx: " << lowIdx.back() << endl;
 		
 		while(loser.votes.size() != 0){
+			//if(DEBUG) cerr << "size! " <<  candidates[lowIdx.back()].votes.size() <<endl;
 			Ballot& b = loser.votes.back();
 			assert(&b == &loser.votes.back());
 			
 			// move to next choice on ballot
-			b.choices.pop_front();
-			int nextCan = b.choices.front();
+			int nextCan;
+			do{
+				b.choices.pop_front();
+				nextCan = b.choices.front();
+				if(DEBUG) cerr << "BOOYAKASHA!" << b.choices.front() <<endl;
+			}while(candidates[nextCan].votes.size() == 0);
+				
 			// remove ballot from loser
 			loser.votes.pop_back();
 			
 			// give ballot to new candidate
 			candidates[nextCan].votes.push_back(b);
 		}
-		
-		
+		/*
 		vector<Candidate>::iterator it = candidates.begin() + lowIdx.back();
-		candidates.erase(it);
+		candidates.erase(it);*/
 	}
 	
 	assert(lowIdx.size() == 0);
@@ -215,18 +227,23 @@ void Election::redistribute(){
 	#define NDEBUG
 	using std::cin;
 
+	void RunElection();
+
 	int main (){
 		int cases;
 		cin >> cases;
 		if(DEBUG) cerr << "cases: " << cases << endl;
 		
 		for(int i = 0; i < cases; ++i){
-			Election e(cin);
-			e.input();
-			e.solve();
+			RunElection();
 		}
 		
-		
 		return 0;
+	}
+
+	void RunElection(){
+		Election e (cin);
+		e.input();
+		e.solve();
 	}
 #endif
