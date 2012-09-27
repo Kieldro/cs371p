@@ -55,7 +55,8 @@ void ballot(int numCan){
 	for(int i = 0; i < numCan; ++i){
 		auto a = choices.begin();
 		advance(a, rand() % choices.size());
-		cout << *a << " ";
+		cout << *a;
+		if(i != numCan - 1) cout << " ";
 		auto it = choices.erase(a);
 	}
 	cout << endl;

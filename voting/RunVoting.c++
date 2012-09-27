@@ -8,7 +8,8 @@ int main (){
 	int cases;
 	cin >> cases;
 	if(DEBUG) cerr << "cases: " << cases << endl;
-	
+	if(cases == 0) return 0;
+
 	for(int i = 0; i < cases; ++i){
 		RunElection();
 	}

@@ -6,7 +6,7 @@ SOURCE = RunVoting.c++
 GEN = TestGen.c++
 
 
-all: test run
+all: test run UVafile log doxygen zip
 
 clean:
 	rm *.app
@@ -26,3 +26,17 @@ gen: $(GEN)
 	$(CC) -std=c++0x $(GEN) -o $(GEN).app
 	./$(GEN).app
 	cat RunVoting.in
+
+UVafile:
+	cp Voting.h UVaVoting.c++
+
+log:
+	git log > Voting.log
+
+doxygen:
+	doxygen Doxyfile
+
+zip:
+	zip Voting README.txt html/* Voting.h Voting.log \
+	RunVoting.c++ RunVoting.in RunVoting.out \
+	UVaVoting.c++ TestVoting.c++ TestVoting.out

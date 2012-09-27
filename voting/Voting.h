@@ -8,6 +8,7 @@
 #include <cassert>  // assert
 #include <ctime>
 #include <iterator>
+#include <algorithm>
 #include <iostream> // endl, istream, ostream
 
 using std::cout;
@@ -62,12 +63,15 @@ inputs a line of numbers
 @param in an input stream
 */
 void Ballot::input(istream& in){
-	int j;
+	int token;
 	for(int i = 0; i < numCandidiates; ++i){
-		in >> choices[i];
-		assert(choices[i] <= 20);
-		assert(choices[i] >= 1);
-		if(DEBUG) cerr << choices[i] << " ";
+		in >> token;
+		//if(token == 0) return;
+		//if(DEBUG) cerr << "token " << token << endl;
+		assert(token <= 20);
+		assert(token >= 1);
+		if(DEBUG) cerr << token << " ";
+		choices[i] = token;
 	}
 	if(DEBUG) cerr << " choices" << endl;
 }
@@ -117,6 +121,7 @@ class Election{
 	int numCan;
 	istream& in;
 	deque<int> lowIdx;
+	//int nContenders;
 	
 	public:
 	Election(istream& in);
@@ -138,8 +143,8 @@ void Election::input(){
 	in >> numCan;
 	if(DEBUG) cerr << "# numCan: " << numCan << endl;
 	candidates.resize(numCan);
+	//nContenders = numCan;
 	
-	//if(DEBUG) cerr << "in.peek(): " << in.peek() << endl;
 	in.ignore();	//
 	for(int i = 0; i < numCan; ++i){
 		getline(in, candidates[i].name);
@@ -155,7 +160,8 @@ void Election::input(){
 		//if(DEBUG) cerr << "i: " << i << endl;
 		string s;
 		getline(in, s);
-		if (in.peek() == 10){		// check for blank line
+		//if(DEBUG) cerr << "in.peek(): " << in.peek() << endl;
+		if (in.peek() == 10 or in.peek() == -1){		// check for blank line
 			break;
 		}
 	}
@@ -177,8 +183,10 @@ void Election::solve(){
 		return;
 	}
 	
-	while(candidates.size() > 1){
+	while(true){
 		int lowest = Ballot::total;
+		int highest = 0;
+		
 		for(int i = 0; i < candidates.size(); ++i){
 			// win condition
 			if(candidates[i].votes.size() > Ballot::total / 2){
@@ -191,12 +199,24 @@ void Election::solve(){
 			if(candidates[i].votes.size() != 0 and candidates[i].votes.size() < lowest){
 				lowest = candidates[i].votes.size();
 				lowIdx.clear();
+
 			}
 			if(candidates[i].votes.size() == lowest){
 				lowIdx.push_back(i);
 			}
 			
 			if(DEBUG) cerr << candidates[i].name << " " << candidates[i].votes.size() << endl;
+			highest = std::max(highest, (int)candidates[i].votes.size());
+		}
+		
+		if(highest == lowest){
+			if(DEBUG) cout << "WINNERS!!!";
+			for(int j = 0; j < candidates.size(); ++j){
+				if(candidates[j].votes.size() > 0)
+					cout << candidates[j].name << endl;
+			}
+			
+			return;
 		}
 		
 		if(DEBUG) cerr << "lowest: " << lowest << endl;
@@ -220,7 +240,6 @@ void Election::redistribute(){
 		if(DEBUG) cerr << "lowidx: " << lowIdx.back() << endl;
 		
 		if(DEBUG) cerr << "candidates.size: " << candidates.size() << endl;
-		//if(DEBUG) candidates.at(12).print();
 
 		while(loser.votes.size() != 0){
 			//if(DEBUG) cerr << "size! " <<  candidates[lowIdx.back()].votes.size() <<endl;
@@ -236,8 +255,8 @@ void Election::redistribute(){
 			
 			if(DEBUG) cerr << "candidates.size: " << candidates.size() << endl;
 			if(DEBUG) cerr << "nextCan: " << nextCan << endl;
-			if(DEBUG) loser.print();
-			if(DEBUG) cerr << "BOOYAKASHA!" << candidates[nextCan].votes.size() <<endl;
+			//if(DEBUG) loser.print();
+			// if(DEBUG) cerr << "BOOYAKASHA!" << candidates[nextCan].votes.size() <<endl;
 
 			// give ballot to new candidate
 			candidates[nextCan].votes.push_back(b);
@@ -248,15 +267,17 @@ void Election::redistribute(){
 		/*
 		vector<Candidate>::iterator it = candidates.begin() + lowIdx.back();
 		candidates.erase(it);*/
+		//--nContenders;
 	}
-	
+
+	//
 	assert(lowIdx.size() == 0);
 }
 
 // -------
 // defines
 #ifdef ONLINE_JUDGE
-	#define NDEBUG
+	#define NDEBUG		// turns off assertions
 	using std::cin;
 
 	void RunElection();

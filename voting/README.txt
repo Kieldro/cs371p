@@ -15,13 +15,6 @@ Actual    number of hours: 18
 10:30a - 8p
 4:30p - 8p
 
-Partner First Name:
-Partner Last Name:
-Partner EID:
-Partner E-mail:
-Partner Estimated number of hours:
-Partner Actual    number of hours:
-
 Turnin CS Username: keo
 GitHub ID: kieldro
 GitHub Repository Name: cs371p
