@@ -44,6 +44,7 @@ class Ballot{
 	public:
 	Ballot(const int numCan);
 	void input(istream&);
+	void print();
 };
 
 // Initialize static variable
@@ -71,18 +72,40 @@ void Ballot::input(istream& in){
 	if(DEBUG) cerr << " choices" << endl;
 }
 
+void Ballot::print()
+{
+	//cerr << "printing all ballots for " << name << endl;
+	
+	for(int i = 0; i < choices.size(); ++i){
+		cerr << choices[i] << " ";
+	}
+	cerr << endl;
+}
+
 class Candidate{
 	public:
 		string name;
 		vector<Ballot> votes;
 		
 		Candidate();
+		void print();
 };
 
 // Constructor
 Candidate::Candidate(): votes()
 {
 	
+}
+
+void Candidate::print()
+{
+	
+	cerr << "printing all " << votes.size() << " ballots for " << name << endl;
+	
+	for(int i = 0; i < votes.size(); ++i){
+		votes[i].print();
+		//cerr << endl;
+	}
 }
 
 /**
@@ -143,6 +166,8 @@ void Election::input(){
 Finds the winner or losers.
 */
 void Election::solve(){
+	if(DEBUG) cerr << "Solving..." << endl;
+
 	// base cases
 	if(Ballot::total == 0 || candidates.size() == 0)
 		return;
@@ -175,7 +200,7 @@ void Election::solve(){
 		}
 		
 		if(DEBUG) cerr << "lowest: " << lowest << endl;
-		if(DEBUG) cerr << "Total ballots: " << Ballot::total << endl;
+		//if(DEBUG) cerr << "Total ballots: " << Ballot::total << endl;
 		// Remove losers
 		redistribute();
 	}
@@ -194,6 +219,9 @@ void Election::redistribute(){
 		if(DEBUG) cerr << "can: " << loser.name << endl;
 		if(DEBUG) cerr << "lowidx: " << lowIdx.back() << endl;
 		
+		if(DEBUG) cerr << "candidates.size: " << candidates.size() << endl;
+		//if(DEBUG) candidates.at(12).print();
+
 		while(loser.votes.size() != 0){
 			//if(DEBUG) cerr << "size! " <<  candidates[lowIdx.back()].votes.size() <<endl;
 			Ballot& b = loser.votes.back();
@@ -203,15 +231,19 @@ void Election::redistribute(){
 			int nextCan;
 			do{
 				b.choices.pop_front();
-				nextCan = b.choices.front();
-				if(DEBUG) cerr << "BOOYAKASHA!" << b.choices.front() <<endl;
+				nextCan = b.choices.front() - 1;
 			}while(candidates[nextCan].votes.size() == 0);
+			
+			if(DEBUG) cerr << "candidates.size: " << candidates.size() << endl;
+			if(DEBUG) cerr << "nextCan: " << nextCan << endl;
+			if(DEBUG) loser.print();
+			if(DEBUG) cerr << "BOOYAKASHA!" << candidates[nextCan].votes.size() <<endl;
+
+			// give ballot to new candidate
+			candidates[nextCan].votes.push_back(b);
 				
 			// remove ballot from loser
 			loser.votes.pop_back();
-			
-			// give ballot to new candidate
-			candidates[nextCan].votes.push_back(b);
 		}
 		/*
 		vector<Candidate>::iterator it = candidates.begin() + lowIdx.back();
