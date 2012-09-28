@@ -39,7 +39,10 @@ struct TestAllocator : CppUnit::TestFixture {
 		const value_type		v = 2;
 		const pointer			p = x.allocate(s);
 		x.construct(p, v);
+		
 		CPPUNIT_ASSERT(*p == v);
+		CPPUNIT_ASSERT(x == A());
+		CPPUNIT_ASSERT(not (x != A()) );
 		x.destroy(p);
 		x.deallocate(p, s);
 	}
@@ -92,7 +95,7 @@ int main () {
 	tr.addTest(TestAllocator< std::allocator<int> >::suite());
 //	tr.addTest(TestAllocator< Allocator<int, 100> >::suite());	// uncomment!
 
-	tr.addTest(TestAllocator< std::allocator<double> >::suite());
+//	tr.addTest(TestAllocator< std::allocator<double> >::suite());
 //	tr.addTest(TestAllocator< Allocator<double, 100> >::suite());	// uncomment!
 
 	tr.run();
