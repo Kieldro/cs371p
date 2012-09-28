@@ -30,7 +30,7 @@ doxygen:
 
 zip:
 	zip Allocator README.txt html/* Allocator.h Allocator.log \
-	TestAllocator.c++ TestAllocator.out
+	$(TEST) TestAllocator.out
 
 # turnin --submit dmj cs371ppj3 Allocator.zip
 # turnin --list   dmj cs371ppj3

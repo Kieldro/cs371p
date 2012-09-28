@@ -90,10 +90,10 @@ int main () {
 	CppUnit::TextTestRunner tr;
 
 	tr.addTest(TestAllocator< std::allocator<int> >::suite());
-//  tr.addTest(TestAllocator< Allocator<int, 100> >::suite());	// uncomment!
+//	tr.addTest(TestAllocator< Allocator<int, 100> >::suite());	// uncomment!
 
 	tr.addTest(TestAllocator< std::allocator<double> >::suite());
-//  tr.addTest(TestAllocator< Allocator<double, 100> >::suite());	// uncomment!
+//	tr.addTest(TestAllocator< Allocator<double, 100> >::suite());	// uncomment!
 
 	tr.run();
 

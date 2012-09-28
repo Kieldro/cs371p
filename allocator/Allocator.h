@@ -18,7 +18,7 @@
 // Allocator
 template <typename T, std::size_t N>
 class Allocator {
-		public:
+	public:
 		// --------
 		// typedefs
 		typedef T					value_type;
@@ -29,7 +29,7 @@ class Allocator {
 		typedef value_type*			pointer;
 		typedef const value_type*	const_pointer;
 
-		typedef value_type& 		reference;
+		typedef value_type& 	 	reference;
 		typedef const value_type&	const_reference;
 
 	public:
