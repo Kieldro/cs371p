@@ -20,7 +20,7 @@ test: TestVoting.c++
 	./TestVoting.c++.app
 
 run: RunVoting
-	./$(SOURCE).app < Sample.in
+	./$(SOURCE).app < tests/rahmanf-RunVoting.in
 
 gen: $(GEN)
 	$(CC) -std=c++0x $(GEN) -o $(GEN).app

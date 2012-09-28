@@ -1,4 +1,4 @@
-#define DEBUG true
+#define DEBUG !true
 
 // includes
 #include <string>
@@ -148,6 +148,7 @@ void Election::input(){
 	in.ignore();	//
 	for(int i = 0; i < numCan; ++i){
 		getline(in, candidates[i].name);
+		assert(candidates[i].name.size() <= 80);
 		if(DEBUG) cerr << "candidate i: " << candidates[i].name << endl;
 	}
 	
@@ -166,6 +167,7 @@ void Election::input(){
 		}
 	}
 	if(DEBUG) cerr << "Ballot::total: " << Ballot::total << endl;
+	assert(Ballot::total <= 1000);
 }
 
 /**
@@ -286,9 +288,11 @@ void Election::redistribute(){
 		int cases;
 		cin >> cases;
 		if(DEBUG) cerr << "cases: " << cases << endl;
-		
+		if(cases == 0) return 0;
+
 		for(int i = 0; i < cases; ++i){
 			RunElection();
+			if(i != cases-1) cout << endl;
 		}
 		
 		return 0;

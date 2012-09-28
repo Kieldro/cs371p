@@ -1,4 +1,4 @@
-#define DEBUG true
+#define DEBUG !true
 
 // includes
 #include <string>
@@ -8,6 +8,7 @@
 #include <cassert>  // assert
 #include <ctime>
 #include <iterator>
+#include <algorithm>
 #include <iostream> // endl, istream, ostream
 
 using std::cout;
@@ -120,7 +121,7 @@ class Election{
 	int numCan;
 	istream& in;
 	deque<int> lowIdx;
-	int nContenders;
+	//int nContenders;
 	
 	public:
 	Election(istream& in);
@@ -130,7 +131,7 @@ class Election{
 };
 
 Election::Election(istream& i):
-	in(i), candidates(), lowIdx(), nContenders(0)
+	in(i), candidates(), lowIdx()
 {
 	Ballot::total = 0;
 }
@@ -142,11 +143,12 @@ void Election::input(){
 	in >> numCan;
 	if(DEBUG) cerr << "# numCan: " << numCan << endl;
 	candidates.resize(numCan);
-	nContenders = numCan;
+	//nContenders = numCan;
 	
 	in.ignore();	//
 	for(int i = 0; i < numCan; ++i){
 		getline(in, candidates[i].name);
+		assert(candidates[i].name.size() <= 80);
 		if(DEBUG) cerr << "candidate i: " << candidates[i].name << endl;
 	}
 	
@@ -165,6 +167,7 @@ void Election::input(){
 		}
 	}
 	if(DEBUG) cerr << "Ballot::total: " << Ballot::total << endl;
+	assert(Ballot::total <= 1000);
 }
 
 /**
@@ -182,11 +185,13 @@ void Election::solve(){
 		return;
 	}
 	
-	while(true or candidates.size() > 1){
+	while(true){
 		int lowest = Ballot::total;
+		int highest = 0;
+		
 		for(int i = 0; i < candidates.size(); ++i){
 			// win condition
-			if(candidates[i].votes.size() > Ballot::total / 2){// or lowidx.size){
+			if(candidates[i].votes.size() > Ballot::total / 2){
 				if(DEBUG) cout << "Winner! ";
 				cout << candidates[i].name << endl;
 				return;
@@ -195,12 +200,25 @@ void Election::solve(){
 			// look for losers
 			if(candidates[i].votes.size() != 0 and candidates[i].votes.size() < lowest){
 				lowest = candidates[i].votes.size();
+				lowIdx.clear();
+
 			}
 			if(candidates[i].votes.size() == lowest){
 				lowIdx.push_back(i);
 			}
 			
 			if(DEBUG) cerr << candidates[i].name << " " << candidates[i].votes.size() << endl;
+			highest = std::max(highest, (int)candidates[i].votes.size());
+		}
+		
+		if(highest == lowest){
+			if(DEBUG) cout << "WINNERS!!!";
+			for(int j = 0; j < candidates.size(); ++j){
+				if(candidates[j].votes.size() > 0)
+					cout << candidates[j].name << endl;
+			}
+			
+			return;
 		}
 		
 		if(DEBUG) cerr << "lowest: " << lowest << endl;
@@ -224,7 +242,6 @@ void Election::redistribute(){
 		if(DEBUG) cerr << "lowidx: " << lowIdx.back() << endl;
 		
 		if(DEBUG) cerr << "candidates.size: " << candidates.size() << endl;
-		//if(DEBUG) candidates.at(12).print();
 
 		while(loser.votes.size() != 0){
 			//if(DEBUG) cerr << "size! " <<  candidates[lowIdx.back()].votes.size() <<endl;
@@ -240,8 +257,8 @@ void Election::redistribute(){
 			
 			if(DEBUG) cerr << "candidates.size: " << candidates.size() << endl;
 			if(DEBUG) cerr << "nextCan: " << nextCan << endl;
-			if(DEBUG) loser.print();
-			if(DEBUG) cerr << "BOOYAKASHA!" << candidates[nextCan].votes.size() <<endl;
+			//if(DEBUG) loser.print();
+			// if(DEBUG) cerr << "BOOYAKASHA!" << candidates[nextCan].votes.size() <<endl;
 
 			// give ballot to new candidate
 			candidates[nextCan].votes.push_back(b);
@@ -252,9 +269,10 @@ void Election::redistribute(){
 		/*
 		vector<Candidate>::iterator it = candidates.begin() + lowIdx.back();
 		candidates.erase(it);*/
+		//--nContenders;
 	}
 
-	//lowIdx.clear();
+	//
 	assert(lowIdx.size() == 0);
 }
 
@@ -270,9 +288,11 @@ void Election::redistribute(){
 		int cases;
 		cin >> cases;
 		if(DEBUG) cerr << "cases: " << cases << endl;
-		
+		if(cases == 0) return 0;
+
 		for(int i = 0; i < cases; ++i){
 			RunElection();
+			if(i != cases-1) cout << endl;
 		}
 		
 		return 0;

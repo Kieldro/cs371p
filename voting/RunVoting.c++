@@ -12,6 +12,7 @@ int main (){
 
 	for(int i = 0; i < cases; ++i){
 		RunElection();
+		if(i != cases-1) cout << endl;
 	}
 	
 	return 0;
