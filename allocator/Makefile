@@ -1,8 +1,7 @@
 SHELL = /bin/sh
 
 CC = g++
-CPPFLAGS = -O2
-SOURCE = RunAllocator.c++
+CPPFLAGS = -ansi -pedantic -ldl -Wall
 TEST = TestAllocator.c++
 
 
@@ -14,18 +13,25 @@ clean:
 test: $(TEST)
 	clear
 	$(CC) $(CPPFLAGS) $(TEST) -lcppunit -o $(TEST).app
-	./$(TEST).app
+	./$(TEST).app #>& TestAllocator.out
 
-run: $(SOURCE)
-	$(CC) $(CPPFLAGS) $(SOURCE) -o $(SOURCE).app
-	./$(SOURCE).app
+run: test
 
 log:
 	git log > Allocator.log
 
 doxygen:
 	doxygen Doxyfile
+	#doxygen -g
+	# EXTRACT_ALL			= YES
+	# EXTRACT_PRIVATE		= YES
+	# EXTRACT_STATIC		= YES
+	# GENERATE_LATEX		= NO
 
 zip:
 	zip Allocator README.txt html/* Allocator.h Allocator.log \
-	RunAllocator.c++
+	TestAllocator.c++ TestAllocator.out
+
+# turnin --submit dmj cs371ppj3 Allocator.zip
+# turnin --list   dmj cs371ppj3
+# turnin --verify dmj cs371ppj3

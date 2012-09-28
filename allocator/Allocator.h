@@ -21,7 +21,7 @@ class Allocator {
 		public:
 		// --------
 		// typedefs
-		typedef typedefs			value_type;
+		typedef T					value_type;
 
 		typedef std::size_t			size_type;
 		typedef std::ptrdiff_t		difference_type;
