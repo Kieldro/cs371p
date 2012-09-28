@@ -17,45 +17,94 @@ using std::istringstream;
 struct TestVoting : CppUnit::TestFixture {
 	// ----
 	// read
-	void test_ballot_0 () {
-	/*	istringstream r("4 25 35 46 57\n");
+	void test_ballot0 () {
+		istringstream r("8 9 5 11 20\n");
 		Ballot b(5);
 		
-		const bool b = read(r, cases, candidates);
-		
-		CPPUNIT_ASSERT(b);
-		CPPUNIT_ASSERT(cases == 1);
-		CPPUNIT_ASSERT(candidates == 2);
-	*/	//CPPUNIT_ASSERT(j == 10);
+		CPPUNIT_ASSERT(Ballot::total == 1);
 	}
 	
-	void test_solve_4 () {
-	/*	int t0 = clock();
-		istringstream r("1 999999\n");
-		ostringstream w;
-		solve(r, w);
-		if(DEBUG) cerr << "w.str(): " << w.str() << endl;
-		CPPUNIT_ASSERT(w.str() == "1 999999 525\n");
-		int t1 = clock();
-		int i = 0; i++;
-		if(DEBUG) cerr << "time: " << (t1 - t0) << endl;
-		if(DEBUG) cerr << "clock per sec: " << CLOCKS_PER_SEC	 << endl;
-	*/
+	void test_ballot1 () {
+		istringstream r("8 9 5 11 20\n");
+		
+		Ballot b(5);
+		
+		CPPUNIT_ASSERT(Ballot::total == 2);
+	}
+	
+	void test_ballot2 () {
+		istringstream r("8 9 5 11 20\n");
+		Ballot b(5);
+		b.input(r);
+		
+		CPPUNIT_ASSERT(Ballot::total == 3);
+		CPPUNIT_ASSERT(b.choices.size() == 5);
+	}
+	
+	void test_candidate0 () {
+		Candidate c;
+		
+		CPPUNIT_ASSERT(c.votes.size() == 0);
+	}
+	
+	void test_candidate1() {
+		Candidate c;
+		c.name = "ME";
+		
+		CPPUNIT_ASSERT(c.name.compare("ME") == 0);
+	}
+	
+	void test_candidate2() {
+		Candidate c;
+		c.name = "Odin";
+		
+		CPPUNIT_ASSERT(c.name.compare("Odin") == 0);
+	}
+	
+	void test_election0() {
+		istringstream r("1\nFSM\n1\n");
+		Election e(r);
+		e.input();
+		
+		CPPUNIT_ASSERT(e.numCan == 1);
+		CPPUNIT_ASSERT(e.candidates.size() == 1);
+	}
+	
+	void test_election1() {
+		istringstream r("2\nFSM\nJebus\n1 2\n");
+		Election e(r);
+		e.input();
+		
+		CPPUNIT_ASSERT(e.numCan == 2);
+		CPPUNIT_ASSERT(e.candidates.size() == 2);
+		CPPUNIT_ASSERT(e.candidates.front().name.compare("FSM") == 0);
+	}
+	
+	void test_election2() {
+		istringstream r("2\nFSM\nJebus\n1 2\n1 2\n2 1\n");
+		Election e(r);
+		e.input();
+		
+		CPPUNIT_ASSERT(e.numCan == 2);
+		CPPUNIT_ASSERT(e.candidates.size() == 2);
+		CPPUNIT_ASSERT(e.candidates.front().name.compare("FSM") == 0);
+		CPPUNIT_ASSERT(e.candidates.front().votes.size() == 2);
 	}
 
 	// -----
 	// suite
 	CPPUNIT_TEST_SUITE(TestVoting);
 	
-	CPPUNIT_TEST(test_read_0);
-	/*CPPUNIT_TEST(test_read_1);
-	CPPUNIT_TEST(test_read_2);
-	CPPUNIT_TEST(test_solve_0);
-	CPPUNIT_TEST(test_solve_1);
-	CPPUNIT_TEST(test_solve_2);
-	CPPUNIT_TEST(test_solve_3);
-	CPPUNIT_TEST(test_solve_4);
-	*/
+	CPPUNIT_TEST(test_ballot0);
+	CPPUNIT_TEST(test_ballot1);
+	CPPUNIT_TEST(test_ballot2);
+	CPPUNIT_TEST(test_candidate0);
+	CPPUNIT_TEST(test_candidate1);
+	CPPUNIT_TEST(test_candidate2);
+	CPPUNIT_TEST(test_election0);
+	CPPUNIT_TEST(test_election1);
+	CPPUNIT_TEST(test_election2);
+	
 	CPPUNIT_TEST_SUITE_END();
 };
 

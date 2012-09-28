@@ -17,10 +17,10 @@ RunVoting: $(SOURCE)
 test: TestVoting.c++
 	clear
 	$(CC) $(CPPFLAGS) TestVoting.c++ -lcppunit -o TestVoting.c++.app
-	./TestVoting.c++.app
+	valgrind ./TestVoting.c++.app &> test
 
 run: RunVoting
-	./$(SOURCE).app < tests/rahmanf-RunVoting.in
+	valgrind ./$(SOURCE).app < RunVoting.in > RunVoting.out
 
 gen: $(GEN)
 	$(CC) -std=c++0x $(GEN) -o $(GEN).app

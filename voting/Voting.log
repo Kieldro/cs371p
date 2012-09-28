@@ -1,0 +1,155 @@
+commit d7e12cb55d18186c4f599d6b4bc49247b80adee6
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Thu Sep 27 19:16:58 2012 -0500
+
+    ACCEPTED by UVa.
+
+commit 5ebee32948badef7187e05ffde1c14053fc0a952
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Thu Sep 27 18:30:55 2012 -0500
+
+    Tie case implemented.
+
+commit 53aebad9175fd7c7216f787a680d86f4724f288b
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Thu Sep 27 16:54:54 2012 -0500
+
+    Fixes #35. Found the segfault; off by 1 error.
+
+commit 3657a3e0154cdefa3cb5ce490bb9673f5916244c
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 26 19:57:46 2012 -0500
+
+    Segfault continutes.
+
+commit 5762fcbea18cd49d86bed05c21ae0d448cd07458
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 26 18:20:05 2012 -0500
+
+    Seg fault.
+
+commit d436b7825ffee1722bba57d470395ea226ad8990
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 26 16:14:05 2012 -0500
+
+    Solved for simple case.
+
+commit b0e56d4e7fc1f892d2a2bcc673e10a8f74807f13
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 26 13:04:21 2012 -0500
+
+    Input functional.
+
+commit 84771440d8aeb2cd008bdc1f82c47d96da07205a
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 26 11:56:50 2012 -0500
+
+    more progress, DNC.
+
+commit 27e6a1f515fd5dda258d7a98147065c4fa668ff0
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Sep 24 15:57:51 2012 -0500
+
+    TestGen finished.
+
+commit 535a89f6c50344f34c9887b83b99e9cae5110047
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Sep 24 15:04:35 2012 -0500
+
+    TestGen works except each ballot needs to be randomized.
+
+commit 12b8dd0e16f485af23942169a36db8b51f737854
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Sep 24 13:54:21 2012 -0500
+
+    making progress, does not compile.
+
+commit c5d69bacfa6b5a4d4b7eef03725621194e48b911
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Sep 17 11:38:36 2012 -0500
+
+    Voting files added. Does not compile.
+
+commit 47807860e3578e1f4b46bea18ccc207b158b7888
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 12 16:04:01 2012 -0500
+
+    After turnin.
+
+commit 864e310a4ea68882280eb96a6cd7b1342f33223a
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 12 15:22:11 2012 -0500
+
+    Turnin version.
+
+commit 940b3790c9080d2507173ecbd50852001adda5b7
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 12 13:32:11 2012 -0500
+
+    commit .
+
+commit 649e42360d8e57b67075e41887eef751a872cfd6
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 12 13:22:46 2012 -0500
+
+    Adding time.
+
+commit 1b1ef98d834afddbf16ff6cddf864528e77e0148
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 12 12:48:33 2012 -0500
+
+    Fixes a logic error in cache.
+
+commit 63bd6a9a879c36ff149f9d602f9acef4a8e486b0
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 12 11:06:09 2012 -0500
+
+    fixed the cache.
+
+commit ec6103ea3755d0cf8e00fa27b5966a162182e189
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Sep 7 11:49:41 2012 -0500
+
+    Begins to implement a cache.
+
+commit 95b9359ac7522c7dbc2e6a43f89ad045351800c3
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 5 14:01:47 2012 -0500
+
+    Fixes logic mistake in meta gen.
+
+commit fe78691d2c4fb7bd9c0bc2b11986872558199865
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 5 13:41:37 2012 -0500
+
+    Adds meta cache generation program.
+
+commit 20c5113887525471e2a961bad86278ba4a1b7bf4
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 5 12:32:44 2012 -0500
+
+    Implements collatz_eval() and cycleLength().
+
+commit d11e0089440ccb583845606e68328558144385ee
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 5 11:37:20 2012 -0500
+
+    Fixes whitespace.
+
+commit 97b1357afb70a19cff7b3ccc7f1698e6858f9617
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 5 11:14:40 2012 -0500
+
+    Adds template files.
+
+commit 15d15fd5aefaa05a265d412a2fe9275da35e226f
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 5 11:13:27 2012 -0500
+
+    forgot to commit.
+
+commit 077cf1a1127c35ae9164b12c8c91988240827b1f
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Sun Sep 2 19:29:47 2012 -0500
+
+    Collatz project.

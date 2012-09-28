@@ -108,7 +108,6 @@ void Candidate::print()
 	
 	for(int i = 0; i < votes.size(); ++i){
 		votes[i].print();
-		//cerr << endl;
 	}
 }
 
@@ -117,13 +116,12 @@ Represents and entire election
 */
 class Election{
 	private:
-	vector<Candidate> candidates;
-	int numCan;
 	istream& in;
 	deque<int> lowIdx;
-	//int nContenders;
 	
 	public:
+	vector<Candidate> candidates;
+	int numCan;
 	Election(istream& in);
 	void input();
 	void solve();
