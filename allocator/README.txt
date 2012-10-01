@@ -12,11 +12,11 @@ Estimated number of hours: 20
 Actual    number of hours: 
 11:10a -11:50a
 
-Partner First Name:
-Partner Last Name:
-Partner EID:
-Partner E-mail:
-Partner Estimated number of hours:
+Partner First Name: Jacob
+Partner Last Name: Wilke
+Partner EID: jlw3599
+Partner E-mail: jake.wilke@gmail.com
+Partner Estimated number of hours: 21
 Partner Actual    number of hours:
 
 Turnin CS Username: keo
