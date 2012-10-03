@@ -30,7 +30,22 @@ struct TestAllocator : CppUnit::TestFixture {
 	typedef typename A::value_type		value_type;
 	typedef typename A::difference_type	difference_type;
 	typedef typename A::pointer			pointer;
-
+	
+	// --------
+	// test0
+	void test0 () {
+		A x;/*
+		const difference_type	s = 1;
+		const value_type		v = 2;
+		const pointer			p = x.allocate(s);
+		x.construct(p, v);
+		
+		CPPUNIT_ASSERT(*p == v);
+		x.destroy(p);
+		x.deallocate(p, s);
+		*/
+	}
+	
 	// --------
 	// test_one
 	void test_one () {
@@ -77,8 +92,9 @@ struct TestAllocator : CppUnit::TestFixture {
 	// suite
 	CPPUNIT_TEST_SUITE(TestAllocator);
 	
-	CPPUNIT_TEST(test_one);
-	CPPUNIT_TEST(test_ten);
+	CPPUNIT_TEST(test0);
+	//CPPUNIT_TEST(test_one);
+	//CPPUNIT_TEST(test_ten);
 	
 	CPPUNIT_TEST_SUITE_END();
 };
@@ -92,8 +108,8 @@ int main () {
 
 	CppUnit::TextTestRunner tr;
 
-	tr.addTest(TestAllocator< std::allocator<int> >::suite());
-//	tr.addTest(TestAllocator< Allocator<int, 100> >::suite());	// uncomment!
+//	tr.addTest(TestAllocator< std::allocator<int> >::suite());
+	tr.addTest(TestAllocator< Allocator<int, 100> >::suite());	// uncomment!
 
 //	tr.addTest(TestAllocator< std::allocator<double> >::suite());
 //	tr.addTest(TestAllocator< Allocator<double, 100> >::suite());	// uncomment!

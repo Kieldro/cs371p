@@ -17,6 +17,10 @@ test: $(TEST)
 
 run: test
 
+scratch: scratch.c++
+	g++ -std=c++0x scratch.c++ -o scratch.c++.app
+	scratch.c++.app
+
 log:
 	git log > Allocator.log
 

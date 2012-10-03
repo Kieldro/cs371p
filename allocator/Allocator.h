@@ -7,12 +7,19 @@
 #ifndef Allocator_h
 #define Allocator_h
 
+#define DEBUG true
+
 // --------
 // includes
 #include <cassert>			// assert
 #include <cstddef>			// size_t
 #include <new>				// new
 #include <stdexcept>		// invalid_argument
+#include <cmath>			// abs
+
+using std::cerr;
+using std::endl;
+using std::abs;
 
 // ---------
 // Allocator
@@ -57,8 +64,23 @@ class Allocator {
 		* O(n) in time
 		* <your documentation>
 		*/
-		bool valid () const {
-			// <your code>
+		bool valid () const
+		{
+			
+			const int* sBegin = (int*)a;
+			const int* sEnd   = (int*) (a + 4 + abs(*sBegin));
+			
+			while(sBegin <= (int*)(a + N - 4)) {
+				if(DEBUG) cerr << "sBegin: " << *sBegin << endl;
+				if(DEBUG) cerr << "sEnd: " << *sEnd << endl;
+				assert(sBegin >= (int*)a && sBegin < (int*)(a + N - 4));
+				//assert(sEnd >= (int*)(a+4) && sEnd < (int*)(a + N - 4));
+				if(*sBegin != *sEnd) return false;
+				
+				sBegin = sEnd + 1;
+				
+				sEnd = (int*)(a + 4 + abs(*sBegin));
+			}
 			
 			
 			return true;
@@ -73,9 +95,16 @@ class Allocator {
 		* <your documentation>
 		*/
 		Allocator () {
-			// <your code>
+			assert(N >= 8);
 			
 			
+			*(int*)a = N - 8;
+			*(int*)(a + N - 4) = N - 8;
+			/**reinterpret_cast<int*>(a) = N - 8;
+			*reinterpret_cast<int*>(a + N - 4) = N - 8;
+			*/if(DEBUG) cerr << "reinterpret_cast: " << std::dec << *reinterpret_cast<int*>(a) << endl;
+			//if(DEBUG) cerr << "reinterpret_cast: " << std::dec << *reinterpret_cast<int*>(a + N - 4) << endl;
+			//if(DEBUG) cerr << "reinterpret_cast: 0x" << std::hex << (int)a[0] << endl;
 			
 			
 			
@@ -148,7 +177,5 @@ class Allocator {
 			
 			assert(valid());
 		}
-			
 	};
-
 #endif // Allocator_h
