@@ -65,9 +65,7 @@ class Allocator {
 		* <your documentation>
 		*/
 		bool valid () const
-		{
-			
-			const int* sBegin = (int*)a;
+		{			const int* sBegin = (int*)a;
 			const int* sEnd   = (int*) (a + 4 + abs(*sBegin));
 			
 			while(sBegin <= (int*)(a + N - 4)) {
@@ -81,7 +79,6 @@ class Allocator {
 				
 				sEnd = (int*)(a + 4 + abs(*sBegin));
 			}
-			
 			
 			return true;
 		}
@@ -97,25 +94,25 @@ class Allocator {
 		Allocator () {
 			assert(N >= 8);
 			
-			
 			*(int*)a = N - 8;
 			*(int*)(a + N - 4) = N - 8;
 			/**reinterpret_cast<int*>(a) = N - 8;
 			*reinterpret_cast<int*>(a + N - 4) = N - 8;
-			*/if(DEBUG) cerr << "reinterpret_cast: " << std::dec << *reinterpret_cast<int*>(a) << endl;
+			*/
+			//if(DEBUG) cerr << "reinterpret_cast: " << std::dec << *reinterpret_cast<int*>(a) << endl;
 			//if(DEBUG) cerr << "reinterpret_cast: " << std::dec << *reinterpret_cast<int*>(a + N - 4) << endl;
 			//if(DEBUG) cerr << "reinterpret_cast: 0x" << std::hex << (int)a[0] << endl;
 			
-			
-			
 			assert(valid());
 		}
-
+		
 		// Default copy, destructor, and copy assignment
 		// Allocator  (const Allocator<T>&);
 		// ~Allocator ();
 		// Allocator& operator = (const Allocator&);
-
+		
+		//findOpen
+		
 		// --------
 		// allocate
 		/**
@@ -127,7 +124,7 @@ class Allocator {
 		* choose the first block that fits
 		*/
 		pointer allocate (size_type n) {
-			// <your code>
+			if(DEBUG) cerr << "allocate..." << endl;
 			int* sBegin = (int*)a;
 			int* sEnd   = (int*) (a + 4 + abs(*sBegin));
 			
@@ -136,15 +133,15 @@ class Allocator {
 				if(DEBUG) cerr << "sEnd: " << *sEnd << endl;
 				assert(sBegin >= (int*)a && sBegin < (int*)(a + N - 4));
 				
-				if(*sBegin >= ((int)n) * sizeof(value_type)) {
-				  int update_this_sentry = *sBegin;
-				  int new_remaining_size = update_this_sentry - 8 - n;
-				  //set up new begin node for remingin space
-				  //*(sBegin) = -n; //updates old begin node to negative n
-				 //*(sBegin + 1) = ;//set up new end node for consumed space
-				  
-				  assert(valid());
-				  return (pointer)(sBegin+1);
+				if(*sBegin >= (int)(n * sizeof(value_type))) {
+					//int update_this_sentry = *sBegin;
+					//int new_remaining_size = update_this_sentry - 8 - n;
+					//set up new begin node for remingin space
+					//*(sBegin) = -n; //updates old begin node to negative n
+					//*(sBegin + 1) = ;//set up new end node for consumed space
+					
+					assert(valid());
+					return (pointer)(sBegin+1);
 				}
 				
 				sBegin = sEnd + 1;
@@ -152,7 +149,7 @@ class Allocator {
 				sEnd = (int*)(a + 4 + abs(*sBegin));
 			}
 			
-			return (pointer)0;		// replace!
+			return (pointer)0;
 		}
 
 		// ---------

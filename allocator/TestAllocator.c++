@@ -31,19 +31,17 @@ struct TestAllocator : CppUnit::TestFixture {
 	typedef typename A::difference_type	difference_type;
 	typedef typename A::pointer			pointer;
 	
-	// --------
+	// -----
 	// test0
 	void test0 () {
-		A x;/*
-		const difference_type	s = 1;
-		const value_type		v = 2;
-		const pointer			p = x.allocate(s);
-		x.construct(p, v);
-		
-		CPPUNIT_ASSERT(*p == v);
-		x.destroy(p);
-		x.deallocate(p, s);
-		*/
+		A x;
+	}
+	
+	// -----
+	// test1
+	void test1 () {
+		A x;
+		x.allocate(6);
 	}
 	
 	// --------
@@ -93,6 +91,7 @@ struct TestAllocator : CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(TestAllocator);
 	
 	CPPUNIT_TEST(test0);
+	CPPUNIT_TEST(test1);
 	//CPPUNIT_TEST(test_one);
 	//CPPUNIT_TEST(test_ten);
 	
