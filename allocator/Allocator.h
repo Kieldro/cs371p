@@ -128,10 +128,31 @@ class Allocator {
 		*/
 		pointer allocate (size_type n) {
 			// <your code>
+			int* sBegin = (int*)a;
+			int* sEnd   = (int*) (a + 4 + abs(*sBegin));
 			
+			while(sBegin <= (int*)(a + N - 4)) {
+				if(DEBUG) cerr << "sBegin: " << *sBegin << endl;
+				if(DEBUG) cerr << "sEnd: " << *sEnd << endl;
+				assert(sBegin >= (int*)a && sBegin < (int*)(a + N - 4));
+				
+				if(*sBegin >= ((int)n) * sizeof(value_type)) {
+				  int update_this_sentry = *sBegin;
+				  int new_remaining_size = update_this_sentry - 8 - n;
+				  //set up new begin node for remingin space
+				  //*(sBegin) = -n; //updates old begin node to negative n
+				 //*(sBegin + 1) = ;//set up new end node for consumed space
+				  
+				  assert(valid());
+				  return (pointer)(sBegin+1);
+				}
+				
+				sBegin = sEnd + 1;
+				
+				sEnd = (int*)(a + 4 + abs(*sBegin));
+			}
 			
-			assert(valid());
-			return 0;		// replace!
+			return (pointer)0;		// replace!
 		}
 
 		// ---------
