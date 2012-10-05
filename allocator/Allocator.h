@@ -38,6 +38,7 @@ class Allocator {
 
 		typedef value_type& 	 	reference;
 		typedef const value_type&	const_reference;
+		
 
 	public:
 		// -----------
@@ -56,7 +57,12 @@ class Allocator {
 		// ----
 		// data
 		char a[N];
-
+		
+		int* intP(int i) const{
+			
+			return (int*)(a + i);
+		}
+		
 		// -----
 		// valid
 		/**
@@ -64,15 +70,16 @@ class Allocator {
 		* O(n) in time
 		* <your documentation>
 		*/
+		int* const final_sentry;
 		bool valid () const
-		{			const int* sBegin = (int*)a;
-			const int* sEnd   = (int*) (a + 4 + abs(*sBegin));
+		{
+			const int* sBegin = intP(0);
+			const int* sEnd   = intP(4 + abs(*	sBegin));
 			
-			while(sBegin <= (int*)(a + N - 4)) {
+			while(sBegin <= final_sentry) {
 				if(DEBUG) cerr << "sBegin: " << *sBegin << endl;
 				if(DEBUG) cerr << "sEnd: " << *sEnd << endl;
 				assert(sBegin >= (int*)a && sBegin < (int*)(a + N - 4));
-				//assert(sEnd >= (int*)(a+4) && sEnd < (int*)(a + N - 4));
 				if(*sBegin != *sEnd) return false;
 				
 				sBegin = sEnd + 1;
@@ -91,11 +98,11 @@ class Allocator {
 		* O(1) in time
 		* <your documentation>
 		*/
-		Allocator () {
+		Allocator (): final_sentry(intP(N-4)) {
 			assert(N >= 8);
 			
-			*(int*)a = N - 8;
-			*(int*)(a + N - 4) = N - 8;
+			*intP(0) = N - 8;
+			*final_sentry = N - 8;
 			/**reinterpret_cast<int*>(a) = N - 8;
 			*reinterpret_cast<int*>(a + N - 4) = N - 8;
 			*/
