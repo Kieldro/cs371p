@@ -64,11 +64,54 @@ struct TestAllocator : CppUnit::TestFixture {
 	// test3
 	void test3 () {
 		A x;
+		value_type v = 3;
+		
+		pointer p = x.allocate(5);
+		x.construct(p, v);
 		
 		
-		x.allocate(5);
+		CPPUNIT_ASSERT(*p == v);
+	}
+	
+	// -----
+	// test4
+	void test4 () {
+		A x;
+		value_type v = 7;
+		int nElements = 5;
 		
-		CPPUNIT_ASSERT(true);
+		pointer p = x.allocate(nElements);
+		
+		for(int i = 0; i < nElements; ++i, ++p){
+			x.construct(p, v);
+			CPPUNIT_ASSERT(*p == v);
+		}
+	}
+	
+	// -----
+	// test5
+	void test5 () {
+		A x;
+		int nElements = 5;
+		
+		pointer p = x.allocate(nElements);
+		x.construct(p, 11);
+		x.destroy(p);
+		
+		x.deallocate(p, 5);
+	}
+	
+	// -----
+	// test6
+	void test6 () {
+		A x;
+		int nElements = 5;
+		
+		pointer p = x.allocate(nElements);
+		x.construct(p, 11);
+		x.destroy(p);
+		
+		x.deallocate(p, 5);
 	}
 	
 	// --------
@@ -81,7 +124,7 @@ struct TestAllocator : CppUnit::TestFixture {
 		x.construct(p, v);
 		
 		CPPUNIT_ASSERT(*p == v);
-		CPPUNIT_ASSERT(x == A());
+		CPPUNIT_ASSERT(x == A());		// operator == test
 		CPPUNIT_ASSERT(not (x != A()) );
 		x.destroy(p);
 		x.deallocate(p, s);
@@ -125,8 +168,12 @@ struct TestAllocator : CppUnit::TestFixture {
 	CPPUNIT_TEST(test1);
 	CPPUNIT_TEST(test2);
 	CPPUNIT_TEST(test3);
-	//CPPUNIT_TEST(test_one);
-	//CPPUNIT_TEST(test_ten);
+	CPPUNIT_TEST(test4);
+	CPPUNIT_TEST(test5);
+	CPPUNIT_TEST(test6);
+	//CPPUNIT_TEST(test7);
+	CPPUNIT_TEST(test_one);
+	CPPUNIT_TEST(test_ten);
 	
 	CPPUNIT_TEST_SUITE_END();
 };

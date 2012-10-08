@@ -81,8 +81,8 @@ class Allocator {
 			int e = 4 + abs(sentinel(b));
 			
 			while(b <= int(N - 4)){
-				if(DEBUG) cerr << "b: " << sentinel(b) << endl;
-				if(DEBUG) cerr << "e: " << sentinel(e) << endl;
+				//if(DEBUG) cerr << "b: " << sentinel(b) << endl;
+				//if(DEBUG) cerr << "e: " << sentinel(e) << endl;
 				//if(DEBUG) cerr << "size of int: " << sizeof(int) << endl;
 				assert(b >= 0 && b <= int(N - 4));
 				assert(e >= 0 && e <= int(N - 4));
@@ -133,13 +133,13 @@ class Allocator {
 		/**
 		* O(1) in space
 		* O(n) in time
-		* <your documentation>
+		* Sets the proper sentinels.
 		* after allocation there must be enough space left for a valid block
 		* the smallest allowable block is sizeof(T) + (2 * sizeof(int))
 		* choose the first block that fits
 		*/
 		pointer allocate (size_type n) {
-			if(DEBUG) cerr << "allocate:" << endl;
+			//if(DEBUG) cerr << "allocate:" << endl;
 			
 			assert(valid());
 			int b = 0;
@@ -186,11 +186,10 @@ class Allocator {
 		/**
 		* O(1) in space
 		* O(1) in time
-		* <your documentation>
+		* Constructs a T object at location p with value v
 		*/
 		void construct (pointer p, const_reference v) {
-			new (p) T(v);		// uncomment!
-			
+			new (p) T(v);
 			
 			assert(valid());
 		}
@@ -200,11 +199,24 @@ class Allocator {
 		/**
 		* O(1) in space
 		* O(1) in time
-		* <your documentation>
+		* deallocates a block of memory, combining any adjacent free blocks.
 		* after deallocation adjacent free blocks must be coalesced
 		*/
-		void deallocate (pointer p, size_type = 0) {
-			// <your code>
+		void deallocate (pointer p, size_type n = 0) {
+			
+			if(n <= 0)
+				return;
+			
+			int b = (char*)p - (char*)(&sentinel(0));
+			int e = b + 4 + abs(sentinel(b));
+			
+			if(DEBUG) cerr << "\np     : " << p << endl;
+			if(DEBUG) cerr << "sent 0: " << &sentinel(0) << endl;
+			if(DEBUG) cerr << "b: " << ((char*)p - 4 - (char*)(&sentinel(0)) ) << endl;
+			
+			
+			sentinel(b) = abs(sentinel(b));
+			sentinel(e) = abs(sentinel(e));
 			
 			
 			assert(valid());
@@ -215,12 +227,10 @@ class Allocator {
 		/**
 		* O(1) in space
 		* O(1) in time
-		* <your documentation>
+		* Calls the destructor of the T object at location p.
 		*/
 		void destroy (pointer p) {
-			// p->~T();		// uncomment!
-			
-			
+			 p->~T();
 			
 			assert(valid());
 		}
