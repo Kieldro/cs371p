@@ -70,19 +70,23 @@ struct TestAllocator : CppUnit::TestFixture {
 			pointer				e = b + s;
 			pointer				p = b;
 		try {
-		while (p != e) {
-			x.construct(p, v);
-			++p;}}
-		catch (...) {
-		while (b != p) {
-			--p;
-			x.destroy(p);}
-		x.deallocate(b, s);
-		throw;}
+			while (p != e) {
+				x.construct(p, v);
+				++p;
+			}
+		}catch (...) {
+			while (b != p) {
+				--p;
+				x.destroy(p);
+			}
+			x.deallocate(b, s);
+			throw;
+		}
 		CPPUNIT_ASSERT(std::count(b, e, v) == s);
 		while (b != e) {
-		--e;
-		x.destroy(e);}
+			--e;
+			x.destroy(e);
+		}
 		x.deallocate(b, s);
 	}
 

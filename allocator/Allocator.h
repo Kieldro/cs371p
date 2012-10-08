@@ -57,10 +57,13 @@ class Allocator {
 		// ----
 		// data
 		char a[N];
-		int* const FINAL_SENTINEL;
 		
 		int* intP(int i) const{
 			return (int*)(a + i);
+		}
+		
+		int& sentinel(int idx) const{
+			return *((int*)(a + idx));
 		}
 		
 		// -----
@@ -72,22 +75,22 @@ class Allocator {
 		*/
 		bool valid () const
 		{
-			const int* sBegin	= intP(0);
-			const int* sEnd		= intP(4 + abs(*sBegin));
+			int b = 0;
+			int e = 4 + abs(sentinel(b));
 			
-			while(sBegin <= FINAL_SENTINEL) {
-				//if(DEBUG) cerr << "sBegin: " << *sBegin << endl;
-				//if(DEBUG) cerr << "sEnd: " << *sEnd << endl;
-				assert(sBegin >= intP(0) && sBegin <= FINAL_SENTINEL);
-				assert(sEnd >= intP(0) && sEnd <= FINAL_SENTINEL);
-				assert(abs(*sBegin) <= (int)(N - 8));
-				assert(abs(*sEnd) <= (int)(N - 8));
+			while(b <= int(N - 4)){
+				//if(DEBUG) cerr << "b: " << sentinel(b) << endl;
+				//if(DEBUG) cerr << "e: " << sentinel(e) << endl;
+				assert(b >= 0 && b <= int(N - 4));
+				assert(e >= 0 && e <= int(N - 4));
+				assert(abs(sentinel(e)) <= int(N - 8));
+				assert(abs(sentinel(b)) <= int(N - 8));
 				
-				if(*sBegin != *sEnd) return false;
+				if(sentinel(b) != sentinel(e))
+					return false;
 				
-				sBegin = sEnd + 1;
-				
-				sEnd = intP(4 + abs(*sBegin));
+				b = e + 4;
+				e = b + 4 + abs(sentinel(b));	
 			}
 			
 			return true;
@@ -101,11 +104,11 @@ class Allocator {
 		* O(1) in time
 		* <your documentation>
 		*/
-		Allocator (): FINAL_SENTINEL(intP(N-4)) {
+		Allocator (){
 			assert(N >= 8);
 			
-			*intP(0) = N - 8;
-			*FINAL_SENTINEL = N - 8;
+			sentinel(0) = N - 8;
+			sentinel(N-4) = N - 8;
 			/**reinterpret_cast<int*>(a) = N - 8;
 			*reinterpret_cast<int*>(a + N - 4) = N - 8;
 			
@@ -135,33 +138,39 @@ class Allocator {
 		* choose the first block that fits
 		*/
 		pointer allocate (size_type n) {
-			if(DEBUG) cerr << "allocate..." << endl;
-			int* sBegin = intP(0);
-			int* sEnd   = intP(4 + abs(*sBegin));
+			if(DEBUG) cerr << "allocate:" << endl;
+			assert(n >= 0);
+			assert(valid());
+			int b = 0;
+			int e = 4 + abs(sentinel(b));
+			int bytesRequested = int(n * sizeof(value_type));
 			
-			while(sBegin <= intP(N - 4)) {
-				if(DEBUG) cerr << "sizeof int: " << sizeof(int) << endl;
-				//if(DEBUG) cerr << "sBegin: " << *sBegin << endl;
-				//if(DEBUG) cerr << "sEnd: " << *sEnd << endl;
-				assert(sBegin >= intP(0) && sBegin < intP(N - 4));
+			while(b <= int(N - 4)) {
+				//if(DEBUG) cerr << "b: " << sentinel(b) << endl;
+				//if(DEBUG) cerr << "e: " << sentinel(e) << endl;
+				assert(b >= 0 && b < int(N - 4));
 				
-				if(*sBegin >= (int)(n * sizeof(value_type))) {
-					//int update_this_sentinel = *sBegin;
-					//int new_remaining_size = update_this_sentinel - 8 - n;
-					//set up new begin node for remingin space
-					//*(sBegin) = -n; //updates old begin node to negative n
-					//*(sBegin + 1) = ;//set up new end node for consumed space
+				if(sentinel(b) >= bytesRequested) {
+					int remainingSpace = sentinel(b) - (bytesRequested + 2*4);
+					
+					// updates old begin sentinel
+					sentinel(b) = -bytesRequested;
+					// creates new end sentinel
+					sentinel(b + 4 + bytesRequested) = -bytesRequested;
+					// set up new begin sentinel for remaining space
+					sentinel(b + 2*4 + bytesRequested) = remainingSpace;
+					// updates old end sentinel
+					sentinel(e) = remainingSpace;
 					
 					assert(valid());
-					return (pointer)(sBegin+1);
+					return (pointer)(a + b + 4);
 				}
 				
-				sBegin = sEnd + 1;
-				
-				sEnd = intP(4 + abs(*sBegin));
+				b = e + 4;
+				e = 4 + abs(sentinel(b));
 			}
 			
-			return (pointer)0;
+			return 0;
 		}
 
 		// ---------
