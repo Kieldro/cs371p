@@ -57,9 +57,9 @@ class Allocator {
 		// ----
 		// data
 		char a[N];
+		int* const FINAL_SENTINEL;
 		
 		int* intP(int i) const{
-			
 			return (int*)(a + i);
 		}
 		
@@ -70,21 +70,24 @@ class Allocator {
 		* O(n) in time
 		* <your documentation>
 		*/
-		int* const final_sentry;
 		bool valid () const
 		{
-			const int* sBegin = intP(0);
-			const int* sEnd   = intP(4 + abs(*	sBegin));
+			const int* sBegin	= intP(0);
+			const int* sEnd		= intP(4 + abs(*sBegin));
 			
-			while(sBegin <= final_sentry) {
-				if(DEBUG) cerr << "sBegin: " << *sBegin << endl;
-				if(DEBUG) cerr << "sEnd: " << *sEnd << endl;
-				assert(sBegin >= (int*)a && sBegin < (int*)(a + N - 4));
+			while(sBegin <= FINAL_SENTINEL) {
+				//if(DEBUG) cerr << "sBegin: " << *sBegin << endl;
+				//if(DEBUG) cerr << "sEnd: " << *sEnd << endl;
+				assert(sBegin >= intP(0) && sBegin <= FINAL_SENTINEL);
+				assert(sEnd >= intP(0) && sEnd <= FINAL_SENTINEL);
+				assert(abs(*sBegin) <= (int)(N - 8));
+				assert(abs(*sEnd) <= (int)(N - 8));
+				
 				if(*sBegin != *sEnd) return false;
 				
 				sBegin = sEnd + 1;
 				
-				sEnd = (int*)(a + 4 + abs(*sBegin));
+				sEnd = intP(4 + abs(*sBegin));
 			}
 			
 			return true;
@@ -98,17 +101,18 @@ class Allocator {
 		* O(1) in time
 		* <your documentation>
 		*/
-		Allocator (): final_sentry(intP(N-4)) {
+		Allocator (): FINAL_SENTINEL(intP(N-4)) {
 			assert(N >= 8);
 			
 			*intP(0) = N - 8;
-			*final_sentry = N - 8;
+			*FINAL_SENTINEL = N - 8;
 			/**reinterpret_cast<int*>(a) = N - 8;
 			*reinterpret_cast<int*>(a + N - 4) = N - 8;
+			
+			if(DEBUG) cerr << "reinterpret_cast: " << std::dec << *reinterpret_cast<int*>(a) << endl;
+			if(DEBUG) cerr << "reinterpret_cast: " << std::dec << *reinterpret_cast<int*>(a + N - 4) << endl;
+			if(DEBUG) cerr << "reinterpret_cast: 0x" << std::hex << (int)a[0] << endl;
 			*/
-			//if(DEBUG) cerr << "reinterpret_cast: " << std::dec << *reinterpret_cast<int*>(a) << endl;
-			//if(DEBUG) cerr << "reinterpret_cast: " << std::dec << *reinterpret_cast<int*>(a + N - 4) << endl;
-			//if(DEBUG) cerr << "reinterpret_cast: 0x" << std::hex << (int)a[0] << endl;
 			
 			assert(valid());
 		}
@@ -132,17 +136,18 @@ class Allocator {
 		*/
 		pointer allocate (size_type n) {
 			if(DEBUG) cerr << "allocate..." << endl;
-			int* sBegin = (int*)a;
-			int* sEnd   = (int*) (a + 4 + abs(*sBegin));
+			int* sBegin = intP(0);
+			int* sEnd   = intP(4 + abs(*sBegin));
 			
-			while(sBegin <= (int*)(a + N - 4)) {
-				if(DEBUG) cerr << "sBegin: " << *sBegin << endl;
-				if(DEBUG) cerr << "sEnd: " << *sEnd << endl;
-				assert(sBegin >= (int*)a && sBegin < (int*)(a + N - 4));
+			while(sBegin <= intP(N - 4)) {
+				if(DEBUG) cerr << "sizeof int: " << sizeof(int) << endl;
+				//if(DEBUG) cerr << "sBegin: " << *sBegin << endl;
+				//if(DEBUG) cerr << "sEnd: " << *sEnd << endl;
+				assert(sBegin >= intP(0) && sBegin < intP(N - 4));
 				
 				if(*sBegin >= (int)(n * sizeof(value_type))) {
-					//int update_this_sentry = *sBegin;
-					//int new_remaining_size = update_this_sentry - 8 - n;
+					//int update_this_sentinel = *sBegin;
+					//int new_remaining_size = update_this_sentinel - 8 - n;
 					//set up new begin node for remingin space
 					//*(sBegin) = -n; //updates old begin node to negative n
 					//*(sBegin + 1) = ;//set up new end node for consumed space
@@ -153,7 +158,7 @@ class Allocator {
 				
 				sBegin = sEnd + 1;
 				
-				sEnd = (int*)(a + 4 + abs(*sBegin));
+				sEnd = intP(4 + abs(*sBegin));
 			}
 			
 			return (pointer)0;

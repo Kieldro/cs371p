@@ -106,11 +106,15 @@ int main () {
 	cout << "TestAllocator.c++" << endl;
 
 	CppUnit::TextTestRunner tr;
-
-//	tr.addTest(TestAllocator< std::allocator<int> >::suite());
+	
+	if(DEBUG) cerr << "Testing std::allocator<int>... " << endl;
+	tr.addTest(TestAllocator< std::allocator<int> >::suite());
+	if(DEBUG) cerr << "Testing Allocator<int, 100>... " << endl;
 	tr.addTest(TestAllocator< Allocator<int, 100> >::suite());	// uncomment!
 
+	//if(DEBUG) cerr << "Testing std::allocator<int>... " << endl;
 //	tr.addTest(TestAllocator< std::allocator<double> >::suite());
+	//if(DEBUG) cerr << "Testing std::allocator<int>... " << endl;
 //	tr.addTest(TestAllocator< Allocator<double, 100> >::suite());	// uncomment!
 
 	tr.run();

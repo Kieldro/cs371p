@@ -9,8 +9,10 @@ Last Name: Buitrago
 EID: ib
 E-mail: kieldro@gmail.com
 Estimated number of hours: 20
-Actual    number of hours: 
+Actual    number of hours: 3
 11:10a -11:50a
+
+11a - 4p
 
 Partner First Name: Jacob
 Partner Last Name: Wilke
