@@ -41,7 +41,34 @@ struct TestAllocator : CppUnit::TestFixture {
 	// test1
 	void test1 () {
 		A x;
+		//pointer p = 
 		x.allocate(6);
+		//if(DEBUG) cerr << endl << "p " << p << endl;
+	}
+	
+	// -----
+	// test2
+	void test2 () {
+		A x;
+		
+		try{
+			x.allocate(100000000000);
+		}
+		catch(...){
+			//if(DEBUG) cerr << "CAUGHT!" << endl;
+			CPPUNIT_ASSERT(true);
+		}
+	}
+	
+	// -----
+	// test3
+	void test3 () {
+		A x;
+		
+		
+		x.allocate(5);
+		
+		CPPUNIT_ASSERT(true);
 	}
 	
 	// --------
@@ -96,6 +123,8 @@ struct TestAllocator : CppUnit::TestFixture {
 	
 	CPPUNIT_TEST(test0);
 	CPPUNIT_TEST(test1);
+	CPPUNIT_TEST(test2);
+	CPPUNIT_TEST(test3);
 	//CPPUNIT_TEST(test_one);
 	//CPPUNIT_TEST(test_ten);
 	

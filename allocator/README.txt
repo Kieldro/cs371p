@@ -10,8 +10,8 @@ EID: ib
 E-mail: kieldro@gmail.com
 Estimated number of hours: 20
 Actual    number of hours: 3
-11:10a -11:50a
-
+11a -12p
+9p - 10p
 11a - 4p
 
 Partner First Name: Jacob

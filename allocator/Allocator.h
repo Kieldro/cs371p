@@ -58,10 +58,12 @@ class Allocator {
 		// data
 		char a[N];
 		
-		int* intP(int i) const{
-			return (int*)(a + i);
-		}
-		
+		// ---------
+		// sentinel
+		/**
+		* O(1) in space/time
+		* returns a int reference to a sentinel given an index.
+		*/
 		int& sentinel(int idx) const{
 			return *((int*)(a + idx));
 		}
@@ -71,7 +73,7 @@ class Allocator {
 		/**
 		* O(1) in space
 		* O(n) in time
-		* <your documentation>
+		* checks if all sentinels are matching pairs and that they add up properly
 		*/
 		bool valid () const
 		{
@@ -79,8 +81,9 @@ class Allocator {
 			int e = 4 + abs(sentinel(b));
 			
 			while(b <= int(N - 4)){
-				//if(DEBUG) cerr << "b: " << sentinel(b) << endl;
-				//if(DEBUG) cerr << "e: " << sentinel(e) << endl;
+				if(DEBUG) cerr << "b: " << sentinel(b) << endl;
+				if(DEBUG) cerr << "e: " << sentinel(e) << endl;
+				//if(DEBUG) cerr << "size of int: " << sizeof(int) << endl;
 				assert(b >= 0 && b <= int(N - 4));
 				assert(e >= 0 && e <= int(N - 4));
 				assert(abs(sentinel(e)) <= int(N - 8));
@@ -90,7 +93,7 @@ class Allocator {
 					return false;
 				
 				b = e + 4;
-				e = b + 4 + abs(sentinel(b));	
+				e = b + 4 + abs(sentinel(b));
 			}
 			
 			return true;
@@ -102,7 +105,7 @@ class Allocator {
 		/**
 		* O(1) in space
 		* O(1) in time
-		* <your documentation>
+		* Sets the first and last sentinels.
 		*/
 		Allocator (){
 			assert(N >= 8);
@@ -125,8 +128,6 @@ class Allocator {
 		// ~Allocator ();
 		// Allocator& operator = (const Allocator&);
 		
-		//findOpen
-		
 		// --------
 		// allocate
 		/**
@@ -139,13 +140,15 @@ class Allocator {
 		*/
 		pointer allocate (size_type n) {
 			if(DEBUG) cerr << "allocate:" << endl;
-			assert(n >= 0);
+			
 			assert(valid());
 			int b = 0;
 			int e = 4 + abs(sentinel(b));
 			int bytesRequested = int(n * sizeof(value_type));
+			if(n < 0 or bytesRequested > int(N - 8))
+				throw std::bad_alloc();
 			
-			while(b <= int(N - 4)) {
+			while(b <= int(N - 4) and n != 0) {
 				//if(DEBUG) cerr << "b: " << sentinel(b) << endl;
 				//if(DEBUG) cerr << "e: " << sentinel(e) << endl;
 				assert(b >= 0 && b < int(N - 4));
@@ -153,17 +156,22 @@ class Allocator {
 				if(sentinel(b) >= bytesRequested) {
 					int remainingSpace = sentinel(b) - (bytesRequested + 2*4);
 					
-					// updates old begin sentinel
-					sentinel(b) = -bytesRequested;
-					// creates new end sentinel
-					sentinel(b + 4 + bytesRequested) = -bytesRequested;
-					// set up new begin sentinel for remaining space
-					sentinel(b + 2*4 + bytesRequested) = remainingSpace;
-					// updates old end sentinel
-					sentinel(e) = remainingSpace;
+					if(remainingSpace >= int(sizeof(value_type))){
+						// updates old begin sentinel
+						sentinel(b) = -bytesRequested;
+						// creates new end sentinel
+						sentinel(b + 4 + bytesRequested) = -bytesRequested;
+						// set up new begin sentinel for remaining space
+						sentinel(b + 2*4 + bytesRequested) = remainingSpace;
+						// updates old end sentinel
+						sentinel(e) = remainingSpace;
+					}else{		// allocate extra space
+						sentinel(b) = -sentinel(b);
+						sentinel(e) = -sentinel(e);
+					}
 					
 					assert(valid());
-					return (pointer)(a + b + 4);
+					return pointer(a + b + 4);
 				}
 				
 				b = e + 4;
@@ -181,7 +189,7 @@ class Allocator {
 		* <your documentation>
 		*/
 		void construct (pointer p, const_reference v) {
-			// new (p) T(v);		// uncomment!
+			new (p) T(v);		// uncomment!
 			
 			
 			assert(valid());
