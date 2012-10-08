@@ -98,20 +98,23 @@ struct TestAllocator : CppUnit::TestFixture {
 		x.construct(p, 11);
 		x.destroy(p);
 		
-		x.deallocate(p, 5);
+		x.deallocate(p, nElements);
 	}
 	
 	// -----
 	// test6
 	void test6 () {
 		A x;
-		int nElements = 5;
+		int nElements = 4;
 		
-		pointer p = x.allocate(nElements);
-		x.construct(p, 11);
-		x.destroy(p);
+		pointer p0 = x.allocate(nElements);
+		pointer p1 = x.allocate(nElements);
 		
-		x.deallocate(p, 5);
+		x.deallocate(p0, nElements);
+		x.deallocate(p1, nElements);
+		x.allocate(2 * nElements);
+		p0++;p1++;
+		
 	}
 	
 	// --------
@@ -164,17 +167,17 @@ struct TestAllocator : CppUnit::TestFixture {
 	// suite
 	CPPUNIT_TEST_SUITE(TestAllocator);
 	
-	CPPUNIT_TEST(test0);
+	/*CPPUNIT_TEST(test0);
 	CPPUNIT_TEST(test1);
 	CPPUNIT_TEST(test2);
 	CPPUNIT_TEST(test3);
 	CPPUNIT_TEST(test4);
 	CPPUNIT_TEST(test5);
-	CPPUNIT_TEST(test6);
-	//CPPUNIT_TEST(test7);
+	*/CPPUNIT_TEST(test6);
+	/*CPPUNIT_TEST(test7);
 	CPPUNIT_TEST(test_one);
 	CPPUNIT_TEST(test_ten);
-	
+	*/
 	CPPUNIT_TEST_SUITE_END();
 };
 

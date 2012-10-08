@@ -81,9 +81,9 @@ class Allocator {
 			int e = 4 + abs(sentinel(b));
 			
 			while(b <= int(N - 4)){
-				//if(DEBUG) cerr << "b: " << sentinel(b) << endl;
-				//if(DEBUG) cerr << "e: " << sentinel(e) << endl;
-				//if(DEBUG) cerr << "size of int: " << sizeof(int) << endl;
+				/*if(DEBUG) cerr << "sentinel(b): " << sentinel(b) << endl;
+				if(DEBUG) cerr << "sentinel(e): " << sentinel(e) << endl;
+				*///if(DEBUG) cerr << "size of int: " << sizeof(int) << endl;
 				assert(b >= 0 && b <= int(N - 4));
 				assert(e >= 0 && e <= int(N - 4));
 				assert(abs(sentinel(e)) <= int(N - 8));
@@ -139,7 +139,7 @@ class Allocator {
 		* choose the first block that fits
 		*/
 		pointer allocate (size_type n) {
-			//if(DEBUG) cerr << "allocate:" << endl;
+			if(DEBUG) cerr << "allocate:" << endl;
 			
 			assert(valid());
 			int b = 0;
@@ -149,9 +149,11 @@ class Allocator {
 				throw std::bad_alloc();
 			
 			while(b <= int(N - 4) and n != 0) {
-				//if(DEBUG) cerr << "b: " << sentinel(b) << endl;
-				//if(DEBUG) cerr << "e: " << sentinel(e) << endl;
-				assert(b >= 0 && b < int(N - 4));
+				/*if(DEBUG) cerr << "sentinel(b): " << sentinel(b) << endl;
+				if(DEBUG) cerr << "sentinel(e): " << sentinel(e) << endl;
+				if(DEBUG) cerr << "b: " << b << endl;
+				if(DEBUG) cerr << "e: " << e << endl;
+				*/assert(b >= 0 && b < int(N - 4));
 				
 				if(sentinel(b) >= bytesRequested) {
 					int remainingSpace = sentinel(b) - (bytesRequested + 2*4);
@@ -165,7 +167,7 @@ class Allocator {
 						sentinel(b + 2*4 + bytesRequested) = remainingSpace;
 						// updates old end sentinel
 						sentinel(e) = remainingSpace;
-					}else{		// allocate extra space
+					}else{		// allocate extra space (all space in free block)
 						sentinel(b) = -sentinel(b);
 						sentinel(e) = -sentinel(e);
 					}
@@ -175,9 +177,11 @@ class Allocator {
 				}
 				
 				b = e + 4;
-				e = 4 + abs(sentinel(b));
+				e = b + 4 + abs(sentinel(b));
 			}
 			
+			// no space available
+			throw std::bad_alloc();
 			return 0;
 		}
 
@@ -202,22 +206,39 @@ class Allocator {
 		* deallocates a block of memory, combining any adjacent free blocks.
 		* after deallocation adjacent free blocks must be coalesced
 		*/
-		void deallocate (pointer p, size_type n = 0) {
+		void deallocate (pointer p, size_type = 0) {
+			if(DEBUG) cerr << "deallocate:" << endl;
+			assert(valid());
 			
-			if(n <= 0)
-				return;
-			
-			int b = (char*)p - (char*)(&sentinel(0));
+			int b = (char*)p - (char*)(&sentinel(0)) - 4;
 			int e = b + 4 + abs(sentinel(b));
 			
-			if(DEBUG) cerr << "\np     : " << p << endl;
+			/*if(DEBUG) cerr << "\np     : " << p << endl;
 			if(DEBUG) cerr << "sent 0: " << &sentinel(0) << endl;
 			if(DEBUG) cerr << "b: " << ((char*)p - 4 - (char*)(&sentinel(0)) ) << endl;
 			
-			
+			if(DEBUG) cerr << "b: " << b << endl;
+			if(DEBUG) cerr << "e: " << e << endl;
+			if(DEBUG) cerr << "sentinel(b): " << sentinel(b) << endl;
+			if(DEBUG) cerr << "sentinel(e): " << sentinel(e) << endl;
+			*/
 			sentinel(b) = abs(sentinel(b));
 			sentinel(e) = abs(sentinel(e));
+			//if(DEBUG) cerr << "BOOM!" << endl;
 			
+			// check if next block is free
+			if(e + 4 < int(N) and sentinel(e + 4) > 0){
+				sentinel(b) += 2 * sizeof(int) + sentinel(e + 4);
+				e = b + 4 + sentinel(b);
+				sentinel(e) = sentinel(b);
+			}
+			
+			// check if previous block is free
+			if(b - 4 > 0 and sentinel(b - 4) > 0){
+				sentinel(e) += 2 * sizeof(int) + sentinel(b - 4);
+				b = e - sentinel(e) - 4;
+				sentinel(b) = sentinel(e);
+			}
 			
 			assert(valid());
 		}
