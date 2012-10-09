@@ -1,3 +1,93 @@
+commit 34347d272aee026f73600abc63813028ab7561d0
+Author: Ian <kieldro@gmail.com>
+Date:   Mon Oct 8 22:37:28 2012 -0500
+
+    Update allocator/README.txt
+
+commit b11f74b7836afbe5c721fb61263912ec02c62dd6
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 8 18:01:23 2012 -0500
+
+    allocate() and deallocate() seem to work.
+
+commit 28000ae9455b8976fb021d56a6b6d3ffd3ff9a23
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 8 15:50:55 2012 -0500
+
+    Adds trivial implementations and tests for deallocate() and destroy().
+
+commit 90b09359ff1786804bf52e27cf6c7ca1de4ec908
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 8 14:50:42 2012 -0500
+
+    allocate() gives extra space if another T can't be fit.
+
+commit c98c1f7d2e70d051a6b6bffe71ec43112f8e2466
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 8 13:15:31 2012 -0500
+
+    Rewritten using sentinel().
+
+commit 0b6b054e485b22a07995472dccb27c019f0fb9bd
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 8 11:53:30 2012 -0500
+
+    Adds more asserts.
+
+commit 5d33b6163ffd68f2dc58b1574cff43a72f39adc4
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Thu Oct 4 21:50:54 2012 -0500
+
+    added intP() caster function.
+
+commit 031abb764894c98d39c1e1547d553294d2855e2b
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Oct 3 16:20:16 2012 -0500
+
+    Adds another trivial test case.
+
+commit 581584affb0b95d00d64b49a5e47d794a2ec0854
+Author: Jacob Wilke <jake.wilke@gmail.com>
+Date:   Wed Oct 3 15:33:48 2012 -0500
+
+    working on allocate(), needs to build the new sentries
+
+commit f102f7af60e8992d7720718cfdfbaac94a771e96
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Oct 3 14:58:30 2012 -0500
+
+    Constructor and valid written.
+
+commit 8a3223e86b5839a42c81599d47791c9e335952c9
+Author: Jacob Wilke <jake.wilke@gmail.com>
+Date:   Mon Oct 1 18:34:22 2012 -0500
+
+    added my info to readme file, also first push - jwilke
+
+commit bcbdc88af3c8724d1ba33ef5d09eecde5af0b937
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 1 16:46:09 2012 -0500
+
+    changes to scratch.c++
+
+commit f404be7600763ad500b05d4e4f5e0f90d021ae65
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Sep 28 12:54:57 2012 -0500
+
+    Trying to add tests.
+
+commit aea5e882e9c0bd5f4b501273c4e86e64ed9520a5
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Sep 28 11:51:33 2012 -0500
+
+    cleans up some whitespace.
+
+commit cce9353032d2e977cc39673cdb4d55c6641addba
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Sep 28 11:43:22 2012 -0500
+
+    Allocator compiling version.
+
 commit f7377ea805f3d2b7712ef4e4fce865d909f44854
 Author: Ian Buitrago <kieldro@gmail.com>
 Date:   Fri Sep 28 11:30:18 2012 -0500

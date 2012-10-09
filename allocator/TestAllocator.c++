@@ -52,7 +52,7 @@ struct TestAllocator : CppUnit::TestFixture {
 		A x;
 		
 		try{
-			x.allocate(100000000000);
+			x.allocate(100000000);
 		}
 		catch(...){
 			//if(DEBUG) cerr << "CAUGHT!" << endl;
@@ -116,6 +116,62 @@ struct TestAllocator : CppUnit::TestFixture {
 		p0++;p1++;
 		
 	}
+
+	void test7 () {
+		A x;
+
+		pointer p0 = x.allocate(7);
+		pointer p1 = x.allocate(7);
+		pointer p2 = x.allocate(5); //this should fill our allocator to maximum capacity
+
+		try{
+			pointer bad = x.allocate(1); // shouldn't work
+			CPPUNIT_ASSERT(false);
+		}
+		catch(...){
+			//if(DEBUG) cerr << "CAUGHT!" << endl;
+			CPPUNIT_ASSERT(true);
+		}
+
+		x.construct(p0, 4);
+		x.destroy(p0);
+
+		x.deallocate(p0, 7);
+		x.deallocate(p2, 7);
+		x.deallocate(p1, 5);
+
+		// should fill back up to maximum capacity if deallocate worked.
+		pointer full_pointer = x.allocate(23);
+		x.deallocate(full_pointer, 23); // restore to memory
+	}
+
+	void test8 () {
+		A x;
+
+		pointer p0 = x.allocate(5);
+		pointer p1 = x.allocate(7);
+		pointer p2 = x.allocate(7); //this should fill our allocator to maximum capacity
+
+		try{
+			pointer bad = x.allocate(1); // shouldn't work
+			CPPUNIT_ASSERT(false);
+		}
+		catch(...){
+			//if(DEBUG) cerr << "CAUGHT!" << endl;
+			CPPUNIT_ASSERT(true);
+		}
+
+		x.construct(p0, 4);
+		x.destroy(p0);
+
+		x.deallocate(p0, 5); //different ordering
+		x.deallocate(p1, 7);
+		x.deallocate(p2, 7);
+
+		// should fill back up to almost maximum capacity if deallocate worked.
+		pointer full_pointer = x.allocate(22);
+		x.deallocate(full_pointer, 22); // restore to memory
+	}
 	
 	// --------
 	// test_one
@@ -167,17 +223,18 @@ struct TestAllocator : CppUnit::TestFixture {
 	// suite
 	CPPUNIT_TEST_SUITE(TestAllocator);
 	
-	/*CPPUNIT_TEST(test0);
+	CPPUNIT_TEST(test0);
 	CPPUNIT_TEST(test1);
 	CPPUNIT_TEST(test2);
 	CPPUNIT_TEST(test3);
 	CPPUNIT_TEST(test4);
 	CPPUNIT_TEST(test5);
-	*/CPPUNIT_TEST(test6);
-	/*CPPUNIT_TEST(test7);
+	CPPUNIT_TEST(test6);
+	CPPUNIT_TEST(test7);
+	CPPUNIT_TEST(test8);
 	CPPUNIT_TEST(test_one);
 	CPPUNIT_TEST(test_ten);
-	*/
+
 	CPPUNIT_TEST_SUITE_END();
 };
 
