@@ -119,13 +119,26 @@ struct TestAllocator : CppUnit::TestFixture {
 
 	void test7 () {
 		A x;
+		pointer test = x.allocate(1);
+		int data_size = sizeof(test[0]); //gets the size of the type in the allocator
+		x.deallocate(test, 1);
 
-		pointer p0 = x.allocate(7);
-		pointer p1 = x.allocate(7);
-		pointer p2 = x.allocate(5); //this should fill our allocator to maximum capacity
+		//calculates total number of elements to fit in 3 arrays
+		int total_can_create = (100 - 3*8) / data_size;
+
+		//figure out the number of elements given to each array
+		int n0 = total_can_create / 3;
+		int n1 = n0;
+		int n2 = total_can_create - n0 - n1; //give n3 the remaining number
+
+		pointer p0 = x.allocate(n0);
+		pointer p1 = x.allocate(n1);
+		pointer p2 = x.allocate(n2); //this should fill our allocator to almost maximum capacity
+		//note - for our allocator, this actually is maximum capacity as there wouldn't be
+		//enough room for another element
 
 		try{
-			pointer bad = x.allocate(1); // shouldn't work
+			x.allocate(1); // shouldn't work
 			CPPUNIT_ASSERT(false);
 		}
 		catch(...){
@@ -136,24 +149,38 @@ struct TestAllocator : CppUnit::TestFixture {
 		x.construct(p0, 4);
 		x.destroy(p0);
 
-		x.deallocate(p0, 7);
-		x.deallocate(p2, 7);
-		x.deallocate(p1, 5);
+		x.deallocate(p0, n0);
+		x.deallocate(p2, n2);
+		x.deallocate(p1, n1);
 
-		// should fill back up to maximum capacity if deallocate worked.
-		pointer full_pointer = x.allocate(23);
-		x.deallocate(full_pointer, 23); // restore to memory
+		// should fill back up to near maximum capacity if deallocate worked.
+		int maximum_capacity_elems = (100 - 8) / data_size;
+		pointer full_pointer = x.allocate(maximum_capacity_elems);
+		x.deallocate(full_pointer, maximum_capacity_elems); // restore to memory
 	}
 
 	void test8 () {
 		A x;
+		pointer test = x.allocate(1);
+		int data_size = sizeof(test[0]); //gets the size of the type in the allocator
+		x.deallocate(test, 1);
 
-		pointer p0 = x.allocate(5);
-		pointer p1 = x.allocate(7);
-		pointer p2 = x.allocate(7); //this should fill our allocator to maximum capacity
+		//calculates total number of elements to fit in 3 arrays
+		int total_can_create = (100 - 3*8) / data_size;
+
+		//figure out the number of elements given to each array
+		int n0 = total_can_create / 3;
+		int n1 = n0;
+		int n2 = total_can_create - n0 - n1; //give n3 the remaining number
+
+		pointer p0 = x.allocate(n0);
+		pointer p1 = x.allocate(n1);
+		pointer p2 = x.allocate(n2); //this should fill our allocator to almost maximum capacity
+		//note - for our allocator, this actually is maximum capacity as there wouldn't be
+		//enough room for another element
 
 		try{
-			pointer bad = x.allocate(1); // shouldn't work
+			x.allocate(1); // shouldn't work
 			CPPUNIT_ASSERT(false);
 		}
 		catch(...){
@@ -164,13 +191,14 @@ struct TestAllocator : CppUnit::TestFixture {
 		x.construct(p0, 4);
 		x.destroy(p0);
 
-		x.deallocate(p0, 5); //different ordering
-		x.deallocate(p1, 7);
-		x.deallocate(p2, 7);
+		x.deallocate(p2, n2); //different ordering
+		x.deallocate(p1, n1);
+		x.deallocate(p0, n0);
 
-		// should fill back up to almost maximum capacity if deallocate worked.
-		pointer full_pointer = x.allocate(22);
-		x.deallocate(full_pointer, 22); // restore to memory
+		// should fill back up to near maximum capacity if deallocate worked.
+		int maximum_capacity_elems = (100 - 8) / data_size;
+		pointer full_pointer = x.allocate(maximum_capacity_elems);
+		x.deallocate(full_pointer, maximum_capacity_elems); // restore to memory
 	}
 	
 	// --------
@@ -253,9 +281,9 @@ int main () {
 	tr.addTest(TestAllocator< Allocator<int, 100> >::suite());	// uncomment!
 
 	//if(DEBUG) cerr << "Testing std::allocator<int>... " << endl;
-//	tr.addTest(TestAllocator< std::allocator<double> >::suite());
+	tr.addTest(TestAllocator< std::allocator<double> >::suite());
 	//if(DEBUG) cerr << "Testing std::allocator<int>... " << endl;
-//	tr.addTest(TestAllocator< Allocator<double, 100> >::suite());	// uncomment!
+	tr.addTest(TestAllocator< Allocator<double, 100> >::suite());	// uncomment!
 
 	tr.run();
 
