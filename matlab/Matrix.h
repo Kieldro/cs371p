@@ -13,6 +13,8 @@
 #include <cstddef>	// ptrdiff_t, size_t
 #include <vector>	// vector
 
+using std::vector;
+
 // ------
 // Matrix
 template <typename T>
@@ -42,7 +44,8 @@ class Matrix {
 		*/
 		friend bool operator == (const Matrix&, const Matrix&) {
 			// <your code>
-			return true;}
+			return true;
+		}
 
 		// -----------
 		// operator !=
@@ -50,7 +53,8 @@ class Matrix {
 		* <your documentation>
 		*/
 		friend bool operator != (const Matrix& lhs, const Matrix& rhs) {
-			return !(lhs == rhs);}
+			return !(lhs == rhs);
+		}
 
 		// ----------
 		// operator <
@@ -59,7 +63,8 @@ class Matrix {
 		*/
 		friend bool operator < (const Matrix& lhs, const Matrix& rhs) {
 			// <your code>
-			return false;}
+			return false;
+		}
 
 		// -----------
 		// operator <=
@@ -67,7 +72,8 @@ class Matrix {
 		* <your documentation>
 		*/
 		friend bool operator <= (const Matrix& lhs, const Matrix& rhs) {
-			return !(rhs < lhs);}
+			return !(rhs < lhs);
+		}
 
 		// ----------
 		// operator >
@@ -75,7 +81,8 @@ class Matrix {
 		* <your documentation>
 		*/
 		friend bool operator > (const Matrix& lhs, const Matrix& rhs) {
-			return (rhs < lhs);}
+			return (rhs < lhs);
+		}
 
 		// -----------
 		// operator >=
@@ -83,7 +90,8 @@ class Matrix {
 		* <your documentation>
 		*/
 		friend bool operator >= (const Matrix& lhs, const Matrix& rhs) {
-			return !(lhs < rhs);}
+			return !(lhs < rhs);
+		}
 
 		// ----------
 		// operator +
@@ -91,13 +99,15 @@ class Matrix {
 		* <your documentation>
 		*/
 		friend Matrix operator + (Matrix lhs, const T& rhs) {
-			return lhs += rhs;}
+			return lhs += rhs;
+		}
 
 		/**
 		* <your documentation>
 		*/
 		friend Matrix operator + (Matrix lhs, const Matrix& rhs) {
-			return lhs += rhs;}
+			return lhs += rhs;
+		}
 
 		// ----------
 		// operator -
@@ -105,13 +115,15 @@ class Matrix {
 		* <your documentation>
 		*/
 		friend Matrix operator - (Matrix lhs, const T& rhs) {
-			return lhs -= rhs;}
+			return lhs -= rhs;
+		}
 
 		/**
 		* <your documentation>
 		*/
 		friend Matrix operator - (Matrix lhs, const Matrix& rhs) {
-			return lhs -= rhs;}
+			return lhs -= rhs;
+		}
 
 		// ----------
 		// operator *
@@ -119,13 +131,15 @@ class Matrix {
 		* <your documentation>
 		*/
 		friend Matrix operator * (Matrix lhs, const T& rhs) {
-			return lhs *= rhs;}
+			return lhs *= rhs;
+		}
 
 		/**
 		* <your documentation>
 		*/
 		friend Matrix operator * (Matrix lhs, const Matrix& rhs) {
-			return lhs *= rhs;}
+			return lhs *= rhs;
+		}
 
 	private:
 		// ----
@@ -138,8 +152,11 @@ class Matrix {
 		* <your documentation>
 		*/
 		bool valid () const {
-			// <your code>
-			return true;}
+			
+			
+			
+			return true;
+		}
 
 	public:
 		// ------------
@@ -147,31 +164,39 @@ class Matrix {
 		/**
 		* <your documentation>
 		*/
-		Matrix (size_type r = 0, size_type c = 0, const_reference v = T()) {
-			// <your code>
-			assert(valid());}
-
+		Matrix (size_type r = 0, size_type c = 0, const_reference v = T()):
+		_m(r, vector<T>(c, v))
+		{
+			
+			assert(valid());
+		}
+		
+		
+		// Canonical methods
 		// Default copy, destructor, and copy assignment
 		// Matrix  (const Matrix<T>&);
 		// ~Matrix ();
 		// Matrix& operator = (const Matrix&);
 
 		// -----------
-		// operator 
+		// operator []
 		/**
 		* <your documentation>
 		*/
 		reference operator [] (size_type i) {
-			// <your code>
 			// dummy is just to be able to compile the skeleton, remove it
 			static value_type dummy;
-			return dummy;}
+			
+			
+			return dummy;
+		}
 
 		/**
 		* <your documentation>
 		*/
 		const_reference operator [] (size_type i) const {
-			return (*const_cast<Matrix*>(this))[i];}
+			return (*const_cast<Matrix*>(this))[i];
+		}
 
 		// -----------
 		// operator +=
@@ -180,14 +205,16 @@ class Matrix {
 		*/
 		Matrix& operator += (const T& rhs) {
 			// <your code>
-			return *this;}
+			return *this;
+		}
 
 		/**
 		* <your documentation>
 		*/
 		Matrix& operator += (const Matrix& rhs) {
 			// <your code>
-			return *this;}
+			return *this;
+		}
 
 		// -----------
 		// operator -=
@@ -196,14 +223,16 @@ class Matrix {
 		*/
 		Matrix& operator -= (const T& rhs) {
 			// <your code>
-			return *this;}
+			return *this;
+		}
 
 		/**
 		* <your documentation>
 		*/
 		Matrix& operator -= (const Matrix& rhs) {
 			// <your code>
-			return *this;}
+			return *this;
+		}
 
 		// -----------
 		// operator *=
@@ -212,14 +241,16 @@ class Matrix {
 		*/
 		Matrix& operator *= (const T& rhs) {
 			// <your code>
-			return *this;}
+			return *this;
+		}
 
 		/**
 		* <your documentation>
 		*/
 		Matrix& operator *= (const Matrix& rhs) {
 			// <your code>
-			return *this;}
+			return *this;
+		}
 
 		// -----
 		// begin
@@ -227,13 +258,15 @@ class Matrix {
 		* <your documentation>
 		*/
 		iterator begin () {
-			return _m.begin();}
+			return _m.begin();
+		}
 
 		/**
 		* <your documentation>
 		*/
 		const_iterator begin () const {
-			return const_cast<Matrix*>(this)->begin();}
+			return const_cast<Matrix*>(this)->begin();
+		}
 
 		// ---
 		// end
@@ -241,13 +274,15 @@ class Matrix {
 		* <your documentation>
 		*/
 		iterator end () {
-			return _m.end();}
+			return _m.end();
+		}
 
 		/**
 		* <your documentation>
 		*/
 		const_iterator end () const {
-			return const_cast<Matrix*>(this)->end();}
+			return const_cast<Matrix*>(this)->end();
+		}
 
 		// ----
 		// size
@@ -255,6 +290,8 @@ class Matrix {
 		* <your documentation>
 		*/
 		size_type size () const {
-			return _m.size();}};
+			return _m.size();
+		}
+};
 
 #endif // Matrix_h

@@ -13,7 +13,7 @@ clean:
 test: $(TEST)
 	clear
 	$(CC) $(CPPFLAGS) $(TEST) -lcppunit -o $(TEST).app
-	valgrind ./$(TEST).app #> TestAllocator.out 2>&1 ; cat $(OUTFILE)
+	valgrind ./$(TEST).app > TestAllocator.out 2>&1 ; cat $(OUTFILE)
 
 run: test
 

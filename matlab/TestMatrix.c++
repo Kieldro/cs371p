@@ -29,12 +29,22 @@ struct TestMatrix : CppUnit::TestFixture {
 		Matrix<int> z(2, 3);
 		Matrix<int> t(2, 3, 4);
 		CPPUNIT_ASSERT(x.size() == 0);
+		
+		CPPUNIT_ASSERT(y.size() == 2);
+		//CPPUNIT_ASSERT(y.size() == 2);
+		
+		CPPUNIT_ASSERT(z.size() == 2);
+		
+		CPPUNIT_ASSERT(t.size() == 2);
 	}
 
 	// ----------
 	// test_index
 	void test_index () {
 		const Matrix<int> x;
+		
+		
+		
 		CPPUNIT_ASSERT(x[0] == 0);
 	}
 
@@ -113,6 +123,7 @@ struct TestMatrix : CppUnit::TestFixture {
 	// -----
 	// suite
 	CPPUNIT_TEST_SUITE(TestMatrix);
+	
 	CPPUNIT_TEST(test_constructor);
 	CPPUNIT_TEST(test_index);
 	CPPUNIT_TEST(test_equals);
@@ -122,6 +133,7 @@ struct TestMatrix : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_multiplies);
 	CPPUNIT_TEST(test_iterator);
 	CPPUNIT_TEST(test_const_iterator);
+	
 	CPPUNIT_TEST_SUITE_END();
 };
 

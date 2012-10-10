@@ -20,7 +20,8 @@
  */
 template <typename T>
 T horzcat (const T& x, const T& y) {
-	return x;}
+	return x;
+}
 
 /**
  * <your documentation>
@@ -28,7 +29,8 @@ T horzcat (const T& x, const T& y) {
  */
 template <typename T>
 T vertcat (const T& x, const T& y) {
-	return x;}
+	return x;
+}
 
 // ----
 // diag
@@ -38,7 +40,11 @@ T vertcat (const T& x, const T& y) {
  */
 template <typename T>
 T diag (const T& x) {
-	return x;}
+	
+	
+	
+	return x;
+}
 
 // ---
 // dot
@@ -48,7 +54,8 @@ T diag (const T& x) {
  */
 template <typename T>
 T dot (const T& x, const T& y) {
-	return x;}
+	return x;
+}
 
 // ---
 // eye
@@ -59,7 +66,8 @@ T dot (const T& x, const T& y) {
 template <typename T>
 T eye (std::size_t r, std::size_t c) {
 	T x;
-	return x;}
+	return x;
+}
 
 // ----------------
 // linsolve (bonus)
@@ -69,7 +77,8 @@ T eye (std::size_t r, std::size_t c) {
  */
 template <typename T>
 T linsolve (const T& x, const T& y) {
-	return x;}
+	return x;
+}
 
 // ----
 // ones
@@ -80,7 +89,8 @@ T linsolve (const T& x, const T& y) {
 template <typename T>
 T ones (std::size_t r, std::size_t c) {
 	T x;
-	return x;}
+	return x;
+}
 
 // ----
 // rand
@@ -91,7 +101,8 @@ T ones (std::size_t r, std::size_t c) {
 template <typename T>
 T rand (std::size_t r, std::size_t c) {
 	T x;
-	return x;}
+	return x;
+}
 
 // ---------
 // transpose
@@ -101,7 +112,8 @@ T rand (std::size_t r, std::size_t c) {
  */
 template <typename T>
 T transpose (const T& x) {
-	return x;}
+	return x;
+}
 
 // ----
 // tril
@@ -111,7 +123,8 @@ T transpose (const T& x) {
  */
 template <typename T>
 T tril (const T& x) {
-	return x;}
+	return x;
+}
 
 // ----
 // triu
@@ -121,7 +134,8 @@ T tril (const T& x) {
  */
 template <typename T>
 T triu (const T& x) {
-	return x;}
+	return x;
+}
 
 // -----
 // zeros
@@ -132,6 +146,7 @@ T triu (const T& x) {
 template <typename T>
 T zeros (std::size_t r, std::size_t c) {
 	T x;
-	return x;}
+	return x;
+}
 
 #endif // MatLab_h

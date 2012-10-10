@@ -9,13 +9,10 @@ all: test run log doxygen zip
 
 run: test
 
-clean:
-	rm *.app
-
 test: $(TEST)
 	clear
 	$(CC) $(CPPFLAGS) $(TEST) -lcppunit -o $(TEST).app
-	./$(TEST).app #>& TestMatlab.out
+	./$(TEST).app #> TestMatlab.out 2>&1
 
 log:
 	git log > Matlab.log
@@ -30,11 +27,14 @@ doxygen:
 
 zip:
 	zip Matlab README.txt html/* Matlab.h Matlab.log \
-	$(TEST) TestMatlab.out
+	$(TEST) TestMatrix.c++ TestMatlab.out TestMatrix.out
 
 # turnin --submit reza cs371ppj4 Matlab.zip
 # turnin --list   reza cs371ppj4
 # turnin --verify reza cs371ppj4
+
+clean:
+	rm *.app
 
 scratch: scratch.c++
 	g++ -std=c++0x scratch.c++ -o scratch.c++.app

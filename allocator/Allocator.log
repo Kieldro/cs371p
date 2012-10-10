@@ -1,3 +1,15 @@
+commit c409df338243b3caaba46e7c90a99393730651c2
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Oct 10 13:03:13 2012 -0500
+
+    Fixed behavior of allocate(0).
+
+commit 12f143c9ee80cf931cbaf412f0a8ddd4176cf56f
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Oct 10 12:03:47 2012 -0500
+
+    Adds matlab skeleton files.
+
 commit de0c110a47af61b22fe35107eb5684d776d36875
 Author: Jake Wilke <jake.wilke@gmail.com>
 Date:   Tue Oct 9 19:46:52 2012 -0500
