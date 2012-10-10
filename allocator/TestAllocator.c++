@@ -21,6 +21,11 @@
 
 #include "Allocator.h"
 
+class Elephant {
+	int four_bytes;
+	char one_byte;
+};
+
 // -------------
 // TestAllocator
 template <typename A>
@@ -146,9 +151,6 @@ struct TestAllocator : CppUnit::TestFixture {
 			CPPUNIT_ASSERT(true);
 		}
 
-		x.construct(p0, 4);
-		x.destroy(p0);
-
 		x.deallocate(p0, n0);
 		x.deallocate(p2, n2);
 		x.deallocate(p1, n1);
@@ -187,9 +189,6 @@ struct TestAllocator : CppUnit::TestFixture {
 			//if(DEBUG) cerr << "CAUGHT!" << endl;
 			CPPUNIT_ASSERT(true);
 		}
-
-		x.construct(p0, 4);
-		x.destroy(p0);
 
 		x.deallocate(p2, n2); //different ordering
 		x.deallocate(p1, n1);
@@ -247,6 +246,17 @@ struct TestAllocator : CppUnit::TestFixture {
 		x.deallocate(b, s);
 	}
 
+	void test_allocate_zero() {
+		A x;
+		try {
+			x.allocate(0);
+			CPPUNIT_ASSERT(false);
+		} catch (...) {
+			CPPUNIT_ASSERT(true);
+		}
+	}
+			
+
 	// -----
 	// suite
 	CPPUNIT_TEST_SUITE(TestAllocator);
@@ -260,11 +270,13 @@ struct TestAllocator : CppUnit::TestFixture {
 	CPPUNIT_TEST(test6);
 	CPPUNIT_TEST(test7);
 	CPPUNIT_TEST(test8);
+	CPPUNIT_TEST(test_allocate_zero);
 	CPPUNIT_TEST(test_one);
 	CPPUNIT_TEST(test_ten);
 
 	CPPUNIT_TEST_SUITE_END();
 };
+
 
 // ----
 // main
@@ -280,10 +292,15 @@ int main () {
 	if(DEBUG) cerr << "Testing Allocator<int, 100>... " << endl;
 	tr.addTest(TestAllocator< Allocator<int, 100> >::suite());	// uncomment!
 
-	//if(DEBUG) cerr << "Testing std::allocator<int>... " << endl;
+	if(DEBUG) cerr << "Testing std::allocator<int>... " << endl;
 	tr.addTest(TestAllocator< std::allocator<double> >::suite());
-	//if(DEBUG) cerr << "Testing std::allocator<int>... " << endl;
+	if(DEBUG) cerr << "Testing std::allocator<int>... " << endl;
 	tr.addTest(TestAllocator< Allocator<double, 100> >::suite());	// uncomment!
+
+	/*if(DEBUG) cerr << "Testing std::allocator<Elephant>... " << endl;
+	tr.addTest(TestAllocator< std::allocator<Elephant> >::suite());
+	if(DEBUG) cerr << "Testing std::allocator<Elephant>... " << endl;
+	tr.addTest(TestAllocator< Allocator<Elephant, 100> >::suite());*/
 
 	tr.run();
 
