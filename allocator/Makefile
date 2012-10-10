@@ -3,6 +3,7 @@ SHELL = /bin/sh
 CC = g++
 CPPFLAGS = -ansi -pedantic -ldl -Wall
 TEST = TestAllocator.c++
+OUTFILE = TestAllocator.out
 
 all: test run log doxygen zip
 
@@ -12,7 +13,7 @@ clean:
 test: $(TEST)
 	clear
 	$(CC) $(CPPFLAGS) $(TEST) -lcppunit -o $(TEST).app
-	valgrind ./$(TEST).app > TestAllocator.out 2>&1
+	valgrind ./$(TEST).app #> TestAllocator.out 2>&1 ; cat $(OUTFILE)
 
 run: test
 

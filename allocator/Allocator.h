@@ -139,7 +139,7 @@ class Allocator {
 		* choose the first block that fits
 		*/
 		pointer allocate (size_type n) {
-			if(DEBUG) cerr << "allocate:" << endl;
+			//if(DEBUG) cerr << "allocate:" << endl;
 			
 			assert(valid());
 			int b = 0;
@@ -148,7 +148,12 @@ class Allocator {
 			if(n < 0 or bytesRequested > int(N - 8))
 				throw std::bad_alloc();
 			
-			while(b <= int(N - 4) and n != 0) {
+			if(n == 0){
+				return pointer(a);
+			}
+			
+			
+			while(b <= int(N - 4)) {
 				/*if(DEBUG) cerr << "sentinel(b): " << sentinel(b) << endl;
 				if(DEBUG) cerr << "sentinel(e): " << sentinel(e) << endl;
 				if(DEBUG) cerr << "b: " << b << endl;
@@ -207,7 +212,7 @@ class Allocator {
 		* after deallocation adjacent free blocks must be coalesced
 		*/
 		void deallocate (pointer p, size_type = 0) {
-			if(DEBUG) cerr << "deallocate:" << endl;
+			//if(DEBUG) cerr << "deallocate:" << endl;
 			assert(valid());
 			
 			int b = (char*)p - (char*)(&sentinel(0)) - 4;

@@ -46,9 +46,9 @@ struct TestAllocator : CppUnit::TestFixture {
 	// test1
 	void test1 () {
 		A x;
-		//pointer p = 
+	//	pointer p = 
 		x.allocate(6);
-		//if(DEBUG) cerr << endl << "p " << p << endl;
+	//	if(DEBUG) cerr << endl << "p " << p << endl;
 	}
 	
 	// -----
@@ -249,11 +249,15 @@ struct TestAllocator : CppUnit::TestFixture {
 	void test_allocate_zero() {
 		A x;
 		try {
+		//	pointer p = 
 			x.allocate(0);
+		//	if(DEBUG) cerr << endl << "p " << p << endl;
+		} catch (std::bad_alloc& ba) {
 			CPPUNIT_ASSERT(false);
-		} catch (...) {
-			CPPUNIT_ASSERT(true);
+		} catch (...){		// any other exception
+			CPPUNIT_ASSERT(false);
 		}
+		
 	}
 	
 	// -----
