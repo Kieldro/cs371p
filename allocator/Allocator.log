@@ -1,3 +1,21 @@
+commit 444fe23138245ac87ddf4eb24abda393bb59b815
+Author: Jake Wilke <jake.wilke@gmail.com>
+Date:   Tue Oct 9 19:46:22 2012 -0500
+
+    last set of tests added
+
+commit 523585da2f91d09d3a9495bb9f4c0a9e1663eab2
+Author: Jake Wilke <jake.wilke@gmail.com>
+Date:   Tue Oct 9 18:36:24 2012 -0500
+
+    updated edge case tests to work with any type instead of just ints
+
+commit d2d3cc3619accf7722ebc97aea84cf07ab6d1ea4
+Author: Jake Wilke <jake.wilke@gmail.com>
+Date:   Tue Oct 9 17:44:28 2012 -0500
+
+    added some edge case unit tests to allocator
+
 commit 34347d272aee026f73600abc63813028ab7561d0
 Author: Ian <kieldro@gmail.com>
 Date:   Mon Oct 8 22:37:28 2012 -0500
