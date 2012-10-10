@@ -255,8 +255,7 @@ struct TestAllocator : CppUnit::TestFixture {
 			CPPUNIT_ASSERT(true);
 		}
 	}
-			
-
+	
 	// -----
 	// suite
 	CPPUNIT_TEST_SUITE(TestAllocator);
@@ -296,12 +295,12 @@ int main () {
 	tr.addTest(TestAllocator< std::allocator<double> >::suite());
 	if(DEBUG) cerr << "Testing std::allocator<int>... " << endl;
 	tr.addTest(TestAllocator< Allocator<double, 100> >::suite());	// uncomment!
-
-	/*if(DEBUG) cerr << "Testing std::allocator<Elephant>... " << endl;
+/*
+	if(DEBUG) cerr << "Testing std::allocator<Elephant>... " << endl;
 	tr.addTest(TestAllocator< std::allocator<Elephant> >::suite());
 	if(DEBUG) cerr << "Testing std::allocator<Elephant>... " << endl;
-	tr.addTest(TestAllocator< Allocator<Elephant, 100> >::suite());*/
-
+	tr.addTest(TestAllocator< Allocator<Elephant, 100> >::suite());
+*/
 	tr.run();
 
 	cout << "Done." << endl;

@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAllocator.html#a2f2743b6dce5a433b55050e0bef3e3fd">deallocate</a> (<a class="el" href="classAllocator.html#a7df4693123ad6d168217e3853cd15495">pointer</a> p, <a class="el" href="classAllocator.html#aec4c70d3e80d2b7d11bbb8bd8a62f016">size_type</a>=0)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAllocator.html#af156a6a50a8c62c70e40cf342a3b64cb">destroy</a> (<a class="el" href="classAllocator.html#a7df4693123ad6d168217e3853cd15495">pointer</a> p)</td></tr>
 <tr><td colspan="2"><h2>Private Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAllocator.html#ac1a806eeae12ce76d42f3dc8d43f4460">sentinel</a> (int idx) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAllocator.html#a45091854a38a5abf184cc442d2af4022">valid</a> () const </td></tr>
 <tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">char&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAllocator.html#a5cd222e9e4d8a10d78cd8411ffcf93c2">a</a> [N]</td></tr>
@@ -196,7 +197,11 @@ template&lt;typename T , std::size_t N&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>O(1) in space O(1) in time &lt;your documentation&gt;=""&gt; </p>
+<p>O(1) in space O(1) in time Sets the first and last sentinels. </p>
+
+<p><p>reinterpret_cast&lt;int*&gt;(a) = N - 8; reinterpret_cast&lt;int*&gt;(a + N - 4) = N - 8;</p>
+<p>if(DEBUG) cerr &lt;&lt; "reinterpret_cast: " &lt;&lt; std::dec &lt;&lt; *reinterpret_cast&lt;int*&gt;(a) &lt;&lt; endl; if(DEBUG) cerr &lt;&lt; "reinterpret_cast: " &lt;&lt; std::dec &lt;&lt; *reinterpret_cast&lt;int*&gt;(a + N - 4) &lt;&lt; endl; if(DEBUG) cerr &lt;&lt; "reinterpret_cast: 0x" &lt;&lt; std::hex &lt;&lt; (int)a[0] &lt;&lt; endl;</p>
+</p>
 
 </div>
 </div>
@@ -218,7 +223,7 @@ template&lt;typename T , std::size_t N&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>O(1) in space O(n) in time &lt;your documentation&gt;=""&gt; after allocation there must be enough space left for a valid block the smallest allowable block is sizeof(T) + (2 * sizeof(int)) choose the first block that fits </p>
+<p>O(1) in space O(n) in time Sets the proper sentinels. after allocation there must be enough space left for a valid block the smallest allowable block is sizeof(T) + (2 * sizeof(int)) choose the first block that fits </p>
 
 </div>
 </div>
@@ -248,7 +253,7 @@ template&lt;typename T , std::size_t N&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>O(1) in space O(1) in time &lt;your documentation&gt;=""&gt; </p>
+<p>O(1) in space O(1) in time Constructs a T object at location p with value v </p>
 
 </div>
 </div>
@@ -278,7 +283,7 @@ template&lt;typename T , std::size_t N&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>O(1) in space O(1) in time &lt;your documentation&gt;=""&gt; after deallocation adjacent free blocks must be coalesced </p>
+<p>O(1) in space O(1) in time deallocates a block of memory, combining any adjacent free blocks. after deallocation adjacent free blocks must be coalesced </p>
 
 </div>
 </div>
@@ -299,7 +304,28 @@ template&lt;typename T , std::size_t N&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>O(1) in space O(1) in time &lt;your documentation&gt;=""&gt; </p>
+<p>O(1) in space O(1) in time Calls the destructor of the T object at location p. </p>
+
+</div>
+</div>
+<a class="anchor" id="ac1a806eeae12ce76d42f3dc8d43f4460"></a><!-- doxytag: member="Allocator::sentinel" ref="ac1a806eeae12ce76d42f3dc8d43f4460" args="(int idx) const " -->
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , std::size_t N&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int&amp; <a class="el" href="classAllocator.html">Allocator</a>&lt; T, N &gt;::sentinel </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>idx</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const<code> [inline, private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>O(1) in space/time returns a int reference to a sentinel given an index. </p>
 
 </div>
 </div>
@@ -319,7 +345,7 @@ template&lt;typename T , std::size_t N&gt; </div>
       </table>
 </div>
 <div class="memdoc">
-<p>O(1) in space O(n) in time &lt;your documentation&gt;=""&gt; </p>
+<p>O(1) in space O(n) in time checks if all sentinels are matching pairs and that they add up properly </p>
 
 </div>
 </div>
@@ -407,7 +433,7 @@ template&lt;typename T , std::size_t N&gt; </div>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&nbsp;</span>Friends</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&nbsp;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -416,7 +442,7 @@ template&lt;typename T , std::size_t N&gt; </div>
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Sep 28 11:41:22 2012 by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Oct 10 11:53:39 2012 by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

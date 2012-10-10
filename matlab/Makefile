@@ -2,9 +2,12 @@ SHELL = /bin/sh
 
 CC = g++
 CPPFLAGS = -ansi -pedantic -ldl -Wall
-TEST = TestAllocator.c++
+TEST = TestMatrix.c++
+
 
 all: test run log doxygen zip
+
+run: test
 
 clean:
 	rm *.app
@@ -12,12 +15,10 @@ clean:
 test: $(TEST)
 	clear
 	$(CC) $(CPPFLAGS) $(TEST) -lcppunit -o $(TEST).app
-	valgrind ./$(TEST).app > TestAllocator.out 2>&1
-
-run: test
+	./$(TEST).app #>& TestMatlab.out
 
 log:
-	git log > Allocator.log
+	git log > Matlab.log
 
 doxygen:
 	doxygen Doxyfile
@@ -28,12 +29,12 @@ doxygen:
 	# GENERATE_LATEX		= NO
 
 zip:
-	zip Allocator README.txt html/* Allocator.h Allocator.log \
-	$(TEST) TestAllocator.out
+	zip Matlab README.txt html/* Matlab.h Matlab.log \
+	$(TEST) TestMatlab.out
 
-# turnin --submit dmj cs371ppj3 Allocator.zip
-# turnin --list   dmj cs371ppj3
-# turnin --verify dmj cs371ppj3
+# turnin --submit reza cs371ppj4 Matlab.zip
+# turnin --list   reza cs371ppj4
+# turnin --verify reza cs371ppj4
 
 scratch: scratch.c++
 	g++ -std=c++0x scratch.c++ -o scratch.c++.app

@@ -7,7 +7,7 @@
 #ifndef Allocator_h
 #define Allocator_h
 
-#define DEBUG true
+#define DEBUG !true
 
 // --------
 // includes
