@@ -205,8 +205,6 @@ class Matrix {
 		Matrix (size_type r = 0, size_type c = 0, const T& v = T()):
 		_m(r, vector<T>(c, v))
 		{
-			
-			
 			assert(valid());
 		}
 		
@@ -309,61 +307,77 @@ class Matrix {
 		// -----------
 		// operator *=
 		/**
-		* <your documentation>
+		* Scalar multiplication of a matrix.
 		*/
 		Matrix& operator *= (const T& rhs) {
-			// <your code>
+			assert(valid());
+			
+			for(unsigned r = 0; r < size(); ++r){
+				for(unsigned c = 0; c < _m[0].size(); ++c)
+					_m[r][c] += rhs;
+			}
+			
 			return *this;
+		}
+		
+		/*
+		Returns the product of 2 vectors.
+		*/
+		T dot(value_type& v0, value_type& v1 ) const{
+			assert(v0.size() == v1.size());
+			
+			T result = 0;
+			
+			for(unsigned i = 0; i < v0.size(); ++i)
+				result += v0[i] * v1[i];
+			
+			return result;
 		}
 
 		/**
-		* <your documentation>
+		* Matrix multiplication.
 		*/
 		Matrix& operator *= (const Matrix& rhs) {
-			// <your code>
+			
+			assert((*this).size() == rhs.size());
+			
+			
+			Matrix C();
+			
+			
 			return *this;
 		}
 
 		// -----
 		// begin
 		/**
-		* <your documentation>
+		* Returns an iterator to the begining of the 2d vector.
 		*/
-		iterator begin () {
-			return _m.begin();
-		}
+		iterator begin () {return _m.begin();}
 
 		/**
-		* <your documentation>
+		* Returns a constant iterator to the begining of the 2d vector.
 		*/
-		const_iterator begin () const {
-			return const_cast<Matrix*>(this)->begin();
-		}
+		const_iterator begin () const {return const_cast<Matrix*>(this)->begin();}
 
 		// ---
 		// end
 		/**
-		* <your documentation>
+		* Returns an iterator to the end of the 2d vector.
 		*/
-		iterator end () {
-			return _m.end();
-		}
+		iterator end () {return _m.end();}
 
 		/**
-		* <your documentation>
+		* Returns a constant iterator to the end of the 2d vector.
 		*/
-		const_iterator end () const {
-			return const_cast<Matrix*>(this)->end();
-		}
+		const_iterator end () const {return const_cast<Matrix*>(this)->end();}
 
 		// ----
 		// size
 		/**
-		* <your documentation>
+		* Returns the number of rows.
 		*/
-		size_type size () const {
-			return _m.size();
-		}
+		size_type size () const {return _m.size();}
 };
 
 #endif // Matrix_h

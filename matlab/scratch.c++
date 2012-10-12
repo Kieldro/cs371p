@@ -5,10 +5,9 @@
 
 using namespace std;
 
-void baz(int* a){
-	
-	cout << sizeof(a) << endl;
-	++a;
+void baz(){
+	int i = 0;
+	cout << i.operator-(i) << endl;
 	
 }
 
@@ -18,9 +17,8 @@ int main(){
 	
 	
 	auto i = 0;
-	for(auto b = x.begin(); b != x.end(); ++b)
-		cout << "i: " << i << endl;
 	
+	baz();
 	
 	
 	return 0;

@@ -9,8 +9,9 @@ Last Name: Buitrago
 EID: ib
 E-mail: kieldro@gmail.com
 Estimated number of hours: 20
-Actual    number of hours: 0
-11a - 12p
+Actual    number of hours: 3
+11a - 2p
+11a - 3p
 
 Partner First Name: 
 Partner Last Name: 

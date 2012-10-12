@@ -6,6 +6,7 @@
 
 /**
  * To test the program:
+ *		make test
  *		g++ -ansi -pedantic -lcppunit -ldl -Wall TestMatrix.c++ -o TestMatrix.app
  *		valgrind TestMatrix.app >& TestMatrix.out
  *		on g++ version 4.4.3
@@ -153,6 +154,17 @@ struct TestMatrix : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(x == z);
 	}
 
+	// ---
+	// dot
+	void test_dot0 () {
+		Matrix<int> x;
+		Matrix<int> y;
+		
+		int i = x.dot(vector<int>() = {5, 3}, vector<int>() = {5, 3});
+		
+		CPPUNIT_ASSERT(i == 34);
+	}
+
 	// ---------------
 	// test_multiplies
 	void test_multiplies0 () {
@@ -209,6 +221,7 @@ struct TestMatrix : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_plus1);
 	CPPUNIT_TEST(test_minus0);
 	CPPUNIT_TEST(test_minus1);
+	CPPUNIT_TEST(test_dot0);
 	CPPUNIT_TEST(test_multiplies0);
 	CPPUNIT_TEST(test_multiplies1);
 	/*CPPUNIT_TEST(test_iterator);
