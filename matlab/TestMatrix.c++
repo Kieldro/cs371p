@@ -45,7 +45,7 @@ struct TestMatrix : CppUnit::TestFixture {
 		
 		
 		
-		CPPUNIT_ASSERT(x[0] == 0);
+		CPPUNIT_ASSERT(x[0][0] == 0);
 	}
 
 	// -----------
