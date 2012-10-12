@@ -22,20 +22,20 @@ class Matrix {
 	public:
 		// --------
 		// typedefs
-		typedef typename std::vector< std::vector<T> > container_type;
-        	typedef typename container_type::value_type value_type;
+		typedef typename std::vector< std::vector<T> >		container_type;
+		typedef typename container_type::value_type			value_type;
 
-        	typedef typename container_type::size_type size_type;
-        	typedef typename container_type::difference_type difference_type;
+		typedef typename container_type::size_type			size_type;
+		typedef typename container_type::difference_type	difference_type;
 
-        	typedef typename container_type::pointer pointer;
-        	typedef typename container_type::const_pointer const_pointer;
-	
-        	typedef typename container_type::reference reference;
-        	typedef typename container_type::const_reference const_reference;
-	
-        	typedef typename container_type::iterator iterator;
-       	 	typedef typename container_type::const_iterator const_iterator;
+		typedef typename container_type::pointer			pointer;
+		typedef typename container_type::const_pointer		const_pointer;
+		
+		typedef typename container_type::reference			reference;
+		typedef typename container_type::const_reference	const_reference;
+		
+		typedef typename container_type::iterator			iterator;
+		typedef typename container_type::const_iterator		const_iterator;
 
 
 
@@ -45,8 +45,25 @@ class Matrix {
 		/**
 		* <your documentation>
 		*/
-		friend bool operator == (const Matrix&, const Matrix&) {
-			// <your code>
+		friend bool operator == (const Matrix& a, const Matrix& b) {
+			assert(a.valid() and b.valid());
+			
+			if(&a == &b or (a.size() == 0 and b.size() == 0) )
+				return true;
+			
+			if(a.size() != b.size())
+				return false;
+			
+			if(a[0].size() != b[0].size())
+				return false;
+			
+			for(unsigned r = 0; r < a.size(); ++r){
+				for(unsigned c = 0; c < a[0].size(); ++c)
+					if(a[r][c] != b[r][c])
+						return false;
+			}
+			
+			
 			return true;
 		}
 
@@ -155,8 +172,14 @@ class Matrix {
 		* <your documentation>
 		*/
 		bool valid () const {
+			if(size() == 0)
+				return true;
 			
-			
+			// all rows same length
+			unsigned nCol = _m[0].size();
+			for(unsigned r = 1; r < size(); ++r)
+				if(_m[r].size() != nCol)
+					return false;
 			
 			return true;
 		}
@@ -170,6 +193,7 @@ class Matrix {
 		Matrix (size_type r = 0, size_type c = 0, const T& v = T()):
 		_m(r, vector<T>(c, v))
 		{
+			
 			
 			assert(valid());
 		}
@@ -187,9 +211,6 @@ class Matrix {
 		* <your documentation>
 		*/
 		reference operator [] (size_type i) {
-			// dummy is just to be able to compile the skeleton, remove it
-			//static value_type dummy(1);
-			
 			return _m[i];
 		}
 		

@@ -51,11 +51,23 @@ struct TestMatrix : CppUnit::TestFixture {
 
 	// -----------
 	// test_equals
-	void test_equals () {
+	void test_equals0 () {
 		Matrix<int> x;
-		Matrix<int> y;
+		Matrix<int>& y = x;
+		
+		CPPUNIT_ASSERT(  x == x);
 		CPPUNIT_ASSERT(  x == y);
 		CPPUNIT_ASSERT(!(x != y));
+		
+	}
+	
+	void test_equals1 () {
+		Matrix<int> x;
+		Matrix<int> y;
+		
+		CPPUNIT_ASSERT(  x == y);
+		CPPUNIT_ASSERT(!(x != y));
+		
 	}
 
 	// --------------
@@ -127,7 +139,8 @@ struct TestMatrix : CppUnit::TestFixture {
 	
 	CPPUNIT_TEST(test_constructor);
 	CPPUNIT_TEST(test_index);
-	CPPUNIT_TEST(test_equals);
+	CPPUNIT_TEST(test_equals0);
+	CPPUNIT_TEST(test_equals1);
 	CPPUNIT_TEST(test_less_than);
 	CPPUNIT_TEST(test_plus);
 	CPPUNIT_TEST(test_minus);
