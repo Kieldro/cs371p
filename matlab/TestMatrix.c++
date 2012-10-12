@@ -123,11 +123,12 @@ struct TestMatrix : CppUnit::TestFixture {
 		Matrix<int> x(2, 2, 0);
 		Matrix<int> y(2, 2, 1);
 		Matrix<int> z(2, 2, 2);
+		//x[0].push_back(7); 	// will invalidate a matrix
 		
 		x += 1;
 		CPPUNIT_ASSERT(x == y);
-		x += y;
-		CPPUNIT_ASSERT(x == z);
+		y += x;
+		CPPUNIT_ASSERT(y == z);
 	}
 
 	// ----------
@@ -163,6 +164,20 @@ struct TestMatrix : CppUnit::TestFixture {
 		int i = x.dot(vector<int>() = {5, 3}, vector<int>() = {5, 3});
 		
 		CPPUNIT_ASSERT(i == 34);
+	}
+
+	// ---
+	// empty
+	void test_empty0 () {
+		Matrix<int> x;
+		Matrix<int> y(0, 3);
+		Matrix<int> z(5, 0);
+		Matrix<int> w(5, 0, 3);
+		
+		CPPUNIT_ASSERT(x.empty());
+		CPPUNIT_ASSERT(y.empty());
+		CPPUNIT_ASSERT(z.empty());
+		CPPUNIT_ASSERT(w.empty());
 	}
 
 	// ---------------
@@ -222,6 +237,7 @@ struct TestMatrix : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_minus0);
 	CPPUNIT_TEST(test_minus1);
 	CPPUNIT_TEST(test_dot0);
+	CPPUNIT_TEST(test_empty0);
 	CPPUNIT_TEST(test_multiplies0);
 	CPPUNIT_TEST(test_multiplies1);
 	/*CPPUNIT_TEST(test_iterator);

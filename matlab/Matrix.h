@@ -26,7 +26,7 @@ class Matrix {
 	public:
 		// --------
 		// typedefs
-		typedef typename std::vector< vector<T> >		container_type;
+		typedef typename std::vector< vector<T> >			container_type;
 		typedef typename container_type::value_type			value_type;
 
 		typedef typename container_type::size_type			size_type;
@@ -179,15 +179,14 @@ class Matrix {
 		// -----
 		// valid
 		/**
-		* <your documentation>
+		* Returns true if 
 		*/
 		bool valid () const {
-			if(size() == 0)
+			if(empty())
 				return true;
 			
 			// all rows same length
 			unsigned nCol = _m[0].size();
-			//assert(nCol != 0);
 			
 			for(unsigned r = 1; r < size(); ++r)
 				if(_m[r].size() != nCol)
@@ -260,7 +259,7 @@ class Matrix {
 			// range checks
 			assert(valid() and rhs.valid());
 			assert((*this).size() == rhs.size());
-			if(size() == 0)
+			if(empty())
 				return *this;
 			
 			assert(_m[0].size() == rhs[0].size());
@@ -291,7 +290,7 @@ class Matrix {
 			// range checks
 			assert(valid() and rhs.valid());
 			assert((*this).size() == rhs.size());
-			if(size() == 0)
+			if(empty())
 				return *this;
 			
 			assert(_m[0].size() == rhs[0].size());
@@ -319,6 +318,26 @@ class Matrix {
 			
 			return *this;
 		}
+
+		/**
+		* Matrix multiplication.
+		*/
+		Matrix& operator *= (const Matrix& rhs) {
+			assert(valid() and rhs.valid());
+			if(empty() and rhs.empty())
+				return *this;
+			assert(!empty() and !empty());
+			
+			
+			
+			assert(_m[0].size() == rhs.size());
+			
+			
+			Matrix C(size(), rhs[0].size(), 0);
+			
+			assert(valid());
+			return *this;
+		}
 		
 		/*
 		Returns the product of 2 vectors.
@@ -332,20 +351,6 @@ class Matrix {
 				result += v0[i] * v1[i];
 			
 			return result;
-		}
-
-		/**
-		* Matrix multiplication.
-		*/
-		Matrix& operator *= (const Matrix& rhs) {
-			
-			assert((*this).size() == rhs.size());
-			
-			
-			Matrix C();
-			
-			
-			return *this;
 		}
 
 		// -----
@@ -378,6 +383,13 @@ class Matrix {
 		* Returns the number of rows.
 		*/
 		size_type size () const {return _m.size();}
+		
+		// ----
+		// empty
+		/**
+		* Returns true if any of the dimensions are 0.
+		*/
+		bool empty() const {return _m.size() ? !_m[0].size() : true;}
 };
 
 #endif // Matrix_h
