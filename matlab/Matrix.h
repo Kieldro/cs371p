@@ -22,19 +22,22 @@ class Matrix {
 	public:
 		// --------
 		// typedefs
-		typedef T value_type;
+		typedef typename std::vector< std::vector<T> > container_type;
+        	typedef typename container_type::value_type value_type;
 
-		typedef std::size_t			size_type;
-		typedef std::ptrdiff_t		difference_type;
+        	typedef typename container_type::size_type size_type;
+        	typedef typename container_type::difference_type difference_type;
 
-		typedef value_type*			pointer;
-		typedef const value_type*	const_pointer;
+        	typedef typename container_type::pointer pointer;
+        	typedef typename container_type::const_pointer const_pointer;
+	
+       	 	typedef typename container_type::reference reference;
+        	typedef typename container_type::const_reference const_reference;
+	
+        	typedef typename container_type::iterator iterator;
+       	 	typedef typename container_type::const_iterator const_iterator;
 
-		typedef value_type&			reference;
-		typedef const value_type&	const_reference;
 
-		typedef typename std::vector< std::vector<T> >::iterator		iterator;
-		typedef typename std::vector< std::vector<T> >::const_iterator	const_iterator;
 
 	public:
 		// -----------
@@ -164,7 +167,7 @@ class Matrix {
 		/**
 		* <your documentation>
 		*/
-		Matrix (size_type r = 0, size_type c = 0, const_reference v = T()):
+		Matrix (size_type r = 0, size_type c = 0, const T& v = T()):
 		_m(r, vector<T>(c, v))
 		{
 			
@@ -185,7 +188,7 @@ class Matrix {
 		*/
 		reference operator [] (size_type i) {
 			// dummy is just to be able to compile the skeleton, remove it
-			static value_type dummy;
+			static value_type dummy(1);
 			
 			
 			return dummy;
