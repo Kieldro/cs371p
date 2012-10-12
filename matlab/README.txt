@@ -25,6 +25,7 @@ GitHub ID: kieldro
 GitHub Repository Name: cs371p
 
 Comments:
+Run using -std=c++0x as on the Makefile on my repo
 
 ----------------
 Pair Programming

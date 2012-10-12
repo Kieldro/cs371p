@@ -67,7 +67,6 @@ struct TestMatrix : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(  x == y);
 		CPPUNIT_ASSERT(!(x != y));
 		CPPUNIT_ASSERT(x == z);
-		
 	}
 	
 	void test_equals1 () {
@@ -95,7 +94,6 @@ struct TestMatrix : CppUnit::TestFixture {
 		y = Matrix<int>(2, 2, 5);
 		y[1][1] = 9;
 		CPPUNIT_ASSERT(x != y);
-		
 	}
 
 	// --------------
@@ -194,13 +192,33 @@ struct TestMatrix : CppUnit::TestFixture {
 	}
 
 	void test_multiplies1 () {
-		Matrix<int> x;
-		Matrix<int> y;
-		Matrix<int> z;
+		Matrix<int> x(3, 5, 11);
+		Matrix<int> z(3, 5, 0);
 		
 		x *= 0;
+		//if(DEBUG)x.printMatrix();
 		CPPUNIT_ASSERT(x == z);
+	}
+
+	void test_multiplies2 () {
+		const int innerD = 3;
+		Matrix<int> x(3, innerD, 11);
+		Matrix<int> y(innerD, 5, 7);
+		Matrix<int> z(3, 5, 11*7*innerD);
+		
 		x *= y;
+		//if(DEBUG)x.printMatrix();
+		CPPUNIT_ASSERT(x == z);
+	}
+
+	void test_multiplies3 () {
+		const int innerD = 1;
+		Matrix<int> x(3, innerD, 11);
+		Matrix<int> y(innerD, 5, 7);
+		Matrix<int> z(3, 5, 11*7*innerD);
+		
+		x *= y;
+		//if(DEBUG)x.printMatrix();
 		CPPUNIT_ASSERT(x == z);
 	}
 
@@ -240,6 +258,8 @@ struct TestMatrix : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_empty0);
 	CPPUNIT_TEST(test_multiplies0);
 	CPPUNIT_TEST(test_multiplies1);
+	CPPUNIT_TEST(test_multiplies2);
+	CPPUNIT_TEST(test_multiplies3);
 	/*CPPUNIT_TEST(test_iterator);
 	CPPUNIT_TEST(test_const_iterator);
 	*/

@@ -313,7 +313,7 @@ class Matrix {
 			
 			for(unsigned r = 0; r < size(); ++r){
 				for(unsigned c = 0; c < _m[0].size(); ++c)
-					_m[r][c] += rhs;
+					_m[r][c] *= rhs;
 			}
 			
 			return *this;
@@ -327,13 +327,19 @@ class Matrix {
 			if(empty() and rhs.empty())
 				return *this;
 			assert(!empty() and !empty());
-			
-			
-			
 			assert(_m[0].size() == rhs.size());
 			
-			
+			int innerD = rhs.size();		// inner dimension
 			Matrix C(size(), rhs[0].size(), 0);
+			
+			for(unsigned r = 0; r < C.size(); ++r){
+				for(unsigned c = 0; c < C[0].size(); ++c){
+					for(int i = 0; i < innerD; ++i)
+						C[r][c] += _m[r][i] * rhs[i][c];
+				}
+			}
+			
+			*this = C;
 			
 			assert(valid());
 			return *this;
@@ -351,6 +357,22 @@ class Matrix {
 				result += v0[i] * v1[i];
 			
 			return result;
+		}
+		
+		void printMatrix() const{
+			assert(valid());
+			if(empty()){
+				cerr << "Matrix empty. " << this << endl;
+				return;
+			}
+			cerr << "Printing " << size() << "x" 
+				 << _m[0].size() << " matrix at: " << this << endl;
+			for(unsigned r = 0; r < size(); ++r){
+				for(unsigned c = 0; c < _m[0].size(); ++c){
+					cerr << _m[r][c] << " ";
+				}
+				cerr << endl;
+			}
 		}
 
 		// -----
