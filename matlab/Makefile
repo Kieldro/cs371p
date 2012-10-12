@@ -13,12 +13,12 @@ run: test testLab
 test: $(TEST)
 	clear
 	$(CC) $(CPPFLAGS) $(TEST) -lcppunit -o $(TEST).app
-	./$(TEST).app > TestMatrix.out 2>&1
+	./$(TEST).app #> TestMatrix.out 2>&1
 
 testLab: $(TESTLAB)
 	clear
 	$(CC) $(CPPFLAGS) $(TESTLAB) -lcppunit -o $(TESTLAB).app
-	./$(TESTLAB).app > TestMatlab.out 2>&1
+	./$(TESTLAB).app #> TestMatlab.out 2>&1
 
 log:
 	git log > Matlab.log

@@ -77,7 +77,7 @@ class Matrix {
 		// -----------
 		// operator !=
 		/**
-		* <your documentation>
+		* Returns true if matricies are not equal.
 		*/
 		friend bool operator != (const Matrix& lhs, const Matrix& rhs) {
 			return !(lhs == rhs);
@@ -126,14 +126,14 @@ class Matrix {
 		// ----------
 		// operator +
 		/**
-		* <your documentation>
+		* Adds scalar rhs to each element in matrix lhs and returns a matrix.
 		*/
 		friend Matrix operator + (Matrix lhs, const T& rhs) {
 			return lhs += rhs;
 		}
 
 		/**
-		* <your documentation>
+		* Adds matricies lhs and rhs together and returns the resulting matrix.
 		*/
 		friend Matrix operator + (Matrix lhs, const Matrix& rhs) {
 			return lhs += rhs;
@@ -142,14 +142,14 @@ class Matrix {
 		// ----------
 		// operator -
 		/**
-		* <your documentation>
+		* Subtracts scalar rhs from each element in matrix lhs and returns the result.
 		*/
 		friend Matrix operator - (Matrix lhs, const T& rhs) {
 			return lhs -= rhs;
 		}
 
 		/**
-		* <your documentation>
+		* Matrix substraction, rhs from lhs and returns a matrix.
 		*/
 		friend Matrix operator - (Matrix lhs, const Matrix& rhs) {
 			return lhs -= rhs;
@@ -158,14 +158,14 @@ class Matrix {
 		// ----------
 		// operator *
 		/**
-		* <your documentation>
+		* Multiplies scalar rhs to each element in matrix lhs and returns a matrix.
 		*/
 		friend Matrix operator * (Matrix lhs, const T& rhs) {
 			return lhs *= rhs;
 		}
 
 		/**
-		* <your documentation>
+		* Multiplies matricies lhs and rhs together and returns the resulting matrix.
 		*/
 		friend Matrix operator * (Matrix lhs, const Matrix& rhs) {
 			return lhs *= rhs;
@@ -199,7 +199,7 @@ class Matrix {
 		// ------------
 		// constructors
 		/**
-		* <your documentation>
+		* Initializes a Matrix with r rows and c columns with value v.
 		*/
 		Matrix (size_type r = 0, size_type c = 0, const T& v = T()):
 		_m(r, vector<T>(c, v))
@@ -219,7 +219,7 @@ class Matrix {
 		// -----------
 		// operator []
 		/**
-		* <your documentation>
+		* Returns a reference to the ith row.
 		*/
 		reference operator [] (size_type i) {
 			return _m[i];
@@ -228,7 +228,7 @@ class Matrix {
 		// -----------
 		// const operator []
 		/**
-		* <your documentation>
+		* Returns a const reference to the ith row.
 		*/
 		const_reference operator [] (size_type i) const {
 			return (*const_cast<Matrix*>(this))[i];

@@ -224,20 +224,34 @@ struct TestMatrix : CppUnit::TestFixture {
 
 	// -------------
 	// test_iterator
-	void test_iterator () {
+	void test_iterator0 () {
 		Matrix<int> x;
 		Matrix<int>::iterator b = x.begin();
 		Matrix<int>::iterator e = x.end();
 		CPPUNIT_ASSERT(b == e);
 	}
+	
+	void test_iterator1 () {
+		Matrix<int> x(3);
+		Matrix<int>::iterator b = x.begin();
+		Matrix<int>::iterator e = x.end();
+		CPPUNIT_ASSERT(b+3 == e);
+	}
 
 	// -------------------
 	// test_const_iterator
-	void test_const_iterator () {
+	void test_const_iterator0 () {
 		const Matrix<int> x;
 		Matrix<int>::const_iterator b = x.begin();
 		Matrix<int>::const_iterator e = x.end();
 		CPPUNIT_ASSERT(b == e);
+	}
+	
+	void test_const_iterator1 () {
+		const Matrix<int> x(5);
+		Matrix<int>::const_iterator b = x.begin();
+		Matrix<int>::const_iterator e = x.end();
+		CPPUNIT_ASSERT(b+5 == e);
 	}
 
 	// -----
@@ -260,9 +274,11 @@ struct TestMatrix : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_multiplies1);
 	CPPUNIT_TEST(test_multiplies2);
 	CPPUNIT_TEST(test_multiplies3);
-	/*CPPUNIT_TEST(test_iterator);
-	CPPUNIT_TEST(test_const_iterator);
-	*/
+	CPPUNIT_TEST(test_iterator0);
+	CPPUNIT_TEST(test_iterator1);
+	CPPUNIT_TEST(test_const_iterator0);
+	CPPUNIT_TEST(test_const_iterator1);
+	
 	CPPUNIT_TEST_SUITE_END();
 };
 
