@@ -11,7 +11,7 @@ E-mail: kieldro@gmail.com
 Estimated number of hours: 20
 Actual    number of hours: 3
 11a - 2p
-11a - 3p
+11a - 6p
 
 Partner First Name: 
 Partner Last Name: 

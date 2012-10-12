@@ -1,0 +1,349 @@
+commit 79426fed69477ca1ea091eb8b280a7e8e41a7c10
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Oct 12 17:34:34 2012 -0500
+
+    operator*= complete.
+
+commit 24886e3d9ba3b6c3f385bf18d6cde2d2448e261b
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Oct 12 16:44:16 2012 -0500
+
+    Adds empty().
+
+commit 96a2529233e4d0e5ded54dee59890b8e1907b6c0
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Oct 12 15:15:29 2012 -0500
+
+    Adds dot() method.
+
+commit ea472df9deb53e73a9f2c10cc1815e978987e47c
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Oct 12 14:31:46 2012 -0500
+
+    operators += and -= complete.
+
+commit 22cf993dbad0957d1c5fbbae078c059e6d5183f9
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Oct 12 11:53:31 2012 -0500
+
+    works on op== and valid().
+
+commit 2f9fede1ec37a71a3f20a4ab8686e75624c5fd8a
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Oct 12 11:23:08 2012 -0500
+
+    operator [] complete.
+
+commit 5e626a8b572fa259783875dd94dd1bbb52910c8d
+Author: Ian <kieldro@gmail.com>
+Date:   Thu Oct 11 20:09:39 2012 -0500
+
+    Update matlab/TestMatrix.c++
+
+commit fd5b85940dc6c1dcbdd51801f0578bf453806034
+Author: Ian <kieldro@gmail.com>
+Date:   Thu Oct 11 20:08:55 2012 -0500
+
+    Update matlab/Matrix.h
+    
+    fixed faulty typedefs
+
+commit 00594998568bc0bd5c5dbf338b05edebd641bf45
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Oct 10 16:30:01 2012 -0500
+
+    Trying to figure out operator [].
+
+commit c409df338243b3caaba46e7c90a99393730651c2
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Oct 10 13:03:13 2012 -0500
+
+    Fixed behavior of allocate(0).
+
+commit 12f143c9ee80cf931cbaf412f0a8ddd4176cf56f
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Oct 10 12:03:47 2012 -0500
+
+    Adds matlab skeleton files.
+
+commit de0c110a47af61b22fe35107eb5684d776d36875
+Author: Jake Wilke <jake.wilke@gmail.com>
+Date:   Tue Oct 9 19:46:52 2012 -0500
+
+    forgot to update the log
+
+commit 444fe23138245ac87ddf4eb24abda393bb59b815
+Author: Jake Wilke <jake.wilke@gmail.com>
+Date:   Tue Oct 9 19:46:22 2012 -0500
+
+    last set of tests added
+
+commit 523585da2f91d09d3a9495bb9f4c0a9e1663eab2
+Author: Jake Wilke <jake.wilke@gmail.com>
+Date:   Tue Oct 9 18:36:24 2012 -0500
+
+    updated edge case tests to work with any type instead of just ints
+
+commit d2d3cc3619accf7722ebc97aea84cf07ab6d1ea4
+Author: Jake Wilke <jake.wilke@gmail.com>
+Date:   Tue Oct 9 17:44:28 2012 -0500
+
+    added some edge case unit tests to allocator
+
+commit 34347d272aee026f73600abc63813028ab7561d0
+Author: Ian <kieldro@gmail.com>
+Date:   Mon Oct 8 22:37:28 2012 -0500
+
+    Update allocator/README.txt
+
+commit b11f74b7836afbe5c721fb61263912ec02c62dd6
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 8 18:01:23 2012 -0500
+
+    allocate() and deallocate() seem to work.
+
+commit 28000ae9455b8976fb021d56a6b6d3ffd3ff9a23
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 8 15:50:55 2012 -0500
+
+    Adds trivial implementations and tests for deallocate() and destroy().
+
+commit 90b09359ff1786804bf52e27cf6c7ca1de4ec908
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 8 14:50:42 2012 -0500
+
+    allocate() gives extra space if another T can't be fit.
+
+commit c98c1f7d2e70d051a6b6bffe71ec43112f8e2466
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 8 13:15:31 2012 -0500
+
+    Rewritten using sentinel().
+
+commit 0b6b054e485b22a07995472dccb27c019f0fb9bd
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 8 11:53:30 2012 -0500
+
+    Adds more asserts.
+
+commit 5d33b6163ffd68f2dc58b1574cff43a72f39adc4
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Thu Oct 4 21:50:54 2012 -0500
+
+    added intP() caster function.
+
+commit 031abb764894c98d39c1e1547d553294d2855e2b
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Oct 3 16:20:16 2012 -0500
+
+    Adds another trivial test case.
+
+commit 581584affb0b95d00d64b49a5e47d794a2ec0854
+Author: Jacob Wilke <jake.wilke@gmail.com>
+Date:   Wed Oct 3 15:33:48 2012 -0500
+
+    working on allocate(), needs to build the new sentries
+
+commit f102f7af60e8992d7720718cfdfbaac94a771e96
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Oct 3 14:58:30 2012 -0500
+
+    Constructor and valid written.
+
+commit 8a3223e86b5839a42c81599d47791c9e335952c9
+Author: Jacob Wilke <jake.wilke@gmail.com>
+Date:   Mon Oct 1 18:34:22 2012 -0500
+
+    added my info to readme file, also first push - jwilke
+
+commit bcbdc88af3c8724d1ba33ef5d09eecde5af0b937
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 1 16:46:09 2012 -0500
+
+    changes to scratch.c++
+
+commit f404be7600763ad500b05d4e4f5e0f90d021ae65
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Sep 28 12:54:57 2012 -0500
+
+    Trying to add tests.
+
+commit aea5e882e9c0bd5f4b501273c4e86e64ed9520a5
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Sep 28 11:51:33 2012 -0500
+
+    cleans up some whitespace.
+
+commit cce9353032d2e977cc39673cdb4d55c6641addba
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Sep 28 11:43:22 2012 -0500
+
+    Allocator compiling version.
+
+commit f7377ea805f3d2b7712ef4e4fce865d909f44854
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Sep 28 11:30:18 2012 -0500
+
+    Adds Allocator files.
+
+commit f9b839cffc612848baad2657201c1943202ab7dd
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Thu Sep 27 20:09:53 2012 -0500
+
+    Turned in.
+
+commit d7e12cb55d18186c4f599d6b4bc49247b80adee6
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Thu Sep 27 19:16:58 2012 -0500
+
+    ACCEPTED by UVa.
+
+commit 5ebee32948badef7187e05ffde1c14053fc0a952
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Thu Sep 27 18:30:55 2012 -0500
+
+    Tie case implemented.
+
+commit 53aebad9175fd7c7216f787a680d86f4724f288b
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Thu Sep 27 16:54:54 2012 -0500
+
+    Fixes #35. Found the segfault; off by 1 error.
+
+commit 3657a3e0154cdefa3cb5ce490bb9673f5916244c
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 26 19:57:46 2012 -0500
+
+    Segfault continutes.
+
+commit 5762fcbea18cd49d86bed05c21ae0d448cd07458
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 26 18:20:05 2012 -0500
+
+    Seg fault.
+
+commit d436b7825ffee1722bba57d470395ea226ad8990
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 26 16:14:05 2012 -0500
+
+    Solved for simple case.
+
+commit b0e56d4e7fc1f892d2a2bcc673e10a8f74807f13
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 26 13:04:21 2012 -0500
+
+    Input functional.
+
+commit 84771440d8aeb2cd008bdc1f82c47d96da07205a
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 26 11:56:50 2012 -0500
+
+    more progress, DNC.
+
+commit 27e6a1f515fd5dda258d7a98147065c4fa668ff0
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Sep 24 15:57:51 2012 -0500
+
+    TestGen finished.
+
+commit 535a89f6c50344f34c9887b83b99e9cae5110047
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Sep 24 15:04:35 2012 -0500
+
+    TestGen works except each ballot needs to be randomized.
+
+commit 12b8dd0e16f485af23942169a36db8b51f737854
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Sep 24 13:54:21 2012 -0500
+
+    making progress, does not compile.
+
+commit c5d69bacfa6b5a4d4b7eef03725621194e48b911
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Sep 17 11:38:36 2012 -0500
+
+    Voting files added. Does not compile.
+
+commit 47807860e3578e1f4b46bea18ccc207b158b7888
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 12 16:04:01 2012 -0500
+
+    After turnin.
+
+commit 864e310a4ea68882280eb96a6cd7b1342f33223a
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 12 15:22:11 2012 -0500
+
+    Turnin version.
+
+commit 940b3790c9080d2507173ecbd50852001adda5b7
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 12 13:32:11 2012 -0500
+
+    commit .
+
+commit 649e42360d8e57b67075e41887eef751a872cfd6
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 12 13:22:46 2012 -0500
+
+    Adding time.
+
+commit 1b1ef98d834afddbf16ff6cddf864528e77e0148
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 12 12:48:33 2012 -0500
+
+    Fixes a logic error in cache.
+
+commit 63bd6a9a879c36ff149f9d602f9acef4a8e486b0
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 12 11:06:09 2012 -0500
+
+    fixed the cache.
+
+commit ec6103ea3755d0cf8e00fa27b5966a162182e189
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Sep 7 11:49:41 2012 -0500
+
+    Begins to implement a cache.
+
+commit 95b9359ac7522c7dbc2e6a43f89ad045351800c3
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 5 14:01:47 2012 -0500
+
+    Fixes logic mistake in meta gen.
+
+commit fe78691d2c4fb7bd9c0bc2b11986872558199865
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 5 13:41:37 2012 -0500
+
+    Adds meta cache generation program.
+
+commit 20c5113887525471e2a961bad86278ba4a1b7bf4
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 5 12:32:44 2012 -0500
+
+    Implements collatz_eval() and cycleLength().
+
+commit d11e0089440ccb583845606e68328558144385ee
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 5 11:37:20 2012 -0500
+
+    Fixes whitespace.
+
+commit 97b1357afb70a19cff7b3ccc7f1698e6858f9617
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 5 11:14:40 2012 -0500
+
+    Adds template files.
+
+commit 15d15fd5aefaa05a265d412a2fe9275da35e226f
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Sep 5 11:13:27 2012 -0500
+
+    forgot to commit.
+
+commit 077cf1a1127c35ae9164b12c8c91988240827b1f
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Sun Sep 2 19:29:47 2012 -0500
+
+    Collatz project.
