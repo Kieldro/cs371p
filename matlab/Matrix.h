@@ -31,7 +31,7 @@ class Matrix {
         	typedef typename container_type::pointer pointer;
         	typedef typename container_type::const_pointer const_pointer;
 	
-       	 	typedef typename container_type::reference reference;
+        	typedef typename container_type::reference reference;
         	typedef typename container_type::const_reference const_reference;
 	
         	typedef typename container_type::iterator iterator;
@@ -188,12 +188,13 @@ class Matrix {
 		*/
 		reference operator [] (size_type i) {
 			// dummy is just to be able to compile the skeleton, remove it
-			static value_type dummy(1);
+			//static value_type dummy(1);
 			
-			
-			return dummy;
+			return _m[i];
 		}
-
+		
+		// -----------
+		// const operator []
 		/**
 		* <your documentation>
 		*/
