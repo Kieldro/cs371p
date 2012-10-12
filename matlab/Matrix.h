@@ -7,6 +7,8 @@
 #ifndef Matrix_h
 #define Matrix_h
 
+#define DEBUG true
+
 // --------
 // includes
 #include <cassert>	// assert
@@ -14,6 +16,8 @@
 #include <vector>	// vector
 
 using std::vector;
+using std::cerr;
+using std::endl;
 
 // ------
 // Matrix
@@ -22,7 +26,7 @@ class Matrix {
 	public:
 		// --------
 		// typedefs
-		typedef typename std::vector< std::vector<T> >		container_type;
+		typedef typename std::vector< vector<T> >		container_type;
 		typedef typename container_type::value_type			value_type;
 
 		typedef typename container_type::size_type			size_type;
@@ -37,32 +41,35 @@ class Matrix {
 		typedef typename container_type::iterator			iterator;
 		typedef typename container_type::const_iterator		const_iterator;
 
-
-
 	public:
 		// -----------
 		// operator ==
 		/**
-		* <your documentation>
+		* Returns true only if both matrix have identical dimensions and values.
 		*/
-		friend bool operator == (const Matrix& a, const Matrix& b) {
-			assert(a.valid() and b.valid());
+		friend bool operator == (const Matrix& A, const Matrix& B) {
+			assert(A.valid() and B.valid());
 			
-			if(&a == &b or (a.size() == 0 and b.size() == 0) )
+			if(&A == &B)		// same object
 				return true;
 			
-			if(a.size() != b.size())
+			if(A.size() != B.size())
 				return false;
 			
-			if(a[0].size() != b[0].size())
+			if(A.size() == 0)		// empty matrix
+				return true;
+			
+			if(A[0].size() != B[0].size())
 				return false;
 			
-			for(unsigned r = 0; r < a.size(); ++r){
-				for(unsigned c = 0; c < a[0].size(); ++c)
-					if(a[r][c] != b[r][c])
+			if(A[0].size() == 0)	// empty rows
+				return true;
+			
+			for(unsigned r = 0; r < A.size(); ++r){
+				for(unsigned c = 0; c < A[0].size(); ++c)
+					if(A[r][c] != B[r][c])
 						return false;
 			}
-			
 			
 			return true;
 		}
@@ -82,7 +89,10 @@ class Matrix {
 		* <your documentation>
 		*/
 		friend bool operator < (const Matrix& lhs, const Matrix& rhs) {
-			// <your code>
+			
+			
+			
+			
 			return false;
 		}
 
@@ -164,7 +174,7 @@ class Matrix {
 	private:
 		// ----
 		// data
-		std::vector< std::vector<T> > _m;
+		vector< vector<T> > _m;
 
 		// -----
 		// valid
@@ -177,6 +187,8 @@ class Matrix {
 			
 			// all rows same length
 			unsigned nCol = _m[0].size();
+			//assert(nCol != 0);
+			
 			for(unsigned r = 1; r < size(); ++r)
 				if(_m[r].size() != nCol)
 					return false;
@@ -202,7 +214,9 @@ class Matrix {
 		// Canonical methods
 		// Default copy, destructor, and copy assignment
 		// Matrix  (const Matrix<T>&);
-		// ~Matrix ();
+		 ~Matrix (){
+		 	//if(DEBUG)cerr << "~Matrix() destructed at: " << this << endl;
+		 }
 		// Matrix& operator = (const Matrix&);
 
 		// -----------
@@ -226,36 +240,69 @@ class Matrix {
 		// -----------
 		// operator +=
 		/**
-		* <your documentation>
+		* Adds the scalar rhs to every element in the matrix.
 		*/
 		Matrix& operator += (const T& rhs) {
-			// <your code>
+			assert(valid());
+			
+			for(unsigned r = 0; r < size(); ++r){
+				for(unsigned c = 0; c < _m[0].size(); ++c)
+					_m[r][c] += rhs;
+			}
+				
 			return *this;
 		}
 
 		/**
-		* <your documentation>
+		* Both matricies must have identical dimensions.
+		* Increments the elements of the matrix
+		* by the respective element in the other matrix
 		*/
 		Matrix& operator += (const Matrix& rhs) {
-			// <your code>
+			// range checks
+			assert(valid() and rhs.valid());
+			assert((*this).size() == rhs.size());
+			if(size() == 0)
+				return *this;
+			
+			assert(_m[0].size() == rhs[0].size());
+			
+			for(unsigned r = 0; r < size(); ++r){
+				for(unsigned c = 0; c < _m[0].size(); ++c)
+					_m[r][c] += rhs[r][c];
+			}
+			
 			return *this;
 		}
 
 		// -----------
 		// operator -=
 		/**
-		* <your documentation>
+		* Decrements all elements in the matrix by scalar rhs.
 		*/
 		Matrix& operator -= (const T& rhs) {
-			// <your code>
-			return *this;
+			return *this += -rhs;
 		}
 
 		/**
-		* <your documentation>
+		* Both matricies must have identical dimensions.
+		* Decrements the elements of the matrix
+		* by the respective element in the other matrix
 		*/
 		Matrix& operator -= (const Matrix& rhs) {
-			// <your code>
+			// range checks
+			assert(valid() and rhs.valid());
+			assert((*this).size() == rhs.size());
+			if(size() == 0)
+				return *this;
+			
+			assert(_m[0].size() == rhs[0].size());
+			
+			for(unsigned r = 0; r < size(); ++r){
+				for(unsigned c = 0; c < _m[0].size(); ++c)
+					_m[r][c] -= rhs[r][c];
+			}
+			
 			return *this;
 		}
 
