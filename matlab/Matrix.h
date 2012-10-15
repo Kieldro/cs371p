@@ -243,7 +243,7 @@ class Matrix {
 		* Adds 2 matrices of the same size togther.
 		*/
 		Matrix& operator += (const Matrix& rhs) {
-			return *this;
+			return mArithmetic(rhs, std::plus<T>());
 		}
 
 		// -----------
@@ -261,8 +261,7 @@ class Matrix {
 		* by the respective element in the other matrix
 		*/
 		Matrix& operator -= (const Matrix& rhs) {
-			// <your code>
-			return *this;
+			return mArithmetic(rhs, std::minus<T>());
 		}
 
 		// -----------
@@ -278,6 +277,25 @@ class Matrix {
 		* Matrix multiplication.
 		*/
 		Matrix& operator *= (const Matrix& rhs) {
+			assert(valid() and rhs.valid());
+			if(empty() and rhs.empty())
+				return *this;
+			assert(!empty() and !empty());
+			assert(_m[0].size() == rhs.size());
+			
+			int innerD = rhs.size();		// inner dimension
+			Matrix C(size(), rhs[0].size(), 0);
+			
+			for(unsigned r = 0; r < C.size(); ++r){
+				for(unsigned c = 0; c < C[0].size(); ++c){
+					for(int i = 0; i < innerD; ++i)
+						C[r][c] += _m[r][i] * rhs[i][c];
+				}
+			}
+			
+			*this = C;
+			
+			assert(valid());
 			return *this;
 		}
 		
@@ -292,6 +310,26 @@ class Matrix {
 				for (unsigned int c = 0; c < _m[0].size(); ++c) {
 					_m[r][c] = bf(_m[r][c], rhs);
 				}
+			}
+			
+			return *this;
+		}
+		
+		/**
+		* 
+		*/
+		template<typename BF>
+		Matrix& mArithmetic (const Matrix& rhs, BF bf) {
+			assert(valid() and rhs.valid());
+			// range checks
+			assert((*this).size() == rhs.size());
+			if(size() == 0)
+				return *this;
+			assert(_m[0].size() == rhs[0].size());
+			
+			for(unsigned r = 0; r < size(); ++r){
+				for(unsigned c = 0; c < _m[0].size(); ++c)
+					_m[r][c] = bf(_m[r][c], rhs[r][c]);
 			}
 			
 			return *this;

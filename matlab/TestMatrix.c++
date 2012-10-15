@@ -487,7 +487,7 @@ struct TestMatrix : CppUnit::TestFixture {
 	
 	// ---------
 	// test_plus
-	void test_plus () {
+	void test_plus0 () {
 		Matrix<int> x;
 		Matrix<int> y;
 		Matrix<int> z;
@@ -497,9 +497,21 @@ struct TestMatrix : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(x.eq(z));
 	}
 
+	void test_plus1 () {
+		Matrix<int> x(2, 2, 0);
+		Matrix<int> y(2, 2, 1);
+		Matrix<int> z(2, 2, 2);
+		//x[0].push_back(7); 	// will invalidate a matrix
+		
+		x += 1;
+		CPPUNIT_ASSERT(x.eq(y));
+		y += x;
+		CPPUNIT_ASSERT(y.eq(z));
+	}
+
 	// ----------
 	// test_minus
-	void test_minus () {
+	void test_minus0 () {
 		Matrix<int> x;
 		Matrix<int> y;
 		Matrix<int> z;
@@ -508,16 +520,59 @@ struct TestMatrix : CppUnit::TestFixture {
 		x -= y;
 		CPPUNIT_ASSERT(x.eq(z));
 	}
+	
+	void test_minus1 () {
+		Matrix<int> x(3, 3, 5);
+		Matrix<int> y(3, 3, 2);
+		Matrix<int> z(3, 3, 0);
+		
+		x -= 3;
+		CPPUNIT_ASSERT(x.eq(y));
+		x -= y;
+		CPPUNIT_ASSERT(x.eq(z));
+	}
 
 	// ---------------
 	// test_multiplies
-	void test_multiplies () {
+	void test_multiplies0 () {
 		Matrix<int> x;
 		Matrix<int> y;
 		Matrix<int> z;
+		
 		x *= 0;
 		CPPUNIT_ASSERT(x.eq(z));
 		x *= y;
+		CPPUNIT_ASSERT(x.eq(z));
+	}
+
+	void test_multiplies1 () {
+		Matrix<int> x(3, 5, 11);
+		Matrix<int> z(3, 5, 0);
+		
+		x *= 0;
+		//if(DEBUG)x.printMatrix();
+		CPPUNIT_ASSERT(x.eq(z));
+	}
+
+	void test_multiplies2 () {
+		const int innerD = 3;
+		Matrix<int> x(3, innerD, 11);
+		Matrix<int> y(innerD, 5, 7);
+		Matrix<int> z(3, 5, 11*7*innerD);
+		
+		x *= y;
+		//if(DEBUG)x.printMatrix();
+		CPPUNIT_ASSERT(x.eq(z));
+	}
+
+	void test_multiplies3 () {
+		const int innerD = 1;
+		Matrix<int> x(3, innerD, 11);
+		Matrix<int> y(innerD, 5, 7);
+		Matrix<int> z(3, 5, 11*7*innerD);
+		
+		x *= y;
+		//if(DEBUG)x.printMatrix();
 		CPPUNIT_ASSERT(x.eq(z));
 	}
 
@@ -604,9 +659,14 @@ struct TestMatrix : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_greater_equal2);
 	CPPUNIT_TEST(test_greater_equal3);
 	CPPUNIT_TEST(test_greater_equal4);
-	CPPUNIT_TEST(test_plus);
-	CPPUNIT_TEST(test_minus);
-	CPPUNIT_TEST(test_multiplies);
+	CPPUNIT_TEST(test_plus0);
+	CPPUNIT_TEST(test_plus1);
+	CPPUNIT_TEST(test_minus0);
+	CPPUNIT_TEST(test_minus1);
+	CPPUNIT_TEST(test_multiplies0);
+	CPPUNIT_TEST(test_multiplies1);
+	CPPUNIT_TEST(test_multiplies2);
+	CPPUNIT_TEST(test_multiplies3);
 	CPPUNIT_TEST(test_iterator);
 	CPPUNIT_TEST(test_const_iterator);
 	CPPUNIT_TEST(test_empty);
