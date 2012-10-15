@@ -135,8 +135,8 @@ struct TestMatrix : CppUnit::TestFixture {
 	}
 
 	// --------------
-	// test_less_than
-	void test_less_than0 () {
+	// test_less
+	void test_less0 () {
 		Matrix<int>  x;
 		Matrix<int>  y;
 		Matrix<bool> z;
@@ -146,22 +146,260 @@ struct TestMatrix : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(z.eq(t));
 	}
 	
-	void test_less_than1 () {
+	void test_less1 () {
 		Matrix<int>  x(2, 2, 5);
 		Matrix<int>  y(2, 2, 5);
 		Matrix<bool> z;
-		Matrix<bool> t(2, 2, 0);
+		Matrix<bool> t(2, 2, false);
 		z = (x < y);
 		
 		CPPUNIT_ASSERT(z.eq(t));
 	}
 	
-	void test_less_than2 () {
+	void test_less2 () {
+		Matrix<int>  x(2, 2, 5);
+		Matrix<int>  y(2, 2, 7);
+		Matrix<bool> z;
+		Matrix<bool> t(2, 2, true);
+		z = (x < y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_less3 () {
 		Matrix<int>  x(2, 2, 5);
 		Matrix<int>  y(2, 2, 5);
 		Matrix<bool> z;
-		Matrix<bool> t(2, 2, 0);
+		Matrix<bool> t(2, 2, false);
+		x[1][1] = 3;
+		t[1][1] = true;
 		z = (x < y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_less4 () {
+		Matrix<int>  x(5, 0);
+		Matrix<int>  y(5, 0);
+		Matrix<bool> z;
+		Matrix<bool> t(5, 0);	// answer must have same dimensions
+		z = (x < y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+
+	// --------------
+	// test_less_equal
+	void test_less_equal0 () {
+		Matrix<int>  x;
+		Matrix<int>  y;
+		Matrix<bool> z;
+		Matrix<bool> t;
+		z = (x <= y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_less_equal1 () {
+		Matrix<int>  x(2, 2, 7);
+		Matrix<int>  y(2, 2, 5);
+		Matrix<bool> z;
+		Matrix<bool> t(2, 2, false);
+		z = (x <= y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_less_equal2 () {
+		Matrix<int>  x(2, 2, 5);
+		Matrix<int>  y(2, 2, 7);
+		Matrix<bool> z;
+		Matrix<bool> t(2, 2, true);
+		z = (x <= y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_less_equal3 () {
+		Matrix<int>  x(2, 2, 5);
+		Matrix<int>  y(2, 2, 5);
+		Matrix<bool> z;
+		Matrix<bool> t(2, 2, true);
+		x[1][1] = 7;
+		t[1][1] = false;
+		z = (x <= y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_less_equal4 () {
+		Matrix<int>  x(5, 0);
+		Matrix<int>  y(5, 0);
+		Matrix<bool> z;
+		Matrix<bool> t(5, 0);	// answer must have same dimensions
+		z = (x <= y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+
+	// --------------
+	// test_ne
+	void test_ne0 () {
+		Matrix<int>  x;
+		Matrix<int>  y;
+		Matrix<bool> z;
+		Matrix<bool> t;
+		z = (x != y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_ne1 () {
+		Matrix<int>  x(2, 2, 3);
+		Matrix<int>  y(2, 2, 3);
+		Matrix<bool> z;
+		Matrix<bool> t(2, 2, false);
+		z = (x != y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_ne2 () {
+		Matrix<int>  x(2, 2, 3);
+		Matrix<int>  y(2, 2, 5);
+		Matrix<bool> z;
+		Matrix<bool> t(2, 2, true);
+		z = (x != y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_ne3 () {
+		Matrix<int>  x(2, 2, 3);
+		Matrix<int>  y(2, 2, 3);
+		Matrix<bool> z;
+		Matrix<bool> t(2, 2, false);
+		x[1][1] = 5;
+		t[1][1] = true;
+		z = (x != y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_ne4 () {
+		Matrix<int>  x(2, 0);
+		Matrix<int>  y(2, 0);
+		Matrix<bool> z;
+		Matrix<bool> t(2, 0);
+		z = (x != y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+
+	// --------------
+	// test_greater
+	void test_greater0 () {
+		Matrix<int>  x;
+		Matrix<int>  y;
+		Matrix<bool> z;
+		Matrix<bool> t;
+		z = (x > y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_greater1 () {
+		Matrix<int>  x(2, 2, 3);
+		Matrix<int>  y(2, 2, 3);
+		Matrix<bool> z;
+		Matrix<bool> t(2, 2, false);
+		z = (x > y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_greater2 () {
+		Matrix<int>  x(2, 2, 3);
+		Matrix<int>  y(2, 2, 5);
+		Matrix<bool> z;
+		Matrix<bool> t(2, 2, false);
+		z = (x > y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_greater3 () {
+		Matrix<int>  x(2, 2, 3);
+		Matrix<int>  y(2, 2, 3);
+		Matrix<bool> z;
+		Matrix<bool> t(2, 2, false);
+		x[1][1] = 5;
+		t[1][1] = true;
+		z = (x > y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_greater4 () {
+		Matrix<int>  x(2, 0);
+		Matrix<int>  y(2, 0);
+		Matrix<bool> z;
+		Matrix<bool> t(2, 0);
+		z = (x > y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+
+	// --------------
+	// test_greater_equal
+	void test_greater_equal0 () {
+		Matrix<int>  x;
+		Matrix<int>  y;
+		Matrix<bool> z;
+		Matrix<bool> t;
+		z = (x >= y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_greater_equal1 () {
+		Matrix<int>  x(2, 2, 3);
+		Matrix<int>  y(2, 2, 3);
+		Matrix<bool> z;
+		Matrix<bool> t(2, 2, true);
+		z = (x >= y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_greater_equal2 () {
+		Matrix<int>  x(2, 2, 3);
+		Matrix<int>  y(2, 2, 5);
+		Matrix<bool> z;
+		Matrix<bool> t(2, 2, false);
+		z = (x >= y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_greater_equal3 () {
+		Matrix<int>  x(2, 2, 3);
+		Matrix<int>  y(2, 2, 3);
+		Matrix<bool> z;
+		Matrix<bool> t(2, 2, true);
+		x[1][1] = 5;
+		t[1][1] = true;
+		z = (x >= y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_greater_equal4 () {
+		Matrix<int>  x(2, 0);
+		Matrix<int>  y(2, 0);
+		Matrix<bool> z;
+		Matrix<bool> t(2, 0);
+		z = (x >= y);
 		
 		CPPUNIT_ASSERT(z.eq(t));
 	}
@@ -342,9 +580,30 @@ struct TestMatrix : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_scalar_multiplication0);
 	CPPUNIT_TEST(test_scalar_multiplication1);
 	CPPUNIT_TEST(test_scalar_multiplication2);
-	CPPUNIT_TEST(test_less_than0);
-	CPPUNIT_TEST(test_less_than1);
-	CPPUNIT_TEST(test_less_than2);
+	CPPUNIT_TEST(test_less0);
+	CPPUNIT_TEST(test_less1);
+	CPPUNIT_TEST(test_less2);
+	CPPUNIT_TEST(test_less3);
+	CPPUNIT_TEST(test_less4);
+	CPPUNIT_TEST(test_less_equal0);
+	CPPUNIT_TEST(test_less_equal1);
+	CPPUNIT_TEST(test_less_equal2);
+	CPPUNIT_TEST(test_less_equal3);
+	CPPUNIT_TEST(test_less_equal4);
+	CPPUNIT_TEST(test_ne0);
+	CPPUNIT_TEST(test_ne1);
+	CPPUNIT_TEST(test_ne2);
+	CPPUNIT_TEST(test_ne3);
+	CPPUNIT_TEST(test_greater0);
+	CPPUNIT_TEST(test_greater1);
+	CPPUNIT_TEST(test_greater2);
+	CPPUNIT_TEST(test_greater3);
+	CPPUNIT_TEST(test_greater4);
+	CPPUNIT_TEST(test_greater_equal0);
+	CPPUNIT_TEST(test_greater_equal1);
+	CPPUNIT_TEST(test_greater_equal2);
+	CPPUNIT_TEST(test_greater_equal3);
+	CPPUNIT_TEST(test_greater_equal4);
 	CPPUNIT_TEST(test_plus);
 	CPPUNIT_TEST(test_minus);
 	CPPUNIT_TEST(test_multiplies);
