@@ -1,3 +1,45 @@
+commit ac16f9a01ee73d85cbce64dbb008b6047429cf3c
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 15 16:45:51 2012 -0500
+
+    Adds matrix arithmetic methods and unit tests.
+
+commit 31ec4f253716193391658c7930ed2280cd1aa9d7
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 15 16:30:18 2012 -0500
+
+    Adds unit tests for all relational operators.
+
+commit cb84be140d64ad79f469996e1e804bdaf7fda35a
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 15 15:56:31 2012 -0500
+
+    Factors out code for relational operators and scalar operations into 2 methods.
+
+commit 45e917b91286a5bc3ee95f02b2e8c2550ea2a09d
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 15 12:55:07 2012 -0500
+
+    Implements scalar arithmetic methods.
+
+commit a99a0f799d9d1c7895be9e3fbbb819b40ffd8c2d
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 15 12:27:46 2012 -0500
+
+    Uses new skeleton code. eq() implemented.
+
+commit fe6aaf6ea31f80ade2a4b2c433322478a1cef86e
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Oct 12 18:20:28 2012 -0500
+
+    Adds some documentationa and iterator tests.
+
+commit df074d47b5eec0cc28da919ec592bad637cb81cd
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Oct 12 17:52:36 2012 -0500
+
+    Adds more required files.
+
 commit 79426fed69477ca1ea091eb8b280a7e8e41a7c10
 Author: Ian Buitrago <kieldro@gmail.com>
 Date:   Fri Oct 12 17:34:34 2012 -0500
