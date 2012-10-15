@@ -217,18 +217,22 @@ class Matrix {
 		// -----------
 		// operator +=
 		/**
-		* <your documentation>
+		* Adds a scalar value to each element of the matrix.
 		*/
 		Matrix& operator += (const T& rhs) {
-			// <your code>
+			assert(valid());
+			for (unsigned int r=0; r<size(); ++r) {
+				for (unsigned int c=0; c<_m[0].size(); ++c) {
+					_m[r][c] += rhs;
+				}
+			}
 			return *this;
 		}
 
 		/**
-		* <your documentation>
+		* Adds to matrices of the same size togther.
 		*/
 		Matrix& operator += (const Matrix& rhs) {
-			// <your code>
 			return *this;
 		}
 
@@ -238,7 +242,12 @@ class Matrix {
 		* <your documentation>
 		*/
 		Matrix& operator -= (const T& rhs) {
-			// <your code>
+			assert(valid());
+			for (unsigned int r=0; r<size(); ++r) {
+				for (unsigned int c=0; c<_m[0].size(); ++c) {
+					_m[r][c] -= rhs;
+				}
+			}
 			return *this;
 		}
 
@@ -256,7 +265,12 @@ class Matrix {
 		* <your documentation>
 		*/
 		Matrix& operator *= (const T& rhs) {
-			// <your code>
+			assert(valid());
+			for (unsigned int r=0; r<size(); ++r) {
+				for (unsigned int c=0; c<_m[0].size(); ++c) {
+					_m[r][c] *= rhs;
+				}
+			}
 			return *this;
 		}
 
@@ -264,7 +278,6 @@ class Matrix {
 		* <your documentation>
 		*/
 		Matrix& operator *= (const Matrix& rhs) {
-			// <your code>
 			return *this;
 		}
 
@@ -347,6 +360,5 @@ class Matrix {
 		* Returns true if any of the dimensions are 0.
 		*/
 		bool empty() const {return _m.size() ? !_m[0].size() : true;}
-	};
-
+};
 #endif // Matrix_h

@@ -44,11 +44,8 @@ struct TestMatrix : CppUnit::TestFixture {
 	// -----------
 	// test_equals
 	void test_equals0 () {
-		//Matrix<int>  x;
-		//Matrix<int>  y;
 		Matrix<bool> z;
 		Matrix<bool> t;
-		//z = (x == y);
 		
 		CPPUNIT_ASSERT(z.eq(z));
 		CPPUNIT_ASSERT(z.eq(t));
@@ -135,7 +132,90 @@ struct TestMatrix : CppUnit::TestFixture {
 		z = (x == y);
 		CPPUNIT_ASSERT(z.eq(t));
 	}
-
+	
+	// --------------------
+	// test_scalar_addition
+	void test_scalar_addition0() {
+		Matrix<int> x(2, 2, 0);
+		Matrix<int> z(2, 2, 1);
+		x += 1;
+		CPPUNIT_ASSERT(z.eq(x));
+	}
+	void test_scalar_addition1() {
+		Matrix<int> x(2, 2, 0);
+		Matrix<int> z(2, 2, -1);
+		x += -1;
+		CPPUNIT_ASSERT(z.eq(x));
+	}
+	void test_scalar_addition2() {
+		Matrix<int> x(2, 2, 2);
+		x[1][0] = 4;
+		Matrix<int> z(2, 2, 7);
+		z[1][0] = 9;
+		x += 5;
+		CPPUNIT_ASSERT(z.eq(x));
+	}
+	void test_scalar_addition3() {
+		Matrix<int> x;
+		Matrix<int> z;
+		x += 1123;
+		CPPUNIT_ASSERT(z.eq(x));
+	}
+	
+	// -----------------------
+	// test_scalar_subtraction
+	void test_scalar_subtraction0() {
+		Matrix<int> x(2, 2, 0);
+		Matrix<int> z(2, 2, -1);
+		x -= 1;
+		CPPUNIT_ASSERT(z.eq(x));
+	}
+	void test_scalar_subtraction1() {
+		Matrix<int> x(2, 2, 0);
+		Matrix<int> z(2, 2, +1);
+		x -= -1;
+		CPPUNIT_ASSERT(z.eq(x));
+	}
+	void test_scalar_subtraction2() {
+		Matrix<int> x(2, 2, 2);
+		x[1][0] = 4;
+		Matrix<int> z(2, 2, -3);
+		z[1][0] = -1;
+		x -= 5;
+		CPPUNIT_ASSERT(z.eq(x));
+	}
+	void test_scalar_subtraction3() {
+		Matrix<int> x;
+		Matrix<int> z;
+		x -= 1123;
+		CPPUNIT_ASSERT(z.eq(x));
+	}
+	
+	// -----------------------
+	// test_scalar_multiplication
+	void test_scalar_multiplication0() {
+		Matrix<int> x(2, 2, 1);
+		Matrix<int> z(2, 2, 3);
+		x *= 3;
+		CPPUNIT_ASSERT(z.eq(x));
+	}
+	void test_scalar_multiplication1() {
+		Matrix<int> x(2, 2, -3);
+		Matrix<int> z(2, 2, 15);
+		x *= -5;
+		CPPUNIT_ASSERT(z.eq(x));
+	}
+	void test_scalar_multiplication2() {
+		Matrix<int> x(2, 2, 2);
+		x[1][0] = 4;
+		Matrix<int> z(2, 2, 10);
+		z[1][0] = 20;
+		x *= 5;
+		CPPUNIT_ASSERT(z.eq(x));
+	}
+	
+	
+	
 	// ---------
 	// test_plus
 	void test_plus () {
@@ -205,6 +285,17 @@ struct TestMatrix : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_relEqual1);
 	CPPUNIT_TEST(test_relEqual2);
 	CPPUNIT_TEST(test_relEqual3);
+	CPPUNIT_TEST(test_scalar_addition0);
+	CPPUNIT_TEST(test_scalar_addition1);
+	CPPUNIT_TEST(test_scalar_addition2);
+	CPPUNIT_TEST(test_scalar_addition3);
+	CPPUNIT_TEST(test_scalar_subtraction0);
+	CPPUNIT_TEST(test_scalar_subtraction1);
+	CPPUNIT_TEST(test_scalar_subtraction2);
+	CPPUNIT_TEST(test_scalar_subtraction3);
+	CPPUNIT_TEST(test_scalar_multiplication0);
+	CPPUNIT_TEST(test_scalar_multiplication1);
+	CPPUNIT_TEST(test_scalar_multiplication2);
 	//CPPUNIT_TEST(test_less_than);
 	CPPUNIT_TEST(test_plus);
 	CPPUNIT_TEST(test_minus);
