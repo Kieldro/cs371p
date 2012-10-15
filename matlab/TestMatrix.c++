@@ -6,15 +6,16 @@
 
 /**
  * To test the program:
- *		g++ -ansi -pedantic -lcppunit -ldl -Wall TestMatrix.c++ -o TestMatrix.app
+ *		make test
+ *		g++ -std=c++0x -ansi -pedantic -lcppunit -ldl -Wall TestMatrix.c++ -o TestMatrix.app
  *		valgrind TestMatrix.app >& TestMatrix.out
  */
 
 // --------
 // includes
-#include "cppunit/extensions/HelperMacros.h" // CPPUNIT_TEST, CPPUNIT_TEST_SUITE, CPPUNIT_TEST_SUITE_END
-#include "cppunit/TestFixture.h"		    // TestFixture
-#include "cppunit/TextTestRunner.h"          // TestRunner
+#include "cppunit/extensions/HelperMacros.h"	// CPPUNIT_TEST, CPPUNIT_TEST_SUITE, CPPUNIT_TEST_SUITE_END
+#include "cppunit/TestFixture.h"				// TestFixture
+#include "cppunit/TextTestRunner.h"				// TestRunner
 
 #include "Matrix.h"
 
@@ -121,15 +122,47 @@ struct TestMatrix : CppUnit::TestFixture {
 		
 		CPPUNIT_ASSERT(z.eq(t));
 	}
+	
+	void test_relEqual4 () {
+		Matrix<int>  x(5, 0);
+		Matrix<int>  y(5, 0);
+		//if(DEBUG)Matrix<int>(0, 5).printMatrix();
+		Matrix<bool> z;
+		Matrix<bool> t(5, 0);	// answer must have same dimensions
+		z = (x == y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
 
 	// --------------
 	// test_less_than
-	void test_less_than () {
+	void test_less_than0 () {
 		Matrix<int>  x;
 		Matrix<int>  y;
 		Matrix<bool> z;
 		Matrix<bool> t;
-		z = (x == y);
+		z = (x < y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_less_than1 () {
+		Matrix<int>  x(2, 2, 5);
+		Matrix<int>  y(2, 2, 5);
+		Matrix<bool> z;
+		Matrix<bool> t(2, 2, 0);
+		z = (x < y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_less_than2 () {
+		Matrix<int>  x(2, 2, 5);
+		Matrix<int>  y(2, 2, 5);
+		Matrix<bool> z;
+		Matrix<bool> t(2, 2, 0);
+		z = (x < y);
+		
 		CPPUNIT_ASSERT(z.eq(t));
 	}
 	
@@ -214,8 +247,6 @@ struct TestMatrix : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(z.eq(x));
 	}
 	
-	
-	
 	// ---------
 	// test_plus
 	void test_plus () {
@@ -270,6 +301,20 @@ struct TestMatrix : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(b == e);
 	}
 
+	// ---
+	// empty
+	void test_empty () {
+		Matrix<int> x;
+		Matrix<int> y(0, 3);
+		Matrix<int> z(5, 0);
+		Matrix<int> w(5, 0, 3);
+		
+		CPPUNIT_ASSERT(x.empty());
+		CPPUNIT_ASSERT(y.empty());
+		CPPUNIT_ASSERT(z.empty());
+		CPPUNIT_ASSERT(w.empty());
+	}
+
 	// -----
 	// suite
 	CPPUNIT_TEST_SUITE(TestMatrix);
@@ -285,6 +330,7 @@ struct TestMatrix : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_relEqual1);
 	CPPUNIT_TEST(test_relEqual2);
 	CPPUNIT_TEST(test_relEqual3);
+	CPPUNIT_TEST(test_relEqual4);
 	CPPUNIT_TEST(test_scalar_addition0);
 	CPPUNIT_TEST(test_scalar_addition1);
 	CPPUNIT_TEST(test_scalar_addition2);
@@ -296,12 +342,15 @@ struct TestMatrix : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_scalar_multiplication0);
 	CPPUNIT_TEST(test_scalar_multiplication1);
 	CPPUNIT_TEST(test_scalar_multiplication2);
-	//CPPUNIT_TEST(test_less_than);
+	CPPUNIT_TEST(test_less_than0);
+	CPPUNIT_TEST(test_less_than1);
+	CPPUNIT_TEST(test_less_than2);
 	CPPUNIT_TEST(test_plus);
 	CPPUNIT_TEST(test_minus);
 	CPPUNIT_TEST(test_multiplies);
 	CPPUNIT_TEST(test_iterator);
 	CPPUNIT_TEST(test_const_iterator);
+	CPPUNIT_TEST(test_empty);
 	
 	CPPUNIT_TEST_SUITE_END();
 };
@@ -310,7 +359,7 @@ struct TestMatrix : CppUnit::TestFixture {
 // main
 int main () {
 	using namespace std;
-	ios_base::sync_with_stdio(false); // turn off synchronization with C I/O
+	ios_base::sync_with_stdio(false);	// turn off synchronization with C I/O
 	cout << "TestMatrix.c++" << endl;
 
 	CppUnit::TextTestRunner tr;

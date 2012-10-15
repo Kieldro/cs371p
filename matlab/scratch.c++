@@ -2,23 +2,28 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <functional>
 
 using namespace std;
 
-void baz(){
+template<typename T>
+void baz(T f){
 	int i = 0;
-	cout << i.operator-(i) << endl;
 	
+	cout << "i: " << f(i, 3) << endl;
 }
 
 
 int main(){
-	vector<int> x(2);
+	int i = 0;
+	not_equal_to<int> ne;
+	plus<int> p;
+	
+	cout << "i: " << ne(i, 3) << endl;
+	cout << "i: " << plus<int>()(i, 3) << endl;
 	
 	
-	auto i = 0;
-	
-	baz();
+	baz(p);
 	
 	
 	return 0;

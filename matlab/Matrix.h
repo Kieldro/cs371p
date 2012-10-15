@@ -7,11 +7,15 @@
 #ifndef Matrix_h
 #define Matrix_h
 
+#define DEBUG true
+
 // --------
 // includes
-#include <cassert> // assert
-#include <cstddef> // ptrdiff_t, size_t
-#include <vector>  // vector
+#include <cassert>		// assert
+#include <cstddef>		// ptrdiff_t, size_t
+#include <vector>		// vector
+#include <functional>	// operators
+#include <typeinfo>		// typeid
 
 using std::vector;
 using std::cerr;
@@ -24,20 +28,20 @@ class Matrix {
 	public:
 		// --------
 		// typedefs
-		typedef typename std::vector< std::vector<T> >	container_type;
-		typedef typename container_type::value_type	  value_type;
+		typedef typename std::vector< std::vector<T> >		container_type;
+		typedef typename container_type::value_type			value_type;
 
-		typedef typename container_type::size_type		size_type;
-		typedef typename container_type::difference_type  difference_type;
+		typedef typename container_type::size_type			size_type;
+		typedef typename container_type::difference_type	difference_type;
 
-		typedef typename container_type::pointer		pointer;
-		typedef typename container_type::const_pointer    const_pointer;
+		typedef typename container_type::pointer			pointer;
+		typedef typename container_type::const_pointer		const_pointer;
 
-		typedef typename container_type::reference		reference;
-		typedef typename container_type::const_reference  const_reference;
+		typedef typename container_type::reference			reference;
+		typedef typename container_type::const_reference	const_reference;
 
-		typedef typename container_type::iterator		 iterator;
-		typedef typename container_type::const_iterator   const_iterator;
+		typedef typename container_type::iterator			iterator;
+		typedef typename container_type::const_iterator		const_iterator;
 
 	public:
 		// -----------
@@ -45,28 +49,8 @@ class Matrix {
 		/**
 		 *  
 		 */
-		friend Matrix<bool> operator == (const Matrix& A, const Matrix& B) {
-			assert(A.valid() and B.valid());
-			assert(A.size() == B.size());
-			
-			// empty case
-			if(A.empty())
-				return Matrix<bool>();
-			
-			assert(A[0].size() == B[0].size());
-			
-			Matrix<bool> C(A.size(), A[0].size(), true);
-			
-			if(&A == &B)		// same object
-				return C;
-			
-			for(unsigned r = 0; r < A.size(); ++r){
-				for(unsigned c = 0; c < A[0].size(); ++c)
-					if(A[r][c] != B[r][c])
-						C[r][c] = false;
-			}
-			
-			return C;
+		friend Matrix<bool> operator == (const Matrix& lhs, const Matrix& rhs) {
+			return relational(lhs, rhs, std::equal_to<T>());
 		}
 
 		// -----------
@@ -75,8 +59,7 @@ class Matrix {
 		 * <your documentation>
 		 */
 		friend Matrix<bool> operator != (const Matrix& lhs, const Matrix& rhs) {
-			// <your code>
-			return true;
+			return relational(lhs, rhs, std::not_equal_to<T>());
 		}
 
 		// ----------
@@ -85,8 +68,7 @@ class Matrix {
 		 * <your documentation>
 		 */
 		friend Matrix<bool> operator < (const Matrix& lhs, const Matrix& rhs) {
-			// <your code>
-			return false;
+			return relational(lhs, rhs, std::less<T>());
 		}
 
 		// -----------
@@ -95,8 +77,7 @@ class Matrix {
 		 * <your documentation>
 		 */
 		friend Matrix<bool> operator <= (const Matrix& lhs, const Matrix& rhs) {
-			// <your code>
-			return true;
+			return relational(lhs, rhs, std::less_equal<T>());
 		}
 
 		// ----------
@@ -105,8 +86,7 @@ class Matrix {
 		 * <your documentation>
 		 */
 		friend Matrix<bool> operator > (const Matrix& lhs, const Matrix& rhs) {
-			// <your code>
-			return true;
+			return relational(lhs, rhs, std::greater<T>());
 		}
 
 		// -----------
@@ -115,21 +95,48 @@ class Matrix {
 		 * <your documentation>
 		 */
 		friend Matrix<bool> operator >= (const Matrix& lhs, const Matrix& rhs) {
-			// <your code>
-			return true;
+			return relational(lhs, rhs, std::greater_equal<T>());
+		}
+		
+		// -----------
+		// relational
+		/**
+		 * Compares matricies element by element, 
+		 * storing the result of the relational operator into the resulting matrix.
+		 */
+		template<typename BF>
+		static Matrix<bool> relational (const Matrix& A, const Matrix& B, BF bf) {
+			assert(A.valid() and B.valid());
+			assert(A.size() == B.size());		// equal number of rows
+			
+			// empty case
+			if(A.size() == 0){
+				return Matrix<bool>();
+			}
+			
+			assert(A[0].size() == B[0].size());		// equal number of columns
+			
+			Matrix<bool> C(A.size(), A[0].size());
+			
+			for(unsigned r = 0; r < A.size(); ++r){
+				for(unsigned c = 0; c < A[0].size(); ++c)
+					C[r][c] = bf(A[r][c], B[r][c]);
+			}
+			
+			return C;
 		}
 
 		// ----------
 		// operator +
 		/**
-		* <your documentation>
+		* Adds scalar rhs to each element in matrix lhs and returns a matrix.
 		*/
 		friend Matrix operator + (Matrix lhs, const T& rhs) {
 			return lhs += rhs;
 		}
 
 		/**
-		* <your documentation>
+		* Adds matricies lhs and rhs together and returns the resulting matrix.
 		*/
 		friend Matrix operator + (Matrix lhs, const Matrix& rhs) {
 			return lhs += rhs;
@@ -138,14 +145,14 @@ class Matrix {
 		// ----------
 		// operator -
 		/**
-		* <your documentation>
+		* Subtracts scalar rhs from each element in matrix lhs and returns the result.
 		*/
 		friend Matrix operator - (Matrix lhs, const T& rhs) {
 			return lhs -= rhs;
 		}
 
 		/**
-		* <your documentation>
+		* Matrix substraction, rhs from lhs and returns a matrix.
 		*/
 		friend Matrix operator - (Matrix lhs, const Matrix& rhs) {
 			return lhs -= rhs;
@@ -154,14 +161,14 @@ class Matrix {
 		// ----------
 		// operator *
 		/**
-		* <your documentation>
+		* Multiplies scalar rhs to each element in matrix lhs and returns a matrix.
 		*/
 		friend Matrix operator * (Matrix lhs, const T& rhs) {
 			return lhs *= rhs;
 		}
 
 		/**
-		* <your documentation>
+		* Multiplies matricies lhs and rhs together and returns the resulting matrix.
 		*/
 		friend Matrix operator * (Matrix lhs, const Matrix& rhs) {
 			return lhs *= rhs;
@@ -175,10 +182,19 @@ class Matrix {
 		// -----
 		// valid
 		/**
-		* <your documentation>
+		* Returns true if the size of all columns are equal.
 		*/
 		bool valid () const {
-			// <your code>
+			if(empty())
+				return true;
+			
+			// all rows same length
+			unsigned nCol = _m[0].size();
+			
+			for(unsigned r = 1; r < size(); ++r)
+				if(_m[r].size() != nCol)
+					return false;
+			
 			return true;
 		}
 
@@ -186,7 +202,7 @@ class Matrix {
 		// ------------
 		// constructors
 		/**
-		* <your documentation>
+		* Initializes a Matrix with r rows and c columns with value v.
 		*/
 		Matrix (size_type r = 0, size_type c = 0, const T& v = T()):
 		_m(r, vector<T>(c, v)) {
@@ -195,20 +211,20 @@ class Matrix {
 
 		// Default copy, destructor, and copy assignment
 		// Matrix  (const Matrix<T>&);
-		// ~Matrix ();
+		~Matrix (){
+			//if(DEBUG)cerr << "~Matrix() destructed at: " << this << endl;
+		}
 		// Matrix& operator = (const Matrix&);
 
 		// -----------
 		// operator []
 		/**
-		* <your documentation>
+		* Returns a reference to the ith row.
 		*/
-		reference operator [] (size_type i) {
-			return _m[i];
-		}
+		reference operator [] (size_type i) {return _m[i];}
 
 		/**
-		* <your documentation>
+		* Returns a const reference to the ith row.
 		*/
 		const_reference operator [] (size_type i) const {
 			return (*const_cast<Matrix*>(this))[i];
@@ -220,17 +236,11 @@ class Matrix {
 		* Adds a scalar value to each element of the matrix.
 		*/
 		Matrix& operator += (const T& rhs) {
-			assert(valid());
-			for (unsigned int r=0; r<size(); ++r) {
-				for (unsigned int c=0; c<_m[0].size(); ++c) {
-					_m[r][c] += rhs;
-				}
-			}
-			return *this;
+			return scalar(rhs, std::plus<T>());
 		}
 
 		/**
-		* Adds to matrices of the same size togther.
+		* Adds 2 matrices of the same size togther.
 		*/
 		Matrix& operator += (const Matrix& rhs) {
 			return *this;
@@ -239,20 +249,16 @@ class Matrix {
 		// -----------
 		// operator -=
 		/**
-		* <your documentation>
+		* Decrements all elements in the matrix by scalar rhs.
 		*/
 		Matrix& operator -= (const T& rhs) {
-			assert(valid());
-			for (unsigned int r=0; r<size(); ++r) {
-				for (unsigned int c=0; c<_m[0].size(); ++c) {
-					_m[r][c] -= rhs;
-				}
-			}
-			return *this;
+			return scalar(rhs, std::minus<T>());
 		}
 
 		/**
-		* <your documentation>
+		* Both matricies must have identical dimensions.
+		* Decrements the elements of the matrix
+		* by the respective element in the other matrix
 		*/
 		Matrix& operator -= (const Matrix& rhs) {
 			// <your code>
@@ -262,22 +268,32 @@ class Matrix {
 		// -----------
 		// operator *=
 		/**
-		* <your documentation>
+		* Scalar multiplication of a matrix.
 		*/
 		Matrix& operator *= (const T& rhs) {
-			assert(valid());
-			for (unsigned int r=0; r<size(); ++r) {
-				for (unsigned int c=0; c<_m[0].size(); ++c) {
-					_m[r][c] *= rhs;
-				}
-			}
-			return *this;
+			return scalar(rhs, std::multiplies<T>());
 		}
 
 		/**
-		* <your documentation>
+		* Matrix multiplication.
 		*/
 		Matrix& operator *= (const Matrix& rhs) {
+			return *this;
+		}
+		
+		/**
+		* 
+		*/
+		template<typename BF>
+		Matrix& scalar (const T& rhs, BF bf) {
+			assert(valid());
+			
+			for (unsigned int r = 0; r < size(); ++r) {
+				for (unsigned int c = 0; c < _m[0].size(); ++c) {
+					_m[r][c] = bf(_m[r][c], rhs);
+				}
+			}
+			
 			return *this;
 		}
 
@@ -312,18 +328,30 @@ class Matrix {
 			
 			return true;
 		}
+		
+		void printMatrix() const{
+			assert(valid());
+			cerr << "Printing " << size() << "x" 
+				 << (size() ? _m[0].size() : 0) << " matrix at: " << this << endl;
+			if(empty())cerr << "[]" << endl;
+			else
+				for(unsigned r = 0; r < size(); ++r){
+					for(unsigned c = 0; c < _m[0].size(); ++c){
+						cerr << _m[r][c] << " ";
+					}
+					cerr << endl;
+				}
+		}
 
 		// -----
 		// begin
 		/**
-		* <your documentation>
+		* Returns an iterator to the begining of the 2d vector.
 		*/
-		iterator begin () {
-			return _m.begin();
-		}
+		iterator begin () {return _m.begin();}
 
 		/**
-		* <your documentation>
+		* Returns a constant iterator to the begining of the 2d vector.
 		*/
 		const_iterator begin () const {
 			return const_cast<Matrix*>(this)->begin();
@@ -332,27 +360,21 @@ class Matrix {
 		// ---
 		// end
 		/**
-		* <your documentation>
+		* Returns an iterator to the end of the 2d vector.
 		*/
-		iterator end () {
-			return _m.end();
-		}
+		iterator end () {return _m.end();}
 
 		/**
-		* <your documentation>
+		* Returns a constant iterator to the end of the 2d vector.
 		*/
-		const_iterator end () const {
-			return const_cast<Matrix*>(this)->end();
-		}
+		const_iterator end () const {return const_cast<Matrix*>(this)->end();}
 
 		// ----
 		// size
 		/**
-		* <your documentation>
+		* Returns the number of rows.
 		*/
-		size_type size () const {
-			return _m.size();
-		}
+		size_type size () const {return _m.size();}
 		
 		// ----
 		// empty

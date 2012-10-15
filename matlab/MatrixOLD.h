@@ -211,9 +211,9 @@ class Matrix {
 		// Canonical methods
 		// Default copy, destructor, and copy assignment
 		// Matrix  (const Matrix<T>&);
-		 ~Matrix (){
-		 	//if(DEBUG)cerr << "~Matrix() destructed at: " << this << endl;
-		 }
+		~Matrix (){
+			//if(DEBUG)cerr << "~Matrix() destructed at: " << this << endl;
+		}
 		// Matrix& operator = (const Matrix&);
 
 		// -----------

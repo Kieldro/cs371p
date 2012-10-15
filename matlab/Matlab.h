@@ -54,7 +54,14 @@ T diag (const T& x) {
  */
 template <typename T>
 T dot (const T& x, const T& y) {
-	return x;
+	assert(x.size() == y.size());
+	
+	T result = 0;
+	/*
+	for(unsigned i = 0; i < x.size(); ++i)
+		result += y[i] * y[i];
+	*/
+	return result;
 }
 
 // ---

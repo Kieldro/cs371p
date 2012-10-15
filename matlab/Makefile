@@ -1,7 +1,7 @@
 SHELL = /bin/sh
 
 CC = g++
-CPPFLAGS = -std=c++0x -pedantic -ldl -Wall
+CPPFLAGS = -std=c++0x -ansi -pedantic -ldl -Wall
 TEST = TestMatrix.c++
 TESTLAB = TestMatlab.c++
 
