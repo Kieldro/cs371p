@@ -1,3 +1,15 @@
+commit 4f397abb7d7a0427b5404c1e3145d5b76beae790
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Tue Oct 16 14:32:02 2012 -0500
+
+    Adjusts matrix mult and implements matrix cat.
+
+commit bcd0fd997558226abcdde1018fa63e133721bf8a
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 15 16:47:15 2012 -0500
+
+    Ran make all.
+
 commit ac16f9a01ee73d85cbce64dbb008b6047429cf3c
 Author: Ian Buitrago <kieldro@gmail.com>
 Date:   Mon Oct 15 16:45:51 2012 -0500

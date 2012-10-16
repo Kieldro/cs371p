@@ -8,7 +8,7 @@ TESTLAB = TestMatlab.c++
 
 all: run log doxygen zip
 
-run: test testLab
+run: test testlab
 
 test: $(TEST)
 	clear

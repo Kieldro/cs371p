@@ -11,6 +11,7 @@
 // includes
 #include <cassert> // assert
 #include <cstddef> // size_t
+#include <cstdlib> // rand
 
 // ------
 // concat
@@ -71,10 +72,16 @@ T vertcat (const T& x, const T& y) {
  */
 template <typename T>
 T diag (const T& x) {
+	if(x.size() == 0 or x[0].size() == 0)
+		return T();
 	
+	int len = std::min(x.size(), x[0].size());
+	T result(len, 1);
 	
+	for(int r = 0; r < len; ++r)
+		result[r][0] = x[r][r];
 	
-	return x;
+	return result;
 }
 
 // ---
@@ -86,12 +93,18 @@ T diag (const T& x) {
 template <typename T>
 T dot (const T& x, const T& y) {
 	assert(x.size() == y.size());
+	// empty case
+	if(x.size() == 0)
+		return T();
+	assert(x[0].size() == y[0].size());
+	if(x[0].size() == 0)
+		return T();
 	
-	T result = 0;
-	/*
+	T result;
+	
 	for(unsigned i = 0; i < x.size(); ++i)
-		result += y[i] * y[i];
-	*/
+		result[0][0] += x[i][0] * y[i][0];
+	
 	return result;
 }
 
@@ -103,7 +116,11 @@ T dot (const T& x, const T& y) {
  */
 template <typename T>
 T eye (std::size_t r, std::size_t c) {
-	T x;
+	T x(r, c, 0);
+	int n = std::min(r, c);
+	for(int i = 0; i < n; ++i)
+		x[i][i] = 1;
+	
 	return x;
 }
 
@@ -126,19 +143,24 @@ T linsolve (const T& x, const T& y) {
  */
 template <typename T>
 T ones (std::size_t r, std::size_t c) {
-	T x;
+	T x(r, c, 1);
 	return x;
 }
 
 // ----
 // rand
 /**
- * <your documentation>
+ * Fills r x c matrix with random values (0, 100) 
  * http://www.mathworks.com/help/matlab/ref/rand.html
  */
 template <typename T>
 T rand (std::size_t r, std::size_t c) {
-	T x;
+	T x(r, c);
+	
+	for(unsigned r = 0; r < x.size(); ++r)
+		for(unsigned c = 0; c < x[0].size(); ++c)
+			x[r][c] = std::rand() % 99 + 1;
+	
 	return x;
 }
 
@@ -150,7 +172,16 @@ T rand (std::size_t r, std::size_t c) {
  */
 template <typename T>
 T transpose (const T& x) {
-	return x;
+	if(x.size() == 0 or x[0].size() == 0)
+		return T();
+	
+	T result(x[0].size(), x.size());
+	
+	for(unsigned r = 0; r < x[0].size(); ++r)
+		for(unsigned c = 0; c < x.size(); ++c)
+			result[r][c] = x[c][r];
+	
+	return result;
 }
 
 // ----
@@ -161,7 +192,15 @@ T transpose (const T& x) {
  */
 template <typename T>
 T tril (const T& x) {
-	return x;
+	T result(x);
+	
+	// write 0s
+	for(unsigned r = 0; r < x.size(); ++r)
+		for(unsigned c = 0; c < x[0].size(); ++c)
+			if(r < c)
+				result[r][c] = 0;
+	
+	return result;
 }
 
 // ----
@@ -172,7 +211,15 @@ T tril (const T& x) {
  */
 template <typename T>
 T triu (const T& x) {
-	return x;
+	T result(x);
+	
+	// write 0s
+	for(unsigned r = 0; r < x.size(); ++r)
+		for(unsigned c = 0; c < x[0].size(); ++c)
+			if(r > c)
+				result[r][c] = 0;
+	
+	return result;
 }
 
 // -----
@@ -183,7 +230,7 @@ T triu (const T& x) {
  */
 template <typename T>
 T zeros (std::size_t r, std::size_t c) {
-	T x;
+	T x(r, c, 0);
 	return x;
 }
 
