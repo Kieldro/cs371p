@@ -278,10 +278,12 @@ class Matrix {
 		*/
 		Matrix& operator *= (const Matrix& rhs) {
 			assert(valid() and rhs.valid());
-			if(empty() and rhs.empty())
+			if(size() == 0){
+				assert(rhs.size() == 0);
 				return *this;
-			assert(!empty() and !empty());
+			}
 			assert(_m[0].size() == rhs.size());
+			assert(rhs.size() != 0);	// 0 inner would inply a non zero column
 			
 			int innerD = rhs.size();		// inner dimension
 			Matrix C(size(), rhs[0].size(), 0);

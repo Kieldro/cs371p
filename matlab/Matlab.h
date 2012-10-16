@@ -20,7 +20,21 @@
  */
 template <typename T>
 T horzcat (const T& x, const T& y) {
-	return x;
+	assert(x.size() == y.size());
+	unsigned rows = x.size();
+	if(rows == 0)
+		return T();
+	unsigned cols = x[0].size() + y[0].size();
+	T z(rows, cols);
+	
+	for(unsigned r = 0; r < rows; ++r)
+		for(unsigned c = 0; c < cols; ++c)
+			if(c < x[0].size())
+				z[r][c] = x[r][c];
+			else
+				z[r][c] = y[r][c - x[0].size()];
+	
+	return z;
 }
 
 /**
@@ -29,7 +43,24 @@ T horzcat (const T& x, const T& y) {
  */
 template <typename T>
 T vertcat (const T& x, const T& y) {
-	return x;
+	if(x.size() == 0){
+		assert(y.size() == 0);		// sizes must match
+		return y;
+	}
+	assert(y.size() != 0);
+	assert(x[0].size() == y[0].size());
+	unsigned rows = x.size() + y.size();
+	unsigned cols = x[0].size();
+	T z(rows, cols);
+	
+	for(unsigned r = 0; r < rows; ++r)
+		for(unsigned c = 0; c < cols; ++c)
+			if(r < x.size())
+				z[r][c] = x[r][c];
+			else
+				z[r][c] = y[r - x.size()][c];
+	
+	return z;
 }
 
 // ----

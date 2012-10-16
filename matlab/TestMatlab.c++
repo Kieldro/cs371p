@@ -24,15 +24,23 @@
 struct TestMatlab : CppUnit::TestFixture {
 	// --------
 	// test_cat
-	void test_horzcat () {
+	void test_horzcat0() {
 		Matrix<int> x;
 		Matrix<int> y;
 		Matrix<int> z;
 		x = horzcat(x, y);
 		CPPUNIT_ASSERT(x.eq(z));
 	}
+	
+	void test_horzcat1 () {
+		Matrix<int> x(2, 2);
+		Matrix<int> y(2, 3);
+		Matrix<int> z(2, 5);
+		x = horzcat(x, y);
+		CPPUNIT_ASSERT(x.eq(z));
+	}
 
-	void test_vertcat () {
+	void test_vertcat0 () {
 		Matrix<int> x;
 		Matrix<int> y;
 		Matrix<int> z;
@@ -40,15 +48,29 @@ struct TestMatlab : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(x.eq(z));
 	}
 
+	void test_vertcat1 () {
+		Matrix<int> x(3, 2);
+		Matrix<int> y(5, 2);
+		Matrix<int> z(8, 2);
+		x = vertcat(x, y);
+		CPPUNIT_ASSERT(x.eq(z));
+	}
+
 	// ---------
 	// test_diag
-	void test_diag () {
+	void test_diag0 () {
 		Matrix<int> x;
 		Matrix<int> y;
 		x = diag(x);
 		CPPUNIT_ASSERT(x.eq(y));
 	}
-
+	
+	void test_diag1 () {
+		Matrix<int> x;
+		Matrix<int> y;
+		x = diag(x);
+		CPPUNIT_ASSERT(x.eq(y));
+	}
 	// --------
 	// test_dot
 	void test_dot () {
@@ -136,9 +158,12 @@ struct TestMatlab : CppUnit::TestFixture {
 	// suite
 	CPPUNIT_TEST_SUITE(TestMatlab);
 	
-	CPPUNIT_TEST(test_horzcat);
-	CPPUNIT_TEST(test_vertcat);
-	CPPUNIT_TEST(test_diag);
+	CPPUNIT_TEST(test_horzcat0);
+	CPPUNIT_TEST(test_horzcat1);
+	CPPUNIT_TEST(test_vertcat0);
+	CPPUNIT_TEST(test_vertcat1);
+	CPPUNIT_TEST(test_diag0);
+	CPPUNIT_TEST(test_diag1);
 	CPPUNIT_TEST(test_eye);
 	CPPUNIT_TEST(test_linsolve);
 	CPPUNIT_TEST(test_ones);

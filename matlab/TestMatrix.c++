@@ -515,8 +515,6 @@ struct TestMatrix : CppUnit::TestFixture {
 		Matrix<int> x;
 		Matrix<int> y;
 		Matrix<int> z;
-		x -= 0;
-		CPPUNIT_ASSERT(x.eq(z));
 		x -= y;
 		CPPUNIT_ASSERT(x.eq(z));
 	}
@@ -549,7 +547,7 @@ struct TestMatrix : CppUnit::TestFixture {
 		Matrix<int> x(3, 5, 11);
 		Matrix<int> z(3, 5, 0);
 		
-		x *= 0;
+		x *= 0;g
 		//if(DEBUG)x.printMatrix();
 		CPPUNIT_ASSERT(x.eq(z));
 	}

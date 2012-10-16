@@ -6,7 +6,7 @@ TEST = TestMatrix.c++
 TESTLAB = TestMatlab.c++
 
 
-all: test run log doxygen zip
+all: run log doxygen zip
 
 run: test testLab
 
@@ -15,7 +15,7 @@ test: $(TEST)
 	$(CC) $(CPPFLAGS) $(TEST) -lcppunit -o $(TEST).app
 	./$(TEST).app #> TestMatrix.out 2>&1
 
-testLab: $(TESTLAB)
+testlab: $(TESTLAB)
 	clear
 	$(CC) $(CPPFLAGS) $(TESTLAB) -lcppunit -o $(TESTLAB).app
 	./$(TESTLAB).app #> TestMatlab.out 2>&1
