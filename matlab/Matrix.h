@@ -324,7 +324,7 @@ class Matrix {
 		Matrix& mArithmetic (const Matrix& rhs, BF bf) {
 			assert(valid() and rhs.valid());
 			// range checks
-			assert((*this).size() == rhs.size());
+			assert(size() == rhs.size());
 			if(size() == 0)
 				return *this;
 			assert(_m[0].size() == rhs[0].size());

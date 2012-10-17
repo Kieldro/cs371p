@@ -9,17 +9,19 @@ Last Name: Buitrago
 EID: ib
 E-mail: kieldro@gmail.com
 Estimated number of hours: 20
-Actual    number of hours: 16
+Actual    number of hours: 19
 11a - 2p
 11a - 6p
 11a - 5p
+4 - 6p
+12 - 1p
 
 Partner First Name: Fayz
 Partner Last Name: Ra
 Partner EID: 
 Partner E-mail: 
 Partner Estimated number of hours: 
-Partner Actual    number of hours: 16
+Partner Actual    number of hours: 19
 
 Turnin CS Username: keo
 GitHub ID: kieldro

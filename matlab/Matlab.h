@@ -87,23 +87,53 @@ T diag (const T& x) {
 // ---
 // dot
 /**
- * <your documentation>
+ * Calculates the dot product of 2 matricies or vectors.
+ * Matricies must be the same size.
+ * Vectors must be trasposable to equal size.
  * http://www.mathworks.com/help/matlab/ref/dot.html
  */
 template <typename T>
 T dot (const T& x, const T& y) {
-	assert(x.size() == y.size());
-	// empty case
-	if(x.size() == 0)
+	T A = x;
+	T B = y;
+	if(A.empty()){
+		assert(B.empty());		// must both be empty
 		return T();
-	assert(x[0].size() == y[0].size());
-	if(x[0].size() == 0)
-		return T();
+	}
 	
-	T result;
+	// non empty
+	assert(!B.empty());
+	if(A.size() != B.size()){
+		// they must be vectors
+		assert(A.size() == 1 or B.size() == 1);
+		assert(A.size() == B[0].size());
+		assert(A[0].size() == B.size());
+		if(A.size() == 1)
+			A = transpose(A);		// form column vector
+		else
+			B = transpose(B);
+	}
+	assert(A[0].size() == B[0].size());
 	
-	for(unsigned i = 0; i < x.size(); ++i)
-		result[0][0] += x[i][0] * y[i][0];
+	// equal size
+	if(A.size() == 1){
+		// create 2 column vectors
+		A = transpose(A);
+		B = transpose(B);
+	}
+	
+	const unsigned cols = A[0].size();
+	T result(1, cols, 0);
+	/*
+	if(DEBUG)A.printMatrix();
+	if(DEBUG)B.printMatrix();
+	if(DEBUG)result.printMatrix();
+	*/
+	for(unsigned r = 0; r < A.size(); ++r)
+		for(unsigned c = 0; c < cols; ++c){
+			//if(DEBUG)cerr << "BOOM! r: " << r << endl;
+			result[0][c] += A[r][c] * B[r][c];
+		}
 	
 	return result;
 }
@@ -132,6 +162,10 @@ T eye (std::size_t r, std::size_t c) {
  */
 template <typename T>
 T linsolve (const T& x, const T& y) {
+	
+	
+	
+	
 	return x;
 }
 

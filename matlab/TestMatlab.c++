@@ -74,14 +74,142 @@ struct TestMatlab : CppUnit::TestFixture {
 	}
 	// --------
 	// test_dot
-	void test_dot () {
-		Matrix<int> x;
-		Matrix<int> y;
-		Matrix<int> z;
-		x = dot(x, y);
-		CPPUNIT_ASSERT(x.eq(z));
+	// 2 0x0 matricies
+	void test_dot0 () {
+		Matrix<int> A;
+		Matrix<int> B;
+		Matrix<int> ans;
+		A = dot(A, B);
+		CPPUNIT_ASSERT(A.eq(ans));
+	}
+	
+	// Any 2 empty matricies returns and empty result in this implementation.
+	void test_dot1 () {
+		Matrix<int> A(3, 0);
+		Matrix<int> B(3, 0);
+		Matrix<int> ans;
+		A = dot(A, B);
+		CPPUNIT_ASSERT(A.eq(ans));
+	}
+	
+	// Allowing different dimensions if both empty, simplifies the logic.
+	void test_dot2 () {
+		Matrix<int> A(3, 0);
+		Matrix<int> B(0, 0);
+		Matrix<int> ans;
+		A = dot(A, B);
+		CPPUNIT_ASSERT(A.eq(ans));
+	}
+	
+	// simple 1x1 vectors
+	void test_dot3 () {
+		Matrix<int> A(1, 1, 3);
+		Matrix<int> B(1, 1, 5);
+		Matrix<int> ans(1, 1, 15);
+		A = dot(A, B);
+		CPPUNIT_ASSERT(A.eq(ans));
+	}
+	
+	// 2 column vectors
+	void test_dot4 () {
+		Matrix<int> A(2, 1, 3);
+		Matrix<int> B(2, 1, 5);
+		Matrix<int> ans(1, 1, 30);
+		A = dot(A, B);
+		CPPUNIT_ASSERT(A.eq(ans));
+	}
+	
+	// 2 row vectors
+	void test_dot5 () {
+		Matrix<int> A(1, 2, 3);
+		Matrix<int> B(1, 2, 5);
+		Matrix<int> ans(1, 1, 30);
+		A = dot(A, B);
+		CPPUNIT_ASSERT(A.eq(ans));
+	}
+	
+	// row and column vectors
+	void test_dot6 () {
+		Matrix<int> A(1, 2, 3);
+		Matrix<int> B(2, 1, 5);
+		Matrix<int> ans(1, 1, 30);
+		A = dot(A, B);
+		CPPUNIT_ASSERT(A.eq(ans));
+	}
+	
+	// column and row vectors
+	void test_dot7 () {
+		Matrix<int> A(2, 1, 3);
+		Matrix<int> B(1, 2, 5);
+		Matrix<int> ans(1, 1, 30);
+		A = dot(A, B);
+		CPPUNIT_ASSERT(A.eq(ans));
+	}
+	
+	// 2 matricies
+	void test_dot8 () {
+		Matrix<int> A(2, 2, 3);
+		Matrix<int> B = horzcat(Matrix<int>(2, 1, 5), Matrix<int>(2, 1, 0));
+		Matrix<int> ans = horzcat(Matrix<int>(1, 1, 30), Matrix<int>(1, 1, 0));
+		A = dot(A, B);
+		CPPUNIT_ASSERT(A.eq(ans));
 	}
 
+	// -------------
+	// test_linsolve
+	void test_linsolve0 () {
+		Matrix<int> A;
+		Matrix<int> B;
+		A = linsolve(A, B);
+		CPPUNIT_ASSERT(A.eq(B));
+	}
+	
+	void test_linsolve1 () {
+		Matrix<int> A(3, 0);
+		Matrix<int> B(3, 0);
+		Matrix<int> ans;
+		A = linsolve(A, B);
+		CPPUNIT_ASSERT(A.eq(ans));	// design choice to return []
+	}
+	
+	void test_linsolve2 () {
+		Matrix<int> A(3, 5);
+		Matrix<int> B(3, 0);
+		Matrix<int> ans;
+		A = linsolve(A, B);
+		CPPUNIT_ASSERT(A.eq(ans));	// design choice to return []
+	}
+	
+	void test_linsolve3 () {
+		Matrix<int> A(3, 0);
+		Matrix<int> B(3, 5);
+		Matrix<int> ans;
+		A = linsolve(A, B);
+		CPPUNIT_ASSERT(A.eq(ans));	// design choice to return []
+	}
+	
+	void test_linsolve4 () {
+		const int m = 1;
+		const int n = 1;
+		const int k = 1;
+		Matrix<int> A(m, n, 2);
+		Matrix<int> B(m, k, 6);
+		Matrix<int> ans(n, k, 3);
+		A = linsolve(A, B);
+		//CPPUNIT_ASSERT(A.eq(ans));
+	}
+	
+	void test_linsolve5 () {
+		const int m = 1;
+		const int n = 2;
+		const int k = 1;
+		Matrix<int> A(m, n, 2);
+		Matrix<int> B(m, k, 16);
+		Matrix<int> ans(n, k, 8);
+		A = linsolve(A, B);
+		//CPPUNIT_ASSERT(A.eq(ans));
+	}
+	
 	// --------
 	// test_eye
 	void test_eye () {
@@ -92,16 +220,6 @@ struct TestMatlab : CppUnit::TestFixture {
 		
 		x = eye< Matrix<int> >(2, 3);
 		CPPUNIT_ASSERT(x.eq(y));
-	}
-
-	// -------------
-	// test_linsolve
-	void test_linsolve () {
-		Matrix<int> x;
-		Matrix<int> y;
-		Matrix<int> z;
-		x = linsolve(x, y);
-		CPPUNIT_ASSERT(x.eq(z));
 	}
 
 	// ---------
@@ -203,8 +321,23 @@ struct TestMatlab : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_vertcat1);
 	CPPUNIT_TEST(test_diag0);
 	CPPUNIT_TEST(test_diag1);
+	CPPUNIT_TEST(test_linsolve0);
+	/*CPPUNIT_TEST(test_linsolve1);
+	CPPUNIT_TEST(test_linsolve2);
+	CPPUNIT_TEST(test_linsolve3);
+	CPPUNIT_TEST(test_linsolve4);
+	CPPUNIT_TEST(test_linsolve5);
+	*/
+	CPPUNIT_TEST(test_dot0);
+	CPPUNIT_TEST(test_dot1);
+	CPPUNIT_TEST(test_dot2);
+	CPPUNIT_TEST(test_dot3);
+	CPPUNIT_TEST(test_dot4);
+	CPPUNIT_TEST(test_dot5);
+	CPPUNIT_TEST(test_dot6);
+	CPPUNIT_TEST(test_dot7);
+	CPPUNIT_TEST(test_dot8);
 	CPPUNIT_TEST(test_eye);
-	CPPUNIT_TEST(test_linsolve);
 	CPPUNIT_TEST(test_ones);
 	CPPUNIT_TEST(test_rand0);
 	CPPUNIT_TEST(test_rand1);

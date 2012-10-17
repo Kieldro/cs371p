@@ -1,3 +1,15 @@
+commit c2257c51604acb3e4c1ce39a8ee3d91d86db1130
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Tue Oct 16 17:40:56 2012 -0500
+
+    Added unit tests to public repository.
+
+commit 1dc362f4cf862803bdd23cf4a630e067296520c1
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Tue Oct 16 16:10:47 2012 -0500
+
+    Some Matlab methods implemented.
+
 commit 4f397abb7d7a0427b5404c1e3145d5b76beae790
 Author: Ian Buitrago <kieldro@gmail.com>
 Date:   Tue Oct 16 14:32:02 2012 -0500
