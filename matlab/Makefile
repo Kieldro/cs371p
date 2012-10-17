@@ -5,8 +5,7 @@ CPPFLAGS = -std=c++0x -ansi -pedantic -ldl -Wall
 TEST = TestMatrix.c++
 TESTLAB = TestMatlab.c++
 
-
-all: run log doxygen zip
+all: run log doxygen zip clean
 
 run: test testlab
 
