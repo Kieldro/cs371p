@@ -16,10 +16,16 @@
 #include <vector>		// vector
 #include <functional>	// operators
 #include <typeinfo>		// typeid
+#include <stdexcept>
+#include <string>
 
 using std::vector;
 using std::cerr;
 using std::endl;
+using std::logic_error;
+using std::string;
+
+const static string ERROR_STR = "Sizes not equal.";
 
 // ------
 // Matrix
@@ -107,6 +113,8 @@ class Matrix {
 		template<typename BF>
 		static Matrix<bool> relational (const Matrix& A, const Matrix& B, BF bf) {
 			assert(A.valid() and B.valid());
+			if(A.size() != B.size())
+				throw logic_error(ERROR_STR);
 			assert(A.size() == B.size());		// equal number of rows
 			
 			// empty case
@@ -114,6 +122,8 @@ class Matrix {
 				return Matrix<bool>();
 			}
 			
+			if(A[0].size() != B[0].size())
+				throw logic_error(ERROR_STR);
 			assert(A[0].size() == B[0].size());		// equal number of columns
 			
 			Matrix<bool> C(A.size(), A[0].size());
@@ -204,8 +214,11 @@ class Matrix {
 		/**
 		* Initializes a Matrix with r rows and c columns with value v.
 		*/
-		Matrix (size_type r = 0, size_type c = 0, const T& v = T()):
-		_m(r, vector<T>(c, v)) {
+		Matrix (size_type r = 0, size_type c = 0, const T& v = T())
+		//: _m(r, vector<T>(c, v))
+		{
+			_m = vector< vector<T> >(r, vector<T>(c, v));
+			
 			assert(valid());
 		}
 
@@ -324,7 +337,10 @@ class Matrix {
 		Matrix& mArithmetic (const Matrix& rhs, BF bf) {
 			assert(valid() and rhs.valid());
 			// range checks
-			assert(size() == rhs.size());
+			
+			if(size() != rhs.size())
+				throw logic_error(ERROR_STR);
+			
 			if(size() == 0)
 				return *this;
 			assert(_m[0].size() == rhs[0].size());

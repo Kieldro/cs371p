@@ -1,29 +1,14 @@
-//#include<string>
+#include <string>
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <functional>
+#include <stdexcept>
 
-using namespace std;
-
-template<typename T>
-void baz(T f){
-	int i = 0;
-	
-	cout << "i: " << f(i, 3) << endl;
-}
-
+//using namespace std;
 
 int main(){
-	int i = 0;
-	not_equal_to<int> ne;
-	plus<int> p;
-	
-	cout << "i: " << ne(i, 3) << endl;
-	cout << "i: " << plus<int>()(i, 3) << endl;
-	
-	
-	baz(p);
+	typeid(int).name();
 	
 	
 	return 0;

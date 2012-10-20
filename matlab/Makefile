@@ -44,4 +44,4 @@ clean:
 
 scratch: scratch.c++
 	g++ -std=c++0x scratch.c++ -o scratch.c++.app
-	scratch.c++.app
+	./scratch.c++.app

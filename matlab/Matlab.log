@@ -1,3 +1,15 @@
+commit fe5d7961eb88e7d88b7207ad295757af2b6f4ff6
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Oct 17 15:20:28 2012 -0500
+
+    test repo files were deleted. Adds them back.
+
+commit f436727158f8f24cf7964b58ec97fb3abeffe075
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Oct 17 15:12:56 2012 -0500
+
+    Adds dot().
+
 commit c2257c51604acb3e4c1ce39a8ee3d91d86db1130
 Author: Ian Buitrago <kieldro@gmail.com>
 Date:   Tue Oct 16 17:40:56 2012 -0500

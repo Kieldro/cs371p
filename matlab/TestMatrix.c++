@@ -19,17 +19,23 @@
 
 #include "Matrix.h"
 
+using std::exception;
+
 // ----------
 // TestMatrix
 struct TestMatrix : CppUnit::TestFixture {
 	// ----------------
 	// test_constructor
-	void test_constructor () {
+	void test_constructor0 () {
 		Matrix<int> x;
 		Matrix<int> y(2);
 		Matrix<int> z(2, 3);
 		Matrix<int> t(2, 3, 4);
 		CPPUNIT_ASSERT(x.size() == 0);
+	}
+
+	void test_constructor1 () {
+		;
 	}
 
 	// ----------
@@ -133,6 +139,35 @@ struct TestMatrix : CppUnit::TestFixture {
 		
 		CPPUNIT_ASSERT(z.eq(t));
 	}
+	
+	void test_relEqual5 () {
+		Matrix<int>  x(5, 5);
+		Matrix<int>  y(4, 5);
+		//auto s = Matrix<int>::eq;
+		
+		try{
+			// exception must be thrown
+			x == y;
+		}catch(exception& e){
+			CPPUNIT_ASSERT(true);
+			return;
+		}
+		CPPUNIT_ASSERT(false);
+	}
+	
+	void test_relEqual6 () {
+		Matrix<int>  x(5, 5);
+		Matrix<int>  y(5, 4);
+		
+		try{
+			// exception must be thrown
+			x == y;
+		}catch(exception& e){
+			CPPUNIT_ASSERT(true);
+			return;
+		}
+		CPPUNIT_ASSERT(false);
+	}
 
 	// --------------
 	// test_less
@@ -179,6 +214,16 @@ struct TestMatrix : CppUnit::TestFixture {
 	}
 	
 	void test_less4 () {
+		Matrix<int>  x(5, 0);
+		Matrix<int>  y(5, 0);
+		Matrix<bool> z;
+		Matrix<bool> t(5, 0);	// answer must have same dimensions
+		z = (x < y);
+		
+		CPPUNIT_ASSERT(z.eq(t));
+	}
+	
+	void test_less5 () {
 		Matrix<int>  x(5, 0);
 		Matrix<int>  y(5, 0);
 		Matrix<bool> z;
@@ -491,8 +536,6 @@ struct TestMatrix : CppUnit::TestFixture {
 		Matrix<int> x;
 		Matrix<int> y;
 		Matrix<int> z;
-		x += 0;
-		CPPUNIT_ASSERT(x.eq(z));
 		x += y;
 		CPPUNIT_ASSERT(x.eq(z));
 	}
@@ -508,6 +551,21 @@ struct TestMatrix : CppUnit::TestFixture {
 		y += x;
 		CPPUNIT_ASSERT(y.eq(z));
 	}
+	
+	void test_plus2 () {
+		Matrix<int> x(2, 2, 0);
+		Matrix<int> y(7, 7, 1);
+		
+		try{
+			x += y;
+		}catch(std::exception& e){
+			CPPUNIT_ASSERT(true);
+			return;
+		}
+		// no exception was thrown
+		CPPUNIT_ASSERT(false);
+	}
+
 
 	// ----------
 	// test_minus
@@ -610,7 +668,8 @@ struct TestMatrix : CppUnit::TestFixture {
 	// suite
 	CPPUNIT_TEST_SUITE(TestMatrix);
 	
-	CPPUNIT_TEST(test_constructor);
+	CPPUNIT_TEST(test_constructor0);
+	CPPUNIT_TEST(test_constructor1);
 	CPPUNIT_TEST(test_index);
 	CPPUNIT_TEST(test_equals0);
 	CPPUNIT_TEST(test_equals1);
@@ -622,6 +681,8 @@ struct TestMatrix : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_relEqual2);
 	CPPUNIT_TEST(test_relEqual3);
 	CPPUNIT_TEST(test_relEqual4);
+	CPPUNIT_TEST(test_relEqual5);
+	CPPUNIT_TEST(test_relEqual6);
 	CPPUNIT_TEST(test_scalar_addition0);
 	CPPUNIT_TEST(test_scalar_addition1);
 	CPPUNIT_TEST(test_scalar_addition2);
@@ -659,6 +720,7 @@ struct TestMatrix : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_greater_equal4);
 	CPPUNIT_TEST(test_plus0);
 	CPPUNIT_TEST(test_plus1);
+	CPPUNIT_TEST(test_plus2);
 	CPPUNIT_TEST(test_minus0);
 	CPPUNIT_TEST(test_minus1);
 	CPPUNIT_TEST(test_multiplies0);
