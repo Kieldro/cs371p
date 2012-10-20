@@ -26,7 +26,10 @@
  */
 template <typename T>
 T horzcat (const T& x, const T& y) {
-	assert(x.size() == y.size());
+	if(x.size() != y.size())
+		throw logic_error(ERROR_STR);
+	
+	//assert(x.size() == y.size());
 	unsigned rows = x.size();
 	if(rows == 0)
 		return T();
@@ -54,12 +57,24 @@ T horzcat (const T& x, const T& y) {
  */
 template <typename T>
 T vertcat (const T& x, const T& y) {
-	if(x.size() == 0){
-		assert(y.size() == 0);		// sizes must match
-		return y;
+	// Zero case: x is empty
+	if(x.size() == 0){ // so x must be 0x0
+		if (y.size() != 0) {
+			if (y[0].size() == 0) {
+				return y;
+			}
+			else
+			{
+				throw logic_error("Columns not equal");
+			}
+		}
+		return y; // if we get here, y is 0x0, like x.
 	}
-	assert(y.size() != 0);
+	
+	if (x[0].size() != y[0].size())
+		throw logic_error("Columns not equal");
 	assert(x[0].size() == y[0].size());
+	
 	unsigned rows = x.size() + y.size();
 	unsigned cols = x[0].size();
 	T z(rows, cols);
@@ -112,22 +127,40 @@ T dot (const T& x, const T& y) {
 	T A = x;
 	T B = y;
 	if(A.empty()){
+		if(!B.empty())
+			throw logic_error("Size mismatch"); //A has a 0 as a size, B doesn't
 		assert(B.empty());		// must both be empty
 		return T();
 	}
 	
-	// non empty
+	// A is non empty,B is
+	if(B.empty())
+		throw logic_error("Size mismatch");
 	assert(!B.empty());
+	
 	if(A.size() != B.size()){
-		// they must be vectors
+		// Matrices need same size; must be vectors
+		
+		if(A.size() != 1 and B.size() != 1)
+			throw logic_error("A and B are similarly sized matrices or vectors");
 		assert(A.size() == 1 or B.size() == 1);
+		
+		//At this point, one vector is horizontal,
+		//while the other is vertical. horiz. size and
+		//vert. size need to match.
+		if(A.size() != B[0].size())
+			throw logic_error("Vector size misatch");
 		assert(A.size() == B[0].size());
-		assert(A[0].size() == B.size());
+		
+		// form column vectors, needed for algorithm below
 		if(A.size() == 1)
-			A = transpose(A);		// form column vector
+			A = transpose(A);
 		else
 			B = transpose(B);
 	}
+	
+	if(A[0].size() != B[0].size()) 
+		throw logic_error("Size misatch"); //Collumns aren't the same
 	assert(A[0].size() == B[0].size());
 	
 	// equal size

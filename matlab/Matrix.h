@@ -145,7 +145,7 @@ class Matrix {
 		 * storing the result of the relational operator into the resulting matrix.
 		 * @param A a matrix
 		 * @param B a matrix
-		 * @bf a binary function
+		 * @param bf a binary function
 		 * @returns a matrix with the results of each element of A and B applied to the function.
 		 */
 		template<typename BF>
@@ -179,6 +179,9 @@ class Matrix {
 		// operator +
 		/**
 		* Adds scalar rhs to each element in matrix lhs and returns a matrix.
+		* @param lhs a matrix
+		* @param rhs a scalar value
+		* @return the matrix lhs with rhs added to each element's value.
 		*/
 		friend Matrix operator + (Matrix lhs, const T& rhs) {
 			return lhs += rhs;
@@ -186,6 +189,9 @@ class Matrix {
 
 		/**
 		* Adds matricies lhs and rhs together and returns the resulting matrix.
+		* @param lhs a matrix
+		* @param rhs a matrix
+		* @return the matrix lhs+lhs as an r-value.
 		*/
 		friend Matrix operator + (Matrix lhs, const Matrix& rhs) {
 			return lhs += rhs;
@@ -195,6 +201,9 @@ class Matrix {
 		// operator -
 		/**
 		* Subtracts scalar rhs from each element in matrix lhs and returns the result.
+		* @param lhs a matrix
+		* @param rhs a scalar value
+		* @return the matrix lhs with rhs subracted from each element's value.
 		*/
 		friend Matrix operator - (Matrix lhs, const T& rhs) {
 			return lhs -= rhs;
@@ -202,6 +211,9 @@ class Matrix {
 
 		/**
 		* Matrix substraction, rhs from lhs and returns a matrix.
+		* @param lhs a matrix
+		* @param rhs a matrix
+		* @return the matrix lhs-lhs as an r-value.
 		*/
 		friend Matrix operator - (Matrix lhs, const Matrix& rhs) {
 			return lhs -= rhs;
@@ -211,6 +223,9 @@ class Matrix {
 		// operator *
 		/**
 		* Multiplies scalar rhs to each element in matrix lhs and returns a matrix.
+		* @param lhs a matrix
+		* @param rhs a scalar value
+		* @return the matrix lhs with rhs subracted by each element's value.
 		*/
 		friend Matrix operator * (Matrix lhs, const T& rhs) {
 			return lhs *= rhs;
@@ -218,6 +233,9 @@ class Matrix {
 
 		/**
 		* Multiplies matricies lhs and rhs together and returns the resulting matrix.
+		* @param lhs a matrix
+		* @param rhs a matrix
+		* @return the matrix lhs*lhs as an r-value.
 		*/
 		friend Matrix operator * (Matrix lhs, const Matrix& rhs) {
 			return lhs *= rhs;
@@ -232,6 +250,7 @@ class Matrix {
 		// valid
 		/**
 		* Returns true if the size of all columns are equal.
+		* @return true if valid, false if not
 		*/
 		bool valid () const {
 			if(empty())
@@ -252,6 +271,9 @@ class Matrix {
 		// constructors
 		/**
 		* Initializes a Matrix with r rows and c columns with value v.
+		* @param r row size
+		* @param c collumn size
+		* @param v initial value to fill the matrix with
 		*/
 		Matrix (size_type r = 0, size_type c = 0, const T& v = T())
 		//: _m(r, vector<T>(c, v))
@@ -363,6 +385,9 @@ class Matrix {
 		
 		/**
 		* Common code for performing scalar operations on a matrix.
+		* @param rhs a scalar value
+		* @param bf a binary function
+		* @return result of this matrix and rhs applied to the function
 		*/
 		template<typename BF>
 		Matrix& scalar (const T& rhs, BF bf) {
@@ -380,6 +405,9 @@ class Matrix {
 		/**
 		* Common code for performing arithmetic on two similarly-size
 		* matrices.
+ 		* @param rhs a matrix
+		* @param bf a binary function
+		* @return matrix of results
 		*/
 		template<typename BF>
 		Matrix& mArithmetic (const Matrix& rhs, BF bf) {

@@ -13,10 +13,10 @@ Actual    number of hours: 20
 
 Partner First Name: Fayz
 Partner Last Name: Rahman
-Partner EID: FRAHMAN
-Partner E-mail: FAYZ.ISABOSS@gmail.com
-Partner Estimated number of hours: 8
-Partner Actual    number of hours: 19
+Partner EID: fnr75
+Partner E-mail: fayz.rahman@utexas.edu
+Partner Estimated number of hours: 15
+Partner Actual    number of hours: 20
 
 Turnin CS Username: keo
 GitHub ID: kieldro

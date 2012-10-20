@@ -1,3 +1,46 @@
+commit 4f00d56e293a6acc2ef1882966ff0db27124a543
+Merge: 704c7f3 18a6552
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Sat Oct 20 15:07:12 2012 -0500
+
+    Merge branch 'master' of github.com:Kieldro/cs371p
+
+commit 704c7f3b9251aad5a10d74c7e5ec05b15619e939
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Sat Oct 20 15:07:06 2012 -0500
+
+    Adds exceptions and some tests to matrix.
+
+commit 18a65527aee3fc142ac5e43d9ccabba2bda4c07e
+Author: Fayz Rahman <fayz.rahman@utexas.edu>
+Date:   Sat Oct 20 15:06:06 2012 -0500
+
+    Corrected documentaion on Matrix.h, more needed.
+
+commit d6bb88c5ae7766b14722a265e7f4ddaeaa328c2e
+Author: Fayz Rahman <fayz.rahman@utexas.edu>
+Date:   Sat Oct 20 14:34:13 2012 -0500
+
+    Added documentation for Matlab.h
+
+commit a55467c79034b231d3545ce74287574d666a9ef5
+Author: Fayz Rahman <fayz.rahman@utexas.edu>
+Date:   Sat Oct 20 14:00:45 2012 -0500
+
+    Added more documentation
+
+commit 7ab1521074bd89d8cb19e5c80e0756b117c6fdcf
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Sat Oct 20 08:25:33 2012 -0500
+
+    Trying to add helper test method.
+
+commit b489de479057eff88e087c6225d9845295fafd7e
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Oct 19 21:02:13 2012 -0500
+
+    Starts adding exceptions.
+
 commit fe5d7961eb88e7d88b7207ad295757af2b6f4ff6
 Author: Ian Buitrago <kieldro@gmail.com>
 Date:   Wed Oct 17 15:20:28 2012 -0500
