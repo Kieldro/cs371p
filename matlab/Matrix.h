@@ -292,13 +292,19 @@ class Matrix {
 		Matrix& operator *= (const Matrix& rhs) {
 			assert(valid() and rhs.valid());
 			if(size() == 0){
-				assert(rhs.size() == 0);
+				if(rhs.size() != 0)		// both must be 0x0 empty matrices
+					throw logic_error(ERROR_STR);
 				return *this;
 			}
-			assert(_m[0].size() == rhs.size());
-			assert(rhs.size() != 0);	// 0 inner would inply a non zero column
 			
+			if(_m[0].size() != rhs.size())
+				throw logic_error(ERROR_STR);
 			int innerD = rhs.size();		// inner dimension
+			// m x 0 and 0 x 0 = m x 0
+			if(innerD == 0){
+				return *this;
+			}
+			
 			Matrix C(size(), rhs[0].size(), 0);
 			
 			for(unsigned r = 0; r < C.size(); ++r){
@@ -337,8 +343,9 @@ class Matrix {
 		Matrix& mArithmetic (const Matrix& rhs, BF bf) {
 			assert(valid() and rhs.valid());
 			// range checks
-			
-			if(size() != rhs.size())
+			if(_m.size() != rhs.size())
+				throw logic_error(ERROR_STR);
+			if(_m.size() != 0 and _m[0].size() != rhs[0].size())
 				throw logic_error(ERROR_STR);
 			
 			if(size() == 0)

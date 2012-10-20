@@ -570,6 +570,20 @@ struct TestMatrix : CppUnit::TestFixture {
 		// no exception was thrown
 		CPPUNIT_ASSERT(false);
 	}
+	
+	void test_plus3 () {
+		Matrix<int> x(2, 2, 0);
+		Matrix<int> y(2, 7, 1);
+		
+		try{
+			x += y;
+		}catch(std::exception& e){
+			CPPUNIT_ASSERT(true);
+			return;
+		}
+		// no exception was thrown
+		CPPUNIT_ASSERT(false);
+	}
 
 
 	// ----------
@@ -600,18 +614,18 @@ struct TestMatrix : CppUnit::TestFixture {
 		Matrix<int> y;
 		Matrix<int> z;
 		
-		x *= 0;
-		CPPUNIT_ASSERT(x.eq(z));
 		x *= y;
 		CPPUNIT_ASSERT(x.eq(z));
 	}
 
 	void test_multiplies1 () {
-		Matrix<int> x(3, 5, 11);
-		Matrix<int> z(3, 5, 0);
+		const int innerD = 5;
+		Matrix<int> x(3, innerD);
+		Matrix<int> y(innerD, 0);
+		Matrix<int> z(3, 0);
 		
-		x *= 0;
-		//if(DEBUG)x.printMatrix();
+		x *= y;
+		// must return a 3x0
 		CPPUNIT_ASSERT(x.eq(z));
 	}
 
@@ -634,6 +648,30 @@ struct TestMatrix : CppUnit::TestFixture {
 		
 		x *= y;
 		//if(DEBUG)x.printMatrix();
+		CPPUNIT_ASSERT(x.eq(z));
+	}
+
+	void test_multiplies4 () {
+		Matrix<int> x(0, 0);
+		Matrix<int> y(1, 0);
+		
+		try{
+			x *= y;
+		}catch(std::exception& e){
+			CPPUNIT_ASSERT(true);
+			return;
+		}
+		// no exception was thrown
+		CPPUNIT_ASSERT(false);
+	}
+
+	void test_multiplies5 () {
+		const int innerD = 0;
+		Matrix<int> x(3, innerD);
+		Matrix<int> y(innerD, 0);
+		Matrix<int> z(3, 0);
+		
+		x *= y;
 		CPPUNIT_ASSERT(x.eq(z));
 	}
 
@@ -726,12 +764,15 @@ struct TestMatrix : CppUnit::TestFixture {
 	CPPUNIT_TEST(test_plus0);
 	CPPUNIT_TEST(test_plus1);
 	CPPUNIT_TEST(test_plus2);
+	CPPUNIT_TEST(test_plus3);
 	CPPUNIT_TEST(test_minus0);
 	CPPUNIT_TEST(test_minus1);
 	CPPUNIT_TEST(test_multiplies0);
 	CPPUNIT_TEST(test_multiplies1);
 	CPPUNIT_TEST(test_multiplies2);
 	CPPUNIT_TEST(test_multiplies3);
+	CPPUNIT_TEST(test_multiplies4);
+	CPPUNIT_TEST(test_multiplies5);
 	CPPUNIT_TEST(test_iterator);
 	CPPUNIT_TEST(test_const_iterator);
 	CPPUNIT_TEST(test_empty);
