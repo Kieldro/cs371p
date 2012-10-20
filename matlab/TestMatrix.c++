@@ -156,20 +156,25 @@ struct TestMatrix : CppUnit::TestFixture {
 	}
 	
 	void test_relEqual6 () {
-		Matrix<int>  x(5, 5);
-		Matrix<int>  y(5, 4);
-		
+		assert(testMethod());
+	}
+	
+	bool testMethod(){
+		Matrix<int> x(5, 5);
+		Matrix<int> y(5, 4);
+		//Matrix<bool> (*op)(const Matrix<int>&, const Matrix<int>&) = Matrix<int>::operator==;
+		//auto f= operator==;
 		try{
 			// exception must be thrown
-			x == y;
+			operator==(x, y);
 		}catch(exception& e){
-			CPPUNIT_ASSERT(true);
-			return;
+			return true;
 		}
-		CPPUNIT_ASSERT(false);
-	}
+		
+		return false;
+	 }
 
-	// --------------
+	// ---------
 	// test_less
 	void test_less0 () {
 		Matrix<int>  x;
