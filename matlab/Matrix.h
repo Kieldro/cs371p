@@ -56,6 +56,9 @@ class Matrix {
 		 * Compares each element of two equally sized matrices to check for equality.
 		 * The result of each pairwise operation is stored in a a boolean matrix
 		 * of the same size in the corresponding position.
+		 * @param lhs a matrix
+		 * @param rhs a matrix
+		 * @returns a boolean matrix that represents the results of lhs == rhs
 		 */
 		friend Matrix<bool> operator == (const Matrix& lhs, const Matrix& rhs) {
 			return relational(lhs, rhs, std::equal_to<T>());
@@ -67,6 +70,9 @@ class Matrix {
 		 * Compares each element of two equally sized matrices to check for inequality.
 		 * The result of each pairwise operation is stored in a a boolean matrix
 		 * of the same size in the corresponding position.
+		 * @param lhs a matrix
+		 * @param rhs a matrix
+		 * @returns a boolean matrix that represents the results of lhs != rhs
 		 */
 		friend Matrix<bool> operator != (const Matrix& lhs, const Matrix& rhs) {
 			return relational(lhs, rhs, std::not_equal_to<T>());
@@ -79,6 +85,9 @@ class Matrix {
 		 * matrix's element is less than the right matrix's element.
 		 * The result of each pairwise operation is stored in a a boolean matrix
 		 * of the same size in the corresponding position.
+		 * @param lhs a matrix
+		 * @param rhs a matrix
+		 * @returns a boolean matrix that represents the results of lhs < rhs
 		 */
 		friend Matrix<bool> operator < (const Matrix& lhs, const Matrix& rhs) {
 			return relational(lhs, rhs, std::less<T>());
@@ -91,6 +100,9 @@ class Matrix {
 		 * matrix's element is less than or equal to the right matrix's element.
 		 * The result of each pairwise operation is stored in a a boolean matrix
 		 * of the same size in the corresponding position.
+		 * @param lhs a matrix
+		 * @param rhs a matrix
+		 * @returns a boolean matrix that represents the results of lhs <= rhs
 		 */
 		friend Matrix<bool> operator <= (const Matrix& lhs, const Matrix& rhs) {
 			return relational(lhs, rhs, std::less_equal<T>());
@@ -103,6 +115,9 @@ class Matrix {
 		 * matrix's element is greater than the right matrix's element.
 		 * The result of each pairwise operation is stored in a a boolean matrix
 		 * of the same size in the corresponding position.
+		 * @param lhs a matrix
+		 * @param rhs a matrix
+		 * @returns a boolean matrix that represents the results of lhs > rhs
 		 */
 		friend Matrix<bool> operator > (const Matrix& lhs, const Matrix& rhs) {
 			return relational(lhs, rhs, std::greater<T>());
@@ -115,6 +130,9 @@ class Matrix {
 		 * matrix's element is greater than or equal to the right matrix's element.
 		 * The result of each pairwise operation is stored in a a boolean matrix
 		 * of the same size in the corresponding position.
+		 * @param lhs a matrix
+		 * @param rhs a matrix
+		 * @returns a boolean matrix that represents the results of lhs >= rhs
 		 */
 		friend Matrix<bool> operator >= (const Matrix& lhs, const Matrix& rhs) {
 			return relational(lhs, rhs, std::greater_equal<T>());
@@ -125,6 +143,10 @@ class Matrix {
 		/**
 		 * Compares matricies element by element, 
 		 * storing the result of the relational operator into the resulting matrix.
+		 * @param A a matrix
+		 * @param B a matrix
+		 * @bf a binary function
+		 * @returns a matrix with the results of each element of A and B applied to the function.
 		 */
 		template<typename BF>
 		static Matrix<bool> relational (const Matrix& A, const Matrix& B, BF bf) {
@@ -304,8 +326,8 @@ class Matrix {
 		}
 
 		/**
-		* Performs matrix multiplication (cross product) between an N x M matrix
-		* and an M x N matrix.
+		* Performs matrix multiplication (cross product) between an A x B matrix
+		* and an B x C matrix.
 		* Returns the resulting N x N matrix.
 		*/
 		Matrix& operator *= (const Matrix& rhs) {
