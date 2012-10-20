@@ -16,8 +16,13 @@
 // ------
 // concat
 /**
- * <your documentation>
+ * Horizontally concatinates two matrices. Given matrices X and Y
+ * with R rows, with respective collumns C1 and C2, the resulting
+ * matrix will be of size [R x C1+C2].
  * http://www.mathworks.com/help/matlab/ref/horzcat.html
+ * @param x a matrix of size C1 x R
+ * @param y a matrix of size C2 x R
+ * @return the horizontally concatinated matrix of size R x C1+C2
  */
 template <typename T>
 T horzcat (const T& x, const T& y) {
@@ -39,8 +44,13 @@ T horzcat (const T& x, const T& y) {
 }
 
 /**
- * <your documentation>
+ * Vertically concatinates two matrices. Given matrices X and Y
+ * with C collumns, with respective rows R1 and R2, the resulting
+ * matrix will be of the size [R1+R2 x C].
  * http://www.mathworks.com/help/matlab/ref/vertcat.html
+ * @param x a matrix of size R1 x C
+ * @param y a matrix of size R2 x C
+ * @return the vertically concatinated matrix of size R1+R2 x C
  */
 template <typename T>
 T vertcat (const T& x, const T& y) {
@@ -67,8 +77,10 @@ T vertcat (const T& x, const T& y) {
 // ----
 // diag
 /**
- * <your documentation>
+ * Given a matrix, returns the diagonal as a column vector.
  * http://www.mathworks.com/help/matlab/ref/diag.html
+ * @param x any matrix
+ * @return the diagonal of the matrix as a column vector
  */
 template <typename T>
 T diag (const T& x) {
@@ -91,6 +103,9 @@ T diag (const T& x) {
  * Matricies must be the same size.
  * Vectors must be trasposable to equal size.
  * http://www.mathworks.com/help/matlab/ref/dot.html
+ * @param x a matrix of size m x n
+ * @param y a matrix of size m x n
+ * @return the dot product of the two matrices
  */
 template <typename T>
 T dot (const T& x, const T& y) {
@@ -141,8 +156,12 @@ T dot (const T& x, const T& y) {
 // ---
 // eye
 /**
- * <your documentation>
+ * Creates an [r x c] Identity matrix. Essentially, 
+ * a matrix with 1's on the diagonals and 0's everywhere else.
  * http://www.mathworks.com/help/matlab/ref/eye.html
+ * @param r the number of rows
+ * @param c the number of columns
+ * @return an Identity matrix of size r x c
  */
 template <typename T>
 T eye (std::size_t r, std::size_t c) {
@@ -172,8 +191,11 @@ T linsolve (const T& x, const T& y) {
 // ----
 // ones
 /**
- * <your documentation>
+ * Creates an r x c matrix filled with 1's.
  * http://www.mathworks.com/help/matlab/ref/ones.html
+ * @param r the number of rows
+ * @param c the number of columns
+ * @return a matrix filled with 1's of size r x c
  */
 template <typename T>
 T ones (std::size_t r, std::size_t c) {
@@ -184,8 +206,11 @@ T ones (std::size_t r, std::size_t c) {
 // ----
 // rand
 /**
- * Fills r x c matrix with random values (0, 100) 
+ * Fills r x c matrix with random values (0, 100).
  * http://www.mathworks.com/help/matlab/ref/rand.html
+ * @param r the number of rows
+ * @param c the number of columns
+ * @return a randomly generated r x c matrix.
  */
 template <typename T>
 T rand (std::size_t r, std::size_t c) {
@@ -201,7 +226,9 @@ T rand (std::size_t r, std::size_t c) {
 // ---------
 // transpose
 /**
- * <your documentation>
+ * Transposes the given matrix.
+ * @param x any matrix
+ * @return a new matrix equal to the given matrix transposed.
  * http://www.mathworks.com/help/matlab/ref/transpose.html
  */
 template <typename T>
@@ -221,8 +248,11 @@ T transpose (const T& x) {
 // ----
 // tril
 /**
- * <your documentation>
+ * Returns the lower triangular part of a given matrix.
+ * All other elements are set to 0.
  * http://www.mathworks.com/help/matlab/ref/tril.html
+ * @param x any matrix
+ * @return the lower triangular part of the matrix
  */
 template <typename T>
 T tril (const T& x) {
@@ -240,7 +270,10 @@ T tril (const T& x) {
 // ----
 // triu
 /**
- * <your documentation>
+ * Returns the upper triangular part of a given matrix.
+ * All other elements are set to 0.
+ * @param x any matrix
+ * @return the upper triangular part of the matrix
  * http://www.mathworks.com/help/matlab/ref/triu.html
  */
 template <typename T>
@@ -259,8 +292,11 @@ T triu (const T& x) {
 // -----
 // zeros
 /**
- * <your documentation>
+ * Creates an r x c matrix filled with 0's.
  * http://www.mathworks.com/help/matlab/ref/zeros.html
+ * @param r the number of rows
+ * @param c the number of collumns
+ * @return a matrix filled with 0's of size r x c
  */
 template <typename T>
 T zeros (std::size_t r, std::size_t c) {
