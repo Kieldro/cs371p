@@ -14,12 +14,13 @@ test: $(TEST)
 	clear
 	$(CC) $(CPPFLAGS) $(TEST) -lcppunit -o $(TEST).app
 	#valgrind \
-	./$(TEST).app > $(OUTFILE) 2>&1; cat $(OUTFILE)
+	./$(TEST).app 2>&1 | tee $(OUTFILE)
 
 testlab: $(TESTLAB)
 	clear
 	$(CC) $(CPPFLAGS) $(TESTLAB) -lcppunit -o $(TESTLAB).app
-	valgrind ./$(TESTLAB).app > TestMatlab.out 2>&1; cat TestMatlab.out
+	#valgrind \
+	./$(TESTLAB).app 2>&1 | tee TestMatlab.out
 
 log:
 	git log > Matlab.log
