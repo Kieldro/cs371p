@@ -4,6 +4,7 @@ CC = g++
 CPPFLAGS = -std=c++0x -pedantic -ldl -Wall
 TEST = TestMatrix.c++
 TESTLAB = TestMatlab.c++
+OUTFILE = TestMatrix.out
 
 all: run log doxygen zip clean
 
@@ -12,8 +13,8 @@ run: test testlab
 test: $(TEST)
 	clear
 	$(CC) $(CPPFLAGS) $(TEST) -lcppunit -o $(TEST).app
-	valgrind \
-	./$(TEST).app > TestMatrix.out 2>&1; cat TestMatrix.out
+	#valgrind \
+	./$(TEST).app > $(OUTFILE) 2>&1; cat $(OUTFILE)
 
 testlab: $(TESTLAB)
 	clear
@@ -36,9 +37,9 @@ zip:
 	Matlab.log $(TEST) $(TESTLAB)\
 	TestMatlab.out TestMatrix.out
 
-# turnin --submit reza cs371ppj4 Matlab.zip
-# turnin --list   reza cs371ppj4
-# turnin --verify reza cs371ppj4
+# turnin --submit dmj cs371ppj5 Matlab.zip
+# turnin --list   dmj cs371ppj5
+# turnin --verify dmj cs371ppj5
 
 clean:
 	rm *.app

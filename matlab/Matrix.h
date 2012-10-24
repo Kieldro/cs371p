@@ -489,7 +489,7 @@ class Matrix {
 		const_iterator begin () const {
 			return const_cast<Matrix*>(this)->begin();
 		}
-
+		
 		// ---
 		// end
 		/**
