@@ -1,5 +1,5 @@
-Project #5: 
-Date: Wed, 07 Nov 2012
+Project #5: Darwin
+Date: Wed, 7 Nov 2012
 
 Course Name: cs371p
 Unique: 53060
@@ -10,6 +10,7 @@ EID: ib
 E-mail: kieldro@gmail.com
 Estimated number of hours: 20
 Actual    number of hours: 0
+5:30p - 
 
 Partner First Name: Jonathan
 Partner Last Name: Chen
@@ -23,7 +24,6 @@ GitHub ID: kieldro
 GitHub Repository Name: cs371p
 
 Comments:
-Run using -std=c++0x as on the Makefile on my repo
 
 ----------------
 Pair Programming
