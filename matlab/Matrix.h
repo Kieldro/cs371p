@@ -7,7 +7,7 @@
 #ifndef Matrix_h
 #define Matrix_h
 
-#define DEBUG true
+#define DEBUG false
 
 // --------
 // includes

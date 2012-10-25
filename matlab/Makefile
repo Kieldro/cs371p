@@ -12,13 +12,13 @@ run: test testlab
 test: $(TEST)
 	clear
 	$(CC) $(CPPFLAGS) $(TEST) -lcppunit -o $(TEST).app
-	#valgrind \
+	valgrind \
 	./$(TEST).app 2>&1 | tee $(OUTFILE)
 
 testlab: $(TESTLAB)
 	clear
 	$(CC) $(CPPFLAGS) $(TESTLAB) -lcppunit -o $(TESTLAB).app
-	#valgrind \
+	valgrind \
 	./$(TESTLAB).app 2>&1 | tee TestMatlab.out
 
 log:
@@ -33,8 +33,8 @@ doxygen:
 	# GENERATE_LATEX		= NO
 
 zip:
-	zip Matlab README.txt html/* Matrix.h Matlab.h\
-	Matlab.log $(TEST) $(TESTLAB)\
+	zip Matlab README.txt html/* Matrix.h Matlab.h \
+	Matlab.log $(TEST) $(TESTLAB) \
 	TestMatlab.out TestMatrix.out
 
 # turnin --submit reza cs371ppj4 Matlab.zip

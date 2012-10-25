@@ -1,8 +1,8 @@
-==6962== Memcheck, a memory error detector
-==6962== Copyright (C) 2002-2011, and GNU GPL'd, by Julian Seward et al.
-==6962== Using Valgrind-3.7.0 and LibVEX; rerun with -h for copyright info
-==6962== Command: ./TestMatlab.c++.app
-==6962== 
+==18534== Memcheck, a memory error detector
+==18534== Copyright (C) 2002-2011, and GNU GPL'd, by Julian Seward et al.
+==18534== Using Valgrind-3.7.0 and LibVEX; rerun with -h for copyright info
+==18534== Command: ./TestMatlab.c++.app
+==18534== 
 TestMatlab.c++
 ...........................
 
@@ -11,18 +11,18 @@ OK (27 tests)
 
 
 Done.
-==6962== 
-==6962== HEAP SUMMARY:
-==6962==     in use at exit: 122,880 bytes in 6 blocks
-==6962==   total heap usage: 1,018 allocs, 1,012 frees, 213,364 bytes allocated
-==6962== 
-==6962== LEAK SUMMARY:
-==6962==    definitely lost: 0 bytes in 0 blocks
-==6962==    indirectly lost: 0 bytes in 0 blocks
-==6962==      possibly lost: 0 bytes in 0 blocks
-==6962==    still reachable: 122,880 bytes in 6 blocks
-==6962==         suppressed: 0 bytes in 0 blocks
-==6962== Rerun with --leak-check=full to see details of leaked memory
-==6962== 
-==6962== For counts of detected and suppressed errors, rerun with: -v
-==6962== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 4 from 4)
+==18534== 
+==18534== HEAP SUMMARY:
+==18534==     in use at exit: 122,880 bytes in 6 blocks
+==18534==   total heap usage: 922 allocs, 916 frees, 211,261 bytes allocated
+==18534== 
+==18534== LEAK SUMMARY:
+==18534==    definitely lost: 0 bytes in 0 blocks
+==18534==    indirectly lost: 0 bytes in 0 blocks
+==18534==      possibly lost: 0 bytes in 0 blocks
+==18534==    still reachable: 122,880 bytes in 6 blocks
+==18534==         suppressed: 0 bytes in 0 blocks
+==18534== Rerun with --leak-check=full to see details of leaked memory
+==18534== 
+==18534== For counts of detected and suppressed errors, rerun with: -v
+==18534== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 2 from 2)

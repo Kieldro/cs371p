@@ -1,3 +1,21 @@
+commit def43765831e0ef05cca5b7e438ea7b1dbbfa6a7
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Oct 24 15:04:48 2012 -0500
+
+    Makes improvement to Makefiles.
+
+commit 71ec87c0dfb86b17bb2bb0b19fc3a7cffea3b912
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Oct 24 11:49:58 2012 -0500
+
+    Project 5 boilerplate files added.
+
+commit bf152263bad2cc9574f9c3ab0fa9e65273fabe7f
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Sat Oct 20 16:24:05 2012 -0500
+
+    Turnin version
+
 commit 4f00d56e293a6acc2ef1882966ff0db27124a543
 Merge: 704c7f3 18a6552
 Author: Ian Buitrago <kieldro@gmail.com>
