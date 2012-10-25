@@ -34,8 +34,8 @@ doxygen:
 	# GENERATE_LATEX		= NO
 
 zip:
-	zip Matlab README.txt html/* Matrix.h Matlab.h\
-	Matlab.log $(TEST) $(TESTLAB)\
+	zip Matlab README.txt html/* Matrix.h Matlab.h \
+	Matlab.log $(TEST) $(TESTLAB) \
 	TestMatlab.out TestMatrix.out
 
 # turnin --submit dmj cs371ppj5 Matlab.zip
