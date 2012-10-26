@@ -53,7 +53,7 @@ struct TestDarwin : CppUnit::TestFixture {
 		Creature x = Hopper('n');
 		
 		g.place(x, 1, 1);
-		
+		g.print();
 		g.runTurn();
 		g.print();
 		g.runTurn();

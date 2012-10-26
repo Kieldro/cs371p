@@ -1,19 +1,20 @@
 TestDarwin.c++
-....BOOM!: h
-
-Printing 3 x 3 grid:
-Turn = 1
+....Turn = 0
   012
 0 ...
-1 ..h
+1 .h.
 2 ...
 
+Turn = 1
+  012
+0 .h.
+1 ...
+2 ...
 
-Printing 3 x 3 grid:
 Turn = 2
   012
-0 ...
-1 ..h
+0 .h.
+1 ...
 2 ...
 
 

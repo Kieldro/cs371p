@@ -36,11 +36,95 @@ class Creature{
 		{
 			
 		}
+};
 
+class Grid{
+	private:
+	vector< vector<Creature> > _g;
 	
-	void hop(){
+	
+	public:
+		unsigned turn;
 		
-		if(DEBUG)cerr << "BOOM!: " << endl;
+	Grid(int rows, int cols)
+	: _g(rows, vector<Creature>(cols)), turn(0)
+	{
+		
+		
+	}
+	
+	void place(const Creature &x, int r, int c){
+		_g[r][c] = x;
+	}
+	
+	void runTurn(){
+		
+		for(int r = 0; r < nRows(); ++r)
+			for(int c = 0; c < nCols() and _g[r][c].turn != turn; ++c){
+				_g[r][c].turn = turn;		// creature is taking it's turn
+				if(_g[r][c].sigil != '.'){
+					// hop
+					hop(r, c);
+				}
+			}
+		
+		++turn;
+	}
+	
+	void hop(int r, int c){
+		//if(DEBUG)cerr << "BOOM!: " << _g[r][c] << endl;
+		Creature& creature = _g[r][c];
+		creature.turn = turn;
+		
+		switch(creature.direction){
+			case 'e':
+				if(++c >= nCols()) return;		// do nothing at wall
+				break;
+			case 'w':
+				if(--c < 0) return;
+				break;
+			case 'n':
+				if(--r < 0) return;
+				break;
+			case 's':
+				if(++r >= nRows()) return;
+		}
+		
+		// inbounds and space empty
+		if(_g[r][c].sigil == '.'){
+			_g[r][c] = creature;		// move to next space
+			creature = Creature();		// set to empty
+		}
+		
+		
+	}
+	
+	void print(){
+		//cout << "\nPrinting " << nRows() << " x " << nCols() << " grid:" << endl;
+		
+		cout << "Turn = " << turn << endl;
+		
+		
+		cout << "  ";
+		for(int c = 0; c < nCols(); ++c)
+			cout << c % 10;
+		cout << endl;
+		for(int r = 0; r < nRows(); ++r){
+			cout << r % 10 << " ";
+			for(int c = 0; c < nCols(); ++c){
+				cout <<  _g[r][c];}
+			cout << endl;
+		}
+		
+		cout << endl;
+	}
+	
+	int nRows() const{
+		return _g.size();
+	}
+	
+	int nCols() const{
+		return _g.size() ? _g[0].size() : 0;
 	}
 };
 
@@ -107,73 +191,6 @@ class Rover : public Creature{
 	Rover(){sigil = 'r';}
 };
 
-class Grid{
-	private:
-	vector< vector<Creature> > _g;
-	
-	
-	public:
-		unsigned turn;
-		
-	Grid(int rows, int cols)
-	: _g(rows, vector<Creature>(cols)), turn(0)
-	{
-		
-		
-	}
-	
-	void place(const Creature &x, int r, int c){
-		_g[r][c] = x;
-	}
-	
-	void runTurn(){
-		
-		for(int r = 0; r < nRows(); ++r)
-			for(int c = 0; c < nCols() and _g[r][c].turn != turn; ++c){
-				_g[r][c].turn = turn;		// creature is taking it's turn
-				if(_g[r][c].sigil != '.'){
-					if(DEBUG)cerr << "BOOM!: " << _g[r][c] << endl;
-					// hop
-					if(c+1 < nCols() and _g[r][c+1].sigil == '.'){
-						_g[r][c].turn = turn;
-						_g[r][c+1] = _g[r][c];
-						_g[r][c] = Creature();
-					}
-				}
-			}
-		
-		++turn;
-	}
-	
-	void print(){
-		cout << "\nPrinting " << nRows() << " x " << nCols() << " grid:" << endl;
-		
-		cout << "Turn = " << turn << endl;
-		
-		
-		cout << "  ";
-		for(int c = 0; c < nCols(); ++c)
-			cout << c % 10;
-		cout << endl;
-		for(int r = 0; r < nRows(); ++r){
-			cout << r % 10 << " ";
-			for(int c = 0; c < nCols(); ++c){
-				cout <<  _g[r][c];}
-			cout << endl;
-		}
-		
-		cout << endl;
-	}
-	
-	int nRows() const{
-		return _g.size();
-	}
-	
-	int nCols() const{
-		return _g.size() ? _g[0].size() : 0;
-	}
-};
-
 /*
 hop 	The creature moves forward as long as the square it is facing is empty. If moving forward would cause the creature to land on top of another creature or a wall, the hop instruction does nothing.
 left 	The creature turns left 90 degrees to face in a new direction.
@@ -186,4 +203,5 @@ ifenemy n 	If the square the creature is facing is occupied by a creature of an 
 ifrandom n 	In order to make it possible to write some creatures capable of exercising what might be called the rudiments of "free will", this instruction jumps to step n half the time and continues with the next instruction the other half of the time.
 go n 	This instruction always jumps to step n, independent of any condition.
 */
+
 #endif // Darwin_h
