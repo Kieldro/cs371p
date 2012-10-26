@@ -9,15 +9,16 @@ Last Name: Buitrago
 EID: ib
 E-mail: kieldro@gmail.com
 Estimated number of hours: 20
-Actual    number of hours: 0
-5:30p - 
+Actual    number of hours: 4
+5:30p - 630
+1p - 3p
 
 Partner First Name: Jonathan
 Partner Last Name: Chen
 Partner EID: 
 Partner E-mail: jontitan@gmail.com
-Partner Estimated number of hours: 
-Partner Actual    number of hours: 0
+Partner Estimated number of hours: 20
+Partner Actual    number of hours: 4
 
 Turnin CS Username: keo
 GitHub ID: kieldro

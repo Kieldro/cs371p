@@ -30,18 +30,30 @@ class Creature{
 		char sigil;
 		char direction;
 		unsigned turn;
+		vector<int> program;
 		
 		Creature()
-		: i(5), sigil('.'), direction('-')
+		: i(5), sigil('.'), direction('-'), program(0)
 		{
+			
+		}
+		
+		void execute(){
+			
+			
+			
+		}
+		
+		void test(){
+			
+			if(DEBUG)cerr << "BOOM!: " << *this << endl;
 			
 		}
 };
 
 class Grid{
 	private:
-	vector< vector<Creature> > _g;
-	
+		vector< vector<Creature> > _g;
 	
 	public:
 		unsigned turn;
@@ -58,23 +70,18 @@ class Grid{
 	}
 	
 	void runTurn(){
-		
 		for(int r = 0; r < nRows(); ++r)
-			for(int c = 0; c < nCols() and _g[r][c].turn != turn; ++c){
-				_g[r][c].turn = turn;		// creature is taking it's turn
-				if(_g[r][c].sigil != '.'){
-					// hop
-					hop(r, c);
-				}
+			for(int c = 0; c < nCols() and _g[r][c].sigil != '.'; ++c){
+				_g[r][c].turn = turn;		// using up turn
+				hop(r, c);
 			}
 		
 		++turn;
 	}
 	
 	void hop(int r, int c){
-		//if(DEBUG)cerr << "BOOM!: " << _g[r][c] << endl;
 		Creature& creature = _g[r][c];
-		creature.turn = turn;
+		//creature.turn = turn;		// used up turn
 		
 		switch(creature.direction){
 			case 'e':
@@ -142,7 +149,7 @@ class Hopper : public Creature{
 	{
 		sigil = 'h';
 		direction = d;
-		
+		turn = 0;
 	}
 };
 
