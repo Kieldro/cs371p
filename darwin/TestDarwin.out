@@ -1,5 +1,13 @@
 TestDarwin.c++
 .
+Printing 5 x 5 grid:
+CCCCC
+CCCCC
+CCCCC
+CCCCC
+CCCCC
+
+
 
 
 OK (1 tests)

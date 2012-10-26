@@ -17,7 +17,10 @@
 struct TestDarwin : CppUnit::TestFixture {
 	// ----------
 	// test_zeros
-	void test_zeros () {
+	void testGrid0 () {
+		Grid g(5, 5);
+		
+		g.print();
 		CPPUNIT_ASSERT(true);
 	}
 
@@ -25,7 +28,7 @@ struct TestDarwin : CppUnit::TestFixture {
 	// suite
 	CPPUNIT_TEST_SUITE(TestDarwin);
 	
-	CPPUNIT_TEST(test_zeros);
+	CPPUNIT_TEST(testGrid0);
 	
 	CPPUNIT_TEST_SUITE_END();
 };

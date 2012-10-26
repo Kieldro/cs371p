@@ -22,46 +22,6 @@ int main () {
 	using namespace std;
 	ios_base::sync_with_stdio(false);	// turn off synchronization with C I/O
 
-	// ----
-	// food
-	/*
-	 0: left
-	 1: go 0
-	*/
-	 
-	// ------
-	// hopper
-	/*
-	 0: hop
-	 1: go 0
-	*/
-
-	// -----
-	// rover
-	/*
-	 0: if_enemy 9
-	 1: if_empty 7
-	 2: if_random 5
-	 3: left
-	 4: go 0
-	 5: right
-	 6: go 0
-	 7: hop
-	 8: go 0
-	 9: infect
-	10: go 0
-	*/
-
-	// ----
-	// trap
-	/*
-	 0: if_enemy 3
-	 1: left
-	 2: go 0
-	 3: infect
-	 4: go 0
-	*/
-
 	// ----------
 	// darwin 8x8
 	try {
