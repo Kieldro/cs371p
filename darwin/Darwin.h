@@ -18,6 +18,17 @@ using std::cout;
 using std::cerr;
 using std::endl;
 using std::string;
+using std::tuple;
+
+struct Instruction{
+	string op;
+	int line;
+	Instruction(string o, int l){
+		op = o;
+		line = l;
+	}
+};
+
 
 class Creature{
 	friend std::ostream& operator<<(std::ostream &strm, const Creature &c) {
@@ -30,10 +41,10 @@ class Creature{
 		char sigil;
 		char direction;
 		unsigned turn;
-		vector<int> program;
+		vector<Instruction> program;
 		
 		Creature()
-		: i(5), sigil('.'), direction('-'), program(0)
+		: i(5), sigil('.'), direction('-')
 		{
 			
 		}
@@ -150,11 +161,13 @@ class Hopper : public Creature{
 		sigil = 'h';
 		direction = d;
 		turn = 0;
+		program.push_back(Instruction("hop", -1));
+		program.push_back(Instruction("go" , 0));
 	}
 };
 
 // ----
-// food
+// foodb
 /*
  0: left
  1: go 0

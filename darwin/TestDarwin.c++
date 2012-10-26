@@ -74,6 +74,16 @@ struct TestDarwin : CppUnit::TestFixture {
 		g.print();
 		CPPUNIT_ASSERT(true);
 	}
+	
+	// --------
+	// testCreatureProgram
+	void testCreatureProgram0 () {
+		Grid g(3, 3);
+		Creature x = Hopper('n');
+		
+		CPPUNIT_ASSERT(x.program[0].op == "hop");
+		CPPUNIT_ASSERT(x.program[0].line == -1);
+	}
 
 	// -----
 	// suite
@@ -84,6 +94,7 @@ struct TestDarwin : CppUnit::TestFixture {
 	CPPUNIT_TEST(testHopper0);
 	CPPUNIT_TEST(testrunTurn0);
 	CPPUNIT_TEST(testrunTurn1);
+	CPPUNIT_TEST(testCreatureProgram0);
 	
 	CPPUNIT_TEST_SUITE_END();
 };
