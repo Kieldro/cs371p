@@ -19,20 +19,29 @@ using std::cerr;
 using std::endl;
 using std::string;
 
-// abstract class
 class Creature{
-	int i;
-	const static char sigil = 'C';
-
 	friend std::ostream& operator<<(std::ostream &strm, const Creature &c) {
 		return strm << c.sigil;
 	}
+	private:
+		int i;
+	
+	public:
+		char sigil;
+		char direction;
+		
+		Creature()
+		: i(5), sigil('.')
+		{
+			
+			
+		}
+
 	
 	void hop(){
 		
-		;
+		if(DEBUG)cerr << "BOOM!: " << endl;
 	}
-	
 };
 
 // ------
@@ -41,9 +50,15 @@ class Creature{
  0: hop
  1: go 0
 */
-class Hopper : Creature{
+class Hopper : public Creature{
 	
-	
+	public:
+	Hopper()
+	//: sigil('H')
+	{
+		sigil = 'H';
+		
+	}
 };
 
 class Grid{
@@ -57,6 +72,10 @@ class Grid{
 	{
 		
 		
+	}
+	
+	void place(const Creature &x, int r, int c){
+		_g[r][c] = x;
 	}
 	
 	void print(){

@@ -1,16 +1,24 @@
 TestDarwin.c++
 .
 Printing 5 x 5 grid:
-CCCCC
-CCCCC
-CCCCC
-CCCCC
-CCCCC
+.....
+.....
+.....
+.....
+.....
+
+.
+Printing 5 x 5 grid:
+.....
+.....
+..H..
+.....
+.....
+
+.
 
 
-
-
-OK (1 tests)
+OK (3 tests)
 
 
 Done.
