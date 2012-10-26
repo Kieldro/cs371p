@@ -56,7 +56,7 @@ class Hopper : public Creature{
 	Hopper()
 	//: sigil('H')
 	{
-		sigil = 'H';
+		sigil = 'h';
 		
 	}
 };
@@ -80,6 +80,9 @@ class Grid{
 	
 	void print(){
 		cout << "\nPrinting " << nRows() << " x " << nCols() << " grid:" << endl;
+		
+		for(int c = 0; c < nCols(); ++c)
+			;
 		
 		for(int r = 0; r < nRows(); ++r){
 			for(int c = 0; c < nCols(); ++c){
