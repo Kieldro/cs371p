@@ -29,11 +29,11 @@ class Creature{
 	public:
 		char sigil;
 		char direction;
+		unsigned turn;
 		
 		Creature()
-		: i(5), sigil('.')
+		: i(5), sigil('.'), direction('-')
 		{
-			
 			
 		}
 
@@ -53,12 +53,58 @@ class Creature{
 class Hopper : public Creature{
 	
 	public:
-	Hopper()
+	Hopper(char d)
 	//: sigil('H')
 	{
 		sigil = 'h';
+		direction = d;
 		
 	}
+};
+
+// ----
+// food
+/*
+ 0: left
+ 1: go 0
+*/
+class Food : public Creature{
+	public:
+	Food(){sigil = 'f';}
+};
+
+// ----
+// trap
+/*
+ 0: if_enemy 3
+ 1: left
+ 2: go 0
+ 3: infect
+ 4: go 0
+*/
+class Trap : public Creature{
+	public:
+	Trap(){sigil = 't';}
+};
+
+// -----
+// rover
+/*
+ 0: if_enemy 9
+ 1: if_empty 7
+ 2: if_random 5
+ 3: left
+ 4: go 0
+ 5: right
+ 6: go 0
+ 7: hop
+ 8: go 0
+ 9: infect
+10: go 0
+*/
+class Rover : public Creature{
+	public:
+	Rover(){sigil = 'r';}
 };
 
 class Grid{
@@ -67,8 +113,10 @@ class Grid{
 	
 	
 	public:
+		unsigned turn;
+		
 	Grid(int rows, int cols)
-	: _g(rows, vector<Creature>(cols))
+	: _g(rows, vector<Creature>(cols)), turn(0)
 	{
 		
 		
@@ -78,13 +126,37 @@ class Grid{
 		_g[r][c] = x;
 	}
 	
+	void runTurn(){
+		
+		for(int r = 0; r < nRows(); ++r)
+			for(int c = 0; c < nCols() and _g[r][c].turn != turn; ++c){
+				_g[r][c].turn = turn;		// creature is taking it's turn
+				if(_g[r][c].sigil != '.'){
+					if(DEBUG)cerr << "BOOM!: " << _g[r][c] << endl;
+					// hop
+					if(c+1 < nCols() and _g[r][c+1].sigil == '.'){
+						_g[r][c].turn = turn;
+						_g[r][c+1] = _g[r][c];
+						_g[r][c] = Creature();
+					}
+				}
+			}
+		
+		++turn;
+	}
+	
 	void print(){
 		cout << "\nPrinting " << nRows() << " x " << nCols() << " grid:" << endl;
 		
-		for(int c = 0; c < nCols(); ++c)
-			;
+		cout << "Turn = " << turn << endl;
 		
+		
+		cout << "  ";
+		for(int c = 0; c < nCols(); ++c)
+			cout << c % 10;
+		cout << endl;
 		for(int r = 0; r < nRows(); ++r){
+			cout << r % 10 << " ";
 			for(int c = 0; c < nCols(); ++c){
 				cout <<  _g[r][c];}
 			cout << endl;
@@ -102,41 +174,6 @@ class Grid{
 	}
 };
 
-
-// ----
-// food
-/*
- 0: left
- 1: go 0
-*/
- 
-
-// -----
-// rover
-/*
- 0: if_enemy 9
- 1: if_empty 7
- 2: if_random 5
- 3: left
- 4: go 0
- 5: right
- 6: go 0
- 7: hop
- 8: go 0
- 9: infect
-10: go 0
-*/
-
-// ----
-// trap
-/*
- 0: if_enemy 3
- 1: left
- 2: go 0
- 3: infect
- 4: go 0
-*/
- 
 /*
 hop 	The creature moves forward as long as the square it is facing is empty. If moving forward would cause the creature to land on top of another creature or a wall, the hop instruction does nothing.
 left 	The creature turns left 90 degrees to face in a new direction.
