@@ -11,6 +11,7 @@ To run the program:
 // --------
 // includes
 #include <cassert>		// assert
+#include <cstdlib>		// rand, srand
 #include <iostream>		// cout, endl
 #include <stdexcept>	// invalid_argument, out_of_range
 
@@ -67,6 +68,7 @@ int main () {
 	// without best
 	try {
 		cout << "*** Darwin 72x72 without Best ***" << endl;
+		srand(0);
 		/*
 		Randomly place the following creatures facing randomly.
 		Call rand(), mod it with 5184 (72x72), and use that for the position
@@ -92,6 +94,7 @@ int main () {
 	// with best
 	try {
 		cout << "*** Darwin 72x72 with Best ***" << endl;
+		srand(0);
 		/*
 		Randomly place the following creatures facing randomly.
 		Call rand(), mod it with 5184 (72x72), and use that for the position
