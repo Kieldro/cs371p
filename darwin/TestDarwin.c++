@@ -21,7 +21,6 @@ struct TestDarwin : CppUnit::TestFixture {
 		Grid g(2, 2);
 		
 		//g.print();
-		CPPUNIT_ASSERT(true);
 	}
 	
 	// --------
@@ -32,7 +31,6 @@ struct TestDarwin : CppUnit::TestFixture {
 		Hopper h('e', 0, 1, NULL);
 		//h.test();
 		//if(DEBUG)cerr << "BOOM!: " << h << endl;
-		CPPUNIT_ASSERT(true);
 	}
 	
 	// --------
@@ -44,24 +42,19 @@ struct TestDarwin : CppUnit::TestFixture {
 		g.place(HOPPER, 'n', 1, 1);
 		
 		//g.print();
-		CPPUNIT_ASSERT(true);
 	}
-/*	
+	
 	// --------
-	// testrunTurn
-	void testrunTurn0 () {
+	// testRunTurn
+	void testRunTurn0 () {
 		Grid g(3, 3);
-		Creature x = Hopper('n', 0, 1, &g);
-		g.place(x, 1, 1);
+		g.place(HOPPER, 'n', 0, 1);
 		
 		g.print();
 		g.runTurn();
 		g.print();
-		g.runTurn();
-		g.print();
-		CPPUNIT_ASSERT(true);
 	}
-	void testrunTurn1 () {
+/*	void testRunTurn1 () {
 		Grid g(3, 3);
 		Creature x = Hopper('n');
 		g.place(x, 1, 1);
@@ -72,7 +65,15 @@ struct TestDarwin : CppUnit::TestFixture {
 		g.print();
 		g.runTurn();
 		g.print();
-		CPPUNIT_ASSERT(true);
+	}
+	
+	// --------
+	// testSimulate
+	void testSimulate0 () {
+		Grid g(3, 3);
+		g.place(HOPPER, 'n', 0, 1);
+		
+		g.simulate(2, 1);
 	}
 	
 	// --------
@@ -92,9 +93,9 @@ struct TestDarwin : CppUnit::TestFixture {
 	CPPUNIT_TEST(testGrid0);
 	CPPUNIT_TEST(testPlace0);
 	CPPUNIT_TEST(testHopper0);
-//	CPPUNIT_TEST(testrunTurn0);
-/*	CPPUNIT_TEST(testrunTurn0);
-	CPPUNIT_TEST(testrunTurn1);
+//	CPPUNIT_TEST(testRunTurn0);
+/*	CPPUNIT_TEST(testRunTurn0);
+	CPPUNIT_TEST(testRunTurn1);
 	CPPUNIT_TEST(testCreatureProgram0);
 	*/
 	CPPUNIT_TEST_SUITE_END();

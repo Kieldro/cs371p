@@ -97,40 +97,43 @@ class Creature{
 			
 		}
 		
-		void hop(){
-			Grid& g = *grid;
-			int r = row, c = col;
-			++turn;		// used up turn
-			
-			switch(direction){
-				case 'e':
-					++c;
-					if(c >= g.nCols()) return;		// do nothing at wall
-					break;
-				case 'w':
-					--c;
-					if(c < 0) return;
-					break;
-				case 'n':
-					--r;
-					if(r < 0) return;
-					break;
-				case 's':
-					++r;
-					if(r >= g.nRows()) return;
-			}
-			// inbounds and space empty
-			if(g._g[r][c].sigil == '.'){
-				g._g[r][c] = *this;		// move to next space
-				g._g[row][col] = Creature();		// set to empty
-				row = r;
-				col = c;
-			}
-		}
+		void hop();
+		
 		friend std::ostream& operator<<(std::ostream &strm, const Creature &c) {
 			return strm << c.sigil;
 		}
 };
+
+void Creature::hop(){
+	Grid& g = *grid;
+	int r = row, c = col;
+	++turn;		// used up turn
+	
+	switch(direction){
+		case 'e':
+			++c;
+			if(c >= g.nCols()) return;		// do nothing at wall
+			break;
+		case 'w':
+			--c;
+			if(c < 0) return;
+			break;
+		case 'n':
+			--r;
+			if(r < 0) return;
+			break;
+		case 's':
+			++r;
+			if(r >= g.nRows()) return;
+	}
+	// inbounds and space empty
+	if(g._g[r][c].sigil == '.'){
+		g._g[r][c] = *this;		// move to next space
+		g._g[row][col] = Creature();		// set to empty
+		row = r;
+		col = c;
+	}
+}
 
 // ------
 // hopper
@@ -196,8 +199,8 @@ class Rover : public Creature{
 	Rover(char d){sigil = 'r';}
 };
 
-
-
+// --------------
+// Grid method definitions
 Grid::Grid(int rows, int cols)
 : _g(rows, vector<Creature>(cols)), turn(0)
 {
