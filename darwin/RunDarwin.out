@@ -1,6 +1,4 @@
 *** Darwin 8x8 ***
-
-Printing 8 x 8 grid:
 Turn = 0
   01234567
 0 f.......
@@ -12,8 +10,6 @@ Turn = 0
 6 ........
 7 .......f
 
-
-Printing 8 x 8 grid:
 Turn = 1
   01234567
 0 f.......
@@ -25,8 +21,6 @@ Turn = 1
 6 ........
 7 .......f
 
-
-Printing 8 x 8 grid:
 Turn = 2
   01234567
 0 f.......
@@ -38,8 +32,6 @@ Turn = 2
 6 ........
 7 .......f
 
-
-Printing 8 x 8 grid:
 Turn = 3
   01234567
 0 f.......
@@ -51,8 +43,6 @@ Turn = 3
 6 ........
 7 .......f
 
-
-Printing 8 x 8 grid:
 Turn = 4
   01234567
 0 f.......
@@ -64,8 +54,6 @@ Turn = 4
 6 ........
 7 .......f
 
-
-Printing 8 x 8 grid:
 Turn = 5
   01234567
 0 f.......

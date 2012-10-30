@@ -81,8 +81,8 @@ struct TestDarwin : CppUnit::TestFixture {
 		Grid g(3, 3);
 		Creature x = Hopper('n');
 		
-		CPPUNIT_ASSERT(x.program[0].op == "hop");
-		CPPUNIT_ASSERT(x.program[0].line == -1);
+		//CPPUNIT_ASSERT(x.program[0].op == "hop");
+		//CPPUNIT_ASSERT(x.program[0].line == -1);
 	}
 
 	// -----

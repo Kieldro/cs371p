@@ -46,18 +46,14 @@ int main () {
 		g.place(Hopper('w'), 4, 3);
 		g.place(Food  ('n'), 7, 7);
 		
-		g.print();
-		for(int i = 0; i < 5; ++i){
-			g.runTurn();
-			g.print();
-		}
+		g.simulate(5, 1);
 		
 		}
 	catch (const invalid_argument&) {
 		assert(false);}
 	catch (const out_of_range&) {
 		assert(false);}
-
+		
 	// ----------
 	// darwin 7x9
 	try {
@@ -71,6 +67,14 @@ int main () {
 		Simulate 5 moves.
 		Print every grid.
 		*/
+		/*Grid g(7, 9);
+		g.place(Trap  ('s'), 0, 0);
+		g.place(Hopper('e'), 3, 2);
+		g.place(Rover ('n'), 5, 4);
+		g.place(Trap  ('w'), 6, 8);
+		
+		g.run(5, 1);*/
+		
 		}
 	catch (const invalid_argument&) {
 		assert(false);}
@@ -97,6 +101,14 @@ int main () {
 		Simulate 1000 moves.
 		Print every 100th grid.
 		*/
+		/*
+		Grid g(72, 72);
+		g.place(Food  ('s'), 0, 0);
+		g.place(Hopper('e'), 3, 2);
+		g.place(Rover ('n'), 5, 4);
+		g.place(Trap  ('w'), 6, 8);
+		
+		g.run(1000, 100);*/
 		}
 	catch (const invalid_argument&) {
 		assert(false);}
@@ -125,6 +137,9 @@ int main () {
 		Best MUST outnumber ALL other species for the bonus pts.
 		Print every 100th grid.
 		*/
+		
+		
+		
 		}
 	catch (const invalid_argument&) {
 		assert(false);}

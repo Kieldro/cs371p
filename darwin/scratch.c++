@@ -8,15 +8,17 @@
 using namespace std;
 
 
+struct A{
+	static int i;
+	
+};
+int A::i = 5;
+
 int main(){
 	//int(*m)(const int&, const int&) = std::max<int>;
 	
-	//vector<int[]> v(3, int[2]);
-	//cout << v[0][0] << endl;
+	cout << A::i << endl;
 	
-	int a[2];
-	cout << a[0] << endl;
-	cout << new int[1][0] << endl;
 	
 	
 	return 0;

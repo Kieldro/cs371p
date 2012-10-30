@@ -1,7 +1,17 @@
 #ifndef Darwin_h
 #define Darwin_h
 
+// macros
 #define DEBUG true
+#define HOP			'H'
+#define LEFT		'L'
+#define RIGHT		'R'
+#define INFECT		'I'
+#define IF_EMPTY	'm'
+#define IF_ENEMY	'n'
+#define IF_WALL		'w'
+#define IF_RANDOM	'r'
+#define GO			'g'
 
 // --------
 // includes
@@ -18,17 +28,18 @@ using std::cout;
 using std::cerr;
 using std::endl;
 using std::string;
-using std::tuple;
 
 struct Instruction{
-	string op;
+	char op;
 	int line;
-	Instruction(string o, int l){
+	Instruction(char o, int l = -1){
 		op = o;
 		line = l;
 	}
 };
 
+class Grid;
+class Grid;
 
 class Creature{
 	friend std::ostream& operator<<(std::ostream &strm, const Creature &c) {
@@ -41,10 +52,10 @@ class Creature{
 		char sigil;
 		char direction;
 		unsigned turn;
-		vector<Instruction> program;
+		Grid* g;
 		
 		Creature()
-		: i(5), sigil('.'), direction('-')
+		: sigil('.'), direction('-')
 		{
 			
 		}
@@ -62,90 +73,6 @@ class Creature{
 		}
 };
 
-class Grid{
-	private:
-		vector< vector<Creature> > _g;
-	
-	public:
-		unsigned turn;
-		
-	Grid(int rows, int cols)
-	: _g(rows, vector<Creature>(cols)), turn(0)
-	{
-		
-		
-	}
-	
-	void place(const Creature &x, int r, int c){
-		_g[r][c] = x;
-	}
-	
-	void runTurn(){
-		for(int r = 0; r < nRows(); ++r)
-			for(int c = 0; c < nCols() and _g[r][c].sigil != '.'; ++c){
-				_g[r][c].turn = turn;		// using up turn
-				hop(r, c);
-			}
-		
-		++turn;
-	}
-	
-	void hop(int r, int c){
-		Creature& creature = _g[r][c];
-		//creature.turn = turn;		// used up turn
-		
-		switch(creature.direction){
-			case 'e':
-				if(++c >= nCols()) return;		// do nothing at wall
-				break;
-			case 'w':
-				if(--c < 0) return;
-				break;
-			case 'n':
-				if(--r < 0) return;
-				break;
-			case 's':
-				if(++r >= nRows()) return;
-		}
-		
-		// inbounds and space empty
-		if(_g[r][c].sigil == '.'){
-			_g[r][c] = creature;		// move to next space
-			creature = Creature();		// set to empty
-		}
-		
-		
-	}
-	
-	void print(){
-		//cout << "\nPrinting " << nRows() << " x " << nCols() << " grid:" << endl;
-		
-		cout << "Turn = " << turn << endl;
-		
-		
-		cout << "  ";
-		for(int c = 0; c < nCols(); ++c)
-			cout << c % 10;
-		cout << endl;
-		for(int r = 0; r < nRows(); ++r){
-			cout << r % 10 << " ";
-			for(int c = 0; c < nCols(); ++c){
-				cout <<  _g[r][c];}
-			cout << endl;
-		}
-		
-		cout << endl;
-	}
-	
-	int nRows() const{
-		return _g.size();
-	}
-	
-	int nCols() const{
-		return _g.size() ? _g[0].size() : 0;
-	}
-};
-
 // ------
 // hopper
 /*
@@ -153,28 +80,26 @@ class Grid{
  1: go 0
 */
 class Hopper : public Creature{
-	
 	public:
-	Hopper(char d)
-	//: sigil('H')
-	{
-		sigil = 'h';
-		direction = d;
-		turn = 0;
-		program.push_back(Instruction("hop", -1));
-		program.push_back(Instruction("go" , 0));
-	}
+		static vector<Instruction> program;
+		Hopper(char d)
+		{
+			sigil = 'h';
+			direction = d;
+			turn = 0;
+		}
 };
+vector<Instruction> Hopper::program;
 
 // ----
-// foodb
+// food
 /*
  0: left
  1: go 0
 */
 class Food : public Creature{
 	public:
-	Food(){sigil = 'f';}
+	Food(char d){sigil = 'f';}
 };
 
 // ----
@@ -208,9 +133,100 @@ class Trap : public Creature{
 */
 class Rover : public Creature{
 	public:
-	Rover(){sigil = 'r';}
+	Rover(char d){sigil = 'r';}
 };
 
+class Grid{
+	private:
+		vector< vector<Creature> > _g;
+	public:
+		unsigned turn;
+		Grid(int rows, int cols);
+		void place(const Creature &x, int r, int c){_g[r][c] = x;}
+		void runTurn();
+		void simulate(int turns, int j);
+		void print();
+		int nRows() const{return _g.size();}
+		int nCols() const{return _g.size() ? _g[0].size() : 0;}
+		void hop(int r, int c){
+			Creature& creature = _g[r][c];
+			//creature.turn = turn;		// used up turn
+			switch(creature.direction){
+				case 'e':
+					if(++c >= nCols()) return;		// do nothing at wall
+					break;
+				case 'w':
+					if(--c < 0) return;
+					break;
+				case 'n':
+					if(--r < 0) return;
+					break;
+				case 's':
+					if(++r >= nRows()) return;
+			}
+			// inbounds and space empty
+			if(_g[r][c].sigil == '.'){
+				_g[r][c] = creature;		// move to next space
+				creature = Creature();		// set to empty
+			}
+		}
+};
+
+Grid::Grid(int rows, int cols)
+: _g(rows, vector<Creature>(cols)), turn(0)
+{
+	// Hopper program initialization
+	// TODO Better way?
+	if(Hopper::program.size() == 0)
+	{
+		Hopper::program.push_back(Instruction(HOP));
+		Hopper::program.push_back(Instruction(GO , 0));
+		//if(DEBUG)cerr << Hopper::program.size() <<  endl;
+	}
+	assert(Hopper::program.size() == 2);
+	
+	// Food program
+	
+	
+}
+
+void Grid::runTurn(){
+	for(int r = 0; r < nRows(); ++r)
+		for(int c = 0; c < nCols() and _g[r][c].sigil != '.'; ++c){
+			_g[r][c].turn = turn;		// using up turn
+			hop(r, c);
+			//_g[r][c].execute();
+		}
+	++turn;
+}
+
+/*
+@param j print the grid every j turns.
+*/
+void Grid::simulate(int turns, int j){
+	print();
+	for(int i = 1; i <= 5; ++i){
+		runTurn();
+		if(i % j == 0)
+			print();
+	}
+}
+
+void Grid::print(){
+	//cout << "\nPrinting " << nRows() << " x " << nCols() << " grid:" << endl;
+	cout << "Turn = " << turn << endl;
+	cout << "  ";
+	for(int c = 0; c < nCols(); ++c)
+		cout << c % 10;
+	cout << endl;
+	for(int r = 0; r < nRows(); ++r){
+		cout << r % 10 << " ";
+		for(int c = 0; c < nCols(); ++c){
+			cout << _g[r][c];}
+		cout << endl;
+	}
+	cout << endl;
+}
 /*
 hop 	The creature moves forward as long as the square it is facing is empty. If moving forward would cause the creature to land on top of another creature or a wall, the hop instruction does nothing.
 left 	The creature turns left 90 degrees to face in a new direction.
@@ -223,5 +239,4 @@ ifenemy n 	If the square the creature is facing is occupied by a creature of an 
 ifrandom n 	In order to make it possible to write some creatures capable of exercising what might be called the rudiments of "free will", this instruction jumps to step n half the time and continues with the next instruction the other half of the time.
 go n 	This instruction always jumps to step n, independent of any condition.
 */
-
 #endif // Darwin_h
