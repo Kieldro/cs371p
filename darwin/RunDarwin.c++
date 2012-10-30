@@ -39,13 +39,13 @@ int main () {
 		Print every grid.
 		*/
 		Grid g(8, 8);
-		g.place(Food  ('e'), 0, 0);
+		/*g.place(Food  ('e'), 0, 0);
 		g.place(Hopper('n'), 3, 3);
 		g.place(Hopper('e'), 3, 4);
 		g.place(Hopper('s'), 4, 4);
 		g.place(Hopper('w'), 4, 3);
 		g.place(Food  ('n'), 7, 7);
-		
+		*/
 		g.simulate(5, 1);
 		
 		}

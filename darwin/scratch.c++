@@ -9,15 +9,33 @@ using namespace std;
 
 
 struct A{
+	int i;
+	int& j;
+	
+	A()
+	:j(i)
+	{
+		i = 7;
+		
+	}
+	
+	int qux(){return i;}
+};
+
+struct B : A{
 	static int i;
 	
 };
-int A::i = 5;
+int B::i = 5;
 
 int main(){
 	//int(*m)(const int&, const int&) = std::max<int>;
+	A a;
+	B b;
 	
-	cout << A::i << endl;
+	cout << "B::i = " << B::i << endl;
+	cout << "a.qux() = " << a.qux() << endl;
+	cout << "b.qux() = " << b.qux() << endl;
 	
 	
 	

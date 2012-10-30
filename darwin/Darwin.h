@@ -3,6 +3,7 @@
 
 // macros
 #define DEBUG true
+
 #define HOP			'H'
 #define LEFT		'L'
 #define RIGHT		'R'
@@ -12,6 +13,9 @@
 #define IF_WALL		'w'
 #define IF_RANDOM	'r'
 #define GO			'g'
+
+#define HOPPER		0
+#define FOOD		1
 
 // --------
 // includes
@@ -38,38 +42,93 @@ struct Instruction{
 	}
 };
 
-class Grid;
-class Grid;
+class Creature;
+class Grid{
+	private:
+	public:
+		vector< vector<Creature> > _g;
+		unsigned turn;
+		
+		Grid(int rows, int cols);
+		void place(int x, char d, int r, int c);
+		void runTurn();
+		void simulate(int turns, int j);
+		void print();
+		int nRows() const{return _g.size();}
+		int nCols() const{return _g.size() ? _g[0].size() : 0;}
+};
 
 class Creature{
-	friend std::ostream& operator<<(std::ostream &strm, const Creature &c) {
-		return strm << c.sigil;
-	}
-	private:
-		int i;
-	
 	public:
 		char sigil;
 		char direction;
+		Grid* grid;
+		int row;
+		int col;
+		const vector<Instruction>* program;
+		int pc;
 		unsigned turn;
-		Grid* g;
 		
-		Creature()
-		: sigil('.'), direction('-')
+		Creature(char d, int r, int c, Grid* g, const vector<Instruction>& p, char s)
+		: program(&p)
 		{
-			
+			direction = d;
+			row = r;
+			col = c;
+			sigil = s;
+			pc = 0;
+			turn = 0;
+			grid = g;
+		}
+		
+		Creature(){
+			sigil = '.';
 		}
 		
 		void execute(){
+			// check if creature already took its turn
+			if(turn != grid->turn)
+				return;
+			
+			const vector<Instruction>& p = *program;
+			
 			
 			
 			
 		}
 		
-		void test(){
+		void hop(){
+			Grid& g = *grid;
+			int r = row, c = col;
+			++turn;		// used up turn
 			
-			if(DEBUG)cerr << "BOOM!: " << *this << endl;
-			
+			switch(direction){
+				case 'e':
+					++c;
+					if(c >= g.nCols()) return;		// do nothing at wall
+					break;
+				case 'w':
+					--c;
+					if(c < 0) return;
+					break;
+				case 'n':
+					--r;
+					if(r < 0) return;
+					break;
+				case 's':
+					++r;
+					if(r >= g.nRows()) return;
+			}
+			// inbounds and space empty
+			if(g._g[r][c].sigil == '.'){
+				g._g[r][c] = *this;		// move to next space
+				g._g[row][col] = Creature();		// set to empty
+				row = r;
+				col = c;
+			}
+		}
+		friend std::ostream& operator<<(std::ostream &strm, const Creature &c) {
+			return strm << c.sigil;
 		}
 };
 
@@ -82,14 +141,15 @@ class Creature{
 class Hopper : public Creature{
 	public:
 		static vector<Instruction> program;
-		Hopper(char d)
-		{
-			sigil = 'h';
-			direction = d;
-			turn = 0;
-		}
+		Hopper(char d, int r, int c, Grid* g);
 };
 vector<Instruction> Hopper::program;
+
+Hopper::Hopper(char d, int r, int c, Grid* g)
+: Creature(d, r, c, g, program, 'h')
+{
+	
+}
 
 // ----
 // food
@@ -136,41 +196,7 @@ class Rover : public Creature{
 	Rover(char d){sigil = 'r';}
 };
 
-class Grid{
-	private:
-		vector< vector<Creature> > _g;
-	public:
-		unsigned turn;
-		Grid(int rows, int cols);
-		void place(const Creature &x, int r, int c){_g[r][c] = x;}
-		void runTurn();
-		void simulate(int turns, int j);
-		void print();
-		int nRows() const{return _g.size();}
-		int nCols() const{return _g.size() ? _g[0].size() : 0;}
-		void hop(int r, int c){
-			Creature& creature = _g[r][c];
-			//creature.turn = turn;		// used up turn
-			switch(creature.direction){
-				case 'e':
-					if(++c >= nCols()) return;		// do nothing at wall
-					break;
-				case 'w':
-					if(--c < 0) return;
-					break;
-				case 'n':
-					if(--r < 0) return;
-					break;
-				case 's':
-					if(++r >= nRows()) return;
-			}
-			// inbounds and space empty
-			if(_g[r][c].sigil == '.'){
-				_g[r][c] = creature;		// move to next space
-				creature = Creature();		// set to empty
-			}
-		}
-};
+
 
 Grid::Grid(int rows, int cols)
 : _g(rows, vector<Creature>(cols)), turn(0)
@@ -186,16 +212,18 @@ Grid::Grid(int rows, int cols)
 	assert(Hopper::program.size() == 2);
 	
 	// Food program
-	
-	
+}
+
+void Grid::place(int x, char d, int r, int c){
+	if(x == HOPPER)
+		_g[r][c] = Hopper(d, r, c, this);
 }
 
 void Grid::runTurn(){
 	for(int r = 0; r < nRows(); ++r)
-		for(int c = 0; c < nCols() and _g[r][c].sigil != '.'; ++c){
-			_g[r][c].turn = turn;		// using up turn
-			hop(r, c);
-			//_g[r][c].execute();
+		for(int c = 0; c < nCols(); ++c){
+			if(_g[r][c].sigil != '.')
+				_g[r][c].execute();
 		}
 	++turn;
 }

@@ -29,7 +29,7 @@ struct TestDarwin : CppUnit::TestFixture {
 	void testHopper0 () {
 		//Grid g(5, 5);
 		
-		Hopper h('e');
+		Hopper h('e', 0, 1, NULL);
 		//h.test();
 		//if(DEBUG)cerr << "BOOM!: " << h << endl;
 		CPPUNIT_ASSERT(true);
@@ -39,19 +39,19 @@ struct TestDarwin : CppUnit::TestFixture {
 	// testPlace
 	void testPlace0 () {
 		Grid g(3, 3);
-		Creature x = Hopper('n');
+		//Creature x = Hopper('n', 0, 1, &g);
 		
-		g.place(x, 1, 1);
+		g.place(HOPPER, 'n', 1, 1);
 		
 		//g.print();
 		CPPUNIT_ASSERT(true);
 	}
-	
+/*	
 	// --------
 	// testrunTurn
 	void testrunTurn0 () {
 		Grid g(3, 3);
-		Creature x = Hopper('n');
+		Creature x = Hopper('n', 0, 1, &g);
 		g.place(x, 1, 1);
 		
 		g.print();
@@ -84,7 +84,7 @@ struct TestDarwin : CppUnit::TestFixture {
 		//CPPUNIT_ASSERT(x.program[0].op == "hop");
 		//CPPUNIT_ASSERT(x.program[0].line == -1);
 	}
-
+*/
 	// -----
 	// suite
 	CPPUNIT_TEST_SUITE(TestDarwin);
@@ -92,10 +92,11 @@ struct TestDarwin : CppUnit::TestFixture {
 	CPPUNIT_TEST(testGrid0);
 	CPPUNIT_TEST(testPlace0);
 	CPPUNIT_TEST(testHopper0);
-	CPPUNIT_TEST(testrunTurn0);
+//	CPPUNIT_TEST(testrunTurn0);
+/*	CPPUNIT_TEST(testrunTurn0);
 	CPPUNIT_TEST(testrunTurn1);
 	CPPUNIT_TEST(testCreatureProgram0);
-	
+	*/
 	CPPUNIT_TEST_SUITE_END();
 };
 

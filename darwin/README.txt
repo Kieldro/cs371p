@@ -26,6 +26,7 @@ GitHub ID: kieldro
 GitHub Repository Name: cs371p
 
 Comments:
+advantages of pointers?
 
 ----------------
 Pair Programming
