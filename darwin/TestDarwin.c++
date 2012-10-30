@@ -45,15 +45,25 @@ struct TestDarwin : CppUnit::TestFixture {
 	}
 	
 	// --------
+	// testHop
+	void testHop0 () {
+		Grid g(3, 3);
+		g.place(HOPPER, 's', 0, 0);
+		
+		g.simulate(3, 1);
+	}
+/*	
+	// --------
 	// testRunTurn
 	void testRunTurn0 () {
 		Grid g(3, 3);
-		g.place(HOPPER, 'n', 0, 1);
+		g.place(HOPPER, 'n', 1, 1);
 		
 		g.print();
 		g.runTurn();
 		g.print();
 	}
+	
 /*	void testRunTurn1 () {
 		Grid g(3, 3);
 		Creature x = Hopper('n');
@@ -93,7 +103,8 @@ struct TestDarwin : CppUnit::TestFixture {
 	CPPUNIT_TEST(testGrid0);
 	CPPUNIT_TEST(testPlace0);
 	CPPUNIT_TEST(testHopper0);
-//	CPPUNIT_TEST(testRunTurn0);
+	CPPUNIT_TEST(testHop0);
+// 	CPPUNIT_TEST(testRunTurn0);
 /*	CPPUNIT_TEST(testRunTurn0);
 	CPPUNIT_TEST(testRunTurn1);
 	CPPUNIT_TEST(testCreatureProgram0);

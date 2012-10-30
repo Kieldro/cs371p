@@ -3,6 +3,7 @@
 
 // macros
 #define DEBUG true
+#define BOOYAKASHA	if(DEBUG) cerr << "BOOYAKASHA!" <<  endl;
 
 #define HOP			'H'
 #define LEFT		'L'
@@ -87,12 +88,13 @@ class Creature{
 		
 		void execute(){
 			// check if creature already took its turn
-			if(turn != grid->turn)
+			if(turn != grid->turn){
+				//BOOYAKASHA
 				return;
-			
+			}
 			const vector<Instruction>& p = *program;
 			
-			
+			hop();
 			
 			
 		}
@@ -108,6 +110,7 @@ void Creature::hop(){
 	Grid& g = *grid;
 	int r = row, c = col;
 	++turn;		// used up turn
+	if(DEBUG) cerr << "BOOYAKASHA! " << row << col <<  endl;
 	
 	switch(direction){
 		case 'e':
@@ -125,13 +128,18 @@ void Creature::hop(){
 		case 's':
 			++r;
 			if(r >= g.nRows()) return;
+			break;
+		default:
+			if(DEBUG) cerr << "Invalid creature to hop()" << r << c <<  endl;
+			
 	}
 	// inbounds and space empty
-	if(g._g[r][c].sigil == '.'){
-		g._g[r][c] = *this;		// move to next space
+	if(g._g[r][c].sigil == '.'){/*TODO MAKE A GRID OF POINTERS!*/
+		g._g[r][c] = *this;		// move to next space COPY ASSIGNMENT
 		g._g[row][col] = Creature();		// set to empty
 		row = r;
 		col = c;
+		if(DEBUG) cerr << "Hopping to " << r << c <<  endl;
 	}
 }
 
@@ -236,7 +244,7 @@ void Grid::runTurn(){
 */
 void Grid::simulate(int turns, int j){
 	print();
-	for(int i = 1; i <= 5; ++i){
+	for(int i = 1; i <= turns; ++i){
 		runTurn();
 		if(i % j == 0)
 			print();

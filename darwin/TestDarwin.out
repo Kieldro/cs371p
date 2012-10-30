@@ -1,8 +1,36 @@
 TestDarwin.c++
-...
+....Turn = 0
+  012
+0 h..
+1 ...
+2 ...
+
+BOOYAKASHA! 00
+Hopping to 10
+Turn = 1
+  012
+0 ...
+1 h..
+2 ...
+
+BOOYAKASHA! 00
+Turn = 2
+  012
+0 ...
+1 h..
+2 ...
+
+BOOYAKASHA! 00
+Turn = 3
+  012
+0 ...
+1 h..
+2 ...
 
 
-OK (3 tests)
+
+
+OK (4 tests)
 
 
 Done.
