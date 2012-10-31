@@ -28,7 +28,7 @@ struct TestDarwin : CppUnit::TestFixture {
 	void testHopper0 () {
 		//Grid g(5, 5);
 		
-		Hopper h('e', 0, 1, NULL);
+		//Hopper h('e', 0, 1, NULL);
 		//h.test();
 		//if(DEBUG)cerr << "BOOM!: " << h << endl;
 	}
@@ -48,9 +48,17 @@ struct TestDarwin : CppUnit::TestFixture {
 	// testHop
 	void testHop0 () {
 		Grid g(3, 3);
-		g.place(HOPPER, 's', 0, 0);
+		g.place(HOPPER, 's', 0, 1);
 		
 		g.simulate(3, 1);
+	}
+	// hop into each other
+	void testHop1 () {
+		Grid g(3, 3);
+		g.place(HOPPER, 'e', 1, 1);
+		g.place(HOPPER, 'w', 1, 2);
+		
+		g.simulate(2, 1);
 	}
 /*	
 	// --------
@@ -104,6 +112,7 @@ struct TestDarwin : CppUnit::TestFixture {
 	CPPUNIT_TEST(testPlace0);
 	CPPUNIT_TEST(testHopper0);
 	CPPUNIT_TEST(testHop0);
+	CPPUNIT_TEST(testHop1);
 // 	CPPUNIT_TEST(testRunTurn0);
 /*	CPPUNIT_TEST(testRunTurn0);
 	CPPUNIT_TEST(testRunTurn1);
