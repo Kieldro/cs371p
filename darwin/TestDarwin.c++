@@ -39,7 +39,7 @@ struct TestDarwin : CppUnit::TestFixture {
 		Grid g(3, 3);
 		//Creature x = Hopper('n', 0, 1, &g);
 		
-		g.place(HOPPER, 'n', 1, 1);
+		//g.place(HOPPER, 'n', 1, 1);
 		
 		//g.print();
 	}

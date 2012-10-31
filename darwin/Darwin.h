@@ -78,25 +78,7 @@ class Creature{
 		int pc;
 		unsigned turn;
 		
-		Creature(char d, int r, int c, Grid* g, char s)
-		//: program(&p)
-		{
-			direction = d;
-			row = r;
-			col = c;
-			sigil = s;
-			grid = g;
-			//pc = 0;	// implicit?
-			//turn = 0;
-			
-			switch(sigil){
-				case 'h':
-					program = &programHopper;
-					break;
-				default:
-					;//if(DEBUG) cerr << "Invalid creature to hop()" << r << c <<  endl;
-			}
-		}
+		Creature(char d, int r, int c, Grid* g, char s);
 		Creature(){}
 		void execute();
 		void hop();
@@ -108,15 +90,37 @@ class Creature{
 		}
 };
 vector<Instruction> Creature::programHopper(2);
+Creature::Creature(char d, int r, int c, Grid* g, char s)
+//: program(&p)
+{
+	direction = d;
+	row = r;
+	col = c;
+	sigil = s;
+	grid = g;
+	//pc = 0;	// implicit?
+	//turn = 0;
+	
+	switch(sigil){
+		case 'h':
+	BOOYAKASHA
+			program = &programHopper;
+			if(DEBUG) cerr << "size() " << program->size() <<  endl;
+			
+			break;
+		default:
+			;//if(DEBUG) cerr << "Invalid creature to hop()" << r << c <<  endl;
+	}
+}
 
 void Creature::execute(){
 	// check if creature already took its turn
 	if(turn != grid->turn){
-		//BOOYAKASHA
 		return;
 	}
 	
 	const vector<Instruction>& p = *program;
+	//if(DEBUG) cerr << "BOOM: " << pc << (int)p[pc].op <<  endl;
 	
 	switch(p[pc].op){
 		case HOP:
@@ -135,7 +139,6 @@ void Creature::execute(){
 void Creature::hop(){
 	Grid& g = *grid;
 	int r = row, c = col;
-	//if(DEBUG) cerr << "BOOYAKASHA! " << row << col <<  endl;
 	
 	switch(direction){
 		case 'e':
@@ -314,7 +317,7 @@ Grid::Grid(int rows, int cols)
 {
 	// Hopper program initialization
 	// TODO Better way?
-	if(Creature::programHopper.size() == 0)
+	if(Creature::programHopper[0].op == 0)
 	{
 		Creature::programHopper[0] = Instruction(HOP);
 		Creature::programHopper[1] = Instruction(GO, 0);

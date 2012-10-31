@@ -1,29 +1,37 @@
 TestDarwin.c++
-....Turn = 0
+....BOOYAKASHA!
+size() 2
+Turn = 0
   012
 0 .h.
 1 ...
 2 ...
 
+Hopping to 11
 Turn = 1
   012
-0 .h.
-1 ...
+0 ...
+1 .h.
 2 ...
 
+Hopping to 21
 Turn = 2
   012
-0 .h.
+0 ...
 1 ...
-2 ...
+2 .h.
 
 Turn = 3
   012
-0 .h.
+0 ...
 1 ...
-2 ...
+2 .h.
 
-.Turn = 0
+.BOOYAKASHA!
+size() 2
+BOOYAKASHA!
+size() 2
+Turn = 0
   012
 0 ...
 1 .hh
