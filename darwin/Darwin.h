@@ -23,12 +23,14 @@
 #include <cassert>		// assert
 //#include <cstddef>		// ptrdiff_t, size_t
 #include <vector>		// vector
+#include <deque>
 #include <functional>	// operators
 #include <typeinfo>		// typeid
 #include <stdexcept>
 #include <string>
 
 using std::vector;
+using std::deque;
 using std::cout;
 using std::cerr;
 using std::endl;
@@ -43,11 +45,12 @@ struct Instruction{
 	}
 };
 
+
 class Creature;
 class Grid{
-	private:
 	public:
-		vector< vector<Creature> > _g;
+		vector< vector<Creature*> > _g;
+		deque<Creature> creatureStash;
 		unsigned turn;
 		
 		Grid(int rows, int cols);
@@ -55,6 +58,14 @@ class Grid{
 		void runTurn();
 		void simulate(int turns, int j);
 		void print();
+		bool valid(){
+			for(int r = 1; r < nRows(); ++r)
+				if(_g[r].size() != _g[r-1].size())
+					return false;
+				//for(int c = 0; c < nCols(); ++c)
+					
+			return true;
+		}
 		int nRows() const{return _g.size();}
 		int nCols() const{return _g.size() ? _g[0].size() : 0;}
 };
@@ -81,10 +92,7 @@ class Creature{
 			turn = 0;
 			grid = g;
 		}
-		
-		Creature(){
-			sigil = '.';
-		}
+		Creature(){}
 		
 		void execute(){
 			// check if creature already took its turn
@@ -110,7 +118,7 @@ void Creature::hop(){
 	Grid& g = *grid;
 	int r = row, c = col;
 	++turn;		// used up turn
-	if(DEBUG) cerr << "BOOYAKASHA! " << row << col <<  endl;
+	//(DEBUG) cerr << "BOOYAKASHA! " << row << col <<  endl;
 	
 	switch(direction){
 		case 'e':
@@ -134,12 +142,14 @@ void Creature::hop(){
 			
 	}
 	// inbounds and space empty
-	if(g._g[r][c].sigil == '.'){/*TODO MAKE A GRID OF POINTERS!*/
-		g._g[r][c] = *this;		// move to next space COPY ASSIGNMENT
-		g._g[row][col] = Creature();		// set to empty
+	Creature*& creatureNew = g._g[r][c];
+	Creature*& creatureOld = g._g[row][col];
+	if(creatureNew == NULL){/*TODO MAKE A GRID OF POINTERS!*/
+		if(DEBUG) cerr << "Hopping to " << r << c <<  endl;
+		creatureNew = this;		// move to next space COPY ASSIGNMENT
+		creatureOld = NULL;		// set to empty
 		row = r;
 		col = c;
-		if(DEBUG) cerr << "Hopping to " << r << c <<  endl;
 	}
 }
 
@@ -207,10 +217,10 @@ class Rover : public Creature{
 	Rover(char d){sigil = 'r';}
 };
 
-// --------------
+// -------------------------
 // Grid method definitions
 Grid::Grid(int rows, int cols)
-: _g(rows, vector<Creature>(cols)), turn(0)
+: _g(rows, vector<Creature*>(cols)), turn(0), creatureStash(0)
 {
 	// Hopper program initialization
 	// TODO Better way?
@@ -226,15 +236,20 @@ Grid::Grid(int rows, int cols)
 }
 
 void Grid::place(int x, char d, int r, int c){
-	if(x == HOPPER)
-		_g[r][c] = Hopper(d, r, c, this);
+	if(x == HOPPER){
+		//Hopper creature(d, r, c, this);
+		creatureStash.push_back(Hopper(d, r, c, this));
+		_g[r][c] = &creatureStash.back();
+	}
 }
 
 void Grid::runTurn(){
 	for(int r = 0; r < nRows(); ++r)
 		for(int c = 0; c < nCols(); ++c){
-			if(_g[r][c].sigil != '.')
-				_g[r][c].execute();
+			Creature*& creaturePtr =  _g[r][c];
+			if(creaturePtr != NULL)
+				creaturePtr->execute();
+			//BOOYAKASHA
 		}
 	++turn;
 }
@@ -252,6 +267,7 @@ void Grid::simulate(int turns, int j){
 }
 
 void Grid::print(){
+	assert(valid());
 	//cout << "\nPrinting " << nRows() << " x " << nCols() << " grid:" << endl;
 	cout << "Turn = " << turn << endl;
 	cout << "  ";
@@ -261,7 +277,11 @@ void Grid::print(){
 	for(int r = 0; r < nRows(); ++r){
 		cout << r % 10 << " ";
 		for(int c = 0; c < nCols(); ++c){
-			cout << _g[r][c];}
+			if(_g[r][c] == NULL)
+				cout << ".";
+			else
+				cout << *_g[r][c];
+		}
 		cout << endl;
 	}
 	cout << endl;

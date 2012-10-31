@@ -1,7 +1,7 @@
 SHELL = /bin/sh
 
 CC = g++
-CPPFLAGS = -std=c++0x -pedantic -Wall
+CPPFLAGS = -std=c++0x #-pedantic -Wall
 SOURCE = Darwin.h
 TEST = TestDarwin.c++
 RUN = RunDarwin.c++

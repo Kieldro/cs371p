@@ -9,10 +9,11 @@ Last Name: Buitrago
 EID: ib
 E-mail: kieldro@gmail.com
 Estimated number of hours: 20
-Actual    number of hours: 4
+Actual    number of hours: 8
 5:30p - 630
 1p - 3p
-6:40p - 
+6:40p - 11p
+11:40a - 
 
 Partner First Name: Jonathan
 Partner Last Name: Chen
