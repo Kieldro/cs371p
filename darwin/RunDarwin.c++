@@ -73,7 +73,7 @@ int main () {
 		g.place(ROVER,  'n', 5, 4);
 		g.place(TRAP,   'w', 6, 8);
 		
-		g.run(5, 1);
+		g.simulate(5, 1);
 		
 		}
 	catch (const invalid_argument&) {
@@ -86,7 +86,6 @@ int main () {
 	// without best
 	try {
 		cout << "*** Darwin 72x72 without Best ***" << endl;
-		srand(0);
 		/*
 		Randomly place the following creatures facing randomly.
 		Call rand(), mod it with 5184 (72x72), and use that for the position
@@ -101,14 +100,43 @@ int main () {
 		Simulate 1000 moves.
 		Print every 100th grid.
 		*/
-		/*
 		Grid g(72, 72);
-		g.place(Food  ('s'), 0, 0);
-		g.place(Hopper('e'), 3, 2);
-		g.place(Rover ('n'), 5, 4);
-		g.place(Trap  ('w'), 6, 8);
+		srand(0);
 		
-		g.run(1000, 100);*/
+		for(int i = 0; i < 10; ++i)
+		{
+			int pos = rand() % 5184;
+			int r = pos / 72;
+			int c = pos % 72;
+			char direction = DIRECTION[rand() % 4];
+			g.place(FOOD, direction, r, c);
+		}
+		for(int i = 0; i < 10; ++i)
+		{
+			int pos = rand() % 5184;
+			int r = pos / 72;
+			int c = pos % 72;
+			char direction = DIRECTION[rand() % 4];
+			g.place(HOPPER, direction, r, c);
+		}
+		for(int i = 0; i < 10; ++i)
+		{
+			int pos = rand() % 5184;
+			int r = pos / 72;
+			int c = pos % 72;
+			char direction = DIRECTION[rand() % 4];
+			g.place(ROVER, direction, r, c);
+		}
+		for(int i = 0; i < 10; ++i)
+		{
+			int pos = rand() % 5184;
+			int r = pos / 72;
+			int c = pos % 72;
+			char direction = DIRECTION[rand() % 4];
+			g.place(TRAP, direction, r, c);
+		}
+		
+		g.simulate(1000, 100);
 		}
 	catch (const invalid_argument&) {
 		assert(false);}
@@ -120,7 +148,6 @@ int main () {
 	// with best
 	try {
 		cout << "*** Darwin 72x72 with Best ***" << endl;
-		srand(0);
 		/*
 		Randomly place the following creatures facing randomly.
 		Call rand(), mod it with 5184 (72x72), and use that for the position
@@ -137,6 +164,51 @@ int main () {
 		Best MUST outnumber ALL other species for the bonus pts.
 		Print every 100th grid.
 		*/
+		Grid g(72, 72);
+		srand(0);
+		
+		for(int i = 0; i < 10; ++i)
+		{
+			int pos = rand() % 5184;
+			int r = pos / 72;
+			int c = pos % 72;
+			char direction = DIRECTION[rand() % 4];
+			g.place(FOOD, direction, r, c);
+		}
+		for(int i = 0; i < 10; ++i)
+		{
+			int pos = rand() % 5184;
+			int r = pos / 72;
+			int c = pos % 72;
+			char direction = DIRECTION[rand() % 4];
+			g.place(HOPPER, direction, r, c);
+		}
+		for(int i = 0; i < 10; ++i)
+		{
+			int pos = rand() % 5184;
+			int r = pos / 72;
+			int c = pos % 72;
+			char direction = DIRECTION[rand() % 4];
+			g.place(ROVER, direction, r, c);
+		}
+		for(int i = 0; i < 10; ++i)
+		{
+			int pos = rand() % 5184;
+			int r = pos / 72;
+			int c = pos % 72;
+			char direction = DIRECTION[rand() % 4];
+			g.place(TRAP, direction, r, c);
+		}
+		for(int i = 0; i < 10; ++i)
+		{
+			int pos = rand() % 5184;
+			int r = pos / 72;
+			int c = pos % 72;
+			char direction = DIRECTION[rand() % 4];
+			g.place(BEST, direction, r, c);
+		}
+		
+		g.simulate(1000, 100);
 		
 		
 		

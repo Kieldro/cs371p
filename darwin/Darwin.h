@@ -21,6 +21,11 @@
 #define ROVER		'r'
 #define BEST		'b'
 
+#define NORTH		0
+#define EAST		1
+#define SOUTH		2
+#define WEST		3
+
 // --------
 // includes
 #include <cassert>		// assert
@@ -39,9 +44,12 @@ using std::endl;
 using std::string;
 using std::logic_error;
 
+static const vector<char> DIRECTION = {'n', 'e', 's', 'w'};
+
 struct Instruction{
 	char op;
 	int line;
+	
 	Instruction(char o, int l = -1){
 		op = o;
 		line = l;
@@ -197,7 +205,7 @@ void Creature::hop(){
 	Creature*& creatureNew = g._g[r][c];
 	Creature*& creatureOld = g._g[row][col];
 	if(creatureNew == NULL){
-		if(DEBUG) cerr << "Hopping to " << r << c <<  endl;
+		//if(DEBUG) cerr << "Hopping to " << r << c <<  endl;
 		creatureNew = this;		// move to next space
 		creatureOld = NULL;		// set to empty
 		row = r;
@@ -259,7 +267,7 @@ void Creature::infect(){
 	// inbounds
 	Creature*& creatureNew = g._g[r][c];
 	if(creatureNew != NULL and creatureNew->sigil != sigil){
-		if(DEBUG) cerr << "Infecting creature at " << r << c <<  endl;
+		//if(DEBUG) cerr << "Infecting creature at " << r << c <<  endl;
 		creatureNew->sigil = sigil;
 		creatureNew->program = program;
 		creatureNew->pc = 0;
@@ -359,6 +367,7 @@ bool Creature::nextCell(int& r, int& c){
 Grid::Grid(int rows, int cols)
 : _g(rows, vector<Creature*>(cols)), turn(0), creatureStash(0)
 {
+	assert(NULL == 0);
 	// static program initializations
 	// TODO Better way?
 	if(Creature::pHopper[0].op == 'a')
@@ -406,45 +415,47 @@ Grid::Grid(int rows, int cols)
 		Creature::pRover[0] = Instruction(IF_ENEMY, 9);
 		Creature::pRover[1] = Instruction(IF_EMPTY, 7);
 		Creature::pRover[2] = Instruction(IF_RANDOM, 5);
-		Creature::pRover[3] = Instruction(GO , 0);
-		Creature::pRover[4] = Instruction(LEFT);
-		Creature::pRover[5] = Instruction(GO , 0);
-		Creature::pRover[6] = Instruction(RIGHT);
-		Creature::pRover[7] = Instruction(GO , 0);
-		Creature::pRover[8] = Instruction(HOP);
-		Creature::pRover[9] = Instruction(GO , 0);
-		Creature::pRover[10] = Instruction(INFECT);
+		Creature::pRover[3] = Instruction(LEFT);
+		Creature::pRover[4] = Instruction(GO , 0);
+		Creature::pRover[5] = Instruction(RIGHT);
+		Creature::pRover[6] = Instruction(GO , 0);
+		Creature::pRover[7] = Instruction(HOP);
+		Creature::pRover[8] = Instruction(GO , 0);
+		Creature::pRover[9] = Instruction(INFECT);
+		Creature::pRover[10]= Instruction(GO , 0);
 		// -----
 		// Best
 		/*
-		0: if_enemy 9
-		1: if_empty 7
-		2: if_random 5
-		3: left
+		0: if_enemy 5
+		1: if_empty 9
+		2: if_wall 7
+		3: right
 		4: go 0
-		5: right
+		5: infect
 		6: go 0
-		7: hop
+		7: left
 		8: go 0
-		9: infect
+		9: hop
 		10: go 0
 		*/
 		Creature::pBest[0] = Instruction(IF_ENEMY, 9);
 		Creature::pBest[1] = Instruction(IF_EMPTY, 7);
 		Creature::pBest[2] = Instruction(IF_RANDOM, 5);
-		Creature::pBest[3] = Instruction(GO , 0);
-		Creature::pBest[4] = Instruction(LEFT);
-		Creature::pBest[5] = Instruction(GO , 0);
-		Creature::pBest[6] = Instruction(RIGHT);
-		Creature::pBest[7] = Instruction(GO , 0);
-		Creature::pBest[8] = Instruction(HOP);
-		Creature::pBest[9] = Instruction(GO , 0);
-		Creature::pBest[10] = Instruction(INFECT);
+		Creature::pBest[3] = Instruction(LEFT);
+		Creature::pBest[4] = Instruction(GO , 0);
+		Creature::pBest[5] = Instruction(RIGHT);
+		Creature::pBest[6] = Instruction(GO , 0);
+		Creature::pBest[7] = Instruction(HOP);
+		Creature::pBest[8] = Instruction(GO , 0);
+		Creature::pBest[9] = Instruction(INFECT);
+		Creature::pBest[10]= Instruction(GO , 0);
 	}
 	//assert(Hopper::program.size() == 2);
 }
 
 void Grid::place(char creatureType, char d, int r, int c){
+	if(_g[r][c] != NULL)
+		throw logic_error("Creature cannot be placed ontop of preexisting creature at " + r + c);
 	creatureStash.push_back(Creature(d, r, c, this, creatureType));
 	_g[r][c] = &creatureStash.back();
 }
@@ -494,23 +505,11 @@ void Grid::print(){
 	cout << endl;
 }
 bool Grid::valid(){
-			for(int r = 1; r < nRows(); ++r)
-				if(_g[r].size() != _g[r-1].size())
-					return false;
-				//for(int c = 0; c < nCols(); ++c)
-					
-			return true;
-		}
-/*
-hop 	The creature moves forward as long as the square it is facing is empty. If moving forward would cause the creature to land on top of another creature or a wall, the hop instruction does nothing.
-left 	The creature turns left 90 degrees to face in a new direction.
-right 	The creature turns right 90 degrees.
-infect 	If the square immediately in front of this creature is occupied by a creature of a different species (an "enemy") that creature is infected to become the same as the infecting species. When a creature is infected, it keeps its position and orientation, but changes its internal species indicator and begins executing the same program as the infecting creature, starting at step 0.
-ifempty n 	If the square in front of the creature is unoccupied (by a wall or another creature), update the next instruction field in the creature so that the program continues from step n. If that square is occupied, go on with the next instruction in sequence.
-ifwall n 	If the creature is facing a wall, jump to step n; otherwise, go on with the next instruction in sequence.
-ifsame n 	If the square the creature is facing is occupied by a creature of the same species, jump to step n; otherwise, go on with the next instruction.
-ifenemy n 	If the square the creature is facing is occupied by a creature of an enemy species, jump to step n; otherwise, go on with the next instruction.
-ifrandom n 	In order to make it possible to write some creatures capable of exercising what might be called the rudiments of "free will", this instruction jumps to step n half the time and continues with the next instruction the other half of the time.
-go n 	This instruction always jumps to step n, independent of any condition.
-*/
+	for(int r = 1; r < nRows(); ++r)
+		if(_g[r].size() != _g[r-1].size())
+			return false;
+		//for(int c = 0; c < nCols(); ++c)
+			
+	return true;
+}
 #endif // Darwin_h
