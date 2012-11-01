@@ -5,7 +5,6 @@ Jonathan Chen
 CS 371p
 project 5 - Darwin
 */
-
 #ifndef Darwin_h
 #define Darwin_h
 
@@ -52,6 +51,7 @@ using std::cerr;
 using std::endl;
 using std::string;
 using std::logic_error;
+using std::out_of_range;
 
 static const vector<char> DIRECTION = {'n', 'e', 's', 'w'};
 
@@ -83,6 +83,7 @@ class Grid{
 		void printCount();
 		void simulate(int turns, int j);
 		bool valid();
+		void randPlace(char, int);
 		int nRows() const{return _g.size();}
 		int nCols() const{return _g.size() ? _g[0].size() : 0;}
 };
@@ -119,11 +120,11 @@ class Creature{
 			return strm << c.sigil;
 		}
 };
-vector<Instruction> Creature::pHopper(2);
-vector<Instruction> Creature::pFood(2);
-vector<Instruction> Creature::pTrap(5);
-vector<Instruction> Creature::pRover(11);
-vector<Instruction> Creature::pBest(11);
+vector<Instruction> Creature::pHopper;
+vector<Instruction> Creature::pFood;
+vector<Instruction> Creature::pTrap;
+vector<Instruction> Creature::pRover;
+vector<Instruction> Creature::pBest;
 
 Creature::Creature(char d, int r, int c, Grid* g, char s){
 	if(d != 'n' and d != 'e' and d != 's' and d != 'w')
@@ -378,21 +379,21 @@ Grid::Grid(int rows, int cols)
 	assert(NULL == 0);
 	// static program initializations
 	// TODO Better way?
-	if(Creature::pHopper[0].op == 'a')
+	if(Creature::pHopper.size() == 0)
 	{
-		Creature::pHopper[0] = Instruction(HOP);
-		Creature::pHopper[1] = Instruction(GO, 0);
+		Creature::pHopper.push_back(Instruction(HOP));
+		Creature::pHopper.push_back(Instruction(GO, 0));
 		// ----
 		// food
-		Creature::pFood[0] = Instruction(LEFT);
-		Creature::pFood[1] = Instruction(GO, 0);
+		Creature::pFood.push_back(Instruction(LEFT));
+		Creature::pFood.push_back(Instruction(GO, 0));
 		// ----
 		// trap
-		Creature::pTrap[0] = Instruction(IF_ENEMY, 3);
-		Creature::pTrap[1] = Instruction(LEFT);
-		Creature::pTrap[2] = Instruction(GO , 0);
-		Creature::pTrap[3] = Instruction(INFECT);
-		Creature::pTrap[4] = Instruction(GO , 0);
+		Creature::pTrap.push_back(Instruction(IF_ENEMY, 3));
+		Creature::pTrap.push_back(Instruction(LEFT));
+		Creature::pTrap.push_back(Instruction(GO , 0));
+		Creature::pTrap.push_back(Instruction(INFECT));
+		Creature::pTrap.push_back(Instruction(GO , 0));
 		// -----
 		// rover
 		/*
@@ -408,17 +409,17 @@ Grid::Grid(int rows, int cols)
 		9: infect
 		10: go 0
 		*/
-		Creature::pRover[0] = Instruction(IF_ENEMY, 9);
-		Creature::pRover[1] = Instruction(IF_EMPTY, 7);
-		Creature::pRover[2] = Instruction(IF_RANDOM, 5);
-		Creature::pRover[3] = Instruction(LEFT);
-		Creature::pRover[4] = Instruction(GO , 0);
-		Creature::pRover[5] = Instruction(RIGHT);
-		Creature::pRover[6] = Instruction(GO , 0);
-		Creature::pRover[7] = Instruction(HOP);
-		Creature::pRover[8] = Instruction(GO , 0);
-		Creature::pRover[9] = Instruction(INFECT);
-		Creature::pRover[10]= Instruction(GO , 0);
+		Creature::pRover.push_back(Instruction(IF_ENEMY, 9));
+		Creature::pRover.push_back(Instruction(IF_EMPTY, 7));
+		Creature::pRover.push_back(Instruction(IF_RANDOM, 5));
+		Creature::pRover.push_back(Instruction(LEFT));
+		Creature::pRover.push_back(Instruction(GO , 0));
+		Creature::pRover.push_back(Instruction(RIGHT));
+		Creature::pRover.push_back(Instruction(GO , 0));
+		Creature::pRover.push_back(Instruction(HOP));
+		Creature::pRover.push_back(Instruction(GO , 0));
+		Creature::pRover.push_back(Instruction(INFECT));
+		Creature::pRover.push_back(Instruction(GO , 0));
 		// -----
 		// Best
 		/*
@@ -434,17 +435,23 @@ Grid::Grid(int rows, int cols)
 		9: hop
 		10: go 0
 		*/
-		Creature::pBest[0] = Instruction(IF_ENEMY, 9);
-		Creature::pBest[1] = Instruction(IF_EMPTY, 7);
-		Creature::pBest[2] = Instruction(IF_RANDOM, 5);
-		Creature::pBest[3] = Instruction(LEFT);
-		Creature::pBest[4] = Instruction(GO , 0);
-		Creature::pBest[5] = Instruction(RIGHT);
-		Creature::pBest[6] = Instruction(GO , 0);
-		Creature::pBest[7] = Instruction(HOP);
-		Creature::pBest[8] = Instruction(GO , 0);
-		Creature::pBest[9] = Instruction(INFECT);
-		Creature::pBest[10]= Instruction(GO , 0);
+		Creature::pBest.push_back(Instruction(IF_ENEMY, 12));
+		Creature::pBest.push_back(Instruction(IF_EMPTY, 7));
+		Creature::pBest.push_back(Instruction(IF_RANDOM, 5));
+		// friend
+		Creature::pBest.push_back(Instruction(LEFT));
+		Creature::pBest.push_back(Instruction(GO , 0));
+		Creature::pBest.push_back(Instruction(RIGHT));
+		Creature::pBest.push_back(Instruction(GO , 0));
+		// empty
+		Creature::pBest.push_back(Instruction(IF_RANDOM, 10));
+		Creature::pBest.push_back(Instruction(HOP));
+		Creature::pBest.push_back(Instruction(GO , 0));
+		Creature::pBest.push_back(Instruction(LEFT));
+		Creature::pBest.push_back(Instruction(GO , 0));
+		// enemy
+		Creature::pBest.push_back(Instruction(INFECT));
+		Creature::pBest.push_back(Instruction(GO , 0));
 	}
 	//assert(Hopper::program.size() == 2);
 }
@@ -456,6 +463,8 @@ Places a created creature into the grid.
 @param c column of the grid.
 */
 void Grid::place(char creatureType, char d, int r, int c){
+	if(r < 0 or r >= nRows() or c < 0 or c >= nCols())
+		throw out_of_range("Coordinates out of range: " + r + c);
 	if(_g[r][c] != NULL)
 		throw logic_error("Creature cannot be placed ontop of preexisting creature at " + r + c);
 	creatureStash.push_back(Creature(d, r, c, this, creatureType));
@@ -522,6 +531,7 @@ void Grid::printCount(){
 	int numRover = 0;
 	int numFood = 0;
 	int numTrap = 0;
+	
 	for(int i = 0; i < creatureStash.size(); ++i){
 		switch(creatureStash[i].sigil){
 			case HOPPER:
@@ -547,6 +557,20 @@ void Grid::printCount(){
 	cerr << HOPPER << " = " << numHopper << endl;
 	cerr << FOOD << " = " << numFood << endl;
 	cerr << TRAP << " = " << numTrap << endl;
+}
+
+/**
+Randomly places count creatures of type type.
+*/
+void Grid::randPlace(char type, int count){
+	for(int i = 0; i < count; ++i){
+		int pos = rand() % (nRows() * nCols());
+		int r = pos / nRows();
+		int c = pos % nCols();
+		char direction = DIRECTION[rand() % 4];
+	
+		place(type, direction, r, c);
+	}
 }
 
 /**

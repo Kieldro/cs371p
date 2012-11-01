@@ -107,6 +107,19 @@ struct TestDarwin : CppUnit::TestFixture {
 		g.simulate(10, 1);
 	}
 	
+	// --------
+	// testBest
+	void testBest1 () {
+		Grid g(20, 20);
+		srand(0);
+			
+		g.randPlace(BEST  , 3);
+		g.randPlace(ROVER , 3);
+		g.randPlace(FOOD  , 3);
+		g.randPlace(HOPPER, 3);
+		g.simulate(100, 10);
+	}
+	
 	// -----
 	// suite
 	CPPUNIT_TEST_SUITE(TestDarwin);
@@ -120,6 +133,7 @@ struct TestDarwin : CppUnit::TestFixture {
 	CPPUNIT_TEST(testTrap1);
 	CPPUNIT_TEST(testRover0);
 	CPPUNIT_TEST(testBest0);
+	CPPUNIT_TEST(testBest1);
 	
 	CPPUNIT_TEST_SUITE_END();
 };
