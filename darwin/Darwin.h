@@ -1,3 +1,11 @@
+/*
+Ian Buitrago
+Jonathan Chen
+11-7-2012
+CS 371p
+project 5 - Darwin
+*/
+
 #ifndef Darwin_h
 #define Darwin_h
 
@@ -72,6 +80,7 @@ class Grid{
 		void place(char x, char d, int r, int c);
 		void runTurn();
 		void print();
+		void printCount();
 		void simulate(int turns, int j);
 		bool valid();
 		int nRows() const{return _g.size();}
@@ -158,7 +167,6 @@ void Creature::execute(){
 		if(DEBUG) cerr << "pc: " << pc << endl;
 		if(DEBUG) cerr << "instruction: " << p[pc].op << endl;
 		if(DEBUG) cerr << "target line: " << p[pc].line << endl;*/
-		
 		switch(p[pc].op){
 			case HOP:
 				hop();
@@ -333,7 +341,7 @@ void Creature::ifRandom(){
 		++pc;
 }
 
-/*
+/**
 @return true if in range, false if out of bounds.
 */
 bool Creature::nextCell(int& r, int& c){
@@ -361,7 +369,6 @@ bool Creature::nextCell(int& r, int& c){
 	
 	return true;
 }
-
 
 // -------------------------
 // Grid method definitions
@@ -503,6 +510,43 @@ void Grid::print(){
 		cout << endl;
 	}
 	cout << endl;
+	if(DEBUG)printCount();
+}
+
+/**
+Debugging function thats prints the count of each creature.
+*/
+void Grid::printCount(){
+	int numHopper = 0;
+	int numBest = 0;
+	int numRover = 0;
+	int numFood = 0;
+	int numTrap = 0;
+	for(int i = 0; i < creatureStash.size(); ++i){
+		switch(creatureStash[i].sigil){
+			case HOPPER:
+				++numHopper;
+				break;
+			case BEST:
+				++numBest;
+				break;
+			case ROVER:
+				++numRover;
+				break;
+			case FOOD:
+				++numFood;
+				break;
+			case TRAP:
+				++numTrap;
+				break;
+		}
+	}
+	
+	cerr << BEST << " = " << numBest << endl;
+	cerr << ROVER << " = " << numRover << endl;
+	cerr << HOPPER << " = " << numHopper << endl;
+	cerr << FOOD << " = " << numFood << endl;
+	cerr << TRAP << " = " << numTrap << endl;
 }
 
 /**
