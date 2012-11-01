@@ -103,32 +103,28 @@ int main () {
 		Grid g(72, 72);
 		srand(0);
 		
-		for(int i = 0; i < 10; ++i)
-		{
+		for(int i = 0; i < 10; ++i){
 			int pos = rand() % 5184;
 			int r = pos / 72;
 			int c = pos % 72;
 			char direction = DIRECTION[rand() % 4];
 			g.place(FOOD, direction, r, c);
 		}
-		for(int i = 0; i < 10; ++i)
-		{
+		for(int i = 0; i < 10; ++i){
 			int pos = rand() % 5184;
 			int r = pos / 72;
 			int c = pos % 72;
 			char direction = DIRECTION[rand() % 4];
 			g.place(HOPPER, direction, r, c);
 		}
-		for(int i = 0; i < 10; ++i)
-		{
+		for(int i = 0; i < 10; ++i){
 			int pos = rand() % 5184;
 			int r = pos / 72;
 			int c = pos % 72;
 			char direction = DIRECTION[rand() % 4];
 			g.place(ROVER, direction, r, c);
 		}
-		for(int i = 0; i < 10; ++i)
-		{
+		for(int i = 0; i < 10; ++i){
 			int pos = rand() % 5184;
 			int r = pos / 72;
 			int c = pos % 72;
@@ -167,40 +163,35 @@ int main () {
 		Grid g(72, 72);
 		srand(0);
 		
-		for(int i = 0; i < 10; ++i)
-		{
+		for(int i = 0; i < 10; ++i){
 			int pos = rand() % 5184;
 			int r = pos / 72;
 			int c = pos % 72;
 			char direction = DIRECTION[rand() % 4];
 			g.place(FOOD, direction, r, c);
 		}
-		for(int i = 0; i < 10; ++i)
-		{
+		for(int i = 0; i < 10; ++i){
 			int pos = rand() % 5184;
 			int r = pos / 72;
 			int c = pos % 72;
 			char direction = DIRECTION[rand() % 4];
 			g.place(HOPPER, direction, r, c);
 		}
-		for(int i = 0; i < 10; ++i)
-		{
+		for(int i = 0; i < 10; ++i){
 			int pos = rand() % 5184;
 			int r = pos / 72;
 			int c = pos % 72;
 			char direction = DIRECTION[rand() % 4];
 			g.place(ROVER, direction, r, c);
 		}
-		for(int i = 0; i < 10; ++i)
-		{
+		for(int i = 0; i < 10; ++i){
 			int pos = rand() % 5184;
 			int r = pos / 72;
 			int c = pos % 72;
 			char direction = DIRECTION[rand() % 4];
 			g.place(TRAP, direction, r, c);
 		}
-		for(int i = 0; i < 10; ++i)
-		{
+		for(int i = 0; i < 10; ++i){
 			int pos = rand() % 5184;
 			int r = pos / 72;
 			int c = pos % 72;

@@ -58,7 +58,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pri-attribs">Private Attributes</a>  </div>
+<a href="#pub-attribs">Public Attributes</a>  </div>
   <div class="headertitle">
 <div class="title">Grid Class Reference</div>  </div>
 </div><!--header-->
@@ -71,13 +71,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a75b3bc6513919ca7de1a7ef82822c27b">Grid</a> (int rows, int cols)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#aa19f69a5691ba38fd00aae71d2c75b3c">place</a> (const <a class="el" href="classCreature.html">Creature</a> &amp;x, int r, int c)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a186c80efbadb7e10c6daed3105e334e6">place</a> (char x, char d, int r, int c)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a36ed2243b51fcefb61948bfb82bca061">runTurn</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a8f86511ed049044225a4116dd1c2a2e2">print</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#ad6aaff57c783f9e20731191ed84a01cc">simulate</a> (int turns, int j)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a5e73c9244664654b83260d64d5def7e8">valid</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#ae554edb2880aed4416065b28277795ff">nRows</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a0caa03851d135852d977d35dee9888c9">nCols</a> () const </td></tr>
-<tr><td colspan="2"><h2><a name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">vector&lt; vector&lt; <a class="el" href="classCreature.html">Creature</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a03d7bf25d31cb729e73deec2d9cbfbcf">_g</a></td></tr>
+<tr><td colspan="2"><h2><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; vector&lt; <a class="el" href="classCreature.html">Creature</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a443d89237500cf021e4d12d93d770d8d">_g</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">deque&lt; <a class="el" href="classCreature.html">Creature</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a59749cb619211b9d06ea887c660017df">creatureStash</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a27a3cf394b8c35bb2f555b2929db4151">turn</a></td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a75b3bc6513919ca7de1a7ef82822c27b"></a><!-- doxytag: member="Grid::Grid" ref="a75b3bc6513919ca7de1a7ef82822c27b" args="(int rows, int cols)" -->
@@ -99,7 +104,7 @@ Private Attributes</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td><code> [inline]</code></td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
@@ -140,15 +145,21 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa19f69a5691ba38fd00aae71d2c75b3c"></a><!-- doxytag: member="Grid::place" ref="aa19f69a5691ba38fd00aae71d2c75b3c" args="(const Creature &amp;x, int r, int c)" -->
+<a class="anchor" id="a186c80efbadb7e10c6daed3105e334e6"></a><!-- doxytag: member="Grid::place" ref="a186c80efbadb7e10c6daed3105e334e6" args="(char x, char d, int r, int c)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classGrid.html#aa19f69a5691ba38fd00aae71d2c75b3c">Grid::place</a> </td>
+          <td class="memname">void <a class="el" href="classGrid.html#a186c80efbadb7e10c6daed3105e334e6">Grid::place</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classCreature.html">Creature</a> &amp;&#160;</td>
+          <td class="paramtype">char&#160;</td>
           <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>d</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -165,7 +176,7 @@ Private Attributes</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td><code> [inline]</code></td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
@@ -181,7 +192,7 @@ Private Attributes</h2></td></tr>
           <td class="memname">void <a class="el" href="classGrid.html#a8f86511ed049044225a4116dd1c2a2e2">Grid::print</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -189,13 +200,99 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<hr/><h2>Member Data Documentation</h2>
-<a class="anchor" id="a03d7bf25d31cb729e73deec2d9cbfbcf"></a><!-- doxytag: member="Grid::_g" ref="a03d7bf25d31cb729e73deec2d9cbfbcf" args="" -->
+<a class="anchor" id="a36ed2243b51fcefb61948bfb82bca061"></a><!-- doxytag: member="Grid::runTurn" ref="a36ed2243b51fcefb61948bfb82bca061" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt; vector&lt;<a class="el" href="classCreature.html">Creature</a>&gt; &gt; <a class="el" href="classGrid.html#a03d7bf25d31cb729e73deec2d9cbfbcf">Grid::_g</a><code> [private]</code></td>
+          <td class="memname">void <a class="el" href="classGrid.html#a36ed2243b51fcefb61948bfb82bca061">Grid::runTurn</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad6aaff57c783f9e20731191ed84a01cc"></a><!-- doxytag: member="Grid::simulate" ref="ad6aaff57c783f9e20731191ed84a01cc" args="(int turns, int j)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classGrid.html#ad6aaff57c783f9e20731191ed84a01cc">Grid::simulate</a> </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>turns</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5e73c9244664654b83260d64d5def7e8"></a><!-- doxytag: member="Grid::valid" ref="a5e73c9244664654b83260d64d5def7e8" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classGrid.html#a5e73c9244664654b83260d64d5def7e8">Grid::valid</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Checks if all rows are euqal in size. </p>
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a443d89237500cf021e4d12d93d770d8d"></a><!-- doxytag: member="Grid::_g" ref="a443d89237500cf021e4d12d93d770d8d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; vector&lt;<a class="el" href="classCreature.html">Creature</a>*&gt; &gt; <a class="el" href="classGrid.html#a443d89237500cf021e4d12d93d770d8d">Grid::_g</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a59749cb619211b9d06ea887c660017df"></a><!-- doxytag: member="Grid::creatureStash" ref="a59749cb619211b9d06ea887c660017df" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">deque&lt;<a class="el" href="classCreature.html">Creature</a>&gt; <a class="el" href="classGrid.html#a59749cb619211b9d06ea887c660017df">Grid::creatureStash</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a27a3cf394b8c35bb2f555b2929db4151"></a><!-- doxytag: member="Grid::turn" ref="a27a3cf394b8c35bb2f555b2929db4151" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classGrid.html#a27a3cf394b8c35bb2f555b2929db4151">Grid::turn</a></td>
         </tr>
       </table>
 </div>
@@ -224,7 +321,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Oct 25 2012 21:49:22 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 1 2012 14:15:52 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

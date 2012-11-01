@@ -1,6 +1,7 @@
 #ifndef Darwin_h
 #define Darwin_h
 
+// ------
 // macros
 #define DEBUG true
 #define BOOYAKASHA	if(DEBUG) cerr << "BOOYAKASHA!" <<  endl;
@@ -376,27 +377,15 @@ Grid::Grid(int rows, int cols)
 		Creature::pHopper[1] = Instruction(GO, 0);
 		// ----
 		// food
-		/*
-		0: left
-		1: go 0
-		*/
 		Creature::pFood[0] = Instruction(LEFT);
 		Creature::pFood[1] = Instruction(GO, 0);
 		// ----
 		// trap
-		/*
-		0: if_enemy 3
-		1: left
-		2: go 0
-		3: infect
-		4: go 0
-		*/
 		Creature::pTrap[0] = Instruction(IF_ENEMY, 3);
 		Creature::pTrap[1] = Instruction(LEFT);
 		Creature::pTrap[2] = Instruction(GO , 0);
 		Creature::pTrap[3] = Instruction(INFECT);
 		Creature::pTrap[4] = Instruction(GO , 0);
-
 		// -----
 		// rover
 		/*
@@ -453,6 +442,12 @@ Grid::Grid(int rows, int cols)
 	//assert(Hopper::program.size() == 2);
 }
 
+/**
+Places a created creature into the grid.
+@param d direction the creature will face.
+@param r row of the grid.
+@param c column of the grid.
+*/
 void Grid::place(char creatureType, char d, int r, int c){
 	if(_g[r][c] != NULL)
 		throw logic_error("Creature cannot be placed ontop of preexisting creature at " + r + c);
@@ -460,20 +455,23 @@ void Grid::place(char creatureType, char d, int r, int c){
 	_g[r][c] = &creatureStash.back();
 }
 
+/*
+Runs a single turn by running through the grid row by row.
+*/
 void Grid::runTurn(){
 	for(int r = 0; r < nRows(); ++r)
 		for(int c = 0; c < nCols(); ++c){
 			Creature*& creaturePtr =  _g[r][c];
 			if(creaturePtr != NULL){
 				creaturePtr->execute();
-				//BOOYAKASHA
 			}
 		}
 	assert(valid());
 	++turn;
 }
 
-/*
+/**
+@param turns the number turns to run the game.
 @param j print the grid every j turns.
 */
 void Grid::simulate(int turns, int j){
@@ -485,9 +483,11 @@ void Grid::simulate(int turns, int j){
 	}
 }
 
+/**
+Prints the grid and turn number.
+*/
 void Grid::print(){
-	//cout << "\nPrinting " << nRows() << " x " << nCols() << " grid:" << endl;
-	cout << "Turn = " << turn << endl;
+	cout << "Turn = " << turn << "." << endl;
 	cout << "  ";
 	for(int c = 0; c < nCols(); ++c)
 		cout << c % 10;
@@ -504,11 +504,14 @@ void Grid::print(){
 	}
 	cout << endl;
 }
+
+/**
+Checks if all rows are euqal in size.
+*/
 bool Grid::valid(){
 	for(int r = 1; r < nRows(); ++r)
 		if(_g[r].size() != _g[r-1].size())
 			return false;
-		//for(int c = 0; c < nCols(); ++c)
 			
 	return true;
 }

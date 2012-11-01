@@ -1,3 +1,106 @@
+commit 8414e6ba9474838eac6ec753084e17f74a7e0319
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Thu Nov 1 13:31:19 2012 -0500
+
+    Acceptance tests practically complete.
+
+commit 7c9ed3e11a2ff7c57e2fad2dee8f4069acc08941
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Oct 31 21:20:16 2012 -0500
+
+    Factors out some code. Implementing ifRandom().
+
+commit 313144206ab75b83344890ad77760acaf47fef1d
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Oct 31 18:35:18 2012 -0500
+
+    Fixes program not loading.
+
+commit 19b2175fb520f4e319d583c24289315d49be5ab9
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Oct 31 16:54:57 2012 -0500
+
+    Hoppers dont hop anymore.
+
+commit f979ecdb04eb6b24b4eaaac454ccccfab97c0caf
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Oct 31 15:40:09 2012 -0500
+
+    Changes grid to 2d vector of Creature pointers.
+
+commit 51223dbfb91dbff5d496c5d82a34dd7e06af608a
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 29 22:56:15 2012 -0500
+
+    Needs to change grid to a 2d vector of pointers to Creatures.
+
+commit bf87e2c502f93078dfacb24f4e34291b458fb48e
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 29 22:18:38 2012 -0500
+
+    Moves hop out of class definition.
+
+commit 78c3ee166c6b7653d2ea38f8db6851e2f4585ea8
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 29 22:10:13 2012 -0500
+
+    Moves hop() to class Creature.
+
+commit f4b8c75b25a94b9e49068683807ad4fe9d251c14
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Oct 29 20:22:30 2012 -0500
+
+    Changed variable programto static.
+
+commit fa3cc969faa074c6ceb894f998c65397660c1fe1
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Oct 26 16:47:00 2012 -0500
+
+    Adds Instruction struct.
+
+commit 618bd2025977f457801db371891078df81e5375a
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Oct 26 15:00:52 2012 -0500
+
+    Writing Creature.execute().
+
+commit 7092bb1e0d86b7a646699563e2beaa170f5c96d5
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Oct 26 14:38:26 2012 -0500
+
+    Grid.hop() almost done.
+
+commit 6cb263c67e59f2452fb56c74b007e6cb71a67569
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Oct 26 14:04:43 2012 -0500
+
+    Adds some a bit of east hopping.
+
+commit f7354a09e9e5ddff03509a1ae79ff48930e4f268
+Merge: 89d5a0e 04491d9
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Oct 26 13:08:15 2012 -0500
+
+    Merge branch 'master' of github.com:Kieldro/cs371p
+
+commit 89d5a0e7595dd3c14b7337e29b2db0deafce8e9e
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Oct 26 13:08:10 2012 -0500
+
+    Skeleton updates.
+
+commit 04491d91c907488fa33cd88a3a42ff07a3958040
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Oct 26 13:05:26 2012 -0500
+
+    Adds example outputs.
+
+commit d1839559cc75319b04f8b368cd2af41f4e827989
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Thu Oct 25 21:49:56 2012 -0500
+
+    Adds hopper class.
+
 commit 5908454f88d27b33f2e8f237bb4d97d8d47a987e
 Author: Ian Buitrago <kieldro@gmail.com>
 Date:   Thu Oct 25 19:42:12 2012 -0500

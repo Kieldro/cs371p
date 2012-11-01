@@ -59,7 +59,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#friends">Friends</a>  </div>
   <div class="headertitle">
 <div class="title">Creature Class Reference</div>  </div>
@@ -67,40 +67,96 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <!-- doxytag: class="Creature" -->
 <p><code>#include &lt;<a class="el" href="Darwin_8h_source.html">Darwin.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for Creature:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="classCreature.png" usemap="#Creature_map" alt=""/>
-  <map id="Creature_map" name="Creature_map">
-<area href="classHopper.html" alt="Hopper" shape="rect" coords="0,56,62,80"/>
-</map>
- </div></div>
 
 <p><a href="classCreature-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a2a42935cbb9c102530ffa00ccb429337">Creature</a> (char d, int r, int c, <a class="el" href="classGrid.html">Grid</a> *g, char s)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a597cc3b08ee17de46c3e7ec3cf0d9b58">Creature</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#aeaa64ba31041ef63193042599d7b5ff8">execute</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#ab019db39665ed1a2cbe5b5caa3af05d4">hop</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#abb2923e06edcc39531a26882ad85f264">left</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a17036acfdcc81a43384fb8c78898718f">right</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#afbff0af5c3d55941dcc769adb3880c28">infect</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a17efe6017344eeaeb3a9696e1e3cd0ea">ifEnemy</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a68aaa3949fb6bd9fce44e493efc47876">ifEmpty</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#acd6c4372a580773445b1ead87817e18e">ifRandom</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#ae42c2185eff83025c2b6ebabd1dd4e4f">ifWall</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a54965fd6690a1479f2cfc2090ede0db9">nextCell</a> (int &amp;r, int &amp;c)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a22896738e5131dc0c136e5741530f4d8">sigil</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#ac78fa0d98262494093d8074f419d1e90">direction</a></td></tr>
-<tr><td colspan="2"><h2><a name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#aba3bf6e3a5c3e14be9910cce37152853">i</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#af069d60a967697bdc03404639fb0e494">row</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a0c3719e1305f2667b08addeec7bc59d2">col</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a47feb52379af9c624a7e4a8f4389d09b">program</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a81b808ceee6ddc5c0a97e0b97b19a707">pc</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#aa44dad7ec271e0f0a75937f5233fa139">turn</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classGrid.html">Grid</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#afa0f152b859ef21a963efbbbb6dc4027">grid</a></td></tr>
+<tr><td colspan="2"><h2><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a4622b90dd5d060fe3b69bb3ce6ed6b05">pHopper</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a5fa7c3ed294570efddeefa24281c6eb2">pFood</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a5ccfd79db36341de4720ffc606e7ea58">pTrap</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a7975877bf5ff58b8f4afa20b98e1406e">pRover</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a51c2d5186d3d5cddb522553320a5ec3a">pBest</a></td></tr>
 <tr><td colspan="2"><h2><a name="friends"></a>
 Friends</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a16346b230a4394de4f75268a461f8145">operator&lt;&lt;</a> (std::ostream &amp;strm, const <a class="el" href="classCreature.html">Creature</a> &amp;c)</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a2a42935cbb9c102530ffa00ccb429337"></a><!-- doxytag: member="Creature::Creature" ref="a2a42935cbb9c102530ffa00ccb429337" args="(char d, int r, int c, Grid *g, char s)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCreature.html#a2a42935cbb9c102530ffa00ccb429337">Creature::Creature</a> </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classGrid.html">Grid</a> *&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a597cc3b08ee17de46c3e7ec3cf0d9b58"></a><!-- doxytag: member="Creature::Creature" ref="a597cc3b08ee17de46c3e7ec3cf0d9b58" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classCreature.html#a597cc3b08ee17de46c3e7ec3cf0d9b58">Creature::Creature</a> </td>
+          <td class="memname"><a class="el" href="classCreature.html#a2a42935cbb9c102530ffa00ccb429337">Creature::Creature</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [inline]</code></td>
@@ -112,6 +168,22 @@ Friends</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="aeaa64ba31041ef63193042599d7b5ff8"></a><!-- doxytag: member="Creature::execute" ref="aeaa64ba31041ef63193042599d7b5ff8" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classCreature.html#aeaa64ba31041ef63193042599d7b5ff8">Creature::execute</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ab019db39665ed1a2cbe5b5caa3af05d4"></a><!-- doxytag: member="Creature::hop" ref="ab019db39665ed1a2cbe5b5caa3af05d4" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -120,7 +192,146 @@ Friends</h2></td></tr>
           <td class="memname">void <a class="el" href="classCreature.html#ab019db39665ed1a2cbe5b5caa3af05d4">Creature::hop</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a68aaa3949fb6bd9fce44e493efc47876"></a><!-- doxytag: member="Creature::ifEmpty" ref="a68aaa3949fb6bd9fce44e493efc47876" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classCreature.html#a68aaa3949fb6bd9fce44e493efc47876">Creature::ifEmpty</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a17efe6017344eeaeb3a9696e1e3cd0ea"></a><!-- doxytag: member="Creature::ifEnemy" ref="a17efe6017344eeaeb3a9696e1e3cd0ea" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classCreature.html#a17efe6017344eeaeb3a9696e1e3cd0ea">Creature::ifEnemy</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acd6c4372a580773445b1ead87817e18e"></a><!-- doxytag: member="Creature::ifRandom" ref="acd6c4372a580773445b1ead87817e18e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classCreature.html#acd6c4372a580773445b1ead87817e18e">Creature::ifRandom</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae42c2185eff83025c2b6ebabd1dd4e4f"></a><!-- doxytag: member="Creature::ifWall" ref="ae42c2185eff83025c2b6ebabd1dd4e4f" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classCreature.html#ae42c2185eff83025c2b6ebabd1dd4e4f">Creature::ifWall</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="afbff0af5c3d55941dcc769adb3880c28"></a><!-- doxytag: member="Creature::infect" ref="afbff0af5c3d55941dcc769adb3880c28" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classCreature.html#afbff0af5c3d55941dcc769adb3880c28">Creature::infect</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abb2923e06edcc39531a26882ad85f264"></a><!-- doxytag: member="Creature::left" ref="abb2923e06edcc39531a26882ad85f264" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classCreature.html#abb2923e06edcc39531a26882ad85f264">Creature::left</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a54965fd6690a1479f2cfc2090ede0db9"></a><!-- doxytag: member="Creature::nextCell" ref="a54965fd6690a1479f2cfc2090ede0db9" args="(int &amp;r, int &amp;c)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classCreature.html#a54965fd6690a1479f2cfc2090ede0db9">Creature::nextCell</a> </td>
+          <td>(</td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>c</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a17036acfdcc81a43384fb8c78898718f"></a><!-- doxytag: member="Creature::right" ref="a17036acfdcc81a43384fb8c78898718f" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classCreature.html#a17036acfdcc81a43384fb8c78898718f">Creature::right</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -157,6 +368,19 @@ Friends</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a0c3719e1305f2667b08addeec7bc59d2"></a><!-- doxytag: member="Creature::col" ref="a0c3719e1305f2667b08addeec7bc59d2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classCreature.html#a0c3719e1305f2667b08addeec7bc59d2">Creature::col</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ac78fa0d98262494093d8074f419d1e90"></a><!-- doxytag: member="Creature::direction" ref="ac78fa0d98262494093d8074f419d1e90" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -170,12 +394,116 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aba3bf6e3a5c3e14be9910cce37152853"></a><!-- doxytag: member="Creature::i" ref="aba3bf6e3a5c3e14be9910cce37152853" args="" -->
+<a class="anchor" id="afa0f152b859ef21a963efbbbb6dc4027"></a><!-- doxytag: member="Creature::grid" ref="afa0f152b859ef21a963efbbbb6dc4027" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="classCreature.html#aba3bf6e3a5c3e14be9910cce37152853">Creature::i</a><code> [private]</code></td>
+          <td class="memname"><a class="el" href="classGrid.html">Grid</a>* <a class="el" href="classCreature.html#afa0f152b859ef21a963efbbbb6dc4027">Creature::grid</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a51c2d5186d3d5cddb522553320a5ec3a"></a><!-- doxytag: member="Creature::pBest" ref="a51c2d5186d3d5cddb522553320a5ec3a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt; <a class="el" href="classCreature.html#a51c2d5186d3d5cddb522553320a5ec3a">Creature::pBest</a><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a81b808ceee6ddc5c0a97e0b97b19a707"></a><!-- doxytag: member="Creature::pc" ref="a81b808ceee6ddc5c0a97e0b97b19a707" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classCreature.html#a81b808ceee6ddc5c0a97e0b97b19a707">Creature::pc</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5fa7c3ed294570efddeefa24281c6eb2"></a><!-- doxytag: member="Creature::pFood" ref="a5fa7c3ed294570efddeefa24281c6eb2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt; <a class="el" href="classCreature.html#a5fa7c3ed294570efddeefa24281c6eb2">Creature::pFood</a><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4622b90dd5d060fe3b69bb3ce6ed6b05"></a><!-- doxytag: member="Creature::pHopper" ref="a4622b90dd5d060fe3b69bb3ce6ed6b05" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt; <a class="el" href="classCreature.html#a4622b90dd5d060fe3b69bb3ce6ed6b05">Creature::pHopper</a><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a47feb52379af9c624a7e4a8f4389d09b"></a><!-- doxytag: member="Creature::program" ref="a47feb52379af9c624a7e4a8f4389d09b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const vector&lt;<a class="el" href="structInstruction.html">Instruction</a>&gt;* <a class="el" href="classCreature.html#a47feb52379af9c624a7e4a8f4389d09b">Creature::program</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7975877bf5ff58b8f4afa20b98e1406e"></a><!-- doxytag: member="Creature::pRover" ref="a7975877bf5ff58b8f4afa20b98e1406e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt; <a class="el" href="classCreature.html#a7975877bf5ff58b8f4afa20b98e1406e">Creature::pRover</a><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5ccfd79db36341de4720ffc606e7ea58"></a><!-- doxytag: member="Creature::pTrap" ref="a5ccfd79db36341de4720ffc606e7ea58" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt; <a class="el" href="classCreature.html#a5ccfd79db36341de4720ffc606e7ea58">Creature::pTrap</a><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af069d60a967697bdc03404639fb0e494"></a><!-- doxytag: member="Creature::row" ref="af069d60a967697bdc03404639fb0e494" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classCreature.html#af069d60a967697bdc03404639fb0e494">Creature::row</a></td>
         </tr>
       </table>
 </div>
@@ -189,6 +517,19 @@ Friends</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">char <a class="el" href="classCreature.html#a22896738e5131dc0c136e5741530f4d8">Creature::sigil</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa44dad7ec271e0f0a75937f5233fa139"></a><!-- doxytag: member="Creature::turn" ref="aa44dad7ec271e0f0a75937f5233fa139" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned <a class="el" href="classCreature.html#aa44dad7ec271e0f0a75937f5233fa139">Creature::turn</a></td>
         </tr>
       </table>
 </div>
@@ -217,7 +558,7 @@ Friends</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Oct 25 2012 21:49:22 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 1 2012 14:15:52 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
