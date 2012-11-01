@@ -60,6 +60,31 @@ struct TestDarwin : CppUnit::TestFixture {
 		
 		g.simulate(2, 1);
 	}
+	
+	// --------
+	// testFood
+	void testFood0 () {
+		Grid g(2, 2);
+		
+		g.place(FOOD, 's', 0, 0);
+		g.simulate(2, 1);
+	}
+	
+	// --------
+	// testTrap
+	void testTrap0 () {
+		Grid g(2, 2);
+		
+		g.place(TRAP, 's', 0, 0);
+		g.simulate(2, 1);
+	}
+	void testTrap1 () {
+		Grid g(3, 3);
+		
+		g.place(TRAP, 'e', 1, 1);
+		g.place(FOOD, 's', 1, 2);
+		g.simulate(2, 1);
+	}
 /*	
 	// --------
 	// testRunTurn
@@ -108,11 +133,14 @@ struct TestDarwin : CppUnit::TestFixture {
 	// suite
 	CPPUNIT_TEST_SUITE(TestDarwin);
 	
-	CPPUNIT_TEST(testGrid0);
-	CPPUNIT_TEST(testPlace0);
-	CPPUNIT_TEST(testHopper0);
+	//CPPUNIT_TEST(testGrid0);
+	//CPPUNIT_TEST(testPlace0);
+	//CPPUNIT_TEST(testHopper0);
 	CPPUNIT_TEST(testHop0);
 	CPPUNIT_TEST(testHop1);
+	CPPUNIT_TEST(testFood0);
+	CPPUNIT_TEST(testTrap0);
+	CPPUNIT_TEST(testTrap1);
 // 	CPPUNIT_TEST(testRunTurn0);
 /*	CPPUNIT_TEST(testRunTurn0);
 	CPPUNIT_TEST(testRunTurn1);

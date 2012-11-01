@@ -1,7 +1,5 @@
 TestDarwin.c++
-....BOOYAKASHA!
-size() 2
-Turn = 0
+.Turn = 0
   012
 0 .h.
 1 ...
@@ -27,11 +25,7 @@ Turn = 3
 1 ...
 2 .h.
 
-.BOOYAKASHA!
-size() 2
-BOOYAKASHA!
-size() 2
-Turn = 0
+.Turn = 0
   012
 0 ...
 1 .hh
@@ -47,6 +41,55 @@ Turn = 2
   012
 0 ...
 1 .hh
+2 ...
+
+.Turn = 0
+  01
+0 f.
+1 ..
+
+Turn = 1
+  01
+0 f.
+1 ..
+
+Turn = 2
+  01
+0 f.
+1 ..
+
+.Turn = 0
+  01
+0 t.
+1 ..
+
+Turn = 1
+  01
+0 t.
+1 ..
+
+Turn = 2
+  01
+0 t.
+1 ..
+
+.Turn = 0
+  012
+0 ...
+1 .tf
+2 ...
+
+Infecting creature at 12
+Turn = 1
+  012
+0 ...
+1 .tt
+2 ...
+
+Turn = 2
+  012
+0 ...
+1 .tt
 2 ...
 
 

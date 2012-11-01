@@ -15,13 +15,15 @@
 #define IF_RANDOM	'r'
 #define GO			'g'
 
-#define HOPPER		0
-#define FOOD		1
+#define HOPPER		'h'
+#define FOOD		'f'
+#define TRAP		't'
+#define ROVER		'r'
+#define BEST		'b'
 
 // --------
 // includes
 #include <cassert>		// assert
-//#include <cstddef>		// ptrdiff_t, size_t
 #include <vector>		// vector
 #include <deque>
 #include <functional>	// operators
@@ -35,6 +37,7 @@ using std::cout;
 using std::cerr;
 using std::endl;
 using std::string;
+using std::logic_error;
 
 struct Instruction{
 	char op;
@@ -44,8 +47,8 @@ struct Instruction{
 		line = l;
 	}
 	Instruction(){
-		op = 0;
-		line = -1;
+		op = 'a';
+		line = 0;
 	}
 };
 
@@ -57,10 +60,10 @@ class Grid{
 		unsigned turn;
 		
 		Grid(int rows, int cols);
-		void place(int x, char d, int r, int c);
+		void place(char x, char d, int r, int c);
 		void runTurn();
-		void simulate(int turns, int j);
 		void print();
+		void simulate(int turns, int j);
 		bool valid();
 		int nRows() const{return _g.size();}
 		int nCols() const{return _g.size() ? _g[0].size() : 0;}
@@ -70,13 +73,17 @@ class Creature{
 	public:
 		char sigil;
 		char direction;
-		Grid* grid;
 		int row;
 		int col;
 		const vector<Instruction>* program;
-		static vector<Instruction> programHopper;
 		int pc;
 		unsigned turn;
+		Grid* grid;
+		static vector<Instruction> pHopper;
+		static vector<Instruction> pFood;
+		static vector<Instruction> pTrap;
+		static vector<Instruction> pRover;
+		static vector<Instruction> pBest;
 		
 		Creature(char d, int r, int c, Grid* g, char s);
 		Creature(){}
@@ -85,82 +92,107 @@ class Creature{
 		void left();
 		void right();
 		void infect();
+		void ifEnemy();
+		void ifEmpty();
+		void ifRandom();
+		void ifWall();
+		bool nextCell(int& r, int& c);
 		friend std::ostream& operator<<(std::ostream &strm, const Creature &c) {
 			return strm << c.sigil;
 		}
 };
-vector<Instruction> Creature::programHopper(2);
-Creature::Creature(char d, int r, int c, Grid* g, char s)
-//: program(&p)
-{
+vector<Instruction> Creature::pHopper(2);
+vector<Instruction> Creature::pFood(2);
+vector<Instruction> Creature::pTrap(5);
+vector<Instruction> Creature::pRover(11);
+vector<Instruction> Creature::pBest(11);
+
+Creature::Creature(char d, int r, int c, Grid* g, char s){
+	if(d != 'n' and d != 'e' and d != 's' and d != 'w')
+		throw logic_error("Invalid direction: " + d);
 	direction = d;
 	row = r;
 	col = c;
 	sigil = s;
 	grid = g;
-	//pc = 0;	// implicit?
-	//turn = 0;
+	pc = 0;
+	turn = 0;
 	
 	switch(sigil){
-		case 'h':
-	BOOYAKASHA
-			program = &programHopper;
-			if(DEBUG) cerr << "size() " << program->size() <<  endl;
-			
+		case HOPPER:
+			program = &pHopper;
+			//if(DEBUG) cerr << "size() " << program->size() <<  endl;
+			break;
+		case FOOD:
+			program = &pFood;
+			break;
+		case TRAP:
+			program = &pTrap;
+			break;
+		case ROVER:
+			program = &pRover;
+			break;
+		case BEST:
+			program = &pBest;
 			break;
 		default:
-			;//if(DEBUG) cerr << "Invalid creature to hop()" << r << c <<  endl;
+			throw logic_error("Invalid creature type: " + sigil);
 	}
 }
 
 void Creature::execute(){
-	// check if creature already took its turn
-	if(turn != grid->turn){
-		return;
-	}
-	
 	const vector<Instruction>& p = *program;
-	//if(DEBUG) cerr << "BOOM: " << pc << (int)p[pc].op <<  endl;
 	
-	switch(p[pc].op){
-		case HOP:
-			hop();
-			break;
-		case LEFT:
-			left();
-			break;
-		default:
-			;
+	// check if creature already took its turn
+	while(turn == grid->turn){/*
+		if(DEBUG) cerr << "*creature: " << sigil << endl;
+		if(DEBUG) cerr << "pc: " << pc << endl;
+		if(DEBUG) cerr << "instruction: " << p[pc].op << endl;
+		if(DEBUG) cerr << "target line: " << p[pc].line << endl;*/
+		
+		switch(p[pc].op){
+			case HOP:
+				hop();
+				break;
+			case LEFT:
+				left();
+				break;
+			case RIGHT:
+				right();
+				break;
+			case INFECT:
+				infect();
+				break;
+			case IF_ENEMY:
+				ifEnemy();
+				break;
+			case IF_EMPTY:
+				ifEmpty();
+				break;
+			case IF_RANDOM:
+				ifRandom();
+				break;
+			case IF_WALL:
+				ifWall();
+				break;
+			case GO:
+				pc = p[pc].line;		// jump to line
+				break;
+			default:
+				;
+		}
 	}
-	++turn;		// used up turn
-	//++pc;
 }
 
 void Creature::hop(){
 	Grid& g = *grid;
 	int r = row, c = col;
+	++pc;
+	++turn;		// used up turn
 	
-	switch(direction){
-		case 'e':
-			++c;
-			if(c >= g.nCols()) return;		// do nothing at wall
-			break;
-		case 'w':
-			--c;
-			if(c < 0) return;
-			break;
-		case 'n':
-			--r;
-			if(r < 0) return;
-			break;
-		case 's':
-			++r;
-			if(r >= g.nRows()) return;
-			break;
-		default:
-			if(DEBUG) cerr << "Invalid creature to hop()" << r << c <<  endl;
-			
-	}
+	if(!nextCell(r, c))
+		return;		// out of bounds, do nothing
+	
 	// inbounds and space empty
 	Creature*& creatureNew = g._g[r][c];
 	Creature*& creatureOld = g._g[row][col];
@@ -174,6 +206,8 @@ void Creature::hop(){
 }
 
 void Creature::left(){
+	++pc;
+	++turn;		// used up turn
 	switch(direction){
 		case 'e':
 			direction = 'n';
@@ -193,6 +227,8 @@ void Creature::left(){
 }
 
 void Creature::right(){
+	++pc;
+	++turn;		// used up turn
 	switch(direction){
 		case 'e':
 			direction = 's';
@@ -214,151 +250,203 @@ void Creature::right(){
 void Creature::infect(){
 	Grid& g = *grid;
 	int r = row, c = col;
-	//(DEBUG) cerr << "BOOYAKASHA! " << row << col <<  endl;
+	++pc;
+	++turn;		// used up turn
 	
+	if(!nextCell(r, c))
+		return;
+	
+	// inbounds
+	Creature*& creatureNew = g._g[r][c];
+	if(creatureNew != NULL and creatureNew->sigil != sigil){
+		if(DEBUG) cerr << "Infecting creature at " << r << c <<  endl;
+		creatureNew->sigil = sigil;
+		creatureNew->program = program;
+		creatureNew->pc = 0;
+	}
+}
+
+void Creature::ifEnemy(){
+	Grid& g = *grid;
+	const vector<Instruction>& p = *program;
+	int r = row, c = col;
+	
+	if(!nextCell(r, c)){
+		++pc;
+		return;
+	}
+	
+	// inbounds
+	Creature*& creatureNew = g._g[r][c];
+	if(creatureNew != NULL and creatureNew->sigil != sigil){
+		pc = p[pc].line;
+	}else
+		++pc;
+}
+
+void Creature::ifEmpty(){
+	Grid& g = *grid;
+	const vector<Instruction>& p = *program;
+	int r = row, c = col;
+	
+	if(!nextCell(r, c)){
+		++pc;
+		return;
+	}
+	
+	// inbounds
+	Creature*& creatureNew = g._g[r][c];
+	if(creatureNew == NULL){
+		pc = p[pc].line;
+	}else
+		++pc;
+}
+
+void Creature::ifWall(){
+	Grid& g = *grid;
+	const vector<Instruction>& p = *program;
+	int r = row, c = col;
+	
+	if(!nextCell(r, c)){
+		pc = p[pc].line;
+	}else
+		++pc;
+}
+
+void Creature::ifRandom(){
+	Grid& g = *grid;
+	const vector<Instruction>& p = *program;
+	int r = row, c = col;
+	
+	if(rand()){
+		pc = p[pc].line;
+	}else
+		++pc;
+}
+
+/*
+@return true if in range, false if out of bounds.
+*/
+bool Creature::nextCell(int& r, int& c){
+	Grid& g = *grid;
 	switch(direction){
 		case 'e':
 			++c;
-			if(c >= g.nCols()) return;		// do nothing at wall
+			if(c >= g.nCols()) return false;		// do nothing at wall
 			break;
 		case 'w':
 			--c;
-			if(c < 0) return;
+			if(c < 0) return false;
 			break;
 		case 'n':
 			--r;
-			if(r < 0) return;
+			if(r < 0) return false;
 			break;
 		case 's':
 			++r;
-			if(r >= g.nRows()) return;
+			if(r >= g.nRows()) return false;
 			break;
 		default:
-			;//if(DEBUG) cerr << "Invalid creature to hop()" << r << c <<  endl;
+			throw logic_error("Invalid direction: " + direction);
 	}
-	/*
-	// inbounds
-	//Creature*& creatureNew = g._g[r][c];
-	if(creatureNew != NULL and creatureNew->sigil != sigil){
-		if(DEBUG) cerr << "Infecting creature at " << r << c <<  endl;
-		creatureNew = this;		// move to next space
-	}*/
+	
+	return true;
 }
 
-// ----
-// food
-/*
- 0: left
- 1: go 0
-*/
-class Food : public Creature{
-	public:
-	Food(char d){sigil = 'f';}
-};
-
-// ----
-// trap
-/*
- 0: if_enemy 3
- 1: left
- 2: go 0
- 3: infect
- 4: go 0
-*/
-class Trap : public Creature{
-	public:
-	Trap(){sigil = 't';}
-};
-
-// -----
-// rover
-/*
- 0: if_enemy 9
- 1: if_empty 7
- 2: if_random 5
- 3: left
- 4: go 0
- 5: right
- 6: go 0
- 7: hop
- 8: go 0
- 9: infect
-10: go 0
-*/
-class Rover : public Creature{
-	public:
-	Rover(char d){sigil = 'r';}
-};
-
-// -----
-// Best
-/*
- 0: if_enemy 9
- 1: if_empty 7
- 2: if_random 5
- 3: left
- 4: go 0
- 5: right
- 6: go 0
- 7: hop
- 8: go 0
- 9: infect
-10: go 0
-*/
-class Best : public Creature{
-	public:
-	Best(char d){sigil = 'b';}
-};
 
 // -------------------------
 // Grid method definitions
 Grid::Grid(int rows, int cols)
 : _g(rows, vector<Creature*>(cols)), turn(0), creatureStash(0)
 {
-	// Hopper program initialization
+	// static program initializations
 	// TODO Better way?
-	if(Creature::programHopper[0].op == 0)
+	if(Creature::pHopper[0].op == 'a')
 	{
-		Creature::programHopper[0] = Instruction(HOP);
-		Creature::programHopper[1] = Instruction(GO, 0);
-		//if(DEBUG)cerr << Hopper::program.size() <<  endl;
+		Creature::pHopper[0] = Instruction(HOP);
+		Creature::pHopper[1] = Instruction(GO, 0);
+		// ----
+		// food
 		/*
-		Food::program.push_back(Instruction(LEFT));
-		Food::program.push_back(Instruction(GO , 0));
-		
-		Trap::program.push_back(Instruction(IF_ENEMY, 3));
-		Trap::program.push_back(Instruction(LEFT));
-		Trap::program.push_back(Instruction(GO , 0));
-		Trap::program.push_back(Instruction(INFECT));
-		Trap::program.push_back(Instruction(GO , 0));
-		
-		Rover::program.push_back(Instruction(IF_ENEMY, 9));
-		Rover::program.push_back(Instruction(IF_EMPTY, 7));
-		Rover::program.push_back(Instruction(IF_RANDOM, 5));
-		Rover::program.push_back(Instruction(GO , 0));
-		Rover::program.push_back(Instruction(LEFT));
-		Rover::program.push_back(Instruction(GO , 0));
-		Rover::program.push_back(Instruction(RIGHT));
-		Rover::program.push_back(Instruction(GO , 0));
-		Rover::program.push_back(Instruction(HOP));
-		Rover::program.push_back(Instruction(GO , 0));
-		Rover::program.push_back(Instruction(INFECT));
-		
-		Best::program.push_back(Instruction(HOP));
-		Best::program.push_back(Instruction(GO , 0));
+		0: left
+		1: go 0
 		*/
+		Creature::pFood[0] = Instruction(LEFT);
+		Creature::pFood[1] = Instruction(GO, 0);
+		// ----
+		// trap
+		/*
+		0: if_enemy 3
+		1: left
+		2: go 0
+		3: infect
+		4: go 0
+		*/
+		Creature::pTrap[0] = Instruction(IF_ENEMY, 3);
+		Creature::pTrap[1] = Instruction(LEFT);
+		Creature::pTrap[2] = Instruction(GO , 0);
+		Creature::pTrap[3] = Instruction(INFECT);
+		Creature::pTrap[4] = Instruction(GO , 0);
+
+		// -----
+		// rover
+		/*
+		0: if_enemy 9
+		1: if_empty 7
+		2: if_random 5
+		3: left
+		4: go 0
+		5: right
+		6: go 0
+		7: hop
+		8: go 0
+		9: infect
+		10: go 0
+		*/
+		Creature::pRover[0] = Instruction(IF_ENEMY, 9);
+		Creature::pRover[1] = Instruction(IF_EMPTY, 7);
+		Creature::pRover[2] = Instruction(IF_RANDOM, 5);
+		Creature::pRover[3] = Instruction(GO , 0);
+		Creature::pRover[4] = Instruction(LEFT);
+		Creature::pRover[5] = Instruction(GO , 0);
+		Creature::pRover[6] = Instruction(RIGHT);
+		Creature::pRover[7] = Instruction(GO , 0);
+		Creature::pRover[8] = Instruction(HOP);
+		Creature::pRover[9] = Instruction(GO , 0);
+		Creature::pRover[10] = Instruction(INFECT);
+		// -----
+		// Best
+		/*
+		0: if_enemy 9
+		1: if_empty 7
+		2: if_random 5
+		3: left
+		4: go 0
+		5: right
+		6: go 0
+		7: hop
+		8: go 0
+		9: infect
+		10: go 0
+		*/
+		Creature::pBest[0] = Instruction(IF_ENEMY, 9);
+		Creature::pBest[1] = Instruction(IF_EMPTY, 7);
+		Creature::pBest[2] = Instruction(IF_RANDOM, 5);
+		Creature::pBest[3] = Instruction(GO , 0);
+		Creature::pBest[4] = Instruction(LEFT);
+		Creature::pBest[5] = Instruction(GO , 0);
+		Creature::pBest[6] = Instruction(RIGHT);
+		Creature::pBest[7] = Instruction(GO , 0);
+		Creature::pBest[8] = Instruction(HOP);
+		Creature::pBest[9] = Instruction(GO , 0);
+		Creature::pBest[10] = Instruction(INFECT);
 	}
 	//assert(Hopper::program.size() == 2);
-	
-	// Food program
 }
 
-void Grid::place(int x, char d, int r, int c){
-	if(x == HOPPER){
-		//Hopper creature(d, r, c, this);
-		creatureStash.push_back(Creature(d, r, c, this, 'h'));
-		_g[r][c] = &creatureStash.back();
-	}
+void Grid::place(char creatureType, char d, int r, int c){
+	creatureStash.push_back(Creature(d, r, c, this, creatureType));
+	_g[r][c] = &creatureStash.back();
 }
 
 void Grid::runTurn(){

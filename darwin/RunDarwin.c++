@@ -67,13 +67,13 @@ int main () {
 		Simulate 5 moves.
 		Print every grid.
 		*/
-		/*Grid g(7, 9);
-		g.place(Trap  ('s'), 0, 0);
-		g.place(Hopper('e'), 3, 2);
-		g.place(Rover ('n'), 5, 4);
-		g.place(Trap  ('w'), 6, 8);
+		Grid g(7, 9);
+		g.place(TRAP,   's', 0, 0);
+		g.place(HOPPER, 'e', 3, 2);
+		g.place(ROVER,  'n', 5, 4);
+		g.place(TRAP,   'w', 6, 8);
 		
-		g.run(5, 1);*/
+		g.run(5, 1);
 		
 		}
 	catch (const invalid_argument&) {
