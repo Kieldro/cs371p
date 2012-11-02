@@ -422,34 +422,15 @@ Grid::Grid(int rows, int cols)
 		Creature::pRover.push_back(Instruction(GO , 0));
 		// -----
 		// Best
-		/*
-		0: if_enemy 5
-		1: if_empty 9
-		2: if_wall 7
-		3: right
-		4: go 0
-		5: infect
-		6: go 0
-		7: left
-		8: go 0
-		9: hop
-		10: go 0
-		*/
-		Creature::pBest.push_back(Instruction(IF_ENEMY, 12));
-		Creature::pBest.push_back(Instruction(IF_EMPTY, 7));
-		Creature::pBest.push_back(Instruction(IF_RANDOM, 5));
-		// friend
-		Creature::pBest.push_back(Instruction(LEFT));
+		Creature::pBest.push_back(Instruction(IF_ENEMY, 9));
+		Creature::pBest.push_back(Instruction(IF_EMPTY, 4));
+		Creature::pBest.push_back(Instruction(LEFT));	// friend
 		Creature::pBest.push_back(Instruction(GO , 0));
-		Creature::pBest.push_back(Instruction(RIGHT));
-		Creature::pBest.push_back(Instruction(GO , 0));
-		// empty
-		Creature::pBest.push_back(Instruction(IF_RANDOM, 10));
+		Creature::pBest.push_back(Instruction(IF_RANDOM, 7));
 		Creature::pBest.push_back(Instruction(HOP));
 		Creature::pBest.push_back(Instruction(GO , 0));
 		Creature::pBest.push_back(Instruction(LEFT));
 		Creature::pBest.push_back(Instruction(GO , 0));
-		// enemy
 		Creature::pBest.push_back(Instruction(INFECT));
 		Creature::pBest.push_back(Instruction(GO , 0));
 	}
