@@ -1,3 +1,27 @@
+commit f3365e3d59be4ac8fee0974e42980a862c7695de
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Thu Nov 1 20:43:22 2012 -0500
+
+    Best creature beats rover in acceptance tests.
+
+commit face21edb2fea0d820fc95fe5e49b568876b873d
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Thu Nov 1 15:32:07 2012 -0500
+
+    Best creature performance now abysmal.
+
+commit ea6057619aaf59409914ab90108622572c6ed811
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Thu Nov 1 14:55:38 2012 -0500
+
+    Adds printCount() debugging method.
+
+commit 1749b38de21b0cd69e06593697679f1488387ebe
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Thu Nov 1 14:18:21 2012 -0500
+
+    Updates UML pdf.
+
 commit 8414e6ba9474838eac6ec753084e17f74a7e0319
 Author: Ian Buitrago <kieldro@gmail.com>
 Date:   Thu Nov 1 13:31:19 2012 -0500

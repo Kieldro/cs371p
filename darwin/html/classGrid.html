@@ -74,8 +74,10 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a186c80efbadb7e10c6daed3105e334e6">place</a> (char x, char d, int r, int c)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a36ed2243b51fcefb61948bfb82bca061">runTurn</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a8f86511ed049044225a4116dd1c2a2e2">print</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a76ba7e71cb2342c8c5465ac3f6525609">printCount</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#ad6aaff57c783f9e20731191ed84a01cc">simulate</a> (int turns, int j)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a5e73c9244664654b83260d64d5def7e8">valid</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#ad1c1d903b85aa27218d898e020ec53a2">randPlace</a> (char, int)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#ae554edb2880aed4416065b28277795ff">nRows</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a0caa03851d135852d977d35dee9888c9">nCols</a> () const </td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
@@ -153,7 +155,7 @@ Public Attributes</h2></td></tr>
           <td class="memname">void <a class="el" href="classGrid.html#a186c80efbadb7e10c6daed3105e334e6">Grid::place</a> </td>
           <td>(</td>
           <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
+          <td class="paramname"><em>creatureType</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -181,6 +183,15 @@ Public Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Places a created creature into the grid. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">d</td><td>direction the creature will face. </td></tr>
+    <tr><td class="paramname">r</td><td>row of the grid. </td></tr>
+    <tr><td class="paramname">c</td><td>column of the grid. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -197,6 +208,52 @@ Public Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Prints the grid and turn number. </p>
+
+</div>
+</div>
+<a class="anchor" id="a76ba7e71cb2342c8c5465ac3f6525609"></a><!-- doxytag: member="Grid::printCount" ref="a76ba7e71cb2342c8c5465ac3f6525609" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classGrid.html#a76ba7e71cb2342c8c5465ac3f6525609">Grid::printCount</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Debugging function thats prints the count of each creature. </p>
+
+</div>
+</div>
+<a class="anchor" id="ad1c1d903b85aa27218d898e020ec53a2"></a><!-- doxytag: member="Grid::randPlace" ref="ad1c1d903b85aa27218d898e020ec53a2" args="(char, int)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classGrid.html#ad1c1d903b85aa27218d898e020ec53a2">Grid::randPlace</a> </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Randomly places count creatures of type type. </p>
 
 </div>
 </div>
@@ -240,6 +297,13 @@ Public Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">turns</td><td>the number turns to run the game. </td></tr>
+    <tr><td class="paramname">j</td><td>print the grid every j turns. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -321,7 +385,7 @@ Public Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 1 2012 14:15:52 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Nov 3 2012 18:51:02 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
