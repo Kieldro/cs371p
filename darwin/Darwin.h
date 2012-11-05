@@ -70,11 +70,13 @@ struct Instruction{
 
 class Creature;
 class Grid{
-	public:
+	friend class Creature;
+	private:
 		vector< vector<Creature*> > _g;
 		deque<Creature> creatureStash;
 		unsigned turn;
 		
+	public:
 		Grid(int rows, int cols);
 		void place(char x, char d, int r, int c);
 		void runTurn();
@@ -88,15 +90,16 @@ class Grid{
 };
 
 class Creature{
-	public:
-		char sigil;
+	private:
 		char direction;
 		int row;
 		int col;
 		const vector<Instruction>* program;
+		Grid* grid;
 		int pc;
 		unsigned turn;
-		Grid* grid;
+	public:
+		char sigil;
 		static vector<Instruction> pHopper;
 		static vector<Instruction> pFood;
 		static vector<Instruction> pTrap;

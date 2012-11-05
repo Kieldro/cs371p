@@ -47,7 +47,6 @@ int main () {
 		g.place(FOOD  , 'n', 7, 7);
 		
 		g.simulate(5, 1);
-		
 		}
 	catch (const invalid_argument&) {
 		assert(false);}
@@ -74,7 +73,6 @@ int main () {
 		g.place(TRAP,   'w', 6, 8);
 		
 		g.simulate(5, 1);
-		
 		}
 	catch (const invalid_argument&) {
 		assert(false);}
