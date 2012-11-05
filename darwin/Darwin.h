@@ -67,6 +67,9 @@ struct Instruction{
 };
 
 class Creature;
+
+// ------
+// Grid
 class Grid{
 	friend class Creature;
 	private:
@@ -120,12 +123,57 @@ class Creature{
 			return strm << c.sigil;
 		}
 };
-vector<Instruction> Creature::pHopper;
-vector<Instruction> Creature::pFood;
-vector<Instruction> Creature::pTrap;
-vector<Instruction> Creature::pRover;
-vector<Instruction> Creature::pBest;
+// Static program initializations
+vector<Instruction> initHopper(){
+	Creature::pHopper.push_back(Instruction(HOP));
+	Creature::pHopper.push_back(Instruction(GO, 0));
+}
+vector<Instruction> initFood(){
+	Creature::pFood.push_back(Instruction(LEFT));
+	Creature::pFood.push_back(Instruction(GO, 0));
+}
+vector<Instruction> initTrap(){
+	Creature::pTrap.push_back(Instruction(IF_ENEMY, 3));
+	Creature::pTrap.push_back(Instruction(LEFT));
+	Creature::pTrap.push_back(Instruction(GO , 0));
+	Creature::pTrap.push_back(Instruction(INFECT));
+	Creature::pTrap.push_back(Instruction(GO , 0));
+}
+vector<Instruction> initRover(){
+	Creature::pRover.push_back(Instruction(IF_ENEMY, 9));
+	Creature::pRover.push_back(Instruction(IF_EMPTY, 7));
+	Creature::pRover.push_back(Instruction(IF_RANDOM, 5));
+	Creature::pRover.push_back(Instruction(LEFT));
+	Creature::pRover.push_back(Instruction(GO , 0));
+	Creature::pRover.push_back(Instruction(RIGHT));
+	Creature::pRover.push_back(Instruction(GO , 0));
+	Creature::pRover.push_back(Instruction(HOP));
+	Creature::pRover.push_back(Instruction(GO , 0));
+	Creature::pRover.push_back(Instruction(INFECT));
+	Creature::pRover.push_back(Instruction(GO , 0));
+}
+vector<Instruction> initBest(){
+	Creature::pBest.push_back(Instruction(IF_ENEMY, 9));
+	Creature::pBest.push_back(Instruction(IF_EMPTY, 4));
+	Creature::pBest.push_back(Instruction(LEFT));	// friend
+	Creature::pBest.push_back(Instruction(GO , 0));
+	Creature::pBest.push_back(Instruction(IF_RANDOM, 7));
+	Creature::pBest.push_back(Instruction(HOP));
+	Creature::pBest.push_back(Instruction(GO , 0));
+	Creature::pBest.push_back(Instruction(LEFT));
+	Creature::pBest.push_back(Instruction(GO , 0));
+	Creature::pBest.push_back(Instruction(INFECT));
+	Creature::pBest.push_back(Instruction(GO , 0));
+}
+vector<Instruction> Creature::pHopper = initHopper();
+vector<Instruction> Creature::pFood = initFood();
+vector<Instruction> Creature::pTrap = initTrap();
+vector<Instruction> Creature::pRover = initRover();
+vector<Instruction> Creature::pBest = initBest();
 
+/**
+Creature constructor.
+*/
 Creature::Creature(char d, int r, int c, Grid* g, char s){
 	if(d < 0 or d > 3)
 		throw logic_error("Invalid direction: " + int(d));
@@ -158,7 +206,9 @@ Creature::Creature(char d, int r, int c, Grid* g, char s){
 			throw logic_error("Invalid creature type: " + sigil);
 	}
 }
-
+/**
+Executes a creature's program until it completes an action.
+*/
 void Creature::execute(){
 	const vector<Instruction>& p = *program;
 	
@@ -202,6 +252,7 @@ void Creature::execute(){
 	}
 }
 
+// Actions
 void Creature::hop(){
 	Grid& g = *grid;
 	int r = row, c = col;
@@ -254,6 +305,7 @@ void Creature::infect(){
 	}
 }
 
+// Control instructions
 void Creature::ifEnemy(){
 	Grid& g = *grid;
 	const vector<Instruction>& p = *program;
@@ -344,67 +396,13 @@ bool Creature::nextCell(int& r, int& c){
 
 // -----------------------
 // Grid method definitions
+/**
+Grid Constructor
+*/
 Grid::Grid(int rows, int cols)
 : _g(rows, vector<Creature*>(cols)), turn(0)//, creatureStash()
 {
 	assert(NULL == 0);
-	// static program initializations
-	// TODO Better way?
-	if(Creature::pHopper.size() == 0)
-	{
-		Creature::pHopper.push_back(Instruction(HOP));
-		Creature::pHopper.push_back(Instruction(GO, 0));
-		// ----
-		// food
-		Creature::pFood.push_back(Instruction(LEFT));
-		Creature::pFood.push_back(Instruction(GO, 0));
-		// ----
-		// trap
-		Creature::pTrap.push_back(Instruction(IF_ENEMY, 3));
-		Creature::pTrap.push_back(Instruction(LEFT));
-		Creature::pTrap.push_back(Instruction(GO , 0));
-		Creature::pTrap.push_back(Instruction(INFECT));
-		Creature::pTrap.push_back(Instruction(GO , 0));
-		// -----
-		// rover
-		/*
-		0: if_enemy 9
-		1: if_empty 7
-		2: if_random 5
-		3: left
-		4: go 0
-		5: right
-		6: go 0
-		7: hop
-		8: go 0
-		9: infect
-		10: go 0
-		*/
-		Creature::pRover.push_back(Instruction(IF_ENEMY, 9));
-		Creature::pRover.push_back(Instruction(IF_EMPTY, 7));
-		Creature::pRover.push_back(Instruction(IF_RANDOM, 5));
-		Creature::pRover.push_back(Instruction(LEFT));
-		Creature::pRover.push_back(Instruction(GO , 0));
-		Creature::pRover.push_back(Instruction(RIGHT));
-		Creature::pRover.push_back(Instruction(GO , 0));
-		Creature::pRover.push_back(Instruction(HOP));
-		Creature::pRover.push_back(Instruction(GO , 0));
-		Creature::pRover.push_back(Instruction(INFECT));
-		Creature::pRover.push_back(Instruction(GO , 0));
-		// -----
-		// Best
-		Creature::pBest.push_back(Instruction(IF_ENEMY, 9));
-		Creature::pBest.push_back(Instruction(IF_EMPTY, 4));
-		Creature::pBest.push_back(Instruction(LEFT));	// friend
-		Creature::pBest.push_back(Instruction(GO , 0));
-		Creature::pBest.push_back(Instruction(IF_RANDOM, 7));
-		Creature::pBest.push_back(Instruction(HOP));
-		Creature::pBest.push_back(Instruction(GO , 0));
-		Creature::pBest.push_back(Instruction(LEFT));
-		Creature::pBest.push_back(Instruction(GO , 0));
-		Creature::pBest.push_back(Instruction(INFECT));
-		Creature::pBest.push_back(Instruction(GO , 0));
-	}
 }
 
 /**

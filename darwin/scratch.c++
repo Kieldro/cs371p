@@ -28,8 +28,15 @@ struct B : A{
 };
 int B::i = 5;
 
+vector<int> baz(){
+	
+	;
+	
+}
+
 int main(){
-	cout << "coasid = " << abs(-1%4) << endl;
+	vector<int> x = baz();
+	cout << "coasid = " << x.size() << endl;
 	
 	return 0;
 }
