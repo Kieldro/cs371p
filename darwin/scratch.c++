@@ -10,13 +10,13 @@ using namespace std;
 
 struct A{
 	int i;
-	int& j;
 	
+	A(int x){
+		i = x;
+	}
 	A()
-	:j(i)
 	{
 		i = 7;
-		
 	}
 	
 	int qux(){return i;}
@@ -29,13 +29,11 @@ struct B : A{
 int B::i = 5;
 
 int main(){
-	//int(*m)(const int&, const int&) = std::max<int>;
-	A a;
-	B b;
 	
-	cout << "B::i = " << B::i << endl;
-	cout << "a.qux() = " << a.qux() << endl;
-	cout << "b.qux() = " << b.qux() << endl;
+	for(int i = 0; i < 3; ++i){
+		A a(i);
+		cout << "&a = " << &a << endl;
+	}
 	
 	
 	

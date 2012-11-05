@@ -39,7 +39,6 @@ project 5 - Darwin
 #include <cassert>		// assert
 #include <vector>		// vector
 #include <deque>
-#include <functional>	// operators
 #include <typeinfo>		// typeid
 #include <stdexcept>
 #include <string>
@@ -433,7 +432,6 @@ Grid::Grid(int rows, int cols)
 		Creature::pBest.push_back(Instruction(INFECT));
 		Creature::pBest.push_back(Instruction(GO , 0));
 	}
-	//assert(Hopper::program.size() == 2);
 }
 
 /**

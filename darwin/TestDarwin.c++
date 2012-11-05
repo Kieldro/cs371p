@@ -99,7 +99,7 @@ struct TestDarwin : CppUnit::TestFixture {
 	void testBest0 () {
 		Grid g(5, 5);
 		srand(0);
-			
+		
 		g.place(BEST  , 'e', 0, 0);
 		g.place(ROVER , 'e', 1, 1);
 		g.place(FOOD  , 's', 1, 3);
@@ -112,7 +112,7 @@ struct TestDarwin : CppUnit::TestFixture {
 	void testBest1 () {
 		Grid g(50, 50);
 		srand(0);
-			
+		
 		g.randPlace(BEST  , 5);
 		g.randPlace(ROVER , 5);
 		g.randPlace(FOOD  , 5);
@@ -123,7 +123,7 @@ struct TestDarwin : CppUnit::TestFixture {
 	void testBest2 () {
 		Grid g(80, 80);
 		srand(0);
-			
+		
 		g.randPlace(BEST  , 13);
 		g.randPlace(ROVER , 13);
 		g.randPlace(FOOD  , 13);
