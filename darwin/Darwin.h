@@ -227,23 +227,6 @@ void Creature::left(){
 	++pc;
 	++turn;		// used up turn
 	direction = abs(--direction % 4);
-	/*
-	switch(direction){
-		case 'e':
-			direction = 'n';
-			break;
-		case 'w':
-			direction = 's';
-			break;
-		case 'n':
-			direction = 'w';
-			break;
-		case 's':
-			direction = 'e';
-			break;
-		default:
-			;//if(DEBUG) cerr << "Invalid creature to hop()" << r << c <<  endl;
-	}*/
 }
 
 void Creature::right(){
@@ -330,6 +313,8 @@ void Creature::ifRandom(){
 }
 
 /**
+@param r Row in the grid that will be changed to the cell the creature faces.
+@param c Column in the grid that will be changed to the cell the creature faces.
 @return true if in range, false if out of bounds.
 */
 bool Creature::nextCell(int& r, int& c){
@@ -360,7 +345,7 @@ bool Creature::nextCell(int& r, int& c){
 // -----------------------
 // Grid method definitions
 Grid::Grid(int rows, int cols)
-: _g(rows, vector<Creature*>(cols)), turn(0), creatureStash(0)
+: _g(rows, vector<Creature*>(cols)), turn(0)//, creatureStash()
 {
 	assert(NULL == 0);
 	// static program initializations
@@ -540,7 +525,7 @@ void Grid::randPlace(char type, int count){
 }
 
 /**
-Checks if all rows are euqal in size.
+Checks if all rows are equal in size.
 */
 bool Grid::valid(){
 	for(int r = 1; r < nRows(); ++r)

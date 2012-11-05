@@ -39,12 +39,12 @@ int main () {
 		Print every grid.
 		*/
 		Grid g(8, 8);
-		g.place(FOOD  , 'e', 0, 0);
-		g.place(HOPPER, 'n', 3, 3);
-		g.place(HOPPER, 'e', 3, 4);
-		g.place(HOPPER, 's', 4, 4);
-		g.place(HOPPER, 'w', 4, 3);
-		g.place(FOOD  , 'n', 7, 7);
+		g.place(FOOD  , EAST, 0, 0);
+		g.place(HOPPER, NORTH, 3, 3);
+		g.place(HOPPER, EAST, 3, 4);
+		g.place(HOPPER, SOUTH, 4, 4);
+		g.place(HOPPER, WEST, 4, 3);
+		g.place(FOOD  , NORTH, 7, 7);
 		
 		g.simulate(5, 1);
 		}
@@ -67,10 +67,11 @@ int main () {
 		Print every grid.
 		*/
 		Grid g(7, 9);
-		g.place(TRAP,   's', 0, 0);
-		g.place(HOPPER, 'e', 3, 2);
-		g.place(ROVER,  'n', 5, 4);
-		g.place(TRAP,   'w', 6, 8);
+		srand(0);
+		g.place(TRAP,   SOUTH, 0, 0);
+		g.place(HOPPER, EAST, 3, 2);
+		g.place(ROVER,  NORTH, 5, 4);
+		g.place(TRAP,   WEST, 6, 8);
 		
 		g.simulate(5, 1);
 		}
