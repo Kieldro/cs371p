@@ -29,13 +29,7 @@ struct B : A{
 int B::i = 5;
 
 int main(){
-	
-	for(int i = 0; i < 3; ++i){
-		A a(i);
-		cout << "&a = " << &a << endl;
-	}
-	
-	
+	cout << "coasid = " << abs(-1%4) << endl;
 	
 	return 0;
 }

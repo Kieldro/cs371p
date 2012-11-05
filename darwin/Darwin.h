@@ -52,8 +52,6 @@ using std::string;
 using std::logic_error;
 using std::out_of_range;
 
-static const vector<char> DIRECTION = {'n', 'e', 's', 'w'};
-
 struct Instruction{
 	char op;
 	int line;
@@ -129,8 +127,8 @@ vector<Instruction> Creature::pRover;
 vector<Instruction> Creature::pBest;
 
 Creature::Creature(char d, int r, int c, Grid* g, char s){
-	if(d != 'n' and d != 'e' and d != 's' and d != 'w')
-		throw logic_error("Invalid direction: " + d);
+	if(d < 0 or d > 3)
+		throw logic_error("Invalid direction: " + int(d));
 	direction = d;
 	row = r;
 	col = c;
@@ -228,6 +226,8 @@ void Creature::hop(){
 void Creature::left(){
 	++pc;
 	++turn;		// used up turn
+	direction = abs(--direction % 4);
+	/*
 	switch(direction){
 		case 'e':
 			direction = 'n';
@@ -243,28 +243,13 @@ void Creature::left(){
 			break;
 		default:
 			;//if(DEBUG) cerr << "Invalid creature to hop()" << r << c <<  endl;
-	}
+	}*/
 }
 
 void Creature::right(){
 	++pc;
 	++turn;		// used up turn
-	switch(direction){
-		case 'e':
-			direction = 's';
-			break;
-		case 'w':
-			direction = 'n';
-			break;
-		case 'n':
-			direction = 'e';
-			break;
-		case 's':
-			direction = 'w';
-			break;
-		default:
-			;//if(DEBUG) cerr << "Invalid creature to hop()" << r << c <<  endl;
-	}
+	direction = ++direction % 4;
 }
 
 void Creature::infect(){
@@ -350,29 +335,29 @@ void Creature::ifRandom(){
 bool Creature::nextCell(int& r, int& c){
 	Grid& g = *grid;
 	switch(direction){
-		case 'e':
+		case EAST:
 			++c;
 			if(c >= g.nCols()) return false;		// do nothing at wall
 			break;
-		case 'w':
+		case WEST:
 			--c;
 			if(c < 0) return false;
 			break;
-		case 'n':
+		case NORTH:
 			--r;
 			if(r < 0) return false;
 			break;
-		case 's':
+		case SOUTH:
 			++r;
 			if(r >= g.nRows()) return false;
 			break;
 		default:
-			throw logic_error("Invalid direction: " + direction);
+			throw logic_error("Invalid direction: " + (int)direction);
 	}
 	return true;
 }
 
-// -------------------------
+// -----------------------
 // Grid method definitions
 Grid::Grid(int rows, int cols)
 : _g(rows, vector<Creature*>(cols)), turn(0), creatureStash(0)
@@ -548,7 +533,7 @@ void Grid::randPlace(char type, int count){
 		int pos = rand() % (nRows() * nCols());
 		int r = pos / nRows();
 		int c = pos % nCols();
-		char direction = DIRECTION[rand() % 4];
+		char direction = rand() % 4;
 	
 		place(type, direction, r, c);
 	}
