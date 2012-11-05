@@ -10,7 +10,7 @@ project 5 - Darwin
 
 // ------
 // macros
-#define DEBUG true
+#define DEBUG !true
 #define BOOYAKASHA	if(DEBUG) cerr << "BOOYAKASHA!" <<  endl;
 
 #define HOP			'H'
