@@ -367,7 +367,6 @@ bool Creature::nextCell(int& r, int& c){
 		default:
 			throw logic_error("Invalid direction: " + direction);
 	}
-	
 	return true;
 }
 

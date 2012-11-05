@@ -117,6 +117,7 @@ struct TestDarwin : CppUnit::TestFixture {
 		g.randPlace(ROVER , 5);
 		g.randPlace(FOOD  , 5);
 		g.randPlace(HOPPER, 5);
+		g.randPlace(TRAP  , 5);
 		g.simulate(500, 50);
 	}
 	void testBest2 () {
@@ -127,6 +128,7 @@ struct TestDarwin : CppUnit::TestFixture {
 		g.randPlace(ROVER , 13);
 		g.randPlace(FOOD  , 13);
 		g.randPlace(HOPPER, 13);
+		g.randPlace(TRAP  , 13);
 		g.simulate(1000, 500);
 	}
 	
