@@ -72,12 +72,17 @@ struct TestDarwin : CppUnit::TestFixture {
 	// --------
 	// testCreature
 	void testCreature0 () {
-		Grid g(3, 3);
-		g.place(HOPPER, SOUTH, 0, 1);
-		g.simulate(3, 1);
+		Creature c (NORTH, 1, 2, NULL, HOPPER);
+		
+		CPPUNIT_ASSERT(c.direction == NORTH);
+		CPPUNIT_ASSERT(c.row == 1);
+		CPPUNIT_ASSERT(c.col == 2);
+		CPPUNIT_ASSERT(c.grid == NULL);
+		CPPUNIT_ASSERT(c.sigil == HOPPER);
+		CPPUNIT_ASSERT(c.turn == 0);
+		CPPUNIT_ASSERT(c.pc == 0);
+		CPPUNIT_ASSERT(c.program == &Creature::pHopper);
 	}
-	
-	
 	
 	// --------
 	// testHop
@@ -178,6 +183,7 @@ struct TestDarwin : CppUnit::TestFixture {
 	CPPUNIT_TEST(testPlace0);
 	CPPUNIT_TEST(testPlace1);
 	CPPUNIT_TEST(testPlace2);
+	CPPUNIT_TEST(testCreature0);
 	CPPUNIT_TEST(testHop0);
 	CPPUNIT_TEST(testHop1);
 	CPPUNIT_TEST(testFood0);

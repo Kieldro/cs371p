@@ -1,3 +1,9 @@
+commit 5c3272e6b3448b0ba154f4625ab5bf4da18ebbf5
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Tue Nov 6 13:00:23 2012 -0600
+
+    Fixes west to be 0.
+
 commit de234df7f8d346823ad81118f835075cd1ce8623
 Author: Ian Buitrago <kieldro@gmail.com>
 Date:   Mon Nov 5 16:48:21 2012 -0600

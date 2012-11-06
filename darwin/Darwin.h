@@ -28,18 +28,8 @@ using std::out_of_range;
 
 // ------
 // macros
-#define DEBUG true
+#define DEBUG !true
 #define BOOYAKASHA	if(DEBUG) cerr << "BOOYAKASHA!" <<  endl;
-
-#define HOP			'H'
-#define LEFT		'L'
-#define RIGHT		'R'
-#define INFECT		'I'
-#define IF_EMPTY	'm'
-#define IF_ENEMY	'n'
-#define IF_WALL		'w'
-#define IF_RANDOM	'r'
-#define GO			'g'
 
 #define HOPPER		'h'
 #define FOOD		'f'
@@ -47,21 +37,19 @@ using std::out_of_range;
 #define ROVER		'r'
 #define BEST		'b'
 
-#define WEST		0
-#define NORTH		1
-#define EAST		2
-#define SOUTH		3
+enum op{HOP, LEFT, RIGHT, INFECT, IF_EMPTY, IF_ENEMY, IF_WALL, IF_RANDOM, GO};
+enum dir{WEST, NORTH, EAST, SOUTH};
 
 struct Instruction{
-	char op;
+	op opCode;
 	int line;
 	
-	Instruction(char o, int l = -1){
-		op = o;
+	Instruction(op o, int l = -1){
+		opCode = o;
 		line = l;
 	}
 	Instruction(){
-		op = 'a';
+		opCode = LEFT;
 		line = 0;
 	}
 };
@@ -80,9 +68,9 @@ class Grid{
 		bool valid();
 	public:
 		Grid(int rows, int cols);
-		void place(char x, char d, int r, int c);
+		void place(char x, dir d, int r, int c);
 		void runTurn();
-		void print(std::ostream&);
+		void print(std::ostream& = cout);
 		void printCount();
 		void simulate(int turns, int j);
 		void randPlace(char, int);
@@ -92,7 +80,7 @@ class Grid{
 
 class Creature{
 	private:
-		char direction;
+		dir direction;
 		int row;
 		int col;
 		const vector<Instruction>* program;
@@ -107,7 +95,7 @@ class Creature{
 		static vector<Instruction> pRover;
 		static vector<Instruction> pBest;
 		
-		Creature(char d, int r, int c, Grid* g, char s);
+		Creature(dir d, int r, int c, Grid* g, char s);
 		Creature(){}
 		void execute();
 		void hop();
@@ -127,9 +115,7 @@ class Creature{
 /**
 Creature constructor.
 */
-Creature::Creature(char d, int r, int c, Grid* g, char s){
-	if(d < 0 or d > 3)
-		throw logic_error("Invalid direction: " + int(d));
+Creature::Creature(dir d, int r, int c, Grid* g, char s){
 	direction = d;
 	row = r;
 	col = c;
@@ -171,7 +157,7 @@ void Creature::execute(){
 		if(DEBUG) cerr << "pc: " << pc << endl;
 		if(DEBUG) cerr << "instruction: " << p[pc].op << endl;
 		if(DEBUG) cerr << "target line: " << p[pc].line << endl;*/
-		switch(p[pc].op){
+		switch(p[pc].opCode){
 			case HOP:
 				hop();
 				break;
@@ -230,13 +216,13 @@ void Creature::hop(){
 void Creature::left(){
 	++pc;
 	++turn;		// used up turn
-	direction = (direction + 3) % 4;
+	direction = dir((direction + 3) % 4);
 }
 
 void Creature::right(){
 	++pc;
 	++turn;		// used up turn
-	direction = ++direction % 4;
+	direction = dir((direction + 1) % 4);
 }
 
 void Creature::infect(){
@@ -379,12 +365,12 @@ vector<Instruction> initRover(){
 vector<Instruction> initBest(){
 	Creature::pBest.push_back(Instruction(IF_ENEMY, 9));
 	Creature::pBest.push_back(Instruction(IF_EMPTY, 4));
-	Creature::pBest.push_back(Instruction(LEFT));	// friend
+	Creature::pBest.push_back(Instruction(RIGHT));	// friend
 	Creature::pBest.push_back(Instruction(GO , 0));
 	Creature::pBest.push_back(Instruction(IF_RANDOM, 7));
 	Creature::pBest.push_back(Instruction(HOP));
 	Creature::pBest.push_back(Instruction(GO , 0));
-	Creature::pBest.push_back(Instruction(LEFT));
+	Creature::pBest.push_back(Instruction(RIGHT));
 	Creature::pBest.push_back(Instruction(GO , 0));
 	Creature::pBest.push_back(Instruction(INFECT));
 	Creature::pBest.push_back(Instruction(GO , 0));
@@ -407,35 +393,12 @@ Grid::Grid(int rows, int cols)
 }
 
 /**
-Prints the grid and turn number.
-*/
-void Grid::print(std::ostream& out = cout){
-	out << "Turn = " << turn << "." << endl;
-	out << "  ";
-	for(int c = 0; c < nCols(); ++c)
-		out << c % 10;
-	out << endl;
-	for(int r = 0; r < nRows(); ++r){
-		out << r % 10 << " ";
-		for(int c = 0; c < nCols(); ++c){
-			if(_g[r][c] == NULL)
-				out << ".";
-			else
-				out << *_g[r][c];
-		}
-		out << endl;
-	}
-	out << endl;
-	if(DEBUG)printCount();
-}
-
-/**
 Places a created creature into the grid.
 @param d direction the creature will face.
 @param r row of the grid.
 @param c column of the grid.
 */
-void Grid::place(char creatureType, char d, int r, int c){
+void Grid::place(char creatureType, dir d, int r, int c){
 	if(r < 0 or r >= nRows() or c < 0 or c >= nCols())
 		throw out_of_range("Coordinates out of range: " + r + c);
 	if(_g[r][c] != NULL)
@@ -470,6 +433,29 @@ void Grid::simulate(int turns, int j){
 		if(i % j == 0)
 			print();
 	}
+}
+
+/**
+Prints the grid and turn number.
+*/
+void Grid::print(std::ostream& out){
+	out << "Turn = " << turn << "." << endl;
+	out << "  ";
+	for(int c = 0; c < nCols(); ++c)
+		out << c % 10;
+	out << endl;
+	for(int r = 0; r < nRows(); ++r){
+		out << r % 10 << " ";
+		for(int c = 0; c < nCols(); ++c){
+			if(_g[r][c] == NULL)
+				out << ".";
+			else
+				out << *_g[r][c];
+		}
+		out << endl;
+	}
+	out << endl;
+	if(DEBUG)printCount();
 }
 
 /**
@@ -517,7 +503,7 @@ void Grid::randPlace(char type, int count){
 		int pos = rand() % (nRows() * nCols());
 		int r = pos / nRows();
 		int c = pos % nCols();
-		char direction = rand() % 4;
+		dir direction = dir(rand() % 4);
 	
 		place(type, direction, r, c);
 	}
