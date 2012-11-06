@@ -35,6 +35,21 @@ struct TestDarwin : CppUnit::TestFixture {
 	}
 	
 	// --------
+	// testCreature
+	void testCreature0 () {
+		Creature c (NORTH, 1, 2, NULL, HOPPER);
+		
+		CPPUNIT_ASSERT(c.direction == NORTH);
+		CPPUNIT_ASSERT(c.row == 1);
+		CPPUNIT_ASSERT(c.col == 2);
+		CPPUNIT_ASSERT(c.grid == NULL);
+		CPPUNIT_ASSERT(c.sigil == HOPPER);
+		CPPUNIT_ASSERT(c.turn == 0);
+		CPPUNIT_ASSERT(c.pc == 0);
+		CPPUNIT_ASSERT(c.program == &Creature::pHopper);
+	}
+	
+	// --------
 	// testPlace
 	void testPlace0 () {
 		Grid g(3, 3);
@@ -68,21 +83,45 @@ struct TestDarwin : CppUnit::TestFixture {
 			CPPUNIT_ASSERT(false);
 		}catch(...){
 			CPPUNIT_ASSERT(true);
-		}			
+		}
 	}
+	
 	// --------
-	// testCreature
-	void testCreature0 () {
-		Creature c (NORTH, 1, 2, NULL, HOPPER);
+	// testNextCell
+	void testNextCell0 () {
+		Grid g (3, 3);
+		g.place(HOPPER, SOUTH, 0, 1);
+		Creature& creature = g.creatureStash.back();
 		
-		CPPUNIT_ASSERT(c.direction == NORTH);
-		CPPUNIT_ASSERT(c.row == 1);
-		CPPUNIT_ASSERT(c.col == 2);
-		CPPUNIT_ASSERT(c.grid == NULL);
-		CPPUNIT_ASSERT(c.sigil == HOPPER);
-		CPPUNIT_ASSERT(c.turn == 0);
-		CPPUNIT_ASSERT(c.pc == 0);
-		CPPUNIT_ASSERT(c.program == &Creature::pHopper);
+		int r = 0;
+		int c = 0;
+		CPPUNIT_ASSERT( creature.nextCell(r, c) );
+		CPPUNIT_ASSERT(r == 1);
+		CPPUNIT_ASSERT(c == 1);
+	}
+	
+	void testNextCell1 () {
+		Grid g (3, 3);
+		g.place(HOPPER, EAST, 1, 0);
+		Creature& creature = g.creatureStash.back();
+		
+		int r = -1;
+		int c = -1;
+		CPPUNIT_ASSERT( creature.nextCell(r, c) );
+		CPPUNIT_ASSERT(r == 1);
+		CPPUNIT_ASSERT(c == 1);
+	}
+	
+	void testNextCell2 () {
+		Grid g (3, 3);
+		g.place(HOPPER, SOUTH, 2, 0);
+		Creature& creature = g.creatureStash.back();
+		
+		int r = 4;
+		int c = 4;
+		CPPUNIT_ASSERT( !creature.nextCell(r, c) );
+		CPPUNIT_ASSERT(r == 3);
+		CPPUNIT_ASSERT(c == 0);
 	}
 	
 	// --------
@@ -181,10 +220,13 @@ struct TestDarwin : CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(TestDarwin);
 	
 	CPPUNIT_TEST(testGrid0);
+	CPPUNIT_TEST(testCreature0);
 	CPPUNIT_TEST(testPlace0);
 	CPPUNIT_TEST(testPlace1);
 	CPPUNIT_TEST(testPlace2);
-	CPPUNIT_TEST(testCreature0);
+	CPPUNIT_TEST(testNextCell0);
+	CPPUNIT_TEST(testNextCell1);
+	CPPUNIT_TEST(testNextCell2);
 	CPPUNIT_TEST(testHop0);
 	CPPUNIT_TEST(testHop1);
 	CPPUNIT_TEST(testFood0);

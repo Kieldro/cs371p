@@ -28,7 +28,7 @@ using std::out_of_range;
 
 // ------
 // macros
-#define DEBUG !true
+#define DEBUG true
 #define BOOYAKASHA	if(DEBUG) cerr << "BOOYAKASHA!" <<  endl;
 
 #define HOPPER		'h'
@@ -66,16 +66,16 @@ class Grid{
 		unsigned turn;
 		
 		bool valid();
-	public:
-		Grid(int rows, int cols);
-		void place(char x, dir d, int r, int c);
 		void runTurn();
 		void print(std::ostream& = cout);
 		void printCount();
-		void simulate(int turns, int j);
-		void randPlace(char, int);
 		int nRows() const{return _g.size();}
 		int nCols() const{return _g.size() ? _g[0].size() : 0;}
+	public:
+		Grid(int rows, int cols);
+		void place(char x, dir d, int r, int c);
+		void randPlace(char, int);
+		void simulate(int turns, int j);
 };
 
 class Creature{
@@ -87,17 +87,7 @@ class Creature{
 		Grid* grid;
 		int pc;
 		unsigned turn;
-	public:
-		char sigil;
-		static vector<Instruction> pHopper;
-		static vector<Instruction> pFood;
-		static vector<Instruction> pTrap;
-		static vector<Instruction> pRover;
-		static vector<Instruction> pBest;
 		
-		Creature(dir d, int r, int c, Grid* g, char s);
-		Creature(){}
-		void execute();
 		void hop();
 		void left();
 		void right();
@@ -107,6 +97,18 @@ class Creature{
 		void ifRandom();
 		void ifWall();
 		bool nextCell(int& r, int& c);
+	public:
+		char sigil;
+		static vector<Instruction> pFood;
+		static vector<Instruction> pHopper;
+		static vector<Instruction> pTrap;
+		static vector<Instruction> pRover;
+		static vector<Instruction> pBest;
+		
+		Creature(dir d, int r, int c, Grid* g, char s);
+		Creature(){}
+		void execute();
+		
 		friend std::ostream& operator<<(std::ostream &strm, const Creature &c) {
 			return strm << c.sigil;
 		}
@@ -304,12 +306,15 @@ void Creature::ifRandom(){
 }
 
 /**
+Helper function that moves r and c to the cell the creature faces and checks the bounds.
 @param r Row in the grid that will be changed to the cell the creature faces.
 @param c Column in the grid that will be changed to the cell the creature faces.
 @return true if in range, false if out of bounds.
 */
 bool Creature::nextCell(int& r, int& c){
 	Grid& g = *grid;
+	r = row;
+	c = col;
 	switch(direction){
 		case EAST:
 			++c;
@@ -335,45 +340,52 @@ bool Creature::nextCell(int& r, int& c){
 
 // Static program initializations
 vector<Instruction> initHopper(){
-	Creature::pHopper.push_back(Instruction(HOP));
-	Creature::pHopper.push_back(Instruction(GO, 0));
+	vector<Instruction>& creatureProgram = Creature::pHopper;
+	
+	creatureProgram.push_back(Instruction(HOP));
+	creatureProgram.push_back(Instruction(GO, 0));
 }
 vector<Instruction> initFood(){
-	Creature::pFood.push_back(Instruction(LEFT));
-	Creature::pFood.push_back(Instruction(GO, 0));
+	vector<Instruction>& creatureProgram = Creature::pFood;
+	
+	creatureProgram.push_back(Instruction(LEFT));
+	creatureProgram.push_back(Instruction(GO, 0));
 }
 vector<Instruction> initTrap(){
-	Creature::pTrap.push_back(Instruction(IF_ENEMY, 3));
-	Creature::pTrap.push_back(Instruction(LEFT));
-	Creature::pTrap.push_back(Instruction(GO , 0));
-	Creature::pTrap.push_back(Instruction(INFECT));
-	Creature::pTrap.push_back(Instruction(GO , 0));
+	vector<Instruction>& creatureProgram = Creature::pTrap;
+	
+	creatureProgram.push_back(Instruction(IF_ENEMY, 3));
+	creatureProgram.push_back(Instruction(LEFT));
+	creatureProgram.push_back(Instruction(GO , 0));
+	creatureProgram.push_back(Instruction(INFECT));
+	creatureProgram.push_back(Instruction(GO , 0));
 }
 vector<Instruction> initRover(){
-	Creature::pRover.push_back(Instruction(IF_ENEMY, 9));
-	Creature::pRover.push_back(Instruction(IF_EMPTY, 7));
-	Creature::pRover.push_back(Instruction(IF_RANDOM, 5));
-	Creature::pRover.push_back(Instruction(LEFT));
-	Creature::pRover.push_back(Instruction(GO , 0));
-	Creature::pRover.push_back(Instruction(RIGHT));
-	Creature::pRover.push_back(Instruction(GO , 0));
-	Creature::pRover.push_back(Instruction(HOP));
-	Creature::pRover.push_back(Instruction(GO , 0));
-	Creature::pRover.push_back(Instruction(INFECT));
-	Creature::pRover.push_back(Instruction(GO , 0));
+	vector<Instruction>& creatureProgram = Creature::pRover;
+	
+	creatureProgram.push_back(Instruction(IF_ENEMY, 9));
+	creatureProgram.push_back(Instruction(IF_EMPTY, 7));
+	creatureProgram.push_back(Instruction(IF_RANDOM, 5));
+	creatureProgram.push_back(Instruction(LEFT));
+	creatureProgram.push_back(Instruction(GO , 0));
+	creatureProgram.push_back(Instruction(RIGHT));
+	creatureProgram.push_back(Instruction(GO , 0));
+	creatureProgram.push_back(Instruction(HOP));
+	creatureProgram.push_back(Instruction(GO , 0));
+	creatureProgram.push_back(Instruction(INFECT));
+	creatureProgram.push_back(Instruction(GO , 0));
 }
 vector<Instruction> initBest(){
-	Creature::pBest.push_back(Instruction(IF_ENEMY, 9));
-	Creature::pBest.push_back(Instruction(IF_EMPTY, 4));
-	Creature::pBest.push_back(Instruction(RIGHT));
-	Creature::pBest.push_back(Instruction(GO , 0));
-	Creature::pBest.push_back(Instruction(IF_RANDOM, 7));
-	Creature::pBest.push_back(Instruction(HOP));
-	Creature::pBest.push_back(Instruction(GO , 0));
-	Creature::pBest.push_back(Instruction(RIGHT));
-	Creature::pBest.push_back(Instruction(GO , 0));
-	Creature::pBest.push_back(Instruction(INFECT));
-	Creature::pBest.push_back(Instruction(GO , 0));
+	vector<Instruction>& creatureProgram = Creature::pBest;
+	
+	creatureProgram.push_back(Instruction(IF_ENEMY, 6));
+	creatureProgram.push_back(Instruction(IF_EMPTY, 4));
+	creatureProgram.push_back(Instruction(LEFT));
+	creatureProgram.push_back(Instruction(GO , 0));
+	creatureProgram.push_back(Instruction(HOP));
+	creatureProgram.push_back(Instruction(GO , 0));
+	creatureProgram.push_back(Instruction(INFECT));
+	creatureProgram.push_back(Instruction(GO , 0));
 }
 vector<Instruction> Creature::pHopper = initHopper();
 vector<Instruction> Creature::pFood = initFood();
