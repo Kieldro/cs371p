@@ -297,7 +297,7 @@ void Creature::ifRandom(){
 	const vector<Instruction>& p = *program;
 	int r = row, c = col;
 	
-	if(rand()){
+	if(rand() % 2){
 		pc = p[pc].line;
 	}else
 		++pc;
@@ -365,7 +365,7 @@ vector<Instruction> initRover(){
 vector<Instruction> initBest(){
 	Creature::pBest.push_back(Instruction(IF_ENEMY, 9));
 	Creature::pBest.push_back(Instruction(IF_EMPTY, 4));
-	Creature::pBest.push_back(Instruction(RIGHT));	// friend
+	Creature::pBest.push_back(Instruction(RIGHT));
 	Creature::pBest.push_back(Instruction(GO , 0));
 	Creature::pBest.push_back(Instruction(IF_RANDOM, 7));
 	Creature::pBest.push_back(Instruction(HOP));

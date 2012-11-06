@@ -46,6 +46,7 @@ struct TestDarwin : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(g._g[r][c] !=  NULL);
 	}
 	
+	// out of bounds tests
 	void testPlace1 () {
 		Grid g(3, 3);
 		int r = -1;

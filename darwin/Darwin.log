@@ -1,3 +1,9 @@
+commit e3d851f57ff1ceaba336b8eec27e9922ded8db91
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Tue Nov 6 13:51:36 2012 -0600
+
+    enums replace most macros.
+
 commit 5c3272e6b3448b0ba154f4625ab5bf4da18ebbf5
 Author: Ian Buitrago <kieldro@gmail.com>
 Date:   Tue Nov 6 13:00:23 2012 -0600

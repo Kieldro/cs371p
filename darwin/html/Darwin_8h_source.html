@@ -334,7 +334,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00297"></a>00297         <span class="keyword">const</span> vector&lt;Instruction&gt;&amp; p = *<a class="code" href="classCreature.html#a47feb52379af9c624a7e4a8f4389d09b">program</a>;
 <a name="l00298"></a>00298         <span class="keywordtype">int</span> r = <a class="code" href="classCreature.html#af069d60a967697bdc03404639fb0e494">row</a>, c = <a class="code" href="classCreature.html#a0c3719e1305f2667b08addeec7bc59d2">col</a>;
 <a name="l00299"></a>00299         
-<a name="l00300"></a>00300         <span class="keywordflow">if</span>(rand()){
+<a name="l00300"></a>00300         <span class="keywordflow">if</span>(rand() % 2){
 <a name="l00301"></a>00301                 <a class="code" href="classCreature.html#a81b808ceee6ddc5c0a97e0b97b19a707">pc</a> = p[<a class="code" href="classCreature.html#a81b808ceee6ddc5c0a97e0b97b19a707">pc</a>].line;
 <a name="l00302"></a>00302         }<span class="keywordflow">else</span>
 <a name="l00303"></a>00303                 ++<a class="code" href="classCreature.html#a81b808ceee6ddc5c0a97e0b97b19a707">pc</a>;
@@ -397,7 +397,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00365"></a><a class="code" href="Darwin_8h.html#a15f42e5c8afa75a116b26409d7cc423f">00365</a> vector&lt;Instruction&gt; <a class="code" href="Darwin_8h.html#a15f42e5c8afa75a116b26409d7cc423f">initBest</a>(){
 <a name="l00366"></a>00366         <a class="code" href="classCreature.html#a51c2d5186d3d5cddb522553320a5ec3a">Creature::pBest</a>.push_back(<a class="code" href="structInstruction.html">Instruction</a>(<a class="code" href="Darwin_8h.html#a99a30df0f2488360cdd46b4b88e5f5f0aca9f5c4b05663cca22ba598a7d89e744">IF_ENEMY</a>, 9));
 <a name="l00367"></a>00367         <a class="code" href="classCreature.html#a51c2d5186d3d5cddb522553320a5ec3a">Creature::pBest</a>.push_back(<a class="code" href="structInstruction.html">Instruction</a>(<a class="code" href="Darwin_8h.html#a99a30df0f2488360cdd46b4b88e5f5f0ae006fe6a2dd9f7542feaf3fed0a61338">IF_EMPTY</a>, 4));
-<a name="l00368"></a>00368         <a class="code" href="classCreature.html#a51c2d5186d3d5cddb522553320a5ec3a">Creature::pBest</a>.push_back(<a class="code" href="structInstruction.html">Instruction</a>(<a class="code" href="Darwin_8h.html#a99a30df0f2488360cdd46b4b88e5f5f0aec8379af7490bb9eaaf579cf17876f38">RIGHT</a>));  <span class="comment">// friend</span>
+<a name="l00368"></a>00368         <a class="code" href="classCreature.html#a51c2d5186d3d5cddb522553320a5ec3a">Creature::pBest</a>.push_back(<a class="code" href="structInstruction.html">Instruction</a>(<a class="code" href="Darwin_8h.html#a99a30df0f2488360cdd46b4b88e5f5f0aec8379af7490bb9eaaf579cf17876f38">RIGHT</a>));
 <a name="l00369"></a>00369         <a class="code" href="classCreature.html#a51c2d5186d3d5cddb522553320a5ec3a">Creature::pBest</a>.push_back(<a class="code" href="structInstruction.html">Instruction</a>(<a class="code" href="Darwin_8h.html#a99a30df0f2488360cdd46b4b88e5f5f0a50d8e53aac4e002d0fd296c5033ce985">GO</a> , 0));
 <a name="l00370"></a>00370         <a class="code" href="classCreature.html#a51c2d5186d3d5cddb522553320a5ec3a">Creature::pBest</a>.push_back(<a class="code" href="structInstruction.html">Instruction</a>(<a class="code" href="Darwin_8h.html#a99a30df0f2488360cdd46b4b88e5f5f0ac5db08f7f3d58d9902ec95a03f4b5702">IF_RANDOM</a>, 7));
 <a name="l00371"></a>00371         <a class="code" href="classCreature.html#a51c2d5186d3d5cddb522553320a5ec3a">Creature::pBest</a>.push_back(<a class="code" href="structInstruction.html">Instruction</a>(<a class="code" href="Darwin_8h.html#a99a30df0f2488360cdd46b4b88e5f5f0a7d98354a8267f1a2e22d9d806edd1a49">HOP</a>));
@@ -542,7 +542,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 6 13:49:04 2012 by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 6 14:35:14 2012 by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
