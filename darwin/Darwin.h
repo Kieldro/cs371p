@@ -8,9 +8,27 @@ project 5 - Darwin
 #ifndef Darwin_h
 #define Darwin_h
 
+// --------
+// includes
+#include <cassert>		// assert
+#include <vector>		// vector
+#include <deque>
+#include <typeinfo>		// typeid
+#include <stdexcept>
+#include <string>
+
+using std::vector;
+using std::deque;
+using std::cout;
+using std::cerr;
+using std::endl;
+using std::string;
+using std::logic_error;
+using std::out_of_range;
+
 // ------
 // macros
-#define DEBUG !true
+#define DEBUG true
 #define BOOYAKASHA	if(DEBUG) cerr << "BOOYAKASHA!" <<  endl;
 
 #define HOP			'H'
@@ -29,28 +47,10 @@ project 5 - Darwin
 #define ROVER		'r'
 #define BEST		'b'
 
-#define NORTH		0
-#define EAST		1
-#define SOUTH		2
-#define WEST		3
-
-// --------
-// includes
-#include <cassert>		// assert
-#include <vector>		// vector
-#include <deque>
-#include <typeinfo>		// typeid
-#include <stdexcept>
-#include <string>
-
-using std::vector;
-using std::deque;
-using std::cout;
-using std::cerr;
-using std::endl;
-using std::string;
-using std::logic_error;
-using std::out_of_range;
+#define WEST		0
+#define NORTH		1
+#define EAST		2
+#define SOUTH		3
 
 struct Instruction{
 	char op;
@@ -77,14 +77,14 @@ class Grid{
 		deque<Creature> creatureStash;
 		unsigned turn;
 		
+		bool valid();
 	public:
 		Grid(int rows, int cols);
 		void place(char x, char d, int r, int c);
 		void runTurn();
-		void print();
+		void print(std::ostream&);
 		void printCount();
 		void simulate(int turns, int j);
-		bool valid();
 		void randPlace(char, int);
 		int nRows() const{return _g.size();}
 		int nCols() const{return _g.size() ? _g[0].size() : 0;}
@@ -123,53 +123,6 @@ class Creature{
 			return strm << c.sigil;
 		}
 };
-// Static program initializations
-vector<Instruction> initHopper(){
-	Creature::pHopper.push_back(Instruction(HOP));
-	Creature::pHopper.push_back(Instruction(GO, 0));
-}
-vector<Instruction> initFood(){
-	Creature::pFood.push_back(Instruction(LEFT));
-	Creature::pFood.push_back(Instruction(GO, 0));
-}
-vector<Instruction> initTrap(){
-	Creature::pTrap.push_back(Instruction(IF_ENEMY, 3));
-	Creature::pTrap.push_back(Instruction(LEFT));
-	Creature::pTrap.push_back(Instruction(GO , 0));
-	Creature::pTrap.push_back(Instruction(INFECT));
-	Creature::pTrap.push_back(Instruction(GO , 0));
-}
-vector<Instruction> initRover(){
-	Creature::pRover.push_back(Instruction(IF_ENEMY, 9));
-	Creature::pRover.push_back(Instruction(IF_EMPTY, 7));
-	Creature::pRover.push_back(Instruction(IF_RANDOM, 5));
-	Creature::pRover.push_back(Instruction(LEFT));
-	Creature::pRover.push_back(Instruction(GO , 0));
-	Creature::pRover.push_back(Instruction(RIGHT));
-	Creature::pRover.push_back(Instruction(GO , 0));
-	Creature::pRover.push_back(Instruction(HOP));
-	Creature::pRover.push_back(Instruction(GO , 0));
-	Creature::pRover.push_back(Instruction(INFECT));
-	Creature::pRover.push_back(Instruction(GO , 0));
-}
-vector<Instruction> initBest(){
-	Creature::pBest.push_back(Instruction(IF_ENEMY, 9));
-	Creature::pBest.push_back(Instruction(IF_EMPTY, 4));
-	Creature::pBest.push_back(Instruction(LEFT));	// friend
-	Creature::pBest.push_back(Instruction(GO , 0));
-	Creature::pBest.push_back(Instruction(IF_RANDOM, 7));
-	Creature::pBest.push_back(Instruction(HOP));
-	Creature::pBest.push_back(Instruction(GO , 0));
-	Creature::pBest.push_back(Instruction(LEFT));
-	Creature::pBest.push_back(Instruction(GO , 0));
-	Creature::pBest.push_back(Instruction(INFECT));
-	Creature::pBest.push_back(Instruction(GO , 0));
-}
-vector<Instruction> Creature::pHopper = initHopper();
-vector<Instruction> Creature::pFood = initFood();
-vector<Instruction> Creature::pTrap = initTrap();
-vector<Instruction> Creature::pRover = initRover();
-vector<Instruction> Creature::pBest = initBest();
 
 /**
 Creature constructor.
@@ -277,7 +230,7 @@ void Creature::hop(){
 void Creature::left(){
 	++pc;
 	++turn;		// used up turn
-	direction = abs(--direction % 4);
+	direction = (direction + 3) % 4;
 }
 
 void Creature::right(){
@@ -394,6 +347,54 @@ bool Creature::nextCell(int& r, int& c){
 	return true;
 }
 
+// Static program initializations
+vector<Instruction> initHopper(){
+	Creature::pHopper.push_back(Instruction(HOP));
+	Creature::pHopper.push_back(Instruction(GO, 0));
+}
+vector<Instruction> initFood(){
+	Creature::pFood.push_back(Instruction(LEFT));
+	Creature::pFood.push_back(Instruction(GO, 0));
+}
+vector<Instruction> initTrap(){
+	Creature::pTrap.push_back(Instruction(IF_ENEMY, 3));
+	Creature::pTrap.push_back(Instruction(LEFT));
+	Creature::pTrap.push_back(Instruction(GO , 0));
+	Creature::pTrap.push_back(Instruction(INFECT));
+	Creature::pTrap.push_back(Instruction(GO , 0));
+}
+vector<Instruction> initRover(){
+	Creature::pRover.push_back(Instruction(IF_ENEMY, 9));
+	Creature::pRover.push_back(Instruction(IF_EMPTY, 7));
+	Creature::pRover.push_back(Instruction(IF_RANDOM, 5));
+	Creature::pRover.push_back(Instruction(LEFT));
+	Creature::pRover.push_back(Instruction(GO , 0));
+	Creature::pRover.push_back(Instruction(RIGHT));
+	Creature::pRover.push_back(Instruction(GO , 0));
+	Creature::pRover.push_back(Instruction(HOP));
+	Creature::pRover.push_back(Instruction(GO , 0));
+	Creature::pRover.push_back(Instruction(INFECT));
+	Creature::pRover.push_back(Instruction(GO , 0));
+}
+vector<Instruction> initBest(){
+	Creature::pBest.push_back(Instruction(IF_ENEMY, 9));
+	Creature::pBest.push_back(Instruction(IF_EMPTY, 4));
+	Creature::pBest.push_back(Instruction(LEFT));	// friend
+	Creature::pBest.push_back(Instruction(GO , 0));
+	Creature::pBest.push_back(Instruction(IF_RANDOM, 7));
+	Creature::pBest.push_back(Instruction(HOP));
+	Creature::pBest.push_back(Instruction(GO , 0));
+	Creature::pBest.push_back(Instruction(LEFT));
+	Creature::pBest.push_back(Instruction(GO , 0));
+	Creature::pBest.push_back(Instruction(INFECT));
+	Creature::pBest.push_back(Instruction(GO , 0));
+}
+vector<Instruction> Creature::pHopper = initHopper();
+vector<Instruction> Creature::pFood = initFood();
+vector<Instruction> Creature::pTrap = initTrap();
+vector<Instruction> Creature::pRover = initRover();
+vector<Instruction> Creature::pBest = initBest();
+
 // -----------------------
 // Grid method definitions
 /**
@@ -402,7 +403,30 @@ Grid Constructor
 Grid::Grid(int rows, int cols)
 : _g(rows, vector<Creature*>(cols)), turn(0)//, creatureStash()
 {
-	assert(NULL == 0);
+	assert(valid());
+}
+
+/**
+Prints the grid and turn number.
+*/
+void Grid::print(std::ostream& out = cout){
+	out << "Turn = " << turn << "." << endl;
+	out << "  ";
+	for(int c = 0; c < nCols(); ++c)
+		out << c % 10;
+	out << endl;
+	for(int r = 0; r < nRows(); ++r){
+		out << r % 10 << " ";
+		for(int c = 0; c < nCols(); ++c){
+			if(_g[r][c] == NULL)
+				out << ".";
+			else
+				out << *_g[r][c];
+		}
+		out << endl;
+	}
+	out << endl;
+	if(DEBUG)printCount();
 }
 
 /**
@@ -446,29 +470,6 @@ void Grid::simulate(int turns, int j){
 		if(i % j == 0)
 			print();
 	}
-}
-
-/**
-Prints the grid and turn number.
-*/
-void Grid::print(){
-	cout << "Turn = " << turn << "." << endl;
-	cout << "  ";
-	for(int c = 0; c < nCols(); ++c)
-		cout << c % 10;
-	cout << endl;
-	for(int r = 0; r < nRows(); ++r){
-		cout << r % 10 << " ";
-		for(int c = 0; c < nCols(); ++c){
-			if(_g[r][c] == NULL)
-				cout << ".";
-			else
-				cout << *_g[r][c];
-		}
-		cout << endl;
-	}
-	cout << endl;
-	if(DEBUG)printCount();
 }
 
 /**

@@ -1,3 +1,52 @@
+commit de234df7f8d346823ad81118f835075cd1ce8623
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Nov 5 16:48:21 2012 -0600
+
+    Makes static initializations neater.
+
+commit 4f6fb6e46c9dbbf713474ad31feb51a5c92247b2
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Nov 5 14:01:49 2012 -0600
+
+    Fixes acceptances tests.
+
+commit 8a281d93e9e7b6d51fe45bcf1b7b373b2b312b9d
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Nov 5 13:22:53 2012 -0600
+
+    Changes direction from characters to marcros.
+
+commit 024e522711b2da62d064b8787dae10776393c42f
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Nov 5 09:53:07 2012 -0600
+
+    Made some data members private.
+
+commit ceb4871e93659855689e2cfe3a206f33b0fdda29
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Nov 5 08:54:24 2012 -0600
+
+    Scratch changes.
+
+commit 9d88205230d78256bf3e8cac5c9cbd0197de3dd0
+Merge: c30c020 63ec684
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Nov 5 08:20:55 2012 -0600
+
+    Manual merge.
+
+commit c30c020c74b703cd1f224ad61846b505c0ade955
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Nov 5 08:19:36 2012 -0600
+
+    Adds trap to some of unit tests.
+
+commit 63ec684b51e4e0b93797b71bac2bc3850ff90aba
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Sat Nov 3 18:58:17 2012 -0500
+
+    Another turn in version.
+
 commit f3365e3d59be4ac8fee0974e42980a862c7695de
 Author: Ian Buitrago <kieldro@gmail.com>
 Date:   Thu Nov 1 20:43:22 2012 -0500

@@ -58,7 +58,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Defines</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Darwin.h File Reference</div>  </div>
 </div><!--header-->
@@ -66,7 +66,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="textblock"><code>#include &lt;cassert&gt;</code><br/>
 <code>#include &lt;vector&gt;</code><br/>
 <code>#include &lt;deque&gt;</code><br/>
-<code>#include &lt;functional&gt;</code><br/>
 <code>#include &lt;typeinfo&gt;</code><br/>
 <code>#include &lt;stdexcept&gt;</code><br/>
 <code>#include &lt;string&gt;</code><br/>
@@ -80,7 +79,7 @@ Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html">Creature</a></td></tr>
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a>&#160;&#160;&#160;!true</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a>&#160;&#160;&#160;true</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#ac2a227e1bcfc8c42890084de92632762">BOOYAKASHA</a>&#160;&#160;&#160;if(<a class="el" href="Darwin_8h.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a>) cerr &lt;&lt; &quot;BOOYAKASHA!&quot; &lt;&lt;  endl;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#a9b5358df42c6e5b0842075da19dedef9">HOP</a>&#160;&#160;&#160;'H'</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#a437ef08681e7210d6678427030446a54">LEFT</a>&#160;&#160;&#160;'L'</td></tr>
@@ -96,13 +95,17 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#aff974876b14049785960788e714d2a46">TRAP</a>&#160;&#160;&#160;'t'</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#abc1a019a200769e6d8e91ed189fafaa1">ROVER</a>&#160;&#160;&#160;'r'</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#a03c8a49a35dc24cf5ad27fec6d72b72b">BEST</a>&#160;&#160;&#160;'b'</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#a1711232abf72723b5216c206e6bbb175">NORTH</a>&#160;&#160;&#160;0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#a072a1ef1143314441742097b799be322">EAST</a>&#160;&#160;&#160;1</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#af3830320fe6287f717dca9669f417950">SOUTH</a>&#160;&#160;&#160;2</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#a755da365a2f771fdb9e15af22fee7d74">WEST</a>&#160;&#160;&#160;3</td></tr>
-<tr><td colspan="2"><h2><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static const vector&lt; char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#a5ec41db48f3de4789f5451c703aeb838">DIRECTION</a> = {'n', 'e', 's', 'w'}</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#a755da365a2f771fdb9e15af22fee7d74">WEST</a>&#160;&#160;&#160;0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#a1711232abf72723b5216c206e6bbb175">NORTH</a>&#160;&#160;&#160;1</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#a072a1ef1143314441742097b799be322">EAST</a>&#160;&#160;&#160;2</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#af3830320fe6287f717dca9669f417950">SOUTH</a>&#160;&#160;&#160;3</td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#ac2c9aa769c4552bea1c602b599a5e98e">initHopper</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#a86508cd95b029efd184e7f7606fabae2">initFood</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#a2c37d4d7621a6bd9a8d045dd905b62c1">initTrap</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#aab3c4a3c309c4ba347f549ff716e8b3c">initRover</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Darwin_8h.html#a15f42e5c8afa75a116b26409d7cc423f">initBest</a> ()</td></tr>
 </table>
 <hr/><h2>Define Documentation</h2>
 <a class="anchor" id="a03c8a49a35dc24cf5ad27fec6d72b72b"></a><!-- doxytag: member="Darwin.h::BEST" ref="a03c8a49a35dc24cf5ad27fec6d72b72b" args="" -->
@@ -136,7 +139,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="Darwin_8h.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a>&#160;&#160;&#160;!true</td>
+          <td class="memname">#define <a class="el" href="Darwin_8h.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a>&#160;&#160;&#160;true</td>
         </tr>
       </table>
 </div>
@@ -149,7 +152,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="Darwin_8h.html#a072a1ef1143314441742097b799be322">EAST</a>&#160;&#160;&#160;1</td>
+          <td class="memname">#define <a class="el" href="Darwin_8h.html#a072a1ef1143314441742097b799be322">EAST</a>&#160;&#160;&#160;2</td>
         </tr>
       </table>
 </div>
@@ -292,7 +295,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="Darwin_8h.html#a1711232abf72723b5216c206e6bbb175">NORTH</a>&#160;&#160;&#160;0</td>
+          <td class="memname">#define <a class="el" href="Darwin_8h.html#a1711232abf72723b5216c206e6bbb175">NORTH</a>&#160;&#160;&#160;1</td>
         </tr>
       </table>
 </div>
@@ -331,7 +334,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="Darwin_8h.html#af3830320fe6287f717dca9669f417950">SOUTH</a>&#160;&#160;&#160;2</td>
+          <td class="memname">#define <a class="el" href="Darwin_8h.html#af3830320fe6287f717dca9669f417950">SOUTH</a>&#160;&#160;&#160;3</td>
         </tr>
       </table>
 </div>
@@ -357,7 +360,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="Darwin_8h.html#a755da365a2f771fdb9e15af22fee7d74">WEST</a>&#160;&#160;&#160;3</td>
+          <td class="memname">#define <a class="el" href="Darwin_8h.html#a755da365a2f771fdb9e15af22fee7d74">WEST</a>&#160;&#160;&#160;0</td>
         </tr>
       </table>
 </div>
@@ -365,13 +368,80 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<hr/><h2>Variable Documentation</h2>
-<a class="anchor" id="a5ec41db48f3de4789f5451c703aeb838"></a><!-- doxytag: member="Darwin.h::DIRECTION" ref="a5ec41db48f3de4789f5451c703aeb838" args="" -->
+<hr/><h2>Function Documentation</h2>
+<a class="anchor" id="a15f42e5c8afa75a116b26409d7cc423f"></a><!-- doxytag: member="Darwin.h::initBest" ref="a15f42e5c8afa75a116b26409d7cc423f" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const vector&lt;char&gt; <a class="el" href="Darwin_8h.html#a5ec41db48f3de4789f5451c703aeb838">DIRECTION</a> = {'n', 'e', 's', 'w'}<code> [static]</code></td>
+          <td class="memname">vector&lt;<a class="el" href="structInstruction.html">Instruction</a>&gt; <a class="el" href="Darwin_8h.html#a15f42e5c8afa75a116b26409d7cc423f">initBest</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a86508cd95b029efd184e7f7606fabae2"></a><!-- doxytag: member="Darwin.h::initFood" ref="a86508cd95b029efd184e7f7606fabae2" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;<a class="el" href="structInstruction.html">Instruction</a>&gt; <a class="el" href="Darwin_8h.html#a86508cd95b029efd184e7f7606fabae2">initFood</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac2c9aa769c4552bea1c602b599a5e98e"></a><!-- doxytag: member="Darwin.h::initHopper" ref="ac2c9aa769c4552bea1c602b599a5e98e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;<a class="el" href="structInstruction.html">Instruction</a>&gt; <a class="el" href="Darwin_8h.html#ac2c9aa769c4552bea1c602b599a5e98e">initHopper</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aab3c4a3c309c4ba347f549ff716e8b3c"></a><!-- doxytag: member="Darwin.h::initRover" ref="aab3c4a3c309c4ba347f549ff716e8b3c" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;<a class="el" href="structInstruction.html">Instruction</a>&gt; <a class="el" href="Darwin_8h.html#aab3c4a3c309c4ba347f549ff716e8b3c">initRover</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2c37d4d7621a6bd9a8d045dd905b62c1"></a><!-- doxytag: member="Darwin.h::initTrap" ref="a2c37d4d7621a6bd9a8d045dd905b62c1" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;<a class="el" href="structInstruction.html">Instruction</a>&gt; <a class="el" href="Darwin_8h.html#a2c37d4d7621a6bd9a8d045dd905b62c1">initTrap</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -397,7 +467,7 @@ Variables</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 3 2012 18:51:02 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 6 2012 12:59:28 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

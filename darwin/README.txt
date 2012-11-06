@@ -29,6 +29,7 @@ GitHub Repository Name: cs371p
 
 Comments:
 advantages of pointers?
+calls using default parameter must be defined after the function.
 
 ----------------
 Pair Programming

@@ -17,6 +17,7 @@ execute:
 #include "cppunit/TestFixture.h"				// TestFixture
 #include "cppunit/TextTestRunner.h"				// TestRunner
 
+#define private public
 #include "Darwin.h"
 
 // ----------
@@ -27,25 +28,62 @@ struct TestDarwin : CppUnit::TestFixture {
 	void testGrid0 () {
 		Grid g(2, 2);
 		
-		g.print();
+		CPPUNIT_ASSERT(g.nRows() == 2);
+		CPPUNIT_ASSERT(g.nCols() == 2);
+		CPPUNIT_ASSERT(g.turn == 0);
+		CPPUNIT_ASSERT(g.creatureStash.size() == 0);
 	}
 	
 	// --------
 	// testPlace
 	void testPlace0 () {
 		Grid g(3, 3);
+		int r = 1;
+		int c = 1;
 		
-		g.place(HOPPER, NORTH, 1, 1);
-		
-		g.print();
+		g.place(HOPPER, NORTH, r, c);
+		CPPUNIT_ASSERT(g.creatureStash.size() == 1);
+		CPPUNIT_ASSERT(g._g[r][c] !=  NULL);
 	}
+	
+	void testPlace1 () {
+		Grid g(3, 3);
+		int r = -1;
+		int c = -1;
+		try{
+			g.place(HOPPER, NORTH, r, c);
+			CPPUNIT_ASSERT(false);
+		}catch(...){
+			CPPUNIT_ASSERT(true);
+		}			
+	}
+	
+	void testPlace2 () {
+		Grid g(3, 3);
+		int r = 3;
+		int c = 3;
+		try{
+			g.place(HOPPER, NORTH, r, c);
+			CPPUNIT_ASSERT(false);
+		}catch(...){
+			CPPUNIT_ASSERT(true);
+		}			
+	}
+	// --------
+	// testCreature
+	void testCreature0 () {
+		Grid g(3, 3);
+		g.place(HOPPER, SOUTH, 0, 1);
+		g.simulate(3, 1);
+	}
+	
+	
 	
 	// --------
 	// testHop
 	void testHop0 () {
 		Grid g(3, 3);
 		g.place(HOPPER, SOUTH, 0, 1);
-		
 		g.simulate(3, 1);
 	}
 	// hop into each other
@@ -138,6 +176,8 @@ struct TestDarwin : CppUnit::TestFixture {
 	
 	CPPUNIT_TEST(testGrid0);
 	CPPUNIT_TEST(testPlace0);
+	CPPUNIT_TEST(testPlace1);
+	CPPUNIT_TEST(testPlace2);
 	CPPUNIT_TEST(testHop0);
 	CPPUNIT_TEST(testHop1);
 	CPPUNIT_TEST(testFood0);
