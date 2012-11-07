@@ -75,7 +75,7 @@ class Grid{
 		int nCols() const{return _g.size() ? _g[0].size() : 0;}
 	public:
 		Grid(int rows, int cols);
-		void place(char x, dir d, int r, int c);
+		Creature& place(char x, dir d, int r, int c);
 		void randPlace(char, int);
 		void simulate(int turns, int j);
 };
@@ -418,14 +418,17 @@ Places a created creature into the grid.
 @param d direction the creature will face.
 @param r row of the grid.
 @param c column of the grid.
+@return a reference to the created/placed creature.
 */
-void Grid::place(char creatureType, dir d, int r, int c){
+Creature& Grid::place(char creatureType, dir d, int r, int c){
 	if(r < 0 or r >= nRows() or c < 0 or c >= nCols())
 		throw out_of_range("Coordinates out of range: " + r + c);
 	if(_g[r][c] != NULL)
 		throw logic_error("Creature cannot be placed ontop of preexisting creature at " + r + c);
 	creatureStash.push_back(Creature(d, r, c, this, creatureType));
 	_g[r][c] = &creatureStash.back();
+	
+	return *_g[r][c];
 }
 
 /*
