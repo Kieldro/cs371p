@@ -16,9 +16,9 @@ Actual    number of hours: 17
 4 11:40a - 12:40p 6:30p - 9:30p
 2 1p - 3p
 
-Partner First Name: Jonathan
+Partner First Name: Ting-Yi
 Partner Last Name: Chen
-Partner EID: JC
+Partner EID: tc8436
 Partner E-mail: jontitan@gmail.com
 Partner Estimated number of hours: 20
 Partner Actual    number of hours: 14
