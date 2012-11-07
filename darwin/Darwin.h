@@ -150,6 +150,7 @@ Creature::Creature(dir d, int r, int c, Grid* g, char s){
 			throw logic_error("Invalid creature type: " + sigil);
 	}
 }
+
 /**
 Executes a creature's program until it completes an action.
 */
@@ -157,11 +158,7 @@ void Creature::execute(){
 	const vector<Instruction>& p = *program;
 	
 	// check if creature already took its turn
-	while(turn == grid->turn){/*
-		if(DEBUG) cerr << "*creature: " << sigil << endl;
-		if(DEBUG) cerr << "pc: " << pc << endl;
-		if(DEBUG) cerr << "instruction: " << p[pc].op << endl;
-		if(DEBUG) cerr << "target line: " << p[pc].line << endl;*/
+	while(turn == grid->turn){
 		
 		switch(p[pc].opCode){
 		// actions
@@ -258,7 +255,6 @@ void Creature::ifWall(){
 	}else
 		++pc;
 }
-
 void Creature::ifRandom(){
 	const vector<Instruction>& p = *program;
 	
@@ -267,7 +263,6 @@ void Creature::ifRandom(){
 	}else
 		++pc;
 }
-
 void Creature::ifEnemy(){
 	Grid& g = *grid;
 	const vector<Instruction>& p = *program;
@@ -285,7 +280,6 @@ void Creature::ifEnemy(){
 	}else
 		++pc;
 }
-
 void Creature::ifEmpty(){
 	Grid& g = *grid;
 	const vector<Instruction>& p = *program;
@@ -426,6 +420,7 @@ Creature& Grid::place(char creatureType, dir d, int r, int c){
 		throw out_of_range("Coordinates out of range: " + r + c);
 	if(_g[r][c] != NULL)
 		throw logic_error("Creature cannot be placed ontop of preexisting creature at " + r + c);
+	
 	creatureStash.push_back(Creature(d, r, c, this, creatureType));
 	_g[r][c] = &creatureStash.back();
 	
@@ -443,6 +438,7 @@ void Grid::runTurn(){
 				creaturePtr->execute();
 			}
 		}
+	
 	assert(valid());
 	++turn;
 }
@@ -464,6 +460,7 @@ void Grid::simulate(int turns, int j, ostream& out){
 Prints the grid and turn number.
 */
 void Grid::print(ostream& out){
+	if(DEBUG) system("clear");
 	out << "Turn = " << turn << "." << endl;
 	out << "  ";
 	for(int c = 0; c < nCols(); ++c)
@@ -480,7 +477,8 @@ void Grid::print(ostream& out){
 		out << endl;
 	}
 	out << endl;
-	if(DEBUG)printCount();
+	if(DEBUG) printCount();
+	//if(DEBUG) sleep(1/2);
 }
 
 /**

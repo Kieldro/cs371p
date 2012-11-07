@@ -35,8 +35,8 @@ doxygen:
 
 zip:
 	zip Darwin README.txt html/* $(SOURCE) Darwin.pdf \
-	Darwin.log $(RUN) $(TEST) \
-	$(RUNOUT) $(TESTOUT)
+		Darwin.log $(RUN) $(TEST) \
+		$(RUNOUT) $(TESTOUT)
 
 # turnin --submit dmj cs371ppj5 Darwin.zip
 # turnin --list   dmj cs371ppj5
