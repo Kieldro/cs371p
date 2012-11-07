@@ -22,7 +22,132 @@ To run the program:
 int main () {
 	using namespace std;
 	ios_base::sync_with_stdio(false);	// turn off synchronization with C I/O
+    
+    // ----------
+	// darwin 1x1 no creature
+	try {
+		cout << "*** Darwin 1x1 no creature ***" << endl;
+		/*
+		1x1 Darwin
+		Nothing in it
+		Simulate 5 moves.
+		Print every grid.
+		*/
+		Grid g(1, 1);
+		g.simulate(5, 1);
+		}
+	catch (const invalid_argument&) {
+		assert(false);}
+	catch (const out_of_range&) {
+		assert(false);}
+        
 
+    // ----------
+	// darwin 1x1
+	try {
+		cout << "*** Darwin 1x1 ***" << endl;
+		/*
+		1x1 Darwin
+		Hopper, facing north, at (0, 0)
+		Simulate 5 moves.
+		Print every grid.
+		*/
+		Grid g(1, 1);
+        g.place(HOPPER, NORTH, 0, 0);
+		g.simulate(5, 1);
+		}
+	catch (const invalid_argument&) {
+		assert(false);}
+	catch (const out_of_range&) {
+		assert(false);}
+        
+    // ----------
+	// darwin 1x5
+	try {
+		cout << "*** Darwin 1x5 ***" << endl;
+		/*
+		1x5 Darwin
+		Hopper, facing north, at (0, 0)
+		Simulate 5 moves.
+		Print every grid.
+		*/
+		Grid g(1, 5);
+        g.place(HOPPER, NORTH, 0, 0);
+		g.simulate(5, 1);
+		}
+	catch (const invalid_argument&) {
+		assert(false);}
+	catch (const out_of_range&) {
+		assert(false);}
+        
+        
+    // ----------
+	// darwin 5x1
+	try {
+		cout << "*** Darwin 5x1 ***" << endl;
+		/*
+		5x1 Darwin
+		Hopper, facing north, at (0, 0)
+		Simulate 5 moves.
+		Print every grid.
+		*/
+		Grid g(5, 1);
+        g.place(HOPPER, NORTH, 0, 0);
+		g.simulate(5, 1);
+		}
+	catch (const invalid_argument&) {
+		assert(false);}
+	catch (const out_of_range&) {
+		assert(false);}
+        
+       
+    // ----------
+	// darwin 2x2
+	try {
+		cout << "*** Darwin 2x2 ***" << endl;
+		/*
+		2x2 Darwin
+		Hopper, facing north, at (0, 0)
+        Food,   facing east,  at (0, 1)
+        Hopper, facing north, at (1, 0)
+        Food,   facing east,  at (1, 1)
+		Simulate 5 moves.
+		Print every grid.
+		*/
+		Grid g(2, 2);
+        g.place(HOPPER, NORTH, 0, 0);
+		g.place(FOOD, EAST, 0, 1);
+        g.place(HOPPER, NORTH, 1, 0);
+		g.place(FOOD, EAST, 1, 1);
+        g.simulate(5, 1);
+		}
+	catch (const invalid_argument&) {
+		assert(false);}
+	catch (const out_of_range&) {
+		assert(false);}
+        
+    
+    // ----------
+	// darwin 5x5
+	try {
+		cout << "*** Darwin 1x5 ***" << endl;
+		/*
+		1x1 Darwin
+		Hopper, facing north, at (0, 0)
+        Food,   facing east,  at (4, 4)
+		Simulate 5 moves.
+		Print every grid.
+		*/
+		Grid g(1, 5);
+        g.place(HOPPER, NORTH, 0, 0);
+		g.place(FOOD, EAST, 4, 4);
+        g.simulate(5, 1);
+		}
+	catch (const invalid_argument&) {
+		assert(false);}
+	catch (const out_of_range&) {
+		assert(false);}
+        
 	// ----------
 	// darwin 8x8
 	try {
