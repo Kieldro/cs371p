@@ -16,9 +16,12 @@ execute:
 #include "cppunit/extensions/HelperMacros.h"	// CPPUNIT_TEST, CPPUNIT_TEST_SUITE, CPPUNIT_TEST_SUITE_END
 #include "cppunit/TestFixture.h"				// TestFixture
 #include "cppunit/TextTestRunner.h"				// TestRunner
+#include <sstream>
 
 #define private public
 #include "Darwin.h"
+
+using std::ostringstream;
 
 // ----------
 // TestDarwin
@@ -419,72 +422,115 @@ struct TestDarwin : CppUnit::TestFixture {
 		g.runTurn();
 		CPPUNIT_ASSERT(c.col == 1);
 	}
+	void testRunTurn2 () {
+		Grid g (3, 3);
+		Creature& c = g.place(HOPPER, EAST, 0, 0);
+		g.place(ROVER, WEST, 0, 1);
+		
+		CPPUNIT_ASSERT(c.sigil == HOPPER);
+		g.runTurn();
+		CPPUNIT_ASSERT(c.sigil == ROVER);
+	}
+	void testRunTurn3 (){
+		Grid g (3, 3);
+		Creature& c = g.place(HOPPER, SOUTH, 0, 0);
+		g.place(HOPPER, NORTH, 1, 1);
+		
+		CPPUNIT_ASSERT(c.row == 0);
+		g.runTurn();
+		CPPUNIT_ASSERT(c.row == 1);
+	}
 	
+	// --------
+	// testSimulate
+	void testSimulate0 () {
+		Grid g (3, 3);
+		ostringstream out;
+		
+		g.simulate(2, 100, out );
+		CPPUNIT_ASSERT(true);
+	}
+	void testSimulate1 () {
+		Grid g (4, 4);
+		ostringstream out;
+		Creature& c = g.place(HOPPER, SOUTH, 0, 0);
+		
+		g.simulate(3, 100, out );
+		CPPUNIT_ASSERT(c.row == 3);
+	}
+	void testSimulate2 () {
+		Grid g (4, 4);
+		ostringstream out;
+		Creature& c = g.place(HOPPER, SOUTH, 0, 0);
+		Creature& p = g.place(TRAP, EAST, 2, 0);
+		
+		g.simulate(3, 100, out );
+		CPPUNIT_ASSERT(c.row == 1);
+		CPPUNIT_ASSERT(c.sigil == TRAP);
+		CPPUNIT_ASSERT(p.direction == WEST);
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// Testing long simulations
 	// --------
 	// testFood
 	void testFood0 () {
 		Grid g(2, 2);
+		ostringstream out;
 		
 		g.place(FOOD, SOUTH, 0, 0);
-		g.simulate(2, 1);
+		g.simulate(2, 1, out);
 	}
 	
 	// --------
 	// testTrap
 	void testTrap0 () {
 		Grid g(2, 2);
+		ostringstream out;
 		
 		g.place(TRAP, SOUTH, 0, 0);
-		g.simulate(2, 1);
+		g.simulate(2, 1, out);
 	}
 	void testTrap1 () {
 		Grid g(3, 3);
+		ostringstream out;
 		
 		g.place(TRAP, EAST, 1, 1);
 		g.place(FOOD, SOUTH, 1, 2);
-		g.simulate(2, 1);
+		g.simulate(2, 1, out);
 	}
 	
 	// --------
 	// testRover
 	void testRover0 () {
 		Grid g(4, 4);
+		ostringstream out;
 		srand(0);
 		
 		g.place(ROVER , EAST, 1, 1);
 		g.place(FOOD  , SOUTH, 1, 3);
 		g.place(HOPPER, EAST, 2, 2);
-		g.simulate(6, 1);
+		g.simulate(6, 1, out);
 	}
 	
 	// --------
 	// testBest
 	void testBest0 () {
 		Grid g(5, 5);
+		ostringstream out;
 		srand(0);
 		
 		g.place(BEST  , EAST, 0, 0);
 		g.place(ROVER , EAST, 1, 1);
 		g.place(FOOD  , SOUTH, 1, 3);
 		g.place(HOPPER, EAST, 2, 2);
-		g.simulate(10, 1);
+		g.simulate(10, 1, out);
 	}
 	
 	// --------
 	// testBest
 	void testBest1 () {
 		Grid g(50, 50);
+		ostringstream out;
 		srand(0);
 		
 		g.randPlace(BEST  , 5);
@@ -492,10 +538,11 @@ struct TestDarwin : CppUnit::TestFixture {
 		g.randPlace(FOOD  , 5);
 		g.randPlace(HOPPER, 5);
 		g.randPlace(TRAP  , 5);
-		g.simulate(500, 50);
+		g.simulate(500, 50, out);
 	}
 	void testBest2 () {
 		Grid g(80, 80);
+		ostringstream out;
 		srand(0);
 		
 		g.randPlace(BEST  , 13);
@@ -503,7 +550,7 @@ struct TestDarwin : CppUnit::TestFixture {
 		g.randPlace(FOOD  , 13);
 		g.randPlace(HOPPER, 13);
 		g.randPlace(TRAP  , 13);
-		g.simulate(1000, 500);
+		g.simulate(1000, 500, out);
 	}
 	
 	// -----
@@ -549,8 +596,11 @@ struct TestDarwin : CppUnit::TestFixture {
 	CPPUNIT_TEST(testValid1);
 	CPPUNIT_TEST(testRunTurn0);
 	CPPUNIT_TEST(testRunTurn1);
-	/*
 	CPPUNIT_TEST(testRunTurn2);
+	CPPUNIT_TEST(testRunTurn3);
+	CPPUNIT_TEST(testSimulate0);
+	CPPUNIT_TEST(testSimulate1);
+	CPPUNIT_TEST(testSimulate2);
 	CPPUNIT_TEST(testFood0);
 	CPPUNIT_TEST(testTrap0);
 	CPPUNIT_TEST(testTrap1);
@@ -558,7 +608,6 @@ struct TestDarwin : CppUnit::TestFixture {
 	CPPUNIT_TEST(testBest0);
 	CPPUNIT_TEST(testBest1);
 	CPPUNIT_TEST(testBest2);
-	*/
 	
 	CPPUNIT_TEST_SUITE_END();
 };

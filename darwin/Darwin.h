@@ -26,6 +26,7 @@ using std::endl;
 using std::string;
 using std::logic_error;
 using std::out_of_range;
+using std::ostream;
 
 // ------
 // macros
@@ -69,7 +70,7 @@ class Grid{
 		
 		bool valid();
 		void runTurn();
-		void print(std::ostream& = cout);
+		void print(ostream& = cout);
 		void printCount();
 		int nRows() const{return _g.size();}
 		int nCols() const{return _g.size() ? _g[0].size() : 0;}
@@ -77,7 +78,7 @@ class Grid{
 		Grid(int rows, int cols);
 		Creature& place(char x, dir d, int r, int c);
 		void randPlace(char, int);
-		void simulate(int turns, int j);
+		void simulate(int turns, int j, ostream& = cout);
 };
 
 class Creature{
@@ -111,7 +112,7 @@ class Creature{
 		Creature(){}
 		void execute();
 		
-		friend std::ostream& operator<<(std::ostream &strm, const Creature &c) {
+		friend ostream& operator<<(ostream &strm, const Creature &c) {
 			return strm << c.sigil;
 		}
 };
@@ -450,19 +451,19 @@ void Grid::runTurn(){
 @param turns the number turns to run the game.
 @param j print the grid every j turns.
 */
-void Grid::simulate(int turns, int j){
-	print();
+void Grid::simulate(int turns, int j, ostream& out){
+	print(out);
 	for(int i = 1; i <= turns; ++i){
 		runTurn();
 		if(i % j == 0)
-			print();
+			print(out);
 	}
 }
 
 /**
 Prints the grid and turn number.
 */
-void Grid::print(std::ostream& out){
+void Grid::print(ostream& out){
 	out << "Turn = " << turn << "." << endl;
 	out << "  ";
 	for(int c = 0; c < nCols(); ++c)
