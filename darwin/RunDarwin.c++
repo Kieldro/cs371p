@@ -130,15 +130,15 @@ int main () {
     // ----------
 	// darwin 5x5
 	try {
-		cout << "*** Darwin 1x5 ***" << endl;
+		cout << "*** Darwin 5x5 ***" << endl;
 		/*
-		1x1 Darwin
+		5x5 Darwin
 		Hopper, facing north, at (0, 0)
         Food,   facing east,  at (4, 4)
 		Simulate 5 moves.
 		Print every grid.
 		*/
-		Grid g(1, 5);
+		Grid g(5, 5);
         g.place(HOPPER, NORTH, 0, 0);
 		g.place(FOOD, EAST, 4, 4);
         g.simulate(5, 1);
