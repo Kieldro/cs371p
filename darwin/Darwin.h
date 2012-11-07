@@ -302,6 +302,7 @@ void Creature::ifEmpty(){
 	}else
 		++pc;
 }
+
 /**
 Helper function that moves r and c to the cell the creature faces and checks the bounds.
 @param r Row in the grid that will be changed to the cell the creature faces.

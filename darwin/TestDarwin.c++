@@ -359,11 +359,104 @@ struct TestDarwin : CppUnit::TestFixture {
 		Creature& c = g.creatureStash.back();
 		g.place(FOOD, EAST, 0, 1);
 		Creature& victim = g.creatureStash.back();
+		victim.pc = 5;
 		
 		CPPUNIT_ASSERT(victim.sigil == FOOD);
+		CPPUNIT_ASSERT(victim.pc == 5);
 		c.infect();
 		CPPUNIT_ASSERT(victim.sigil == c.sigil);
+		CPPUNIT_ASSERT(victim.pc == 0);
 	}
+	void testInfect1 () {
+		Grid g (3, 3);
+		g.place(HOPPER, EAST, 0, 0);
+		Creature& c = g.creatureStash.back();
+		g.place(HOPPER, EAST, 0, 1);
+		Creature& victim = g.creatureStash.back();
+		victim.pc = 5;
+		
+		CPPUNIT_ASSERT(victim.sigil == c.sigil);
+		CPPUNIT_ASSERT(victim.pc == 5);
+		c.infect();
+		CPPUNIT_ASSERT(victim.sigil == c.sigil);
+		CPPUNIT_ASSERT(victim.pc == 5);
+	}
+	void testInfect2 () {
+		Grid g (3, 3);
+		g.place(HOPPER, EAST, 0, 2);
+		Creature& c = g.creatureStash.back();
+		
+		c.infect();
+		CPPUNIT_ASSERT(true);
+	}
+	
+	// --------
+	// testExecute
+	void testExecute0 () {
+		Grid g (3, 3);
+		g.place(HOPPER, EAST, 0, 0);
+		Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(c.col == 0);
+		c.execute();
+		CPPUNIT_ASSERT(c.col == 1);
+	}
+	void testExecute1 () {
+		Grid g (3, 3);
+		g.place(FOOD, EAST, 0, 0);
+		Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(c.direction == EAST);
+		c.execute();
+		CPPUNIT_ASSERT(c.direction == NORTH);
+	}
+	void testExecute2 () {
+		Grid g (3, 3);
+		g.place(ROVER, EAST, 0, 0);
+		Creature& c = g.creatureStash.back();
+		g.place(FOOD, EAST, 0, 1);
+		Creature& victim = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(victim.sigil == FOOD);
+		c.execute();
+		CPPUNIT_ASSERT(victim.sigil == ROVER);
+	}
+	
+	// --------
+	// testValid
+	void testValid0 () {
+		Grid g (3, 3);
+		
+		CPPUNIT_ASSERT(g.valid());
+	}
+	void testValid1 () {
+		Grid g (3, 3);
+		
+		g._g[0].pop_back();
+		CPPUNIT_ASSERT( !g.valid());
+	}
+	
+	// --------
+	// testRunTurn
+	void testRunTurn0 () {
+		Grid g (3, 3);
+		g.place(HOPPER, EAST, 0, 0);
+		//Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(true);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	// --------
 	// testFood
@@ -474,9 +567,14 @@ struct TestDarwin : CppUnit::TestFixture {
 	CPPUNIT_TEST(testHop1);
 	CPPUNIT_TEST(testHop2);
 	CPPUNIT_TEST(testInfect0);
-	/*
 	CPPUNIT_TEST(testInfect1);
 	CPPUNIT_TEST(testInfect2);
+	CPPUNIT_TEST(testExecute0);
+	CPPUNIT_TEST(testExecute1);
+	CPPUNIT_TEST(testExecute2);
+	CPPUNIT_TEST(testValid0);
+	CPPUNIT_TEST(testValid1);
+	/*
 	CPPUNIT_TEST(testFood0);
 	CPPUNIT_TEST(testTrap0);
 	CPPUNIT_TEST(testTrap1);
