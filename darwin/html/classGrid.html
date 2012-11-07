@@ -52,15 +52,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a75b3bc6513919ca7de1a7ef82822c27b">Grid</a> (int rows, int cols)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a7c3ac7b9cf22eebb57d60fb3ad303c1c">place</a> (char x, <a class="el" href="Darwin_8h.html#a4ca269cf93df1b512b52174c1a256fe5">dir</a> d, int r, int c)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#ad1c1d903b85aa27218d898e020ec53a2">randPlace</a> (char, int)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#ad6aaff57c783f9e20731191ed84a01cc">simulate</a> (int turns, int j)</td></tr>
+<tr><td colspan="2"><h2>Private Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a5e73c9244664654b83260d64d5def7e8">valid</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a36ed2243b51fcefb61948bfb82bca061">runTurn</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a21c7433746bd2a620e27334ccdd4316c">print</a> (std::ostream &amp;=cout)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a76ba7e71cb2342c8c5465ac3f6525609">printCount</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#ad6aaff57c783f9e20731191ed84a01cc">simulate</a> (int turns, int j)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#ad1c1d903b85aa27218d898e020ec53a2">randPlace</a> (char, int)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#ae554edb2880aed4416065b28277795ff">nRows</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a0caa03851d135852d977d35dee9888c9">nCols</a> () const </td></tr>
-<tr><td colspan="2"><h2>Private Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a5e73c9244664654b83260d64d5def7e8">valid</a> ()</td></tr>
 <tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">vector&lt; vector&lt; <a class="el" href="classCreature.html">Creature</a> * &gt; &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a443d89237500cf021e4d12d93d770d8d">_g</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">deque&lt; <a class="el" href="classCreature.html">Creature</a> &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGrid.html#a59749cb619211b9d06ea887c660017df">creatureStash</a></td></tr>
@@ -107,7 +107,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td> const<code> [inline]</code></td>
+          <td> const<code> [inline, private]</code></td>
         </tr>
       </table>
 </div>
@@ -124,7 +124,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td> const<code> [inline]</code></td>
+          <td> const<code> [inline, private]</code></td>
         </tr>
       </table>
 </div>
@@ -190,7 +190,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td class="paramtype">std::ostream &amp;&nbsp;</td>
           <td class="paramname"> <em>out</em> = <code>cout</code></td>
           <td>&nbsp;)&nbsp;</td>
-          <td></td>
+          <td><code> [private]</code></td>
         </tr>
       </table>
 </div>
@@ -208,7 +208,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td></td>
+          <td><code> [private]</code></td>
         </tr>
       </table>
 </div>
@@ -254,7 +254,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td></td>
+          <td><code> [private]</code></td>
         </tr>
       </table>
 </div>
@@ -386,7 +386,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 6 14:35:14 2012 by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Nov 7 12:00:25 2012 by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

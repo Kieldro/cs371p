@@ -53,6 +53,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#afd5fbd402387d5ba792cdedc551cc321">Creature</a> (<a class="el" href="Darwin_8h.html#a4ca269cf93df1b512b52174c1a256fe5">dir</a> d, int r, int c, <a class="el" href="classGrid.html">Grid</a> *g, char s)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a597cc3b08ee17de46c3e7ec3cf0d9b58">Creature</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#aeaa64ba31041ef63193042599d7b5ff8">execute</a> ()</td></tr>
+<tr><td colspan="2"><h2>Public Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">char&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a22896738e5131dc0c136e5741530f4d8">sigil</a></td></tr>
+<tr><td colspan="2"><h2>Static Public Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a5fa7c3ed294570efddeefa24281c6eb2">pFood</a> = initFood()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a4622b90dd5d060fe3b69bb3ce6ed6b05">pHopper</a> = initHopper()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a5ccfd79db36341de4720ffc606e7ea58">pTrap</a> = initTrap()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a7975877bf5ff58b8f4afa20b98e1406e">pRover</a> = initRover()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a51c2d5186d3d5cddb522553320a5ec3a">pBest</a> = initBest()</td></tr>
+<tr><td colspan="2"><h2>Private Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#ab019db39665ed1a2cbe5b5caa3af05d4">hop</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#abb2923e06edcc39531a26882ad85f264">left</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a17036acfdcc81a43384fb8c78898718f">right</a> ()</td></tr>
@@ -62,14 +71,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#acd6c4372a580773445b1ead87817e18e">ifRandom</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#ae42c2185eff83025c2b6ebabd1dd4e4f">ifWall</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a54965fd6690a1479f2cfc2090ede0db9">nextCell</a> (int &amp;r, int &amp;c)</td></tr>
-<tr><td colspan="2"><h2>Public Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">char&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a22896738e5131dc0c136e5741530f4d8">sigil</a></td></tr>
-<tr><td colspan="2"><h2>Static Public Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a4622b90dd5d060fe3b69bb3ce6ed6b05">pHopper</a> = initHopper()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a5fa7c3ed294570efddeefa24281c6eb2">pFood</a> = initFood()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a5ccfd79db36341de4720ffc606e7ea58">pTrap</a> = initTrap()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a7975877bf5ff58b8f4afa20b98e1406e">pRover</a> = initRover()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static vector&lt; <a class="el" href="structInstruction.html">Instruction</a> &gt;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a51c2d5186d3d5cddb522553320a5ec3a">pBest</a> = initBest()</td></tr>
 <tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="Darwin_8h.html#a4ca269cf93df1b512b52174c1a256fe5">dir</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a31401c09380939247fca448737edbb62">direction</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#af069d60a967697bdc03404639fb0e494">row</a></td></tr>
@@ -173,7 +174,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td></td>
+          <td><code> [private]</code></td>
         </tr>
       </table>
 </div>
@@ -190,7 +191,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td></td>
+          <td><code> [private]</code></td>
         </tr>
       </table>
 </div>
@@ -207,7 +208,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td></td>
+          <td><code> [private]</code></td>
         </tr>
       </table>
 </div>
@@ -224,7 +225,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td></td>
+          <td><code> [private]</code></td>
         </tr>
       </table>
 </div>
@@ -241,7 +242,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td></td>
+          <td><code> [private]</code></td>
         </tr>
       </table>
 </div>
@@ -258,7 +259,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td></td>
+          <td><code> [private]</code></td>
         </tr>
       </table>
 </div>
@@ -275,7 +276,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td></td>
+          <td><code> [private]</code></td>
         </tr>
       </table>
 </div>
@@ -302,11 +303,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td><td></td>
+          <td></td><td></td><td><code> [private]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Helper function that moves r and c to the cell the creature faces and checks the bounds. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>r</em>&nbsp;</td><td>Row in the grid that will be changed to the cell the creature faces. </td></tr>
@@ -327,7 +329,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td></td>
+          <td><code> [private]</code></td>
         </tr>
       </table>
 </div>
@@ -551,7 +553,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Nov 6 14:35:14 2012 by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Nov 7 12:00:25 2012 by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

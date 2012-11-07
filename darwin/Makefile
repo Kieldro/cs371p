@@ -1,7 +1,7 @@
 SHELL = /bin/sh
 
 CC = g++
-CPPFLAGS = -std=c++0x #-pedantic -Wall
+CPPFLAGS = -std=c++0x -ansi -pedantic -Wall
 SOURCE = Darwin.h
 TEST = TestDarwin.c++
 RUN = RunDarwin.c++
@@ -46,5 +46,6 @@ clean:
 	rm *.app
 
 scratch: scratch.c++
-	g++ -std=c++0x scratch.c++ -o scratch.c++.app
+	clear
+	g++ $(CPPFLAGS) scratch.c++ -o scratch.c++.app
 	./scratch.c++.app

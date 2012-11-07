@@ -10,6 +10,7 @@ project 5 - Darwin
 
 // --------
 // includes
+#include <cstdlib>
 #include <cassert>		// assert
 #include <vector>		// vector
 #include <deque>
@@ -159,7 +160,9 @@ void Creature::execute(){
 		if(DEBUG) cerr << "pc: " << pc << endl;
 		if(DEBUG) cerr << "instruction: " << p[pc].op << endl;
 		if(DEBUG) cerr << "target line: " << p[pc].line << endl;*/
+		
 		switch(p[pc].opCode){
+		// actions
 			case HOP:
 				hop();
 				break;
@@ -172,6 +175,7 @@ void Creature::execute(){
 			case INFECT:
 				infect();
 				break;
+		// control instructions
 			case IF_ENEMY:
 				ifEnemy();
 				break;
@@ -187,8 +191,6 @@ void Creature::execute(){
 			case GO:
 				pc = p[pc].line;		// jump to line
 				break;
-			default:
-				;
 		}
 	}
 }
@@ -284,7 +286,6 @@ void Creature::ifEmpty(){
 }
 
 void Creature::ifWall(){
-	Grid& g = *grid;
 	const vector<Instruction>& p = *program;
 	int r = row, c = col;
 	
@@ -295,9 +296,7 @@ void Creature::ifWall(){
 }
 
 void Creature::ifRandom(){
-	Grid& g = *grid;
 	const vector<Instruction>& p = *program;
-	int r = row, c = col;
 	
 	if(rand() % 2){
 		pc = p[pc].line;
@@ -340,28 +339,34 @@ bool Creature::nextCell(int& r, int& c){
 
 // Static program initializations
 vector<Instruction> initHopper(){
-	vector<Instruction>& creatureProgram = Creature::pHopper;
+	vector<Instruction> creatureProgram;
 	
 	creatureProgram.push_back(Instruction(HOP));
 	creatureProgram.push_back(Instruction(GO, 0));
+	
+	return creatureProgram;
 }
 vector<Instruction> initFood(){
-	vector<Instruction>& creatureProgram = Creature::pFood;
+	vector<Instruction> creatureProgram = Creature::pFood;
 	
 	creatureProgram.push_back(Instruction(LEFT));
 	creatureProgram.push_back(Instruction(GO, 0));
+	
+	return creatureProgram;
 }
 vector<Instruction> initTrap(){
-	vector<Instruction>& creatureProgram = Creature::pTrap;
+	vector<Instruction> creatureProgram = Creature::pTrap;
 	
 	creatureProgram.push_back(Instruction(IF_ENEMY, 3));
 	creatureProgram.push_back(Instruction(LEFT));
 	creatureProgram.push_back(Instruction(GO , 0));
 	creatureProgram.push_back(Instruction(INFECT));
 	creatureProgram.push_back(Instruction(GO , 0));
+	
+	return creatureProgram;
 }
 vector<Instruction> initRover(){
-	vector<Instruction>& creatureProgram = Creature::pRover;
+	vector<Instruction> creatureProgram = Creature::pRover;
 	
 	creatureProgram.push_back(Instruction(IF_ENEMY, 9));
 	creatureProgram.push_back(Instruction(IF_EMPTY, 7));
@@ -374,9 +379,11 @@ vector<Instruction> initRover(){
 	creatureProgram.push_back(Instruction(GO , 0));
 	creatureProgram.push_back(Instruction(INFECT));
 	creatureProgram.push_back(Instruction(GO , 0));
+	
+	return creatureProgram;
 }
 vector<Instruction> initBest(){
-	vector<Instruction>& creatureProgram = Creature::pBest;
+	vector<Instruction> creatureProgram = Creature::pBest;
 	
 	creatureProgram.push_back(Instruction(IF_ENEMY, 6));
 	creatureProgram.push_back(Instruction(IF_EMPTY, 4));
@@ -386,7 +393,10 @@ vector<Instruction> initBest(){
 	creatureProgram.push_back(Instruction(GO , 0));
 	creatureProgram.push_back(Instruction(INFECT));
 	creatureProgram.push_back(Instruction(GO , 0));
+	
+	return creatureProgram;
 }
+// some kind of optimization is taking place here, only 1 vector is being constructed per line?
 vector<Instruction> Creature::pHopper = initHopper();
 vector<Instruction> Creature::pFood = initFood();
 vector<Instruction> Creature::pTrap = initTrap();
@@ -480,7 +490,7 @@ void Grid::printCount(){
 	int numFood = 0;
 	int numTrap = 0;
 	
-	for(int i = 0; i < creatureStash.size(); ++i){
+	for(unsigned i = 0; i < creatureStash.size(); ++i){
 		switch(creatureStash[i].sigil){
 			case HOPPER:
 				++numHopper;

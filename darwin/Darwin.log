@@ -1,3 +1,15 @@
+commit 38cf42e7513fa859659483222110371857098f41
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Tue Nov 6 16:36:35 2012 -0600
+
+    Adds more unit tests.
+
+commit ad16803ad3fee5faf0e55a815af581e302c46054
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Tue Nov 6 14:36:08 2012 -0600
+
+    Fixes error in ifRandom(). Output finally correct.
+
 commit e3d851f57ff1ceaba336b8eec27e9922ded8db91
 Author: Ian Buitrago <kieldro@gmail.com>
 Date:   Tue Nov 6 13:51:36 2012 -0600
