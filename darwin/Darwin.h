@@ -41,6 +41,8 @@ using std::out_of_range;
 enum op{HOP, LEFT, RIGHT, INFECT, IF_EMPTY, IF_ENEMY, IF_WALL, IF_RANDOM, GO};
 enum dir{WEST, NORTH, EAST, SOUTH};
 
+class Creature;
+
 struct Instruction{
 	op opCode;
 	int line;
@@ -55,7 +57,6 @@ struct Instruction{
 	}
 };
 
-class Creature;
 
 // ------
 // Grid
@@ -93,10 +94,10 @@ class Creature{
 		void left();
 		void right();
 		void infect();
+		void ifWall();
+		void ifRandom();
 		void ifEnemy();
 		void ifEmpty();
-		void ifRandom();
-		void ifWall();
 		bool nextCell(int& r, int& c);
 	public:
 		char sigil;
@@ -196,6 +197,17 @@ void Creature::execute(){
 }
 
 // Actions
+void Creature::left(){
+	++pc;
+	++turn;		// used up turn
+	direction = dir((direction + 3) % 4);
+}
+
+void Creature::right(){
+	++pc;
+	++turn;		// used up turn
+	direction = dir((direction + 1) % 4);
+}
 void Creature::hop(){
 	Grid& g = *grid;
 	int r = row, c = col;
@@ -216,19 +228,6 @@ void Creature::hop(){
 		col = c;
 	}
 }
-
-void Creature::left(){
-	++pc;
-	++turn;		// used up turn
-	direction = dir((direction + 3) % 4);
-}
-
-void Creature::right(){
-	++pc;
-	++turn;		// used up turn
-	direction = dir((direction + 1) % 4);
-}
-
 void Creature::infect(){
 	Grid& g = *grid;
 	int r = row, c = col;
@@ -249,6 +248,25 @@ void Creature::infect(){
 }
 
 // Control instructions
+void Creature::ifWall(){
+	const vector<Instruction>& p = *program;
+	int r = row, c = col;
+	
+	if(!nextCell(r, c)){
+		pc = p[pc].line;
+	}else
+		++pc;
+}
+
+void Creature::ifRandom(){
+	const vector<Instruction>& p = *program;
+	
+	if(rand() % 2){
+		pc = p[pc].line;
+	}else
+		++pc;
+}
+
 void Creature::ifEnemy(){
 	Grid& g = *grid;
 	const vector<Instruction>& p = *program;
@@ -284,26 +302,6 @@ void Creature::ifEmpty(){
 	}else
 		++pc;
 }
-
-void Creature::ifWall(){
-	const vector<Instruction>& p = *program;
-	int r = row, c = col;
-	
-	if(!nextCell(r, c)){
-		pc = p[pc].line;
-	}else
-		++pc;
-}
-
-void Creature::ifRandom(){
-	const vector<Instruction>& p = *program;
-	
-	if(rand() % 2){
-		pc = p[pc].line;
-	}else
-		++pc;
-}
-
 /**
 Helper function that moves r and c to the cell the creature faces and checks the bounds.
 @param r Row in the grid that will be changed to the cell the creature faces.

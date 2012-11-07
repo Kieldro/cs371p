@@ -124,20 +124,245 @@ struct TestDarwin : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(c == 0);
 	}
 	
+	// ----------
+	// testIfWall
+	void testIfWall0 () {
+		// not a wall
+		Grid g (3, 3);
+		g.place(HOPPER, EAST, 0, 1);
+		Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(c.pc == 0);
+		c.ifWall();
+		CPPUNIT_ASSERT(c.pc == 1);
+	}
+	
+	void testIfWall1 () {
+		// an east wall
+		Grid g (3, 3);
+		g.place(HOPPER, EAST, 0, 2);
+		Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(c.pc == 0);
+		c.ifWall();
+		//if(DEBUG) cerr << "BOOYAKASHA!" << c.pc <<  endl;
+		CPPUNIT_ASSERT(c.pc == (*c.program)[0].line );
+	}
+	
+	void testIfWall2 () {
+		// a south wall
+		Grid g (3, 3);
+		g.place(HOPPER, SOUTH, 2, 1);
+		Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(c.pc == 0);
+		c.ifWall();
+		CPPUNIT_ASSERT(c.pc == (*c.program)[0].line);
+	}
+	
+	// ----------
+	// testIfRandom
+	void testIfRandom0 () {
+		Grid g (3, 3);
+		g.place(FOOD, EAST, 0, 0);
+		Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(c.pc == 0);
+		srand(0);
+		c.ifRandom();
+		CPPUNIT_ASSERT(c.pc == (*c.program)[0].line);
+	}
+	
+	void testIfRandom1 () {
+		Grid g (3, 3);
+		g.place(FOOD, EAST, 0, 0);
+		Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(c.pc == 0);
+		srand(2);
+		c.ifRandom();
+		CPPUNIT_ASSERT(c.pc == 1);
+	}
+	
+	// ----------
+	// testIfEnemy
+	void testIfEnemy0 () {
+		Grid g (3, 3);
+		g.place(HOPPER, EAST, 0, 0);
+		Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(c.pc == 0);
+		c.ifEnemy();
+		CPPUNIT_ASSERT(c.pc == 1);
+	}
+	
+	void testIfEnemy1 () {
+		Grid g (3, 3);
+		g.place(HOPPER, EAST, 0, 0);
+		Creature& c = g.creatureStash.back();
+		g.place(FOOD, EAST, 0, 1);		// enemy
+		
+		CPPUNIT_ASSERT(c.pc == 0);
+		c.ifEnemy();
+		CPPUNIT_ASSERT(c.pc == (*c.program)[0].line);
+	}
+	
+	// ----------
+	// testIfEmpty
+	void testIfEmpty0 () {
+		Grid g (3, 3);
+		g.place(HOPPER, EAST, 0, 0);
+		Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(c.pc == 0);
+		c.ifEmpty();
+		CPPUNIT_ASSERT(c.pc == (*c.program)[0].line);
+	}
+	
+	void testIfEmpty1 () {
+		Grid g (3, 3);
+		g.place(HOPPER, EAST, 0, 0);
+		Creature& c = g.creatureStash.back();
+		g.place(HOPPER, EAST, 0, 1);
+		
+		CPPUNIT_ASSERT(c.pc == 0);
+		c.ifEmpty();
+		CPPUNIT_ASSERT(c.pc == 1);
+	}
+	
+	void testIfEmpty2 () {
+		Grid g (3, 3);
+		g.place(HOPPER, EAST, 0, 2);
+		Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(c.pc == 0);
+		c.ifEmpty();
+		CPPUNIT_ASSERT(c.pc == 1);
+	}
+	
+	// ----------
+	// testLeft
+	void testLeft0 () {
+		Grid g (3, 3);
+		g.place(HOPPER, EAST, 0, 0);
+		Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(c.direction == EAST);
+		c.left();
+		CPPUNIT_ASSERT(c.direction == NORTH);
+	}
+	void testLeft1 () {
+		Grid g (3, 3);
+		g.place(HOPPER, SOUTH, 0, 0);
+		Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(c.direction == SOUTH);
+		c.left();
+		CPPUNIT_ASSERT(c.direction == EAST);
+	}
+	void testLeft2 () {
+		Grid g (3, 3);
+		g.place(HOPPER, WEST, 0, 0);
+		Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(c.direction == WEST);
+		c.left();
+		CPPUNIT_ASSERT(c.direction == SOUTH);
+	}
+	void testLeft3 () {
+		Grid g (3, 3);
+		g.place(HOPPER, NORTH, 0, 0);
+		Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(c.direction == NORTH);
+		c.left();
+		CPPUNIT_ASSERT(c.direction == WEST);
+	}
+	
+	// ----------
+	// testRight
+	void testRight0 () {
+		Grid g (3, 3);
+		g.place(HOPPER, EAST, 0, 0);
+		Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(c.direction == EAST);
+		c.right();
+		CPPUNIT_ASSERT(c.direction == SOUTH);
+	}
+	void testRight1 () {
+		Grid g (3, 3);
+		g.place(HOPPER, SOUTH, 0, 0);
+		Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(c.direction == SOUTH);
+		c.right();
+		CPPUNIT_ASSERT(c.direction == WEST);
+	}
+	void testRight2 () {
+		Grid g (3, 3);
+		g.place(HOPPER, WEST, 0, 0);
+		Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(c.direction == WEST);
+		c.right();
+		CPPUNIT_ASSERT(c.direction == NORTH);
+	}
+	void testRight3 () {
+		Grid g (3, 3);
+		g.place(HOPPER, NORTH, 0, 0);
+		Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(c.direction == NORTH);
+		c.right();
+		CPPUNIT_ASSERT(c.direction == EAST);
+	}
+	
 	// --------
 	// testHop
 	void testHop0 () {
-		Grid g(3, 3);
-		g.place(HOPPER, SOUTH, 0, 1);
-		g.simulate(3, 1);
-	}
-	// hop into each other
-	void testHop1 () {
-		Grid g(3, 3);
-		g.place(HOPPER, EAST, 1, 1);
-		g.place(HOPPER, WEST, 1, 2);
+		Grid g (3, 3);
+		g.place(HOPPER, EAST, 0, 0);
+		Creature& c = g.creatureStash.back();
 		
-		g.simulate(2, 1);
+		CPPUNIT_ASSERT(c.col == 0);
+		c.hop();
+		CPPUNIT_ASSERT(c.col == 1);
+	}
+	// hop into a creature
+	void testHop1 () {
+		Grid g (3, 3);
+		g.place(HOPPER, EAST, 0, 0);
+		Creature& c = g.creatureStash.back();
+		g.place(FOOD, EAST, 0, 1);
+		
+		CPPUNIT_ASSERT(c.col == 0);
+		c.hop();
+		CPPUNIT_ASSERT(c.col == 0);
+	}
+	// hop into wall
+	void testHop2 () {
+		Grid g (3, 3);
+		g.place(HOPPER, EAST, 0, 2);
+		Creature& c = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(c.col == 2);
+		c.hop();
+		CPPUNIT_ASSERT(c.col == 2);
+	}
+	
+	// --------
+	// testInfect
+	void testInfect0 () {
+		Grid g (3, 3);
+		g.place(HOPPER, EAST, 0, 0);
+		Creature& c = g.creatureStash.back();
+		g.place(FOOD, EAST, 0, 1);
+		Creature& victim = g.creatureStash.back();
+		
+		CPPUNIT_ASSERT(victim.sigil == FOOD);
+		c.infect();
+		CPPUNIT_ASSERT(victim.sigil == c.sigil);
 	}
 	
 	// --------
@@ -227,8 +452,31 @@ struct TestDarwin : CppUnit::TestFixture {
 	CPPUNIT_TEST(testNextCell0);
 	CPPUNIT_TEST(testNextCell1);
 	CPPUNIT_TEST(testNextCell2);
+	CPPUNIT_TEST(testIfWall0);
+	CPPUNIT_TEST(testIfWall1);
+	CPPUNIT_TEST(testIfWall2);
+	CPPUNIT_TEST(testIfRandom0);
+	CPPUNIT_TEST(testIfRandom1);
+	CPPUNIT_TEST(testIfEnemy0);
+	CPPUNIT_TEST(testIfEnemy1);
+	CPPUNIT_TEST(testIfEmpty0);
+	CPPUNIT_TEST(testIfEmpty1);
+	CPPUNIT_TEST(testIfEmpty2);
+	CPPUNIT_TEST(testLeft0);
+	CPPUNIT_TEST(testLeft1);
+	CPPUNIT_TEST(testLeft2);
+	CPPUNIT_TEST(testLeft3);
+	CPPUNIT_TEST(testRight0);
+	CPPUNIT_TEST(testRight1);
+	CPPUNIT_TEST(testRight2);
+	CPPUNIT_TEST(testRight3);
 	CPPUNIT_TEST(testHop0);
 	CPPUNIT_TEST(testHop1);
+	CPPUNIT_TEST(testHop2);
+	CPPUNIT_TEST(testInfect0);
+	/*
+	CPPUNIT_TEST(testInfect1);
+	CPPUNIT_TEST(testInfect2);
 	CPPUNIT_TEST(testFood0);
 	CPPUNIT_TEST(testTrap0);
 	CPPUNIT_TEST(testTrap1);
@@ -236,6 +484,7 @@ struct TestDarwin : CppUnit::TestFixture {
 	CPPUNIT_TEST(testBest0);
 	CPPUNIT_TEST(testBest1);
 	CPPUNIT_TEST(testBest2);
+	*/
 	
 	CPPUNIT_TEST_SUITE_END();
 };
