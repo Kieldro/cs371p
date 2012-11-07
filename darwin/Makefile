@@ -13,13 +13,13 @@ all: test run log doxygen zip clean
 run: $(RUN)
 	clear
 	$(CC) $(CPPFLAGS) $(RUN) -o $(RUN).app
-	#valgrind \
+	valgrind \
 	./$(RUN).app 2>&1 | tee $(RUNOUT)
 
 test: $(TEST)
 	clear
 	$(CC) $(CPPFLAGS) -ldl $(TEST) -lcppunit -o $(TEST).app
-	#valgrind \
+	valgrind \
 	./$(TEST).app 2>&1 | tee $(TESTOUT)
 
 log:

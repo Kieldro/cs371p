@@ -1,3 +1,63 @@
+commit 7ea6b32945ebb9c9e6ae7fe6ef5129a7e6bd5e67
+Author: Jonathan <jontitan@ubuntu.ubuntu-domain>
+Date:   Wed Nov 7 16:28:03 2012 -0600
+
+    minor change to acceptance test
+
+commit 6edd89dca4c26170b30777d3a91bd4f56b2dcd36
+Author: Jonathan <jontitan@ubuntu.ubuntu-domain>
+Date:   Wed Nov 7 16:16:41 2012 -0600
+
+    fixed acceptance tests
+
+commit eb0c3d0ad2a30bbd27077c63557f98b8394faa86
+Author: Jonathan <jontitan@ubuntu.ubuntu-domain>
+Date:   Wed Nov 7 16:10:37 2012 -0600
+
+    changed my name and EID in readme
+
+commit 7e4bc16da47d549ec3a593c9fbeae32890246c71
+Author: Jonathan <jontitan@ubuntu.ubuntu-domain>
+Date:   Wed Nov 7 16:09:19 2012 -0600
+
+    pushing acceptance tests
+
+commit 7fa051b5b87f130bb4391770a1dd6c97d2069007
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Nov 7 15:52:41 2012 -0600
+
+    Adds some debug facilities.
+
+commit 77241130c633c5c5a35cf52f98518a6d39ff28f2
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Nov 7 15:21:33 2012 -0600
+
+    Unit tests complete. UML updated.
+
+commit 90d296551bfebad7f7a4580ab62a732ea069b2b1
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Nov 7 14:42:03 2012 -0600
+
+    Changed signature of place().
+
+commit 038640e6f7793592ff0a3ba47ef7191e70e30671
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Nov 7 14:03:04 2012 -0600
+
+    Adds more unit tests.
+
+commit 91e821c6dbcfac1d0543cc2d9e36835b3f191a8b
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Nov 7 13:39:03 2012 -0600
+
+    Adds a number of unit tests.
+
+commit a2c91da835bfafa996cc6f7221bb49517bd5fe91
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Nov 7 12:50:46 2012 -0600
+
+    Fixes some warnings.
+
 commit 38cf42e7513fa859659483222110371857098f41
 Author: Ian Buitrago <kieldro@gmail.com>
 Date:   Tue Nov 6 16:36:35 2012 -0600

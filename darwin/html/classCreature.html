@@ -38,7 +38,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="tabs">
     <ul>
       <li><a href="annotated.html"><span>Class&nbsp;List</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&nbsp;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&nbsp;Members</span></a></li>
     </ul>
   </div>
@@ -66,10 +65,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#abb2923e06edcc39531a26882ad85f264">left</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a17036acfdcc81a43384fb8c78898718f">right</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#afbff0af5c3d55941dcc769adb3880c28">infect</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#ae42c2185eff83025c2b6ebabd1dd4e4f">ifWall</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#acd6c4372a580773445b1ead87817e18e">ifRandom</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a17efe6017344eeaeb3a9696e1e3cd0ea">ifEnemy</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a68aaa3949fb6bd9fce44e493efc47876">ifEmpty</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#acd6c4372a580773445b1ead87817e18e">ifRandom</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#ae42c2185eff83025c2b6ebabd1dd4e4f">ifWall</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a54965fd6690a1479f2cfc2090ede0db9">nextCell</a> (int &amp;r, int &amp;c)</td></tr>
 <tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="Darwin_8h.html#a4ca269cf93df1b512b52174c1a256fe5">dir</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a31401c09380939247fca448737edbb62">direction</a></td></tr>
@@ -80,7 +79,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a81b808ceee6ddc5c0a97e0b97b19a707">pc</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#aa44dad7ec271e0f0a75937f5233fa139">turn</a></td></tr>
 <tr><td colspan="2"><h2>Friends</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a16346b230a4394de4f75268a461f8145">operator&lt;&lt;</a> (std::ostream &amp;strm, const <a class="el" href="classCreature.html">Creature</a> &amp;c)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">ostream &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreature.html#a5ad4e4d25496cbe40075f4a931bb0e13">operator&lt;&lt;</a> (ostream &amp;strm, const <a class="el" href="classCreature.html">Creature</a> &amp;c)</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="afd5fbd402387d5ba792cdedc551cc321"></a><!-- doxytag: member="Creature::Creature" ref="afd5fbd402387d5ba792cdedc551cc321" args="(dir d, int r, int c, Grid *g, char s)" -->
@@ -338,14 +337,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 </div>
 <hr/><h2>Friends And Related Function Documentation</h2>
-<a class="anchor" id="a16346b230a4394de4f75268a461f8145"></a><!-- doxytag: member="Creature::operator&lt;&lt;" ref="a16346b230a4394de4f75268a461f8145" args="(std::ostream &amp;strm, const Creature &amp;c)" -->
+<a class="anchor" id="a5ad4e4d25496cbe40075f4a931bb0e13"></a><!-- doxytag: member="Creature::operator&lt;&lt;" ref="a5ad4e4d25496cbe40075f4a931bb0e13" args="(ostream &amp;strm, const Creature &amp;c)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
+          <td class="memname">ostream&amp; operator&lt;&lt; </td>
           <td>(</td>
-          <td class="paramtype">std::ostream &amp;&nbsp;</td>
+          <td class="paramtype">ostream &amp;&nbsp;</td>
           <td class="paramname"> <em>strm</em>, </td>
         </tr>
         <tr>
@@ -553,7 +552,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Nov 7 12:00:25 2012 by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Nov 7 16:32:15 2012 by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

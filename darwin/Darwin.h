@@ -30,7 +30,7 @@ using std::ostream;
 
 // ------
 // macros
-#define DEBUG true
+#define DEBUG !true
 #define BOOYAKASHA	if(DEBUG) cerr << "BOOYAKASHA!" <<  endl;
 
 #define HOPPER		'h'

@@ -1,228 +1,28 @@
+==17060== Memcheck, a memory error detector
+==17060== Copyright (C) 2002-2011, and GNU GPL'd, by Julian Seward et al.
+==17060== Using Valgrind-3.7.0 and LibVEX; rerun with -h for copyright info
+==17060== Command: ./TestDarwin.c++.app
+==17060== 
 TestDarwin.c++
-[H[2J..........................................b = 0
-r = 0
-h = 0
-f = 0
-t = 0
-[H[2J.b = 0
-r = 0
-h = 1
-f = 0
-t = 0
-[H[2J.b = 0
-r = 0
-h = 1
-f = 0
-t = 1
-[H[2J.b = 0
-r = 0
-h = 0
-f = 1
-t = 0
-[H[2Jb = 0
-r = 0
-h = 0
-f = 1
-t = 0
-[H[2Jb = 0
-r = 0
-h = 0
-f = 1
-t = 0
-[H[2J.b = 0
-r = 0
-h = 0
-f = 0
-t = 1
-[H[2Jb = 0
-r = 0
-h = 0
-f = 0
-t = 1
-[H[2Jb = 0
-r = 0
-h = 0
-f = 0
-t = 1
-[H[2J.b = 0
-r = 0
-h = 0
-f = 1
-t = 1
-[H[2Jb = 0
-r = 0
-h = 0
-f = 0
-t = 2
-[H[2Jb = 0
-r = 0
-h = 0
-f = 0
-t = 2
-[H[2J.b = 0
-r = 1
-h = 1
-f = 1
-t = 0
-[H[2Jb = 0
-r = 1
-h = 1
-f = 1
-t = 0
-[H[2Jb = 0
-r = 2
-h = 1
-f = 0
-t = 0
-[H[2Jb = 0
-r = 3
-h = 0
-f = 0
-t = 0
-[H[2Jb = 0
-r = 3
-h = 0
-f = 0
-t = 0
-[H[2Jb = 0
-r = 3
-h = 0
-f = 0
-t = 0
-[H[2Jb = 0
-r = 3
-h = 0
-f = 0
-t = 0
-[H[2J.b = 1
-r = 1
-h = 1
-f = 1
-t = 0
-[H[2Jb = 1
-r = 1
-h = 1
-f = 1
-t = 0
-[H[2Jb = 1
-r = 2
-h = 1
-f = 0
-t = 0
-[H[2Jb = 1
-r = 2
-h = 1
-f = 0
-t = 0
-[H[2Jb = 1
-r = 3
-h = 0
-f = 0
-t = 0
-[H[2Jb = 1
-r = 3
-h = 0
-f = 0
-t = 0
-[H[2Jb = 1
-r = 3
-h = 0
-f = 0
-t = 0
-[H[2Jb = 0
-r = 4
-h = 0
-f = 0
-t = 0
-[H[2Jb = 0
-r = 4
-h = 0
-f = 0
-t = 0
-[H[2Jb = 0
-r = 4
-h = 0
-f = 0
-t = 0
-[H[2Jb = 0
-r = 4
-h = 0
-f = 0
-t = 0
-[H[2J.b = 5
-r = 5
-h = 5
-f = 5
-t = 5
-[H[2Jb = 6
-r = 8
-h = 2
-f = 4
-t = 5
-[H[2Jb = 6
-r = 11
-h = 0
-f = 3
-t = 5
-[H[2Jb = 8
-r = 11
-h = 0
-f = 2
-t = 4
-[H[2Jb = 8
-r = 14
-h = 0
-f = 1
-t = 2
-[H[2Jb = 5
-r = 18
-h = 0
-f = 1
-t = 1
-[H[2Jb = 4
-r = 20
-h = 0
-f = 0
-t = 1
-[H[2Jb = 3
-r = 20
-h = 0
-f = 0
-t = 2
-[H[2Jb = 1
-r = 22
-h = 0
-f = 0
-t = 2
-[H[2Jb = 0
-r = 22
-h = 0
-f = 0
-t = 3
-[H[2Jb = 0
-r = 22
-h = 0
-f = 0
-t = 3
-[H[2J.b = 13
-r = 13
-h = 13
-f = 13
-t = 13
-[H[2Jb = 35
-r = 11
-h = 0
-f = 5
-t = 14
-[H[2Jb = 43
-r = 2
-h = 0
-f = 5
-t = 15
-
+...................................................
 
 
 OK (51 tests)
 
 
 Done.
+==17060== 
+==17060== HEAP SUMMARY:
+==17060==     in use at exit: 122,880 bytes in 6 blocks
+==17060==   total heap usage: 1,959 allocs, 1,953 frees, 550,445 bytes allocated
+==17060== 
+==17060== LEAK SUMMARY:
+==17060==    definitely lost: 0 bytes in 0 blocks
+==17060==    indirectly lost: 0 bytes in 0 blocks
+==17060==      possibly lost: 0 bytes in 0 blocks
+==17060==    still reachable: 122,880 bytes in 6 blocks
+==17060==         suppressed: 0 bytes in 0 blocks
+==17060== Rerun with --leak-check=full to see details of leaked memory
+==17060== 
+==17060== For counts of detected and suppressed errors, rerun with: -v
+==17060== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 4 from 4)
