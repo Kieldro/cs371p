@@ -67,12 +67,12 @@ int main () {
 		cout << "*** Darwin 1x5 ***" << endl;
 		/*
 		1x5 Darwin
-		Hopper, facing north, at (0, 0)
+		Hopper, facing east, at (0, 0)
 		Simulate 5 moves.
 		Print every grid.
 		*/
 		Grid g(1, 5);
-        g.place(HOPPER, NORTH, 0, 0);
+        g.place(HOPPER, EAST, 0, 0);
 		g.simulate(5, 1);
 		}
 	catch (const invalid_argument&) {
@@ -87,12 +87,12 @@ int main () {
 		cout << "*** Darwin 5x1 ***" << endl;
 		/*
 		5x1 Darwin
-		Hopper, facing north, at (0, 0)
+		Hopper, facing south, at (0, 0)
 		Simulate 5 moves.
 		Print every grid.
 		*/
 		Grid g(5, 1);
-        g.place(HOPPER, NORTH, 0, 0);
+        g.place(HOPPER, SOUTH, 0, 0);
 		g.simulate(5, 1);
 		}
 	catch (const invalid_argument&) {
@@ -133,13 +133,13 @@ int main () {
 		cout << "*** Darwin 5x5 ***" << endl;
 		/*
 		5x5 Darwin
-		Hopper, facing north, at (0, 0)
+		Hopper, facing south, at (0, 0)
         Food,   facing east,  at (4, 4)
 		Simulate 5 moves.
 		Print every grid.
 		*/
 		Grid g(5, 5);
-        g.place(HOPPER, NORTH, 0, 0);
+        g.place(HOPPER, SOUTH, 0, 0);
 		g.place(FOOD, EAST, 4, 4);
         g.simulate(5, 1);
 		}
