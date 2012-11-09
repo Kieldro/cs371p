@@ -15,10 +15,10 @@ Actual    number of hours: 4
 
 Partner First Name: Graham
 Partner Last Name: Benevelli
-Partner EID: GB
+Partner EID: grambo
 Partner E-mail: grahambenevelli@gmail.com
-Partner Estimated number of hours: 
-Partner Actual    number of hours: 
+Partner Estimated 20
+Partner Actual    -1
 
 Turnin CS Username: keo
 GitHub ID: kieldro
