@@ -37,7 +37,7 @@ int main () {
 		Simulate 2500 moves.
 		Print grid.
 		*//*
-		Life<ConwayCell> game = input<ConwayCell>("RunLifeConway.in");
+		Life<ConwayCell> game("RunLifeConway.in");
 		game.simulate(283,  2500);
 		game.simulate(40,   2500);
 		game.simulate(2500-40-283, 2500);*/
@@ -58,7 +58,7 @@ int main () {
 		Simulate 2 moves.
 		Print every grid.
 		*//*
-		Life<FredkinCell> game = input<FredkinCell>("RunLifeFredkin.in");
+		Life<FredkinCell> game("RunLifeFredkin.in");
 		game.simulate(2, 1);*/	
 		
 		}
@@ -77,7 +77,7 @@ int main () {
 		Simulate 5 moves.
 		Print every grid.
 		*/
-		Life<Cell> game = input<Cell>("RunLife.in");
+		Life<Cell> game("RunLife.in");
 		game.simulate(5, 1);
 		
 		}

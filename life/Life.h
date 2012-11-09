@@ -47,18 +47,18 @@ class Life{
 		unsigned population;
 		
 		Life(int rows = 0, int cols = 0);
-		~Life();
+		Life(string);
 		int countNeighbors(AbstractCell, int row, int col);
 		void runTurn();
 		void simulate(int turns, int j, ostream& out = cout);
 		void print(ostream& out = cout);
-		friend Life<T> input();
+		~Life();
 	private:
 		allocator<Tvector2D> _x;
 		
+		void allocateGrids(int, int);
 		int nRows() const{return _g->size();}
 		int nCols() const{return _g->size() ? (*_g)[0].size() : 0;}
-		
 };
 		
 // Constructor
@@ -66,8 +66,38 @@ template <typename T>
 Life<T>::Life(int rows, int cols)
 : _g(_x.allocate(2))
 {
-	//if(DEBUG) cerr << "CONSTRUCT LIFE!" << endl;
+	allocateGrids(rows, cols);
+}
+
+template <typename T>
+Life<T>::Life(string file)
+: _g(_x.allocate(2))
+{
+	ifstream inFile(file);
+	string s;
+	int rows, cols;
+	char inChar;
 	
+	getline(inFile, s);
+	rows = atoi(s.c_str());
+	getline(inFile, s);
+	cols = atoi(s.c_str());
+	//if(DEBUG) cerr << rows << endl;
+	//if(DEBUG) cerr << cols << endl;
+	allocateGrids(rows, cols);
+	
+	for(int r = 0; r < rows; ++r){
+		for(int c = 0; c < cols; ++c){
+			inFile >> inChar;
+			if(_g[0][r][c].readChar(inChar))
+				++population;
+		}
+	}
+}
+
+
+template <typename T>
+void Life<T>::allocateGrids(int rows, int cols){
 	if (rows < 0 or cols < 0)
 		throw logic_error("Negative dimensions.");
 	generation = 0;
@@ -158,34 +188,5 @@ void Life<T>::print(ostream& out){
 	}
 	out << endl;
 	if(DEBUG) usleep(100000);
-}
-
-/**
-@param file
-*/
-template <typename T>
-Life<T> input(string file){
-	ifstream inFile(file);
-	string s;
-	int rows, cols;
-	char inChar;
-	
-	getline(inFile, s);
-	rows = atoi(s.c_str());
-	getline(inFile, s);
-	cols = atoi(s.c_str());
-	//if(DEBUG) cerr << rows << endl;
-	//if(DEBUG) cerr << cols << endl;
-	Life<T> result(rows, cols);
-	
-	for(int r = 0; r < rows; ++r){
-		for(int c = 0; c < cols; ++c){
-			inFile >> inChar;
-			if(result._g[0][r][c].readChar(inChar))
-				++result.population;
-		}
-	}
-	
-	return result;
 }
 #endif // Life_h
