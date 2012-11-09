@@ -32,7 +32,7 @@ using std::allocator;
 
 #include "ConwayCell.h"
 #include "FredkinCell.h"
-
+#include "Cell.h"
 
 /**
 	
@@ -181,7 +181,8 @@ Life<T> input(string file){
 	for(int r = 0; r < rows; ++r){
 		for(int c = 0; c < cols; ++c){
 			inFile >> inChar;
-			if(result._g[0][r][c].readChar(inChar)) ++result.population;
+			if(result._g[0][r][c].readChar(inChar))
+				++result.population;
 		}
 	}
 	
