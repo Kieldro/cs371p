@@ -4,9 +4,9 @@
 
 class AbstractCell{
 	
-	
-	
-    virtual void qux(){};
+    virtual void qux(){}
+public:
+    virtual bool update(int neighbors){}
 };
 
 #endif // AbstractCell_h

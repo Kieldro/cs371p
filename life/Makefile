@@ -14,7 +14,7 @@ all: test run log doxygen zip clean
 
 run: $(RUN)
 	clear
-	$(CC) $(CPPFLAGS) $(RUN) -o $(RUN).app
+	$(CC) $(CPPFLAGS) -ldl $(RUN) -o $(RUN).app
 	#valgrind \
 	./$(RUN).app 2>&1 | tee $(RUNOUT)
 
@@ -39,7 +39,7 @@ zip:
 	zip Life README.txt html/* AbstractCell.h Cell.h \
 		ConwayCell.h FredkinCell.h \
 		Life.h Life.log Life.pdf \
-		TestLife.c++ TestLife.out
+		$(TEST) $(TESTOUT)
 
 # turnin --submit reza cs371ppj6 Life.zip
 # turnin --list   reza cs371ppj6

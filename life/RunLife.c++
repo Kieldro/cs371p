@@ -15,6 +15,7 @@ To run the program:
 #include <cassert>   // assert
 #include <iostream>  // cout, endl
 #include <stdexcept> // invalid_argument, out_of_range
+#include <sstream>
 
 #include "Life.h"
 
@@ -39,12 +40,10 @@ int main () {
 		Simulate 2500 moves.
 		Print grid.
 		*/
-		Life<ConwayCell> game(109, 69);
-		game.simulate(283, 9000);
+		Life<ConwayCell> game = input<ConwayCell>("RunLifeConway.in");
+		game.simulate(283, 1);
 		game.simulate(40, 9000);
 		game.simulate(2500, 2500);		// print first and last
-		
-		
 		
 		}
 	catch (const invalid_argument&) {
@@ -62,7 +61,7 @@ int main () {
 		Simulate 2 moves.
 		Print every grid.
 		*/
-		Life<FredkinCell> game(20, 20);
+		//Life<FredkinCell> game(20, 20);
 		//game.simulate(2, 1);
 		
 		}

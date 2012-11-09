@@ -17,6 +17,18 @@ class ConwayCell : AbstractCell
 		void qux(){
 			;
 		}
+		/**
+		
+		*/
+		bool update(int neighbors){
+			if(alive) {
+				if(neighbors == 2 or neighbors == 3) {
+					return true;}
+				else {
+					return false;}}
+			
+			return neighbors == 3;
+		}
 		
 		friend ostream& operator<< (ostream &strm, const ConwayCell& c){
 			if (!c.alive)
