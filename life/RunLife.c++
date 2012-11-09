@@ -16,6 +16,9 @@ To run the program:
 #include <iostream>  // cout, endl
 #include <stdexcept> // invalid_argument, out_of_range
 
+#include "Life.h"
+
+
 // ----
 // main
 int main () {
@@ -36,7 +39,7 @@ int main () {
 		Simulate 2500 moves.
 		Print grid.
 		*/
-		
+		Life<ConwayCell> l;
 		
 		
 		
