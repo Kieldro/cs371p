@@ -22,6 +22,7 @@ using std::logic_error;
 using std::out_of_range;
 using std::ostream;
 using std::ifstream;
+using std::allocator;
 
 // ------
 // macros
@@ -38,19 +39,24 @@ using std::ifstream;
 */
 template <typename T>
 class Life{
+	typedef vector< vector<T> > Tvector2D;
 	public:
-		vector< vector<T> > _g;
+		Tvector2D* _g;
 		unsigned generation;
 		
 		
 		Life(int rows = 0, int cols = 0)
-		: _g(rows, vector<T>(cols))
+		: _g(x.allocate(2))
 		{
 			if (rows < 0 or cols < 0)
 				throw logic_error("Negative dimensions.");
-			
+			//x.construct();
 		}
 		
+		~Life(){
+			//x.destroy();
+			//x.deallocate(_g);
+		}
 		
 		
 		
@@ -58,6 +64,7 @@ class Life{
 		void simulate(int turns, int j, ostream& out = cout);
 		void print(ostream& out = cout);
 	private:
+		allocator<Tvector2D> x;
 		
 		int nRows() const{return _g.size();}
 		int nCols() const{return _g.size() ? _g[0].size() : 0;}
@@ -111,18 +118,16 @@ Prints the grid and turn number.
 */
 template <typename T>
 void Life<T>::print(ostream& out){
+	Tvector2D& grid = *_g[generation % 2];
+	
 	if(DEBUG) system("clear");
 	out << "Generation = " << generation << ", ";
 	out << "Population = " << -1 << endl;
-	out << "  ";
-	for(int c = 0; c < nCols(); ++c)
-		out << c % 10;
-	out << endl;
+	
 	for(int r = 0; r < nRows(); ++r){
 		out << r % 10 << " ";
 		for(int c = 0; c < nCols(); ++c){
-			out << 
-			_g[r][c];
+			out << grid[r][c];
 		}
 		out << endl;
 	}
