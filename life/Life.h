@@ -2,8 +2,6 @@
 #ifndef Life_h
 #define Life_h
 
-
-
 // --------
 // includes
 #include <cstdlib>
@@ -33,8 +31,8 @@ using std::ostream;
 
 
 /**
-
-
+	
+	
 */
 template <typename T>
 class Life{
@@ -46,7 +44,12 @@ class Life{
 	public:
 		vector< vector<T> > _g;
 		
-		
+		Life(int rows, int cols)
+		: _g(rows, vector<T>(cols))
+		{
+			
+			
+		}
 		
 		
 		

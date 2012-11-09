@@ -4,8 +4,10 @@
 
 #include "AbstractCell.h"
 
-class ConwayCell : AbstractCell{
-	
-	
+class ConwayCell : AbstractCell
+{
+	void qux(){
+		;
+	}
 };
 #endif //ConwayCell_h

@@ -10,30 +10,18 @@ using namespace std;
 
 struct A{
 	int i;
-	
-	A(int x){
-		i = x;
-	}
-	A()
-	{
-		i = 7;
-	}
-	
-	int qux(){return i;}
+	virtual int qux(){}
 };
 
 struct B : A{
-	static int i;
+	int qux(){}
 	
 };
-int B::i = 5;
 
 int main(){
 	
-	for(int i = 0; i < 3; ++i){
-		A a(i);
-		cout << "&a = " << &a << endl;
-	}
+	B b;
+	cout << "&b = " << &b << endl;
 	
 	
 	

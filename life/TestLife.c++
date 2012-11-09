@@ -29,8 +29,9 @@ struct TestLife : CppUnit::TestFixture {
 	// --------
 	// testLife
 	void testLife0 () {
-		Life<ConwayCell> game;
+		Life<ConwayCell> game(3, 3);
 		
+		ConwayCell c;
 		
 		CPPUNIT_ASSERT(1);
 	}

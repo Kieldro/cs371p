@@ -6,7 +6,7 @@ class AbstractCell{
 	
 	
 	
-	virtual void qux();
+    virtual void qux(){};
 };
 
 #endif //AbstractCell_h
