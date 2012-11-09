@@ -5,7 +5,7 @@
 #include "AbstractCell.h"
 
 class FredkinCell : AbstractCell{
-	
+	int age;
 	
 };
 #endif //FredkinCell_h

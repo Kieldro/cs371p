@@ -29,14 +29,10 @@ struct TestLife : CppUnit::TestFixture {
 	// --------
 	// testLife
 	void testLife0 () {
-		Life<ConwayCell> game(3, 3);
-		ConwayCell c;
-		std::ifstream infile("RunLifeConway.in");
-		string s;
 		
-		getline(infile, s);
-		cout << s << endl;
-		
+		Life<ConwayCell> game(0, 0);
+		game.input("RunLifeConway.in");
+		ConwayCell cell;
 		CPPUNIT_ASSERT(1);
 	}
 	

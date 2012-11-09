@@ -21,10 +21,11 @@ using std::string;
 using std::logic_error;
 using std::out_of_range;
 using std::ostream;
+using std::ifstream;
 
 // ------
 // macros
-#define DEBUG !true
+#define DEBUG true
 #define BOOYAKASHA	if(DEBUG) cerr << "BOOYAKASHA!" <<  endl; else;
 
 #include "ConwayCell.h"
@@ -39,18 +40,21 @@ template <typename T>
 class Life{
 	public:
 		vector< vector<T> > _g;
+		unsigned generation;
 		
-		Life(int rows, int cols)
+		
+		Life(int rows = 0, int cols = 0)
 		: _g(rows, vector<T>(cols))
 		{
-			
+			if (rows < 0 or cols < 0)
+				throw logic_error("Negative dimensions.");
 			
 		}
 		
 		
 		
 		
-		
+		void input(string file);
 		void simulate(int turns, int j, ostream& out = cout);
 		void print(ostream& out = cout);
 	private:
@@ -59,6 +63,34 @@ class Life{
 		int nCols() const{return _g.size() ? _g[0].size() : 0;}
 		
 };
+
+/**
+@param file
+*/
+template <typename T>
+void Life<T>::input(string file){
+	ifstream inFile(file);
+	string s;
+	int rows, cols;
+	char c;
+	
+	getline(inFile, s);
+	rows = atoi(s.c_str());
+	getline(inFile, s);
+	cols = atoi(s.c_str());
+	
+	if(DEBUG) cerr << rows << endl;
+	if(DEBUG) cerr << cols << endl;
+	for(int i = 0; i < rows; ++i){
+		for(int j = 0; j < cols; ++j){
+			inFile >> c;
+			if(DEBUG) cerr << c;
+			
+		}
+		if(DEBUG) cerr << endl;
+	}
+	
+}
 
 /**
 @param turns the number turns to run the game.
@@ -80,7 +112,7 @@ Prints the grid and turn number.
 template <typename T>
 void Life<T>::print(ostream& out){
 	if(DEBUG) system("clear");
-	out << "Generation = " << -1 << ", ";
+	out << "Generation = " << generation << ", ";
 	out << "Population = " << -1 << endl;
 	out << "  ";
 	for(int c = 0; c < nCols(); ++c)
@@ -89,10 +121,8 @@ void Life<T>::print(ostream& out){
 	for(int r = 0; r < nRows(); ++r){
 		out << r % 10 << " ";
 		for(int c = 0; c < nCols(); ++c){
-			if(_g[r][c] == NULL)
-				out << ".";
-			else
-				out << *_g[r][c];
+			out << 
+			_g[r][c];
 		}
 		out << endl;
 	}

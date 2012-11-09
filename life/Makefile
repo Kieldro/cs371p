@@ -16,13 +16,13 @@ run: $(RUN)
 	clear
 	$(CC) $(CPPFLAGS) $(RUN) -o $(RUN).app
 	#valgrind \
-	./$(RUN).app < $(RUNIN) 2>&1 | tee $(RUNOUT)
+	./$(RUN).app 2>&1 | tee $(RUNOUT)
 
 test: $(TEST)
 	clear
 	$(CC) $(CPPFLAGS) -ldl $(TEST) -lcppunit -o $(TEST).app
 	#valgrind \
-	./$(TEST).app < $(RUNIN) 2>&1 | tee $(TESTOUT)
+	./$(TEST).app 2>&1 | tee $(TESTOUT)
 
 log:
 	git log > Life.log

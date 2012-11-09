@@ -12,6 +12,13 @@ class ConwayCell : AbstractCell
 		void qux(){
 			;
 		}
+		
+		friend ostream& operator<< (ostream &strm, const ConwayCell& c){
+			if (!c.alive)
+				return strm << ".";
+			
+			return strm << "*";
+		}
 	private:
 		
 };

@@ -16,6 +16,11 @@ struct A{
 struct B : A{
 	int qux(){}
 	
+	vector<int> v [2];
+	
+	B()
+	:v()
+	{}
 };
 
 int main(){
@@ -24,6 +29,7 @@ int main(){
 	cout << "&b = " << &b << endl;
 	
 	
+	cout << "b.v[0].size() = " << b.v[0].size() << endl;
 	
 	return 0;
 }
