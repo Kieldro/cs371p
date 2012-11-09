@@ -9,13 +9,13 @@ Last Name: Buitrago
 EID: ib
 E-mail: kieldro@gmail.com
 Estimated number of hours: 20
-Actual    number of hours: 0
-9p - 
+Actual    number of hours: 3
+3 hrs: 9p - 12a
 
 Partner First Name: Graham
 Partner Last Name: Benevelli
 Partner EID: GB
-Partner E-mail: 
+Partner E-mail: grahambenevelli@gmail.com
 Partner Estimated number of hours: 
 Partner Actual    number of hours: 
 
@@ -24,6 +24,8 @@ GitHub ID: kieldro
 GitHub Repository Name: cs371p
 
 Comments:
+link to the UML: http://www.gliffy.com/pubdoc/4058932/L.png
+
 
 ----------------
 Pair Programming

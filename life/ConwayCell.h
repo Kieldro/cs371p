@@ -6,8 +6,13 @@
 
 class ConwayCell : AbstractCell
 {
-	void qux(){
-		;
-	}
+	public:
+		bool alive;
+		
+		void qux(){
+			;
+		}
+	private:
+		
 };
 #endif //ConwayCell_h

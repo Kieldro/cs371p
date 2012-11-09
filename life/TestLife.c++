@@ -30,8 +30,12 @@ struct TestLife : CppUnit::TestFixture {
 	// testLife
 	void testLife0 () {
 		Life<ConwayCell> game(3, 3);
-		
 		ConwayCell c;
+		std::ifstream infile("RunLifeConway.in");
+		string s;
+		
+		getline(infile, s);
+		cout << s << endl;
 		
 		CPPUNIT_ASSERT(1);
 	}

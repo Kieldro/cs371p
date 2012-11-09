@@ -39,7 +39,10 @@ int main () {
 		Simulate 2500 moves.
 		Print grid.
 		*/
-		Life<ConwayCell> l;
+		Life<ConwayCell> game(109, 69);
+		game.simulate(283, 9000);
+		game.simulate(40, 9000);
+		game.simulate(2500, 2500);		// print first and last
 		
 		
 		
@@ -59,6 +62,9 @@ int main () {
 		Simulate 2 moves.
 		Print every grid.
 		*/
+		Life<FredkinCell> game(20, 20);
+		//game.simulate(2, 1);
+		
 		}
 	catch (const invalid_argument&) {
 		assert(false);}
@@ -70,11 +76,14 @@ int main () {
 	try {
 		cout << "*** Life<Cell> 20x20 ***" << endl;
 		/*
-		read RunLifeCell.in // assume all Fredkin cells
+		read RunLife.in // assume all Fredkin cells
 		Print grid.
 		Simulate 5 moves.
 		Print every grid.
 		*/
+		//Life<Cell> game(20, 20);
+		//game.simulate(5, 1);
+		
 		}
 	catch (const invalid_argument&) {
 		assert(false);}

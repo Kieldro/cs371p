@@ -28,6 +28,7 @@ using std::ostream;
 #define BOOYAKASHA	if(DEBUG) cerr << "BOOYAKASHA!" <<  endl; else;
 
 #include "ConwayCell.h"
+#include "FredkinCell.h"
 
 
 /**
@@ -36,11 +37,6 @@ using std::ostream;
 */
 template <typename T>
 class Life{
-	private:
-		
-		int nRows() const{return _g.size();}
-		int nCols() const{return _g.size() ? _g[0].size() : 0;}
-		
 	public:
 		vector< vector<T> > _g;
 		
@@ -57,8 +53,12 @@ class Life{
 		
 		void simulate(int turns, int j, ostream& out = cout);
 		void print(ostream& out = cout);
+	private:
+		
+		int nRows() const{return _g.size();}
+		int nCols() const{return _g.size() ? _g[0].size() : 0;}
+		
 };
-
 
 /**
 @param turns the number turns to run the game.
