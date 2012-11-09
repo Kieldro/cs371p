@@ -8,4 +8,4 @@ class FredkinCell : AbstractCell{
 	int age;
 	
 };
-#endif //FredkinCell_h
+#endif // FredkinCell_h

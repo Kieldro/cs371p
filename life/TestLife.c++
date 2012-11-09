@@ -29,10 +29,14 @@ struct TestLife : CppUnit::TestFixture {
 	// --------
 	// testLife
 	void testLife0 () {
+		Life<ConwayCell> game = input<ConwayCell>("RunLife.in");
+		game.print();
+		CPPUNIT_ASSERT(1);
+	}
+	void testLife1 () {
+		Life<ConwayCell> game(5, 5);
 		
-		Life<ConwayCell> game(0, 0);
-		game.input("RunLifeConway.in");
-		ConwayCell cell;
+		game.print();
 		CPPUNIT_ASSERT(1);
 	}
 	
@@ -41,6 +45,7 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(TestLife);
 	
 	CPPUNIT_TEST(testLife0);
+	//CPPUNIT_TEST(testLife1);
 	
 	
 	CPPUNIT_TEST_SUITE_END();

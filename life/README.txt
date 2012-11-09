@@ -10,7 +10,8 @@ EID: ib
 E-mail: kieldro@gmail.com
 Estimated number of hours: 20
 Actual    number of hours: 4
-3 hrs: 9p - 1a
+4 hrs: 9p - 1a
+0 hrs: 1130a - 
 
 Partner First Name: Graham
 Partner Last Name: Benevelli

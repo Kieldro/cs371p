@@ -9,6 +9,11 @@ class ConwayCell : AbstractCell
 	public:
 		bool alive;
 		
+		ConwayCell(){
+			
+			alive = false;
+		}
+		
 		void qux(){
 			;
 		}
@@ -22,4 +27,4 @@ class ConwayCell : AbstractCell
 	private:
 		
 };
-#endif //ConwayCell_h
+#endif // ConwayCell_h

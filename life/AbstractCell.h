@@ -9,4 +9,4 @@ class AbstractCell{
     virtual void qux(){};
 };
 
-#endif //AbstractCell_h
+#endif // AbstractCell_h
