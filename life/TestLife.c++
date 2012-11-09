@@ -30,13 +30,13 @@ struct TestLife : CppUnit::TestFixture {
 	// testLife
 	void testLife0 () {
 		Life<ConwayCell> game = input<ConwayCell>("AcceptanceTest.in");
-		game.print();
+		//game.print();
 		CPPUNIT_ASSERT(1);
 	}
 	void testLife1 () {
 		Life<ConwayCell> game(5, 5);
 		
-		game.print();
+		//game.print();
 		CPPUNIT_ASSERT(1);
 	}
 	
@@ -47,7 +47,6 @@ struct TestLife : CppUnit::TestFixture {
 		game._g[0][4][1].alive = true;
 		game._g[0][5][1].alive = true;
 		CPPUNIT_ASSERT(game.countNeighbors(game._g[0][1][1], 1, 1) == 1);
-		cout << game.countNeighbors(game._g[0][2][1], 2, 1);
 		CPPUNIT_ASSERT(game.countNeighbors(game._g[0][2][1], 2, 1) == 1);
 		CPPUNIT_ASSERT(game.countNeighbors(game._g[0][3][1], 3, 1) == 2);
 	}
@@ -55,14 +54,55 @@ struct TestLife : CppUnit::TestFixture {
 	void testRunTurn0() {
 		Life<ConwayCell> game = input<ConwayCell>("RunLifeConway.in");
 		game.runTurn();
-		game.print();
+		//game.print();
 		CPPUNIT_ASSERT(1);		
 	}
 	
 	void testSimulateTurn0() {
 		Life<ConwayCell> game = input<ConwayCell>("RunLifeConway.in");
-		game.simulate(5, 1);
+		//game.simulate(5, 1);
 		CPPUNIT_ASSERT(1);		
+	}
+	
+	// ------------------
+	// testConwayReadChar
+	void testConwayReadChar0 () {
+		ConwayCell c;
+		CPPUNIT_ASSERT(c.readChar('*'));
+		CPPUNIT_ASSERT(c.alive);
+	}
+	void testConwayReadChar1 () {
+		ConwayCell c;
+		CPPUNIT_ASSERT(!c.readChar('.'));
+		CPPUNIT_ASSERT(!c.alive);
+	}
+	void testConwayReadChar2 () {
+		ConwayCell c;
+		CPPUNIT_ASSERT(!c.readChar('0'));
+		CPPUNIT_ASSERT(!c.alive);
+	}
+	
+	// ------------------
+	// testFredkinReadChar
+	void testFredkinReadChar0 () {
+		FredkinCell c;
+		CPPUNIT_ASSERT(!c.readChar('.'));
+		CPPUNIT_ASSERT(c.age < 0);
+	}
+	void testFredkinReadChar1 () {
+		FredkinCell c;
+		CPPUNIT_ASSERT(c.readChar('+'));
+		CPPUNIT_ASSERT(c.age >= 10);
+	}
+	void testFredkinReadChar2 () {
+		FredkinCell c;
+		CPPUNIT_ASSERT(c.readChar('0'));
+		CPPUNIT_ASSERT(c.age == 0);
+	}
+	void testFredkinReadChar3 () {
+		FredkinCell c;
+		CPPUNIT_ASSERT(c.readChar('7'));
+		CPPUNIT_ASSERT(c.age == 7);
 	}
 	
 	// --------
@@ -93,40 +133,47 @@ struct TestLife : CppUnit::TestFixture {
 	void testFredKinUpdate0 () {
 		FredkinCell f;
 		f.age = 10;
-		CPPUNIT_ASSERT(!f.update(0));
-		CPPUNIT_ASSERT(!f.update(2));
-		CPPUNIT_ASSERT(!f.update(4));
+		CPPUNIT_ASSERT(f.update(0) == -1);
+		CPPUNIT_ASSERT(f.update(2) == -1);
+		CPPUNIT_ASSERT(f.update(4) == -1);
 	}
 	void testFredKinUpdate1 () {
 		FredkinCell f;
 		f.age = 10;
-		CPPUNIT_ASSERT(f.update(1));
-		CPPUNIT_ASSERT(f.update(3));
-		CPPUNIT_ASSERT(f.update(5));
+		CPPUNIT_ASSERT(f.update(1) == 11);
+		CPPUNIT_ASSERT(f.update(3) == 11);
+		CPPUNIT_ASSERT(f.update(5) == 11);
 	}
 	void testFredKinUpdate2 () {
 		FredkinCell f;
 		f.age = -1;
-		CPPUNIT_ASSERT(f.update(1));
-		CPPUNIT_ASSERT(f.update(3));
+		CPPUNIT_ASSERT(f.update(1) == 0);
+		CPPUNIT_ASSERT(f.update(3) == 0);
 	}
 	void testFredKinUpdate3 () {
 		FredkinCell f;
 		f.age = -1;
-		CPPUNIT_ASSERT(!f.update(0));
-		CPPUNIT_ASSERT(!f.update(2));
-		CPPUNIT_ASSERT(!f.update(4));
+		CPPUNIT_ASSERT(f.update(0) == -1);
+		CPPUNIT_ASSERT(f.update(2) == -1);
+		CPPUNIT_ASSERT(f.update(4) == -1);
 	}
 	
 	// -----
 	// suite
 	CPPUNIT_TEST_SUITE(TestLife);
 	
-	//CPPUNIT_TEST(testLife0);
-	//CPPUNIT_TEST(testLife1);
+	CPPUNIT_TEST(testLife0);
+	CPPUNIT_TEST(testLife1);
 	CPPUNIT_TEST(testUpdate0);
-	//CPPUNIT_TEST(testRunTurn0);
-	//CPPUNIT_TEST(testSimulateTurn0);
+	CPPUNIT_TEST(testRunTurn0);
+	CPPUNIT_TEST(testSimulateTurn0);
+	CPPUNIT_TEST(testConwayReadChar0);
+	CPPUNIT_TEST(testConwayReadChar1);
+	CPPUNIT_TEST(testConwayReadChar2);
+	CPPUNIT_TEST(testFredkinReadChar0);
+	CPPUNIT_TEST(testFredkinReadChar1);
+	CPPUNIT_TEST(testFredkinReadChar2);
+	CPPUNIT_TEST(testFredkinReadChar3);
 	CPPUNIT_TEST(testConwayUpdate0);
 	CPPUNIT_TEST(testConwayUpdate1);
 	CPPUNIT_TEST(testConwayUpdate2);

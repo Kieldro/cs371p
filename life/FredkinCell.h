@@ -4,19 +4,47 @@
 
 #include "AbstractCell.h"
 
-class FredkinCell : AbstractCell{
+class FredkinCell : public AbstractCell{
 	public:
 	
 	int age;
 	
-	bool update(int neighbors){
+	int update(int neighbors){
 			if(age >= 0) {
 				if(neighbors == 0 or neighbors == 2 or neighbors == 4) {
-					return false;}
+					return -1;}
 				else {
-					return true;}}
+					return age+1;}}
 			
-			return neighbors == 1 or neighbors == 3;
+			if (neighbors == 1 or neighbors == 3) {
+				return 0;	
+			} else {
+				return -1;	
+			}
+		}
+		
+	bool readChar(char c) {
+		if(c == '+') 
+			age = 10;
+		else if(c - '0' >= 0 and c -'0' <= 9) age = (int) c - '0';
+		else age = -1;
+		return age >= 0;
+	}
+	
+	bool isAlive() {
+		return age >= 0;	
+	}
+	
+	void ageCell(int inc) {
+		age = inc;	
+	}
+	
+	friend ostream& operator<< (ostream &strm, const FredkinCell& c){
+			if (c.age < 0)
+				return strm << "-";
+			if (c.age < 10)
+				return strm << c.age;
+			return strm << "+";
 		}
 	
 };

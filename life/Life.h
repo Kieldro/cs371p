@@ -48,7 +48,7 @@ class Life{
 		
 		Life(int rows = 0, int cols = 0);
 		~Life();
-		int countNeighbors(ConwayCell, int row, int col);
+		int countNeighbors(AbstractCell, int row, int col);
 		void runTurn();
 		void simulate(int turns, int j, ostream& out = cout);
 		void print(ostream& out = cout);
@@ -90,7 +90,7 @@ Life<T>::~Life(){
 Updates a cell.
 */
 template <typename T>
-int Life<T>::countNeighbors(ConwayCell cell, int r, int c){
+int Life<T>::countNeighbors(AbstractCell cell, int r, int c){
 	int neighbors = 0;
 	Tvector2D& grid = _g[generation % 2];
 	
@@ -98,7 +98,7 @@ int Life<T>::countNeighbors(ConwayCell cell, int r, int c){
 		for(int j = c-1; j < c+2; ++j){
 			if((i == r and j == c) or i < 0 or j < 0 or i >= nRows() or j >= nCols())
 				continue;
-			if(grid[i][j].alive)
+			if(grid[i][j].isAlive())
 				++neighbors;
 		}
 	//if(DEBUG) cerr << r << " " << c << " " << neighbors << endl;
@@ -116,8 +116,9 @@ void Life<T>::runTurn(){
 	
 	for(int r = 0; r < nRows(); ++r){
 		for(int c = 0; c < nCols(); ++c){
-			next[r][c].alive = current[r][c].update(countNeighbors(current[r][c], r, c));
-			if(next[r][c].alive)
+			int neighbors = countNeighbors(current[r][c], r, c);
+			next[r][c].ageCell(current[r][c].update(neighbors));
+			if(next[r][c].isAlive())
 				++population;
 		}
 	}
@@ -173,24 +174,16 @@ Life<T> input(string file){
 	rows = atoi(s.c_str());
 	getline(inFile, s);
 	cols = atoi(s.c_str());
-	if(DEBUG) cerr << rows << endl;
-	if(DEBUG) cerr << cols << endl;
+	//if(DEBUG) cerr << rows << endl;
+	//if(DEBUG) cerr << cols << endl;
 	Life<T> result(rows, cols);
 	
 	for(int r = 0; r < rows; ++r){
 		for(int c = 0; c < cols; ++c){
 			inFile >> inChar;
-			if(inChar == '*') {
-				result._g[0][r][c].alive = true;
-				++result.population;
-			}
-			//if(DEBUG) cerr << inChar;
-			
+			if(result._g[0][r][c].readChar(inChar)) ++result.population;
 		}
-		//if(DEBUG) cerr << endl;
 	}
-	
-	//if(DEBUG) result.print();
 	
 	return result;
 }
