@@ -5,22 +5,25 @@
 #include "AbstractCell.h"
 
 class FredkinCell : public AbstractCell{
-	public:
+	private:
 		bool alive;
 		int age;
-		
-		int update(int neighbors){
-			if(age >= 0) {
-				if(neighbors == 0 or neighbors == 2 or neighbors == 4) {
-					return -1;}
-				else {
-					return age+1;}}
+	public:
+		FredkinCell(){ alive = false; age = 0;}
+		void update(int neighbors, unsigned* population){
+			//if(DEBUG) cerr << "neighbors: " << neighbors << endl;
+			assert(neighbors >= 0 and neighbors <= 4);
 			
-			if (neighbors == 1 or neighbors == 3) {
-				return 0;	
-			} else {
-				return -1;	
-			}
+			if(alive) {
+				if(neighbors == 0 or neighbors == 2 or neighbors == 4)
+					alive = false;
+				else
+					++age;
+			} else if (neighbors == 1 or neighbors == 3)
+				alive = true;
+			
+			if(alive)
+				++*population;
 		}
 			
 		bool readChar(char c) {
@@ -33,10 +36,6 @@ class FredkinCell : public AbstractCell{
 		
 		bool isAlive() {
 			return alive;	
-		}
-		
-		void ageCell(int inc) {
-			age = inc;	
 		}
 		
 		friend ostream& operator<< (ostream &strm, const FredkinCell& c){

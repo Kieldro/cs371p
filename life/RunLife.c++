@@ -76,9 +76,9 @@ int main () {
 		Print grid.
 		Simulate 5 moves.
 		Print every grid.
-		*/
+		*//*
 		Life<Cell> game("RunLife.in");
-		game.simulate(5, 1);
+		game.simulate(5, 1);*/
 		}
 	catch (const invalid_argument&) {
 		assert(false);}

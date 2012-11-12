@@ -22,6 +22,7 @@ execute:
 #include "Life.h"
 
 using std::ostringstream;
+unsigned dummy = 0;
 
 // --------
 // TestLife
@@ -39,8 +40,10 @@ struct TestLife : CppUnit::TestFixture {
 	void testLife1 () {
 		Life<FredkinCell> game(5, 5);
 		
-		//game.print();
-		CPPUNIT_ASSERT(1);
+		CPPUNIT_ASSERT(game.generation == 0);
+		CPPUNIT_ASSERT(game.population == 0);
+		CPPUNIT_ASSERT(game.nRows() == 5);
+		CPPUNIT_ASSERT(game.nCols() == 5);
 	}
 	
 	void testUpdate0() {
@@ -49,9 +52,12 @@ struct TestLife : CppUnit::TestFixture {
 		game._g[0][3][1].alive = true;
 		game._g[0][4][1].alive = true;
 		game._g[0][5][1].alive = true;
+		
 		CPPUNIT_ASSERT(game.countNeighbors(game._g[0][1][1], 1, 1) == 1);
 		CPPUNIT_ASSERT(game.countNeighbors(game._g[0][2][1], 2, 1) == 1);
 		CPPUNIT_ASSERT(game.countNeighbors(game._g[0][3][1], 3, 1) == 2);
+		CPPUNIT_ASSERT(game.countNeighbors(game._g[0][3][2], 3, 2) == 3);
+		CPPUNIT_ASSERT(game.countNeighbors(game._g[0][0][0], 0, 0) == 0);
 	}
 	
 	void testRunTurn0() {
@@ -65,6 +71,17 @@ struct TestLife : CppUnit::TestFixture {
 		Life<ConwayCell> game(3, 3);
 		//game.simulate(5, 1);
 		CPPUNIT_ASSERT(1);		
+	}
+	
+	// ------------------
+	// testUpdateCell
+	void testUpdateCell0 () {
+		Life<ConwayCell> game(3, 3);
+		int r = 0, c = 0;
+		game._g[0][r][c].alive = true;
+		game.updateCell(r, c);
+		
+		CPPUNIT_ASSERT(!game._g[0][r][c].alive);
 	}
 	
 	// ------------------
@@ -112,53 +129,97 @@ struct TestLife : CppUnit::TestFixture {
 	// testConwayUpdate
 	void testConwayUpdate0 () {
 		ConwayCell c;
-		CPPUNIT_ASSERT(!c.update(2));
+		unsigned population = 0;
+		c.update(2, &population);
+		
+		CPPUNIT_ASSERT(!c.alive);
+		CPPUNIT_ASSERT(population == 0);
 	}
 	void testConwayUpdate1 () {
 		ConwayCell c;
-		CPPUNIT_ASSERT(c.update(3));
+		unsigned population = 0;
+		c.update(3, &population);
+		
+		CPPUNIT_ASSERT(c.alive);
+		CPPUNIT_ASSERT(population == 1);
 	}
 	void testConwayUpdate2 () {
 		ConwayCell c;
 		c.alive= true;
-		CPPUNIT_ASSERT(c.update(3));
-		CPPUNIT_ASSERT(c.update(2));
-		CPPUNIT_ASSERT(!c.update(1));
+		unsigned population = 0;
+		
+		c.update(3, &population);
+		CPPUNIT_ASSERT(c.alive);
+		CPPUNIT_ASSERT(population == 1);
+		
+		c.update(2, &population);
+		CPPUNIT_ASSERT(c.alive);
+		CPPUNIT_ASSERT(population == 2);
+		
+		c.update(1, &population);
+		CPPUNIT_ASSERT(!c.alive);
+		CPPUNIT_ASSERT(population == 2);
 	}
 	void testConwayUpdate3 () {
 		ConwayCell c;
 		c.alive= true;
-		CPPUNIT_ASSERT(!c.update(4));
+		c.update(4, &dummy);
+		
+		CPPUNIT_ASSERT(!c.alive);
 	}
 	
 	// --------
 	// testFredkinUpdate
 	void testFredKinUpdate0 () {
 		FredkinCell f;
+		f.alive= true;
 		f.age = 10;
-		CPPUNIT_ASSERT(f.update(0) == -1);
-		CPPUNIT_ASSERT(f.update(2) == -1);
-		CPPUNIT_ASSERT(f.update(4) == -1);
+		f.update(0, &dummy);
+		
+		CPPUNIT_ASSERT(!f.alive);
+		CPPUNIT_ASSERT(f.age == 10);
 	}
 	void testFredKinUpdate1 () {
 		FredkinCell f;
+		f.alive= true;
 		f.age = 10;
-		CPPUNIT_ASSERT(f.update(1) == 11);
-		CPPUNIT_ASSERT(f.update(3) == 11);
-		CPPUNIT_ASSERT(f.update(5) == 11);
+		
+		f.update(1, &dummy);
+		CPPUNIT_ASSERT(f.age == 11);
+		CPPUNIT_ASSERT(f.alive);
+		
+		f.update(3, &dummy);
+		CPPUNIT_ASSERT(f.age == 12);
+		CPPUNIT_ASSERT(f.alive);
 	}
 	void testFredKinUpdate2 () {
 		FredkinCell f;
-		f.age = -1;
-		CPPUNIT_ASSERT(f.update(1) == 0);
-		CPPUNIT_ASSERT(f.update(3) == 0);
+		
+		CPPUNIT_ASSERT(!f.alive);
+		CPPUNIT_ASSERT(f.age == 0);
+		
+		f.update(1, &dummy);
+		CPPUNIT_ASSERT(f.alive);
+		CPPUNIT_ASSERT(f.age == 0);
+		
+		f.update(3, &dummy);
+		CPPUNIT_ASSERT(f.alive);
+		CPPUNIT_ASSERT(f.age == 1);
 	}
 	void testFredKinUpdate3 () {
 		FredkinCell f;
-		f.age = -1;
-		CPPUNIT_ASSERT(f.update(0) == -1);
-		CPPUNIT_ASSERT(f.update(2) == -1);
-		CPPUNIT_ASSERT(f.update(4) == -1);
+		
+		f.update(0, &dummy);
+		CPPUNIT_ASSERT(!f.alive);
+		CPPUNIT_ASSERT(f.age == 0);
+		
+		f.update(2, &dummy);
+		CPPUNIT_ASSERT(!f.alive);
+		CPPUNIT_ASSERT(f.age == 0);
+		
+		f.update(4, &dummy);
+		CPPUNIT_ASSERT(!f.alive);
+		CPPUNIT_ASSERT(f.age == 0);
 	}
 	
 	// -----

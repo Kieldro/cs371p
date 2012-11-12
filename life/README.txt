@@ -9,16 +9,17 @@ Last Name: Buitrago
 EID: ib
 E-mail: kieldro@gmail.com
 Estimated number of hours: 20
-Actual    number of hours: 4
+Actual    number of hours: 14
 4 hrs: 9p - 1a
-0 hrs: 1130a - 
+5 hrs: 1130a - 4:30
+4.5 hrs: 12p - 4:30
 
 Partner First Name: Graham
 Partner Last Name: Benevelli
 Partner EID: grambo
 Partner E-mail: grahambenevelli@gmail.com
-Partner Estimated 20
-Partner Actual    -1
+Partner Estimated: 20
+Partner Actual   : -1
 
 Turnin CS Username: keo
 GitHub ID: kieldro

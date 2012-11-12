@@ -37,7 +37,7 @@ using std::allocator;
 Life class.
 */
 template <typename T>
-class Life{
+class Life {
 	typedef vector< vector<T> > Tvector2D;
 	public:
 		unsigned generation;
@@ -47,9 +47,10 @@ class Life{
 		Life(int rows = 0, int cols = 0);
 		void simulate(int turns, int j, ostream& out = cout);
 		void runTurn();
-		void print(ostream& out = cout);
+		void updateCell(int r, int c);
 		int countNeighbors(ConwayCell, int row, int col);
 		int countNeighbors(FredkinCell, int row, int col);
+		void print(ostream& out = cout);
 		int nRows() const{return _g->size();}
 		int nCols() const{return _g->size() ? (*_g)[0].size() : 0;}
 		~Life();
@@ -82,8 +83,8 @@ Life<T>::Life(string file)
 	//if(DEBUG) cerr << cols << endl;
 	allocateGrids(rows, cols);
 	
-	for(int r = 0; r < rows; ++r){
-		for(int c = 0; c < cols; ++c){
+	for(int r = 0; r < rows; ++r) {
+		for(int c = 0; c < cols; ++c) {
 			inFile >> inChar;
 			if(_g[0][r][c].readChar(inChar))
 				++population;
@@ -104,7 +105,7 @@ Constructor helper function. Allocates and constructs 2 grids.
 @param cols The number of columns in the grids.
 */
 template <typename T>
-void Life<T>::allocateGrids(int rows, int cols){
+void Life<T>::allocateGrids(int rows, int cols) {
 	if (rows < 0 or cols < 0)
 		throw logic_error("Negative dimensions.");
 	generation = 0;
@@ -119,7 +120,7 @@ void Life<T>::allocateGrids(int rows, int cols){
 Destructs then destroys both grids.
 */
 template <typename T>
-Life<T>::~Life(){
+Life<T>::~Life() {
 	_x.destroy(_g);
 	_x.destroy(_g + 1);
 	
@@ -127,15 +128,57 @@ Life<T>::~Life(){
 }
 
 /**
-Updates a cell.
+@param turns the number turns to run the game.
+@param j print the grid every j turns.
 */
 template <typename T>
-int Life<T>::countNeighbors(ConwayCell cell, int r, int c){
+void Life<T>::simulate(int turns, int j, ostream& out) {
+	print(out);
+	for(int i = 1; i <= turns; ++i) {
+		runTurn();
+		if(i % j == 0)
+			print(out);
+	}
+}
+
+/**
+Runs a turn.
+*/
+template <typename T>
+void Life<T>::runTurn() {
+	population = 0;
+	
+	for(int r = 0; r < nRows(); ++r) {
+		for(int c = 0; c < nCols(); ++c) {
+			updateCell(r, c);
+		}
+	}
+	++generation;
+}
+
+/**
+Updates cell to next generation and increment population accordingly.
+*/
+template <typename T>
+void Life<T>::updateCell(int r, int c) {
+	auto& current = _g[generation % 2];
+	auto& next = _g[(generation + 1) % 2];
+	
+	int neighbors = countNeighbors(current[r][c], r, c);
+	next[r][c] = current[r][c];
+	next[r][c].update(neighbors, &population);
+}
+
+/**
+Updates a cell.
+*/
+template <typename T>		// TODO cell is never used
+int Life<T>::countNeighbors(ConwayCell, int r, int c) {
 	int neighbors = 0;
 	Tvector2D& grid = _g[generation % 2];
 	
 	for(int i = r-1; i < r+2; ++i)
-		for(int j = c-1; j < c+2; ++j){
+		for(int j = c-1; j < c+2; ++j) {
 			if((i == r and j == c) or i < 0 or j < 0 or i >= nRows() or j >= nCols())
 				continue;
 			if(grid[i][j].isAlive())
@@ -149,7 +192,7 @@ int Life<T>::countNeighbors(ConwayCell cell, int r, int c){
 Updates a Fredkin cell.
 */
 template <typename T>
-int Life<T>::countNeighbors(FredkinCell cell, int r, int c){
+int Life<T>::countNeighbors(FredkinCell, int r, int c) {
 	int neighbors = 0;
 	Tvector2D& grid = _g[generation % 2];
 	
@@ -166,52 +209,18 @@ int Life<T>::countNeighbors(FredkinCell cell, int r, int c){
 }
 
 /**
-Runs a turn.
-*/
-template <typename T>
-void Life<T>::runTurn(){
-	Tvector2D& current = _g[generation % 2];
-	Tvector2D& next = _g[(generation+1) % 2];
-	population = 0;
-	
-	for(int r = 0; r < nRows(); ++r){
-		for(int c = 0; c < nCols(); ++c){
-			int neighbors = countNeighbors(current[r][c], r, c);
-			next[r][c].ageCell(current[r][c].update(neighbors));
-			if(next[r][c].isAlive())
-				++population;
-		}
-	}
-	++generation;
-}
-
-/**
-@param turns the number turns to run the game.
-@param j print the grid every j turns.
-*/
-template <typename T>
-void Life<T>::simulate(int turns, int j, ostream& out){
-	print(out);
-	for(int i = 1; i <= turns; ++i){
-		runTurn();
-		if(i % j == 0)
-			print(out);
-	}
-}
-
-/**
 Prints the grid and turn number.
 */
 template <typename T>
-void Life<T>::print(ostream& out){
+void Life<T>::print(ostream& out) {
 	Tvector2D& grid = _g[generation % 2];
 	
 	if(DEBUG) system("clear");
 	out << "Generation = " << generation << ", ";
 	out << "Population = " << population << "." << endl;
 	
-	for(int r = 0; r < nRows(); ++r){
-		for(int c = 0; c < nCols(); ++c){
+	for(int r = 0; r < nRows(); ++r) {
+		for(int c = 0; c < nCols(); ++c) {
 			out << grid[r][c];
 		}
 		out << endl;

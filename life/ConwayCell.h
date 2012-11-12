@@ -7,40 +7,21 @@
 class ConwayCell : public AbstractCell
 {
 	public:
-		bool alive;
-		
-		ConwayCell(){
-			
-			alive = false;
-		}
-		
-		void qux(){
-			;
-		}
-		/**
-		
-		*/
-		int update(int neighbors){
+		ConwayCell(){ alive = false; }
+		bool isAlive() const { return alive; }
+		bool readChar(char c) { return alive = c == '*'; }
+		void update(int neighbors, unsigned* population) {		// input params then output params.
+			assert(neighbors >= 0 and neighbors <= 8);
 			if(alive) {
-				if(neighbors == 2 or neighbors == 3) {
-					return true;}
-				else {
-					return false;}}
+				if(neighbors == 2 or neighbors == 3)
+					alive = true;
+				else 
+					alive = false;
+			} else
+				alive = neighbors == 3;
 			
-			return (int) neighbors == 3;
-		}
-		
-		bool readChar(char c) {
-			if(c == '*') alive = true;	
-			return alive;
-		}
-		
-		bool isAlive() {
-			return alive;	
-		}
-		
-		void ageCell(int inc) {
-			alive = inc == 1;	
+			if(alive)
+				++*population;
 		}
 		
 		friend ostream& operator<< (ostream &strm, const ConwayCell& c){
@@ -50,6 +31,6 @@ class ConwayCell : public AbstractCell
 			return strm << "*";
 		}
 	private:
-		
+		bool alive;
 };
 #endif // ConwayCell_h

@@ -13,8 +13,8 @@ class Cell : public AbstractCell{
 		aCell = new FredkinCell;
 	}
 	
-	int update(int neighbors){
-		return cell.update(neighbors);
+	void update(int neighbors, unsigned* population){
+		cell.update(neighbors, population);
 	}
 	
 	bool readChar(char c) {
@@ -23,10 +23,6 @@ class Cell : public AbstractCell{
 	
 	bool isAlive() {
 		return cell.isAlive();
-	}
-	
-	void ageCell(int inc) {
-		cell.ageCell(inc);
 	}
 	
 	~Cell(){
