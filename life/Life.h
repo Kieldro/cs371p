@@ -170,7 +170,7 @@ void Life<T>::updateCell(int r, int c) {
 }
 
 /**
-Updates a cell.
+Counts the neighbors of a ConwayCell.
 */
 template <typename T>		// TODO cell is never used
 int Life<T>::countNeighbors(ConwayCell, int r, int c) {
@@ -181,30 +181,32 @@ int Life<T>::countNeighbors(ConwayCell, int r, int c) {
 		for(int j = c-1; j < c+2; ++j) {
 			if((i == r and j == c) or i < 0 or j < 0 or i >= nRows() or j >= nCols())
 				continue;
-			if(grid[i][j].isAlive())
+			if(grid[i][j].isNeighbor())
 				++neighbors;
 		}
 	//if(DEBUG) cerr << r << " " << c << " " << neighbors << endl;
+	assert(neighbors >= 0 and neighbors <= 8);
 	return neighbors;
 }
 
 /**
-Updates a Fredkin cell.
+Counts the neighbors of a FredkinCell.
 */
 template <typename T>
 int Life<T>::countNeighbors(FredkinCell, int r, int c) {
 	int neighbors = 0;
 	Tvector2D& grid = _g[generation % 2];
 	
-	if(r - 1 >= 0 and grid[r - 1][c].isAlive())
+	if(r - 1 >= 0 and grid[r - 1][c].isNeighbor())
 		++neighbors;
-	if(r + 1 < nRows() and grid[r + 1][c].isAlive())
+	if(r + 1 < nRows() and grid[r + 1][c].isNeighbor())
 		++neighbors;
-	if(c - 1 >= 0 and grid[r][c - 1].isAlive())
+	if(c - 1 >= 0 and grid[r][c - 1].isNeighbor())
 		++neighbors;
-	if(c + 1 < nCols() and grid[r][c + 1].isAlive())
+	if(c + 1 < nCols() and grid[r][c + 1].isNeighbor())
 		++neighbors;
 	
+	assert(neighbors >= 0 and neighbors <= 4);
 	return neighbors;
 }
 

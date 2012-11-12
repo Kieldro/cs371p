@@ -4,32 +4,20 @@
 
 #include "AbstractCell.h"
 
-class Cell : public AbstractCell{
+class Cell : public AbstractCell {
 	public:
 	FredkinCell cell;
 	AbstractCell* aCell;
 	
-	Cell(){
-		aCell = new FredkinCell;
-	}
-	
-	void update(int neighbors, unsigned* population){
+	Cell(){ aCell = new FredkinCell; }
+	bool readChar(char c) { return cell.readChar(c); }
+	bool isNeighbor() { return cell.isNeighbor(); }
+	void update(int neighbors, unsigned* population) {
 		cell.update(neighbors, population);
 	}
+	~Cell() { delete aCell; }
 	
-	bool readChar(char c) {
-		return cell.readChar(c);
-	}
-	
-	bool isAlive() {
-		return cell.isAlive();
-	}
-	
-	~Cell(){
-		delete aCell;
-	}
-	
-	friend ostream& operator<< (ostream &strm, const Cell& c){
+	friend ostream& operator<< (ostream &strm, const Cell& c) {
 		return strm << c.cell;
 	}
 };

@@ -8,7 +8,8 @@ class ConwayCell : public AbstractCell
 {
 	public:
 		ConwayCell(){ alive = false; }
-		bool isAlive() const { return alive; }
+		explicit ConwayCell(bool a){ alive = a; }
+		bool isNeighbor() const { return alive; }
 		bool readChar(char c) { return alive = c == '*'; }
 		void update(int neighbors, unsigned* population) {		// input params then output params.
 			assert(neighbors >= 0 and neighbors <= 8);

@@ -107,7 +107,7 @@ struct TestLife : CppUnit::TestFixture {
 	void testFredkinReadChar0 () {
 		FredkinCell c;
 		CPPUNIT_ASSERT(!c.readChar('.'));
-		CPPUNIT_ASSERT(c.age < 0);
+		CPPUNIT_ASSERT(c.age == 0);
 	}
 	void testFredkinReadChar1 () {
 		FredkinCell c;
@@ -170,7 +170,7 @@ struct TestLife : CppUnit::TestFixture {
 	
 	// --------
 	// testFredkinUpdate
-	void testFredKinUpdate0 () {
+	void testFredkinUpdate0 () {
 		FredkinCell f;
 		f.alive= true;
 		f.age = 10;
@@ -179,20 +179,20 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(!f.alive);
 		CPPUNIT_ASSERT(f.age == 10);
 	}
-	void testFredKinUpdate1 () {
+	void testFredkinUpdate1 () {
 		FredkinCell f;
 		f.alive= true;
 		f.age = 10;
 		
 		f.update(1, &dummy);
-		CPPUNIT_ASSERT(f.age == 11);
 		CPPUNIT_ASSERT(f.alive);
+		CPPUNIT_ASSERT(f.age == 11);
 		
 		f.update(3, &dummy);
-		CPPUNIT_ASSERT(f.age == 12);
 		CPPUNIT_ASSERT(f.alive);
+		CPPUNIT_ASSERT(f.age == 12);
 	}
-	void testFredKinUpdate2 () {
+	void testFredkinUpdate2 () {
 		FredkinCell f;
 		
 		CPPUNIT_ASSERT(!f.alive);
@@ -206,7 +206,7 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(f.alive);
 		CPPUNIT_ASSERT(f.age == 1);
 	}
-	void testFredKinUpdate3 () {
+	void testFredkinUpdate3 () {
 		FredkinCell f;
 		
 		f.update(0, &dummy);
@@ -220,6 +220,25 @@ struct TestLife : CppUnit::TestFixture {
 		f.update(4, &dummy);
 		CPPUNIT_ASSERT(!f.alive);
 		CPPUNIT_ASSERT(f.age == 0);
+	}
+	void testFredkinUpdate4 () {
+		FredkinCell f(true, 0);
+		unsigned population = 0;
+		
+		f.update(1, &population);
+		CPPUNIT_ASSERT(f.alive);
+		CPPUNIT_ASSERT(f.age == 1);
+		CPPUNIT_ASSERT(population == 1);
+		
+		f.update(2, &population);
+		CPPUNIT_ASSERT(!f.alive);
+		CPPUNIT_ASSERT(f.age == 1);
+		CPPUNIT_ASSERT(population == 1);
+		
+		f.update(3, &population);
+		CPPUNIT_ASSERT(f.alive);
+		CPPUNIT_ASSERT(f.age == 1);
+		CPPUNIT_ASSERT(population == 2);
 	}
 	
 	// -----
@@ -242,10 +261,11 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testConwayUpdate1);
 	CPPUNIT_TEST(testConwayUpdate2);
 	CPPUNIT_TEST(testConwayUpdate3);
-	CPPUNIT_TEST(testFredKinUpdate0);
-	CPPUNIT_TEST(testFredKinUpdate1);
-	CPPUNIT_TEST(testFredKinUpdate2);
-	CPPUNIT_TEST(testFredKinUpdate3);
+	CPPUNIT_TEST(testFredkinUpdate0);
+	CPPUNIT_TEST(testFredkinUpdate1);
+	CPPUNIT_TEST(testFredkinUpdate2);
+	CPPUNIT_TEST(testFredkinUpdate3);
+	CPPUNIT_TEST(testFredkinUpdate4);
 	
 	CPPUNIT_TEST_SUITE_END();
 };

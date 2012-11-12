@@ -6,6 +6,6 @@ class AbstractCell{
 	public:
 		virtual bool readChar(char c) { return 0; }
 		virtual void update(int neighbors, int* population) {}
-		virtual bool isAlive() { return 0; }
+		virtual bool isNeighbor() { return 0; }
 };
 #endif // AbstractCell_h
