@@ -1,4 +1,3 @@
-
 #ifndef Life_h
 #define Life_h
 
@@ -35,40 +34,37 @@ using std::allocator;
 #include "Cell.h"
 
 /**
-	
-	
+Life class.
 */
 template <typename T>
 class Life{
 	typedef vector< vector<T> > Tvector2D;
 	public:
-		Tvector2D* _g;
 		unsigned generation;
 		unsigned population;
 		
-		Life(int rows = 0, int cols = 0);
 		Life(string);
-		int countNeighbors(AbstractCell, int row, int col);
-		void runTurn();
+		Life(int rows = 0, int cols = 0);
 		void simulate(int turns, int j, ostream& out = cout);
+		void runTurn();
 		void print(ostream& out = cout);
+		int countNeighbors(ConwayCell, int row, int col);
+		int countNeighbors(FredkinCell, int row, int col);
+		int nRows() const{return _g->size();}
+		int nCols() const{return _g->size() ? (*_g)[0].size() : 0;}
 		~Life();
 	private:
+		Tvector2D* _g;	// pointer to the grids
 		allocator<Tvector2D> _x;
 		
 		void allocateGrids(int, int);
-		int nRows() const{return _g->size();}
-		int nCols() const{return _g->size() ? (*_g)[0].size() : 0;}
 };
 		
-// Constructor
-template <typename T>
-Life<T>::Life(int rows, int cols)
-: _g(_x.allocate(2))
-{
-	allocateGrids(rows, cols);
-}
-
+// Constructors
+/**
+Initializes a grid based on the input file.
+@param file The name of an input file.
+*/
 template <typename T>
 Life<T>::Life(string file)
 : _g(_x.allocate(2))
@@ -95,7 +91,18 @@ Life<T>::Life(string file)
 	}
 }
 
+template <typename T>
+Life<T>::Life(int rows, int cols)
+: _g(_x.allocate(2))
+{
+	allocateGrids(rows, cols);
+}
 
+/**
+Constructor helper function. Allocates and constructs 2 grids.
+@param rows The number of rows in the grids.
+@param cols The number of columns in the grids.
+*/
 template <typename T>
 void Life<T>::allocateGrids(int rows, int cols){
 	if (rows < 0 or cols < 0)
@@ -108,6 +115,9 @@ void Life<T>::allocateGrids(int rows, int cols){
 }
 
 // Destructor
+/**
+Destructs then destroys both grids.
+*/
 template <typename T>
 Life<T>::~Life(){
 	_x.destroy(_g);
@@ -120,7 +130,7 @@ Life<T>::~Life(){
 Updates a cell.
 */
 template <typename T>
-int Life<T>::countNeighbors(AbstractCell cell, int r, int c){
+int Life<T>::countNeighbors(ConwayCell cell, int r, int c){
 	int neighbors = 0;
 	Tvector2D& grid = _g[generation % 2];
 	
@@ -132,6 +142,26 @@ int Life<T>::countNeighbors(AbstractCell cell, int r, int c){
 				++neighbors;
 		}
 	//if(DEBUG) cerr << r << " " << c << " " << neighbors << endl;
+	return neighbors;
+}
+
+/**
+Updates a Fredkin cell.
+*/
+template <typename T>
+int Life<T>::countNeighbors(FredkinCell cell, int r, int c){
+	int neighbors = 0;
+	Tvector2D& grid = _g[generation % 2];
+	
+	if(r - 1 >= 0 and grid[r - 1][c].isAlive())
+		++neighbors;
+	if(r + 1 < nRows() and grid[r + 1][c].isAlive())
+		++neighbors;
+	if(c - 1 >= 0 and grid[r][c - 1].isAlive())
+		++neighbors;
+	if(c + 1 < nCols() and grid[r][c + 1].isAlive())
+		++neighbors;
+	
 	return neighbors;
 }
 
@@ -187,6 +217,6 @@ void Life<T>::print(ostream& out){
 		out << endl;
 	}
 	out << endl;
-	if(DEBUG) usleep(100000);
+	if(DEBUG) usleep(100000);		// micros seconds
 }
 #endif // Life_h

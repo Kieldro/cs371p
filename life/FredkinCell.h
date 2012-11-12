@@ -6,6 +6,7 @@
 
 class FredkinCell : public AbstractCell{
 	public:
+		bool alive;
 		int age;
 		
 		int update(int neighbors){
@@ -31,7 +32,7 @@ class FredkinCell : public AbstractCell{
 		}
 		
 		bool isAlive() {
-			return age >= 0;	
+			return alive;	
 		}
 		
 		void ageCell(int inc) {

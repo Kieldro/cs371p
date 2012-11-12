@@ -36,11 +36,11 @@ int main () {
 		Print grid.
 		Simulate 2500 moves.
 		Print grid.
-		*//*
+		*/
 		Life<ConwayCell> game("RunLifeConway.in");
 		game.simulate(283,  2500);
 		game.simulate(40,   2500);
-		game.simulate(2500-40-283, 2500);*/
+		game.simulate(2500, 2500);
 		
 		}
 	catch (const invalid_argument&) {
@@ -57,9 +57,9 @@ int main () {
 		Print grid.
 		Simulate 2 moves.
 		Print every grid.
-		*//*
+		*/
 		Life<FredkinCell> game("RunLifeFredkin.in");
-		game.simulate(2, 1);*/	
+		game.simulate(2, 1);
 		
 		}
 	catch (const invalid_argument&) {
@@ -79,7 +79,6 @@ int main () {
 		*/
 		Life<Cell> game("RunLife.in");
 		game.simulate(5, 1);
-		
 		}
 	catch (const invalid_argument&) {
 		assert(false);}

@@ -18,7 +18,7 @@ execute:
 #include "cppunit/TextTestRunner.h"				// TestRunner
 #include <sstream>
 
-//#define private public
+#define private public
 #include "Life.h"
 
 using std::ostringstream;
@@ -30,10 +30,14 @@ struct TestLife : CppUnit::TestFixture {
 	// testLife
 	void testLife0 () {
 		Life<ConwayCell> game("RunLifeConway.in");
-		//game.print();
+		
+		CPPUNIT_ASSERT(game.generation == 0);
+		CPPUNIT_ASSERT(game.population == 35);
+		CPPUNIT_ASSERT(game.nRows() == 109);
+		CPPUNIT_ASSERT(game.nCols() == 69);
 	}
 	void testLife1 () {
-		Life<ConwayCell> game(5, 5);
+		Life<FredkinCell> game(5, 5);
 		
 		//game.print();
 		CPPUNIT_ASSERT(1);
