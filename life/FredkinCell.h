@@ -39,6 +39,10 @@ class FredkinCell : public AbstractCell{
 			return alive;
 		}
 		
+		AbstractCell* clone() {
+			return new ConwayCell(this);
+		}
+		
 		
 		friend ostream& operator<< (ostream &strm, const FredkinCell& c) {
 			if (!c.alive)

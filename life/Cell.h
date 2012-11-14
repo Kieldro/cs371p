@@ -7,8 +7,8 @@
 
 class Cell : public AbstractCell {
 	public:
-	FredkinCell* cell;
-	//AbstractCell* aCell;
+	//FredkinCell* cell;
+	AbstractCell* cell;
 	
 	Cell(){
 		//if(DEBUG) cerr <<  "Cell() BOOM " << endl;
@@ -16,7 +16,7 @@ class Cell : public AbstractCell {
 	}
 	Cell(const Cell& c){
 		//if(DEBUG) cerr <<  "Cell(const Cell&) BOOM " << endl;
-		cell = new FredkinCell(*c.cell);
+		cell = c.cell->clone();
 	}
 	bool readChar(char c) { return cell->readChar(c); }
 	bool isNeighbor() { return cell->isNeighbor(); }
