@@ -31,11 +31,18 @@ class ConwayCell : public AbstractCell
 			return new ConwayCell(*this);
 		}
 		
+		bool transform() {
+			return false;
+		}
+		
+		char print() const {
+			if(!alive)
+				return '.';
+			return '*';
+		}
+		
 		friend ostream& operator<< (ostream &strm, const ConwayCell& c){
-			if (!c.alive)
-				return strm << ".";
-			
-			return strm << "*";
+			return strm << c.print();
 		}
 };
 #endif // ConwayCell_h

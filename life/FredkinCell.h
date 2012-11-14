@@ -44,14 +44,21 @@ class FredkinCell : public AbstractCell{
 			return new FredkinCell(*this);
 		}
 		
+		bool transform() {
+			return age >= 2 && alive;
+		}
+		
+		char print() const {
+			if (!alive)
+				return '-';
+			if (age < 10)
+				return '0' + age;
+			else
+				return '+';
+		}
 		
 		friend ostream& operator<< (ostream &strm, const FredkinCell& c) {
-			if (!c.alive)
-				return strm << "-";
-			if (c.age < 10)
-				return strm << c.age;
-			else
-				return strm << "+";
+			return strm << c.print();
 		}
 	private:
 		int age;

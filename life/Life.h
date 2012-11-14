@@ -97,6 +97,8 @@ Life<T>::~Life() {
 	_x.deallocate(_g, 2);
 }
 
+// ---------
+// runTurn
 /**
 Runs a turn.
 */

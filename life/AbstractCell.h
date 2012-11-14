@@ -37,6 +37,11 @@ class AbstractCell{
 		virtual void update(int neighborsAdj, int neighborsDiag, unsigned int* population) {}
 		virtual bool isNeighbor() { return 0; }
 		virtual AbstractCell* clone() { return NULL; }
+		virtual bool transform () { return false; }
+		virtual char print () const { return 'F'; }
+		friend ostream& operator<< (ostream &strm, const AbstractCell& c) {
+			return strm << c.print();
+		}
 	protected:
 		bool alive;
 };

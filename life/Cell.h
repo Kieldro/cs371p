@@ -12,9 +12,7 @@ class Cell : public AbstractCell {
 			cell = new FredkinCell;
 		}
 		Cell(const Cell& c) {
-			cell = new FredkinCell;
-			
-			cell = c.cell->clone();	// FIXME
+			cell = c.cell->clone();
 			//if(DEBUG) cerr <<  "Cell(const Cell&) BOOM " << endl;
 		}
 		~Cell() { //delete aCell; 
@@ -28,11 +26,14 @@ class Cell : public AbstractCell {
 		bool isNeighbor() { return cell->isNeighbor(); }
 		void update(int neighborsAdj, int neighborsDiag, unsigned* population) {
 			cell->update(neighborsAdj, neighborsDiag, population);
+			/*if(cell->transform()) {
+				delete cell;
+				cell = new ConwayCell(true);
+			}*/
 		}
 		
-		
 		friend ostream& operator<< (ostream &strm, const Cell& c) {
-			return strm << c.cell;
+			return strm << *(c.cell);
 		}
 	
 	private:
