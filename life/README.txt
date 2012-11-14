@@ -9,12 +9,12 @@ Last Name: Buitrago
 EID: ib
 E-mail: kieldro@gmail.com
 Estimated number of hours: 20
-Actual    number of hours: 14
+Actual    number of hours: 15
 4 hrs: 9p - 1a
 5 hrs: 1130a - 4:30
 4.5 hrs: 12p - 4:30
-0 hrs: 7p - 
-
+1 hrs: 7p - 8p
+0 hrs: 11a - 
 
 Partner First Name: Graham
 Partner Last Name: Benevelli
@@ -30,6 +30,7 @@ GitHub Repository Name: cs371p
 Comments:
 link to the UML: http://www.gliffy.com/pubdoc/4058932/L.png
 
+-2d vector of Cell or Cell*?
 
 ----------------
 Pair Programming

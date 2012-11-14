@@ -1,36 +1,6 @@
 #ifndef Life_h
 #define Life_h
 
-// --------
-// includes
-#include <cstdlib>
-#include <cassert>		// assert
-#include <vector>		// vector
-#include <deque>
-#include <typeinfo>		// typeid
-#include <stdexcept>
-#include <string>
-#include <fstream>
-
-using std::vector;
-using std::deque;
-using std::cout;
-using std::cerr;
-using std::endl;
-using std::string;
-using std::logic_error;
-using std::out_of_range;
-using std::ostream;
-using std::ifstream;
-using std::allocator;
-
-// ------
-// macros
-#define DEBUG true
-#define BOOYAKASHA	if(DEBUG) cerr << "BOOYAKASHA!" <<  endl; else;
-
-#include "ConwayCell.h"
-#include "FredkinCell.h"
 #include "Cell.h"
 
 /**
@@ -81,8 +51,7 @@ Life<T>::Life(string file)
 	cols = atoi(s.c_str());
 	//if(DEBUG) cerr << rows << endl;
 	//if(DEBUG) cerr << cols << endl;
-	constructGrids(rows, cols);
-	
+	constructGrids(rows, cols);		// TODO Construct on the fly
 	for(int r = 0; r < rows; ++r) {
 		for(int c = 0; c < cols; ++c) {
 			inFile >> inChar;
@@ -112,6 +81,7 @@ void Life<T>::constructGrids(int rows, int cols) {
 	population = 0;
 	
 	_x.construct(_g, Tvector2D(rows, vector<T>(cols)));
+	//BOOYAKASHA
 	_x.construct(_g + 1, Tvector2D(rows, vector<T>(cols)));
 }
 

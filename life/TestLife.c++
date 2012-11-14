@@ -31,7 +31,7 @@ struct TestLife : CppUnit::TestFixture {
 	// testLife
 	void testLife0 () {
 		Life<ConwayCell> game("RunLifeConway.in");
-		
+		//BOOYAKASHA
 		CPPUNIT_ASSERT(game.generation == 0);
 		CPPUNIT_ASSERT(game.population == 35);
 		CPPUNIT_ASSERT(game.nRows() == 109);
@@ -62,12 +62,12 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(game.nCols() == 5);
 	}
 	void testLife4 () {
-		Life<Cell> game(5, 5);
+		Life<Cell> game(2, 2);
 		
 		CPPUNIT_ASSERT(game.generation == 0);
 		CPPUNIT_ASSERT(game.population == 0);
-		CPPUNIT_ASSERT(game.nRows() == 5);
-		CPPUNIT_ASSERT(game.nCols() == 5);
+		CPPUNIT_ASSERT(game.nRows() == 2);
+		CPPUNIT_ASSERT(game.nCols() == 2);
 	}
 	
 	void testUpdate0() {
@@ -482,11 +482,13 @@ struct TestLife : CppUnit::TestFixture {
 	// -----
 	// suite
 	CPPUNIT_TEST_SUITE(TestLife);
+	
+	CPPUNIT_TEST(testLife4);	// FAILS
+	
 	CPPUNIT_TEST(testLife0);
 	CPPUNIT_TEST(testLife1);
 	CPPUNIT_TEST(testLife2);
 	CPPUNIT_TEST(testLife3);
-	//CPPUNIT_TEST(testLife4);	// FAILS
 	CPPUNIT_TEST(testUpdate0);
 	CPPUNIT_TEST(testRunTurn0);
 	CPPUNIT_TEST(testSimulateTurn0);

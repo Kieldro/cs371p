@@ -2,25 +2,30 @@
 #ifndef Cell_h
 #define Cell_h
 
-#include "AbstractCell.h"
+#include "ConwayCell.h"
+#include "FredkinCell.h"
 
 class Cell : public AbstractCell {
 	public:
-	FredkinCell cell;
+	FredkinCell* cell;
 	//AbstractCell* aCell;
-	int* i;
 	
-	Cell(){ //aCell = new FredkinCell; 
-		//if(DEBUG) cerr << sizeof(*aCell) << endl;
-		i = new int;
+	Cell(){
+		//if(DEBUG) cerr <<  "Cell() BOOM " << endl;
+		cell = new FredkinCell; 
 	}
-	bool readChar(char c) { return cell.readChar(c); }
-	bool isNeighbor() { return cell.isNeighbor(); }
+	Cell(const Cell& c){
+		//if(DEBUG) cerr <<  "Cell(const Cell&) BOOM " << endl;
+		cell = new FredkinCell(*c.cell);
+	}
+	bool readChar(char c) { return cell->readChar(c); }
+	bool isNeighbor() { return cell->isNeighbor(); }
 	void update(int neighbors, unsigned* population) {
-		cell.update(neighbors, population);
+		cell->update(neighbors, population);
 	}
 	~Cell() { //delete aCell; 
-		delete i;
+		//if(DEBUG) cerr <<  "~Cell() BOOM " << endl;
+		delete cell;
 	}
 	
 	friend ostream& operator<< (ostream &strm, const Cell& c) {

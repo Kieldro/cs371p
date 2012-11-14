@@ -7,20 +7,19 @@ TEST = TestLife.c++
 TESTOUT = TestLife.out
 
 RUN = RunLife.c++
-RUNIN = RunLife.in
 RUNOUT = RunLife.out
 
 all: test run log doxygen zip clean
 
 run: $(RUN)
 	clear
-	$(CC) $(CPPFLAGS) -ldl $(RUN) -o $(RUN).app
+	$(CC) $(CPPFLAGS) $(RUN) -o $(RUN).app
 	#valgrind \
 	./$(RUN).app 2>&1 | tee $(RUNOUT)
 
 test: $(TEST)
 	clear
-	$(CC) $(CPPFLAGS) -ldl $(TEST) -lcppunit -o $(TEST).app
+	$(CC) $(CPPFLAGS) $(TEST) -lcppunit -o $(TEST).app
 	#valgrind \
 	./$(TEST).app 2>&1 | tee $(TESTOUT)
 
@@ -49,6 +48,7 @@ clean:
 	rm *.app
 
 scratch: scratch.c++
-	g++ -std=c++0x scratch.c++ -o scratch.c++.app
-	valgrind \
+	clear
+	$(CC) $(CPPFLAGS) scratch.c++ -o scratch.c++.app
+	#valgrind \
 	./scratch.c++.app
