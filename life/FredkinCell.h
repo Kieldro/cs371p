@@ -10,8 +10,9 @@ class FredkinCell : public AbstractCell{
 		FredkinCell(bool a1, int a2 = 0) { alive = a1; age = a2; }
 		FredkinCell(const FredkinCell &other) { alive = other.alive; age = other.age; }
 		bool isNeighbor() { return alive; }
-		void update(int neighbors, unsigned* population) {
+		void update(int neighborsAdj, int neighborsDiag, unsigned* population) {
 			//if(DEBUG) cerr << "neighbors: " << neighbors << endl;
+			int neighbors = neighborsAdj;
 			assert(neighbors >= 0 and neighbors <= 4);
 			
 			if(alive) {

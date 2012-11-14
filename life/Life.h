@@ -18,8 +18,8 @@ class Life {
 		void simulate(int turns, int j, ostream& out = cout);
 		void runTurn();
 		void updateCell(int r, int c);
-		int countNeighbors(ConwayCell, int row, int col);
-		int countNeighbors(FredkinCell, int row, int col);
+		int countNeighborsAdjacent(int row, int col);
+		int countNeighborsDiag(int row, int col);
 		void print(ostream& out = cout);
 		int nRows() const{return _g->size();}
 		int nCols() const{return _g->size() ? (*_g)[0].size() : 0;}
@@ -120,26 +120,29 @@ void Life<T>::updateCell(int r, int c) {
 	auto& current = _g[generation % 2];
 	auto& next = _g[(generation + 1) % 2];
 	
-	int neighbors = countNeighbors(current[r][c], r, c);
+	int neighborsAdj = this->countNeighborsAdjacent(r, c);
+	int neighborsDiag = this->countNeighborsDiag(r, c);
 	next[r][c] = current[r][c];
-	next[r][c].update(neighbors, &population);
+	next[r][c].update(neighborsAdj, neighborsDiag, &population);
 }
 
 /**
 Counts the neighbors of a ConwayCell.
 */
 template <typename T>		// TODO cell is never used
-int Life<T>::countNeighbors(ConwayCell, int r, int c) {
+int Life<T>::countNeighborsAdjacent(int r, int c) {
 	int neighbors = 0;
 	Tvector2D& grid = _g[generation % 2];
 	
-	for(int i = r-1; i < r+2; ++i)
-		for(int j = c-1; j < c+2; ++j) {
-			if((i == r and j == c) or i < 0 or j < 0 or i >= nRows() or j >= nCols())
-				continue;
-			if(grid[i][j].isNeighbor())
-				++neighbors;
-		}
+	if(r - 1 >= 0 && c - 1 >= 0 and grid[r-1][c-1].isNeighbor())
+		++neighbors;
+	if(r - 1 >= 0 && c + 1 < nCols() and grid[r-1][c+1].isNeighbor())
+		++neighbors;
+	if(r + 1 < nRows() && c - 1 >= 0 and grid[r+1][c-1].isNeighbor())
+		++neighbors;
+	if(r + 1 < nRows() && c + 1 < nCols() and grid[r+1][c+1].isNeighbor())
+		++neighbors;
+		
 	//if(DEBUG) cerr << r << " " << c << " " << neighbors << endl;
 	assert(neighbors >= 0 and neighbors <= 8);
 	return neighbors;
@@ -149,7 +152,7 @@ int Life<T>::countNeighbors(ConwayCell, int r, int c) {
 Counts the neighbors of a FredkinCell.
 */
 template <typename T>
-int Life<T>::countNeighbors(FredkinCell, int r, int c) {
+int Life<T>::countNeighborsDiag(int r, int c) {
 	int neighbors = 0;
 	Tvector2D& grid = _g[generation % 2];
 	

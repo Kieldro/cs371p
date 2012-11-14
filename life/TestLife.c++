@@ -77,11 +77,12 @@ struct TestLife : CppUnit::TestFixture {
 		game._g[0][4][1].alive = true;
 		game._g[0][5][1].alive = true;
 		
-		CPPUNIT_ASSERT(game.countNeighbors(game._g[0][1][1], 1, 1) == 1);
-		CPPUNIT_ASSERT(game.countNeighbors(game._g[0][2][1], 2, 1) == 1);
-		CPPUNIT_ASSERT(game.countNeighbors(game._g[0][3][1], 3, 1) == 2);
-		CPPUNIT_ASSERT(game.countNeighbors(game._g[0][3][2], 3, 2) == 3);
-		CPPUNIT_ASSERT(game.countNeighbors(game._g[0][0][0], 0, 0) == 0);
+		cout << game.countNeighborsAdjacent(2, 1) << endl;
+		CPPUNIT_ASSERT(game.countNeighborsAdjacent(1, 1) == 1);
+		CPPUNIT_ASSERT(game.countNeighborsAdjacent(2, 1) == 1);
+		CPPUNIT_ASSERT(game.countNeighborsAdjacent(3, 1) == 2);
+		CPPUNIT_ASSERT(game.countNeighborsAdjacent(3, 2) == 3);
+		CPPUNIT_ASSERT(game.countNeighborsAdjacent(0, 0) == 0);
 	}
 	
 	void testRunTurn0() {
@@ -202,7 +203,7 @@ struct TestLife : CppUnit::TestFixture {
 	void testConwayUpdate0 () {
 		ConwayCell c;
 		unsigned population = 0;
-		c.update(2, &population);
+		c.update(2, 0, &population);
 		
 		CPPUNIT_ASSERT(!c.alive);
 		CPPUNIT_ASSERT(population == 0);
@@ -210,7 +211,7 @@ struct TestLife : CppUnit::TestFixture {
 	void testConwayUpdate1 () {
 		ConwayCell c;
 		unsigned population = 0;
-		c.update(3, &population);
+		c.update(3, 0, &population);
 		
 		CPPUNIT_ASSERT(c.alive);
 		CPPUNIT_ASSERT(population == 1);
@@ -220,22 +221,22 @@ struct TestLife : CppUnit::TestFixture {
 		c.alive= true;
 		unsigned population = 0;
 		
-		c.update(3, &population);
+		c.update(3, 0, &population);
 		CPPUNIT_ASSERT(c.alive);
 		CPPUNIT_ASSERT(population == 1);
 		
-		c.update(2, &population);
+		c.update(2, 0, &population);
 		CPPUNIT_ASSERT(c.alive);
 		CPPUNIT_ASSERT(population == 2);
 		
-		c.update(1, &population);
+		c.update(1, 0, &population);
 		CPPUNIT_ASSERT(!c.alive);
 		CPPUNIT_ASSERT(population == 2);
 	}
 	void testConwayUpdate3 () {
 		ConwayCell c;
 		c.alive= true;
-		c.update(4, &dummy);
+		c.update(4, 0, &dummy);
 		
 		CPPUNIT_ASSERT(!c.alive);
 	}
@@ -387,7 +388,7 @@ struct TestLife : CppUnit::TestFixture {
 		FredkinCell f;
 		f.alive= true;
 		f.age = 10;
-		f.update(0, &dummy);
+		f.update(0, 0, &dummy);
 		
 		CPPUNIT_ASSERT(!f.alive);
 		CPPUNIT_ASSERT(f.age == 10);
@@ -397,11 +398,11 @@ struct TestLife : CppUnit::TestFixture {
 		f.alive= true;
 		f.age = 10;
 		
-		f.update(1, &dummy);
+		f.update(1, 0, &dummy);
 		CPPUNIT_ASSERT(f.alive);
 		CPPUNIT_ASSERT(f.age == 11);
 		
-		f.update(3, &dummy);
+		f.update(3, 0, &dummy);
 		CPPUNIT_ASSERT(f.alive);
 		CPPUNIT_ASSERT(f.age == 12);
 	}
@@ -411,26 +412,26 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(!f.alive);
 		CPPUNIT_ASSERT(f.age == 0);
 		
-		f.update(1, &dummy);
+		f.update(1, 0, &dummy);
 		CPPUNIT_ASSERT(f.alive);
 		CPPUNIT_ASSERT(f.age == 0);
 		
-		f.update(3, &dummy);
+		f.update(3, 0, &dummy);
 		CPPUNIT_ASSERT(f.alive);
 		CPPUNIT_ASSERT(f.age == 1);
 	}
 	void testFredkinUpdate3 () {
 		FredkinCell f;
 		
-		f.update(0, &dummy);
+		f.update(0, 0, &dummy);
 		CPPUNIT_ASSERT(!f.alive);
 		CPPUNIT_ASSERT(f.age == 0);
 		
-		f.update(2, &dummy);
+		f.update(2, 0, &dummy);
 		CPPUNIT_ASSERT(!f.alive);
 		CPPUNIT_ASSERT(f.age == 0);
 		
-		f.update(4, &dummy);
+		f.update(4, 0, &dummy);
 		CPPUNIT_ASSERT(!f.alive);
 		CPPUNIT_ASSERT(f.age == 0);
 	}
@@ -438,17 +439,17 @@ struct TestLife : CppUnit::TestFixture {
 		FredkinCell f(true, 0);
 		unsigned population = 0;
 		
-		f.update(1, &population);
+		f.update(1, 0, &population);
 		CPPUNIT_ASSERT(f.alive);
 		CPPUNIT_ASSERT(f.age == 1);
 		CPPUNIT_ASSERT(population == 1);
 		
-		f.update(2, &population);
+		f.update(2, 0, &population);
 		CPPUNIT_ASSERT(!f.alive);
 		CPPUNIT_ASSERT(f.age == 1);
 		CPPUNIT_ASSERT(population == 1);
 		
-		f.update(3, &population);
+		f.update(3, 0, &population);
 		CPPUNIT_ASSERT(f.alive);
 		CPPUNIT_ASSERT(f.age == 1);
 		CPPUNIT_ASSERT(population == 2);

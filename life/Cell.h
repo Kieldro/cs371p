@@ -20,8 +20,8 @@ class Cell : public AbstractCell {
 	}
 	bool readChar(char c) { return cell->readChar(c); }
 	bool isNeighbor() { return cell->isNeighbor(); }
-	void update(int neighbors, unsigned* population) {
-		cell->update(neighbors, population);
+	void update(int neighborsAdj, int neighborsDiag, unsigned* population) {
+		cell->update(neighborsAdj, neighborsDiag, population);
 	}
 	~Cell() { //delete aCell; 
 		//if(DEBUG) cerr <<  "~Cell() BOOM " << endl;

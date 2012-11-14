@@ -12,7 +12,8 @@ class ConwayCell : public AbstractCell
 		ConwayCell(const ConwayCell &other) { alive = other.alive; }
 		bool isNeighbor() const { return alive; }
 		bool readChar(char c) { return alive = c == '*'; }
-		void update(int neighbors, unsigned* population) {		// input params then output params.
+		void update(int neighborsAdj,  int neighborsDiag, unsigned* population) {		// input params then output params.
+			int neighbors = neighborsAdj + neighborsDiag;
 			assert(neighbors >= 0 and neighbors <= 8);
 			if(alive) {
 				if(neighbors == 2 or neighbors == 3)
