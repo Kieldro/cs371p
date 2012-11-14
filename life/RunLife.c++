@@ -25,18 +25,18 @@ int main () {
 
 	// ------------------
 	// Conway Cell 109x69
+	/*
+	read RunLifeConway.in // assume all Conway cells
+	Print grid.
+	Simulate 283 moves.
+	Print grid.
+	Simulate 40 moves.
+	Print grid.
+	Simulate 2500 moves.
+	Print grid.
+	*/
 	try {
 		cout << "*** Life<ConwayCell> 109x69 ***" << endl;
-		/*
-		read RunLifeConway.in // assume all Conway cells
-		Print grid.
-		Simulate 283 moves.
-		Print grid.
-		Simulate 40 moves.
-		Print grid.
-		Simulate 2500 moves.
-		Print grid.
-		*/
 		Life<ConwayCell> game("RunLifeConway.in");
 		game.simulate(283,  2500);
 		game.simulate(40,   2500);
@@ -50,14 +50,14 @@ int main () {
 
 	// ------------------
 	// Fredkin Cell 20x20
+	/*
+	read RunLifeFredkin.in // assume all Fredkin cells
+	Print grid.
+	Simulate 2 moves.
+	Print every grid.
+	*/
 	try {
 		cout << "*** Life<FredkinCell> 20x20 ***" << endl;
-		/*
-		read RunLifeFredkin.in // assume all Fredkin cells
-		Print grid.
-		Simulate 2 moves.
-		Print every grid.
-		*/
 		Life<FredkinCell> game("RunLifeFredkin.in");
 		game.simulate(2, 1);
 		
@@ -69,14 +69,14 @@ int main () {
 
 	// ----------
 	// Cell 20x20
-	try {
+	/*
+	read RunLife.in // assume all Fredkin cells
+	Print grid.
+	Simulate 5 moves.
+	Print every grid.
+	*/
+	try {/*
 		cout << "*** Life<Cell> 20x20 ***" << endl;
-		/*
-		read RunLife.in // assume all Fredkin cells
-		Print grid.
-		Simulate 5 moves.
-		Print every grid.
-		*//*
 		Life<Cell> game("RunLife.in");
 		game.simulate(5, 1);*/
 		}

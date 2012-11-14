@@ -58,7 +58,7 @@ class Life {
 		Tvector2D* _g;	// pointer to the grids
 		allocator<Tvector2D> _x;
 		
-		void allocateGrids(int, int);
+		void constructGrids(int, int);
 };
 		
 // Constructors
@@ -81,7 +81,7 @@ Life<T>::Life(string file)
 	cols = atoi(s.c_str());
 	//if(DEBUG) cerr << rows << endl;
 	//if(DEBUG) cerr << cols << endl;
-	allocateGrids(rows, cols);
+	constructGrids(rows, cols);
 	
 	for(int r = 0; r < rows; ++r) {
 		for(int c = 0; c < cols; ++c) {
@@ -96,7 +96,7 @@ template <typename T>
 Life<T>::Life(int rows, int cols)
 : _g(_x.allocate(2))
 {
-	allocateGrids(rows, cols);
+	constructGrids(rows, cols);
 }
 
 /**
@@ -105,7 +105,7 @@ Constructor helper function. Allocates and constructs 2 grids.
 @param cols The number of columns in the grids.
 */
 template <typename T>
-void Life<T>::allocateGrids(int rows, int cols) {
+void Life<T>::constructGrids(int rows, int cols) {
 	if (rows < 0 or cols < 0)
 		throw logic_error("Negative dimensions.");
 	generation = 0;
@@ -228,6 +228,6 @@ void Life<T>::print(ostream& out) {
 		out << endl;
 	}
 	out << endl;
-	if(DEBUG) usleep(100000);		// micros seconds
+	if(DEBUG) usleep(100000);		// micro seconds
 }
 #endif // Life_h

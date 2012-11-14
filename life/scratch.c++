@@ -7,29 +7,32 @@
 
 using namespace std;
 
-
-struct A{
+struct B{
 	int i;
-	virtual int qux(){}
+	B(){i = 5;}
+	
+};
+struct A{
+	int* i;
+	B* b;
+	
+	A() : i(new int)
+	{
+		*i = 0;
+		b = new B;
+	}
+	
+	~A(){
+		
+		delete i;
+		delete b;
+	}
 };
 
-struct B : A{
-	int qux(){}
-	
-	vector<int> v [2];
-	
-	B()
-	:v()
-	{}
-};
 
 int main(){
-	
-	B b;
-	cout << "&b = " << &b << endl;
-	
-	
-	cout << "b.v[0].size() = " << b.v[0].size() << endl;
+	A a;
+	std::cout << "i = " << a.b->i << std::endl;
 	
 	return 0;
 }

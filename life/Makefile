@@ -50,4 +50,5 @@ clean:
 
 scratch: scratch.c++
 	g++ -std=c++0x scratch.c++ -o scratch.c++.app
+	valgrind \
 	./scratch.c++.app
