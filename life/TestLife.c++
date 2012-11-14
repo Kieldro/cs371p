@@ -69,6 +69,14 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(game.nRows() == 2);
 		CPPUNIT_ASSERT(game.nCols() == 2);
 	}
+	void testLife5 () {
+		Life<Cell> game("RunLife.in");
+		
+		CPPUNIT_ASSERT(game.generation == 0);
+		CPPUNIT_ASSERT(game.population == 6);
+		CPPUNIT_ASSERT(game.nRows() == 20);
+		CPPUNIT_ASSERT(game.nCols() == 20);
+	}
 	
 	void testUpdate0() {
 		Life<ConwayCell> game(7, 5);
@@ -77,11 +85,11 @@ struct TestLife : CppUnit::TestFixture {
 		game._g[0][4][1].alive = true;
 		game._g[0][5][1].alive = true;
 		
-		cout << game.countNeighborsAdjacent(2, 1) << endl;
+		//cout << game.countNeighborsAdjacent(2, 1) << endl;
 		CPPUNIT_ASSERT(game.countNeighborsAdjacent(1, 1) == 1);
 		CPPUNIT_ASSERT(game.countNeighborsAdjacent(2, 1) == 1);
 		CPPUNIT_ASSERT(game.countNeighborsAdjacent(3, 1) == 2);
-		CPPUNIT_ASSERT(game.countNeighborsAdjacent(3, 2) == 3);
+		CPPUNIT_ASSERT(game.countNeighborsAdjacent(3, 2) == 1);
 		CPPUNIT_ASSERT(game.countNeighborsAdjacent(0, 0) == 0);
 	}
 	
@@ -484,12 +492,13 @@ struct TestLife : CppUnit::TestFixture {
 	// suite
 	CPPUNIT_TEST_SUITE(TestLife);
 	
-	CPPUNIT_TEST(testLife4);	// FAILS
 	
+	CPPUNIT_TEST(testLife5);
 	CPPUNIT_TEST(testLife0);
 	CPPUNIT_TEST(testLife1);
 	CPPUNIT_TEST(testLife2);
 	CPPUNIT_TEST(testLife3);
+	CPPUNIT_TEST(testLife4);
 	CPPUNIT_TEST(testUpdate0);
 	CPPUNIT_TEST(testRunTurn0);
 	CPPUNIT_TEST(testSimulateTurn0);

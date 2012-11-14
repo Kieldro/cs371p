@@ -28,7 +28,7 @@ class ConwayCell : public AbstractCell
 		}
 		
 		AbstractCell* clone() {
-			return new ConwayCell(this);
+			return new ConwayCell(*this);
 		}
 		
 		friend ostream& operator<< (ostream &strm, const ConwayCell& c){

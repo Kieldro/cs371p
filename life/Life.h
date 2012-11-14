@@ -49,11 +49,12 @@ Life<T>::Life(string file)
 	rows = atoi(s.c_str());
 	getline(inFile, s);
 	cols = atoi(s.c_str());
-	//if(DEBUG) cerr << rows << endl;
-	//if(DEBUG) cerr << cols << endl;
 	constructGrids(rows, cols);		// TODO Construct on the fly
+	
 	for(int r = 0; r < rows; ++r) {
 		for(int c = 0; c < cols; ++c) {
+			//if(DEBUG) cerr << "r: " << r << endl;
+			//if(DEBUG) cerr << "c: " << c << endl;
 			inFile >> inChar;
 			if(_g[0][r][c].readChar(inChar))
 				++population;
@@ -81,7 +82,6 @@ void Life<T>::constructGrids(int rows, int cols) {
 	population = 0;
 	
 	_x.construct(_g, Tvector2D(rows, vector<T>(cols)));
-	//BOOYAKASHA
 	_x.construct(_g + 1, Tvector2D(rows, vector<T>(cols)));
 }
 
@@ -130,17 +130,17 @@ void Life<T>::updateCell(int r, int c) {
 Counts the neighbors of a ConwayCell.
 */
 template <typename T>		// TODO cell is never used
-int Life<T>::countNeighborsAdjacent(int r, int c) {
+int Life<T>::countNeighborsDiag(int r, int c) {
 	int neighbors = 0;
 	Tvector2D& grid = _g[generation % 2];
 	
-	if(r - 1 >= 0 && c - 1 >= 0 and grid[r-1][c-1].isNeighbor())
+	if(r - 1 >= 0 and c - 1 >= 0 and grid[r-1][c-1].isNeighbor())
 		++neighbors;
-	if(r - 1 >= 0 && c + 1 < nCols() and grid[r-1][c+1].isNeighbor())
+	if(r - 1 >= 0 and c + 1 < nCols() and grid[r-1][c+1].isNeighbor())
 		++neighbors;
-	if(r + 1 < nRows() && c - 1 >= 0 and grid[r+1][c-1].isNeighbor())
+	if(r + 1 < nRows() and c - 1 >= 0 and grid[r+1][c-1].isNeighbor())
 		++neighbors;
-	if(r + 1 < nRows() && c + 1 < nCols() and grid[r+1][c+1].isNeighbor())
+	if(r + 1 < nRows() and c + 1 < nCols() and grid[r+1][c+1].isNeighbor())
 		++neighbors;
 		
 	//if(DEBUG) cerr << r << " " << c << " " << neighbors << endl;
@@ -152,7 +152,7 @@ int Life<T>::countNeighborsAdjacent(int r, int c) {
 Counts the neighbors of a FredkinCell.
 */
 template <typename T>
-int Life<T>::countNeighborsDiag(int r, int c) {
+int Life<T>::countNeighborsAdjacent(int r, int c) {
 	int neighbors = 0;
 	Tvector2D& grid = _g[generation % 2];
 	

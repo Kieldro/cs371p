@@ -1,16 +1,8 @@
 TestLife.c++
-......0
-F................................................
+.......................................................
 
 
-!!!FAILURES!!!
-Test Results:
-Run:  54   Failures: 1   Errors: 0
-
-
-1) test: TestLife::testUpdate0 (F) line: 81 TestLife.c++
-assertion failed
-- Expression: game.countNeighborsAdjacent(1, 1) == 1
+OK (55 tests)
 
 
 Done.

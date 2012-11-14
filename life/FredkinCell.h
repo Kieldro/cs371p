@@ -8,7 +8,7 @@ class FredkinCell : public AbstractCell{
 	public:
 		FredkinCell() { alive = false; age = 0; }
 		FredkinCell(bool a1, int a2 = 0) { alive = a1; age = a2; }
-		FredkinCell(const FredkinCell &other) { alive = other.alive; age = other.age; }
+		FredkinCell(const FredkinCell& other) { alive = other.alive; age = other.age; }
 		bool isNeighbor() { return alive; }
 		void update(int neighborsAdj, int neighborsDiag, unsigned* population) {
 			//if(DEBUG) cerr << "neighbors: " << neighbors << endl;
@@ -41,7 +41,7 @@ class FredkinCell : public AbstractCell{
 		}
 		
 		AbstractCell* clone() {
-			return new ConwayCell(this);
+			return new FredkinCell(*this);
 		}
 		
 		
