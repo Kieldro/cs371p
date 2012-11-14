@@ -19,6 +19,7 @@ execute:
 #include <sstream>
 
 #define private public
+#define protected public
 #include "Life.h"
 
 using std::ostringstream;
@@ -68,6 +69,7 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(game.population == 0);
 		CPPUNIT_ASSERT(game.nRows() == 2);
 		CPPUNIT_ASSERT(game.nCols() == 2);
+		CPPUNIT_ASSERT(game._g[0][0][0].cell != 0);
 	}
 	void testLife5 () {
 		Life<Cell> game("RunLife.in");
@@ -275,6 +277,31 @@ struct TestLife : CppUnit::TestFixture {
 		std::ostringstream w;
 		w << c1 << c2;
 		CPPUNIT_ASSERT(w.str() == "*.");
+	}
+	
+	// ---------------
+	// testConwayClone
+	// ---------------
+	
+	void testConwayClone0 () {
+		ConwayCell c1;
+		c1.readChar('*');
+		ConwayCell* c2 = c1.clone();
+		CPPUNIT_ASSERT(c2->alive == true);
+	}
+	
+	void testConwayClone1 () {
+		ConwayCell c1;
+		c1.readChar('.');
+		ConwayCell* c2 = c1.clone();
+		CPPUNIT_ASSERT(c2->alive == false);
+	}
+	
+	void testConwayClone2 () {
+		ConwayCell c1;
+		c1.readChar('*');
+		ConwayCell* c2 = c1.clone();
+		CPPUNIT_ASSERT(c2->alive == true);
 	}
 
 	// ------------------------------
@@ -488,17 +515,28 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(w.str() == "0-9");
 	}
 	
+	// testFredkinClone
+	
+	void testFredkinClone0 () {
+		FredkinCell c1(true, 3);
+		AbstractCell* c2 = c1.clone();
+		CPPUNIT_ASSERT(c2->alive == true);
+		CPPUNIT_ASSERT(((FredkinCell*) c2)->age == 3);
+		CPPUNIT_ASSERT(&c1 != c2);
+	}
+	
 	// -----
 	// suite
 	CPPUNIT_TEST_SUITE(TestLife);
 	
 	
 	CPPUNIT_TEST(testLife5);
+	CPPUNIT_TEST(testLife4);
+	CPPUNIT_TEST(testFredkinClone0);
 	CPPUNIT_TEST(testLife0);
 	CPPUNIT_TEST(testLife1);
 	CPPUNIT_TEST(testLife2);
 	CPPUNIT_TEST(testLife3);
-	CPPUNIT_TEST(testLife4);
 	CPPUNIT_TEST(testUpdate0);
 	CPPUNIT_TEST(testRunTurn0);
 	CPPUNIT_TEST(testSimulateTurn0);
@@ -520,6 +558,7 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testConwayOperator0);
 	CPPUNIT_TEST(testConwayOperator1);
 	CPPUNIT_TEST(testConwayOperator2);
+	CPPUNIT_TEST(testConwayClone0);
 	CPPUNIT_TEST(testFredkinDefaultConstructor0);
 	CPPUNIT_TEST(testFredkinDefaultConstructor1);
 	CPPUNIT_TEST(testFredkinDefaultConstructor2);

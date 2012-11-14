@@ -9,11 +9,12 @@ class Cell : public AbstractCell {
 	public:
 		Cell() {
 			//if(DEBUG) cerr <<  "Cell() BOOM " << endl;
-			cell = new FredkinCell; 
+			cell = new FredkinCell;
 		}
 		Cell(const Cell& c) {
-			cell = new FredkinCell; 
-			//cell = c.cell->clone();	// FIXME
+			cell = new FredkinCell;
+			
+			cell = c.cell->clone();	// FIXME
 			//if(DEBUG) cerr <<  "Cell(const Cell&) BOOM " << endl;
 		}
 		~Cell() { //delete aCell; 

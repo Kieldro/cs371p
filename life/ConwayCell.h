@@ -27,7 +27,7 @@ class ConwayCell : public AbstractCell
 				++*population;
 		}
 		
-		AbstractCell* clone() {
+		ConwayCell* clone() {
 			return new ConwayCell(*this);
 		}
 		
@@ -37,7 +37,5 @@ class ConwayCell : public AbstractCell
 			
 			return strm << "*";
 		}
-	private:
-		bool alive;
 };
 #endif // ConwayCell_h

@@ -36,6 +36,8 @@ class AbstractCell{
 		virtual bool readChar(char c) { return 0; }
 		virtual void update(int neighborsAdj, int neighborsDiag, unsigned int* population) {}
 		virtual bool isNeighbor() { return 0; }
-		AbstractCell* clone() { return NULL; }
+		virtual AbstractCell* clone() { return NULL; }
+	protected:
+		bool alive;
 };
 #endif // AbstractCell_h

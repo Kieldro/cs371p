@@ -40,7 +40,7 @@ class FredkinCell : public AbstractCell{
 			return alive;
 		}
 		
-		AbstractCell* clone() {
+		FredkinCell* clone() {
 			return new FredkinCell(*this);
 		}
 		
@@ -54,7 +54,6 @@ class FredkinCell : public AbstractCell{
 				return strm << "+";
 		}
 	private:
-		bool alive;
 		int age;
 };
 #endif // FredkinCell_h
