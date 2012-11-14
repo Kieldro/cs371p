@@ -128,20 +128,6 @@ Life<T>::~Life() {
 }
 
 /**
-@param turns the number turns to run the game.
-@param j print the grid every j turns.
-*/
-template <typename T>
-void Life<T>::simulate(int turns, int j, ostream& out) {
-	print(out);
-	for(int i = 1; i <= turns; ++i) {
-		runTurn();
-		if(i % j == 0)
-			print(out);
-	}
-}
-
-/**
 Runs a turn.
 */
 template <typename T>
@@ -208,6 +194,20 @@ int Life<T>::countNeighbors(FredkinCell, int r, int c) {
 	
 	assert(neighbors >= 0 and neighbors <= 4);
 	return neighbors;
+}
+
+/**
+@param turns the number turns to run the game.
+@param j print the grid every j turns.
+*/
+template <typename T>
+void Life<T>::simulate(int turns, int j, ostream& out) {
+	print(out);
+	for(int i = 1; i <= turns; ++i) {
+		runTurn();
+		if(i % j == 0)
+			print(out);
+	}
 }
 
 /**
