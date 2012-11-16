@@ -29,7 +29,7 @@ Cell& Cell::operator= (const Cell& c) {
 	return *this;
 }
 
-bool Cell::readChar(char c) { 
+bool Cell::readChar(char c) {
 	if(c == '*') {
 		delete cell;
 		cell = new ConwayCell();

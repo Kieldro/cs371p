@@ -14,34 +14,7 @@ To run the program:
 // includes
 #include "Life.h"
 
-void test0();
-void test1();
-void test2();
-void test3();
-void test4();
-void test5();
-void test6();
-void test7();
-void test9();
-
 using namespace std;
-// ----
-// main
-int main() {
-	ios_base::sync_with_stdio(false); // turn off synchronization with C I/O
-	
-	test0();
-	test1();
-	test2();
-	test3();
-	test4();
-	test5();
-	//test6();
-	test7();
-	test9();
-
-	return 0;
-}
 
 // ------------------
 // 
@@ -186,4 +159,22 @@ void test9() {
 	} catch (const out_of_range&) {
 		assert(false);
 	}
+}
+
+// ----
+// main
+int main() {
+	ios_base::sync_with_stdio(false); // turn off synchronization with C I/O
+	
+	test0();
+	test1();
+	test2();
+	test3();
+	test4();
+	test5();
+	//test6();
+	test7();
+	test9();
+
+	return 0;
 }

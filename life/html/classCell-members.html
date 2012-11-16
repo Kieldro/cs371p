@@ -46,13 +46,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <h1>Cell Member List</h1>This is the complete list of members for <a class="el" href="classCell.html">Cell</a>, including all inherited members.<table>
-  <tr class="memlist"><td><a class="el" href="classCell.html#a571fa4bd7b5242f31c712adadc522334">age</a></td><td><a class="el" href="classCell.html">Cell</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classCell.html#aef952b222407b1d167142d6c270f9082">ageCell</a>(int inc)</td><td><a class="el" href="classCell.html">Cell</a></td><td><code> [inline, virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classCell.html#a510b1173d59194c746236a365094ec6a">cell</a></td><td><a class="el" href="classCell.html">Cell</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classCell.html#a6c8a8a5b7fcc15c9ccea420e35374194">isAlive</a>()</td><td><a class="el" href="classCell.html">Cell</a></td><td><code> [inline, virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classAbstractCell.html#aa92e42d5bb67f3249d8e2dde2c3228e7">alive</a></td><td><a class="el" href="classAbstractCell.html">AbstractCell</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a></td><td><a class="el" href="classCell.html">Cell</a></td><td><code> [private]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classCell.html#acad0ce468a59cd5704c210f5aa84b2ee">Cell</a>(bool a=false)</td><td><a class="el" href="classCell.html">Cell</a></td><td><code> [inline]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classCell.html#a51f477d8039e209153054228a5792b0c">Cell</a>(const Cell &amp;c)</td><td><a class="el" href="classCell.html">Cell</a></td><td><code> [inline]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classCell.html#ac067a6ec9c95bf9ae1c6a1e86c73d231">Cell</a>(AbstractCell *c)</td><td><a class="el" href="classCell.html">Cell</a></td><td><code> [inline]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classAbstractCell.html#a6d1317ebdedf4e2ba77bffd9d227be4a">clone</a>()</td><td><a class="el" href="classAbstractCell.html">AbstractCell</a></td><td><code> [inline, virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classCell.html#ae0e877ff871f41a26b0f501932bc71fc">isNeighbor</a>()</td><td><a class="el" href="classCell.html">Cell</a></td><td><code> [inline, virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classCell.html#a0f5cc7074c0e0494a1ec889032f3fdbb">operator&lt;&lt;</a>(ostream &amp;strm, const Cell &amp;c)</td><td><a class="el" href="classCell.html">Cell</a></td><td><code> [friend]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classCell.html#a8808f6ea4f6607981d24e785465c32c6">readChar</a>(char c)</td><td><a class="el" href="classCell.html">Cell</a></td><td><code> [inline, virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classCell.html#a491f79d25d7e774a7337400a4b580fbb">update</a>(int neighbors)</td><td><a class="el" href="classCell.html">Cell</a></td><td><code> [inline, virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classAbstractCell.html#a7fdb14e73cb5510f4022c9588f84c59f">AbstractCell::operator&lt;&lt;</a>(ostream &amp;strm, const AbstractCell &amp;c)</td><td><a class="el" href="classAbstractCell.html">AbstractCell</a></td><td><code> [friend]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classCell.html#a7159cd870e201a45ea84a3fdfa9e6581">operator=</a>(const Cell &amp;c)</td><td><a class="el" href="classCell.html">Cell</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classAbstractCell.html#a49ad9075c7b5e69fab1e980eeaaad3e4">print</a>() const </td><td><a class="el" href="classAbstractCell.html">AbstractCell</a></td><td><code> [inline, virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classCell.html#a8808f6ea4f6607981d24e785465c32c6">readChar</a>(char c)</td><td><a class="el" href="classCell.html">Cell</a></td><td><code> [virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classAbstractCell.html#a000b7cd5df28dc8c12d94cea7cb09185">transform</a>()</td><td><a class="el" href="classAbstractCell.html">AbstractCell</a></td><td><code> [inline, virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classCell.html#a0ab00be82aae2ad3a0f99066855a57ee">update</a>(int, int, unsigned *)</td><td><a class="el" href="classCell.html">Cell</a></td><td><code> [virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classCell.html#a9fa559f7a28e2b4336c6879ca09304d8">~Cell</a>()</td><td><a class="el" href="classCell.html">Cell</a></td><td><code> [inline]</code></td></tr>
 </table></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -68,7 +76,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Nov 9 15:36:12 2012 for My Project by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Nov 16 16:21:14 2012 for My Project by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

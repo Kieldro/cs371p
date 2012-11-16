@@ -61,13 +61,12 @@ Life<T>::Life(string file)
 	
 	for(int r = 0; r < rows; ++r) {
 		for(int c = 0; c < cols; ++c) {
-			//if(DEBUG) cerr << "r: " << r << endl;
-			//if(DEBUG) cerr << "c: " << c << endl;
 			inFile >> inChar;
 			if(_g[0][r][c].readChar(inChar))
 				++population;
 		}
 	}
+	inFile.close();
 }
 
 template <typename T>
@@ -194,7 +193,7 @@ void Life<T>::simulate(int turns, int j, ostream& out) {
 }
 
 /**
-
+Set a cell in the current generation.
 @param r
 @param c
 */

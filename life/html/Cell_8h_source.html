@@ -45,39 +45,51 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00002"></a>00002 <span class="preprocessor">#ifndef Cell_h</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span><span class="preprocessor">#define Cell_h</span>
 <a name="l00004"></a>00004 <span class="preprocessor"></span>
-<a name="l00005"></a>00005 <span class="preprocessor">#include &quot;<a class="code" href="AbstractCell_8h.html">AbstractCell.h</a>&quot;</span>
-<a name="l00006"></a>00006 
-<a name="l00007"></a><a class="code" href="classCell.html">00007</a> <span class="keyword">class </span><a class="code" href="classCell.html">Cell</a> : <span class="keyword">public</span> <a class="code" href="classAbstractCell.html">AbstractCell</a>{
-<a name="l00008"></a><a class="code" href="classCell.html#a510b1173d59194c746236a365094ec6a">00008</a>         <span class="keyword">public</span>:
-<a name="l00009"></a><a class="code" href="classCell.html#a571fa4bd7b5242f31c712adadc522334">00009</a>         <a class="code" href="classAbstractCell.html">AbstractCell</a> <a class="code" href="classCell.html#a510b1173d59194c746236a365094ec6a">cell</a>;
-<a name="l00010"></a>00010         <span class="keywordtype">int</span> <a class="code" href="classCell.html#a571fa4bd7b5242f31c712adadc522334">age</a>;
-<a name="l00011"></a><a class="code" href="classCell.html#a491f79d25d7e774a7337400a4b580fbb">00011</a>         
-<a name="l00012"></a>00012         <span class="keywordtype">int</span> <a class="code" href="classCell.html#a491f79d25d7e774a7337400a4b580fbb">update</a>(<span class="keywordtype">int</span> neighbors){
-<a name="l00013"></a>00013                         <span class="keywordflow">return</span> <a class="code" href="classCell.html#a510b1173d59194c746236a365094ec6a">cell</a>.<a class="code" href="classAbstractCell.html#a94e827a9c9b07e349c194ed92d797b10">update</a>(neighbors);
-<a name="l00014"></a>00014         }
-<a name="l00015"></a><a class="code" href="classCell.html#a8808f6ea4f6607981d24e785465c32c6">00015</a>                 
-<a name="l00016"></a>00016         <span class="keywordtype">bool</span> <a class="code" href="classCell.html#a8808f6ea4f6607981d24e785465c32c6">readChar</a>(<span class="keywordtype">char</span> c) {
-<a name="l00017"></a>00017                 <span class="keywordflow">return</span> <a class="code" href="classCell.html#a510b1173d59194c746236a365094ec6a">cell</a>.<a class="code" href="classAbstractCell.html#a8d6cedefe54ca88ce26dba48091b0d7d">readChar</a>(c);
-<a name="l00018"></a>00018         }
-<a name="l00019"></a><a class="code" href="classCell.html#a6c8a8a5b7fcc15c9ccea420e35374194">00019</a>         
-<a name="l00020"></a>00020         <span class="keywordtype">bool</span> <a class="code" href="classCell.html#a6c8a8a5b7fcc15c9ccea420e35374194">isAlive</a>() {
-<a name="l00021"></a>00021                 <span class="keywordflow">return</span> <a class="code" href="classCell.html#a510b1173d59194c746236a365094ec6a">cell</a>.<a class="code" href="classAbstractCell.html#ad799e7d9fed29d098293c76ac1dad5bb">isAlive</a>();  
-<a name="l00022"></a>00022         }
-<a name="l00023"></a><a class="code" href="classCell.html#aef952b222407b1d167142d6c270f9082">00023</a>         
-<a name="l00024"></a>00024         <span class="keywordtype">void</span> <a class="code" href="classCell.html#aef952b222407b1d167142d6c270f9082">ageCell</a>(<span class="keywordtype">int</span> inc) {
-<a name="l00025"></a>00025                 <a class="code" href="classCell.html#a510b1173d59194c746236a365094ec6a">cell</a>.<a class="code" href="classAbstractCell.html#a0c219a1e657c19e3e07f39f17600004c">ageCell</a>(inc);      
-<a name="l00026"></a>00026         }
-<a name="l00027"></a><a class="code" href="classCell.html#a0f5cc7074c0e0494a1ec889032f3fdbb">00027</a>         
-<a name="l00028"></a>00028         <span class="keyword">friend</span> ostream&amp; <a class="code" href="classCell.html#a0f5cc7074c0e0494a1ec889032f3fdbb">operator&lt;&lt; </a>(ostream &amp;strm, <span class="keyword">const</span> <a class="code" href="classCell.html">Cell</a>&amp; c){
-<a name="l00029"></a>00029                         <span class="keywordflow">if</span> (c.<a class="code" href="classCell.html#a571fa4bd7b5242f31c712adadc522334">age</a> &lt; 0)
-<a name="l00030"></a>00030                                 <span class="keywordflow">return</span> strm &lt;&lt; <span class="stringliteral">&quot;-&quot;</span>;
-<a name="l00031"></a>00031                         <span class="keywordflow">if</span> (c.<a class="code" href="classCell.html#a571fa4bd7b5242f31c712adadc522334">age</a> &lt; 10)
-<a name="l00032"></a>00032                                 <span class="keywordflow">return</span> strm &lt;&lt; c.<a class="code" href="classCell.html#a571fa4bd7b5242f31c712adadc522334">age</a>;
-<a name="l00033"></a>00033                         <span class="keywordflow">return</span> strm &lt;&lt; <span class="stringliteral">&quot;+&quot;</span>;
-<a name="l00034"></a>00034                 }
-<a name="l00035"></a>00035         
-<a name="l00036"></a>00036 };
-<a name="l00037"></a>00037 <span class="preprocessor">#endif // Cell_h</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &quot;<a class="code" href="ConwayCell_8h.html">ConwayCell.h</a>&quot;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;<a class="code" href="FredkinCell_8h.html">FredkinCell.h</a>&quot;</span>
+<a name="l00007"></a>00007 
+<a name="l00008"></a><a class="code" href="classCell.html">00008</a> <span class="keyword">class </span><a class="code" href="classCell.html">Cell</a> : <span class="keyword">public</span> <a class="code" href="classAbstractCell.html">AbstractCell</a> {
+<a name="l00009"></a><a class="code" href="classCell.html#acad0ce468a59cd5704c210f5aa84b2ee">00009</a>         <span class="keyword">public</span>:
+<a name="l00010"></a><a class="code" href="classCell.html#a51f477d8039e209153054228a5792b0c">00010</a>                 <a class="code" href="classCell.html#a51f477d8039e209153054228a5792b0c">Cell</a>(<span class="keywordtype">bool</span> a = <span class="keyword">false</span>) { <a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a> = <span class="keyword">new</span> <a class="code" href="classFredkinCell.html">FredkinCell</a>(a); }
+<a name="l00011"></a><a class="code" href="classCell.html#ac067a6ec9c95bf9ae1c6a1e86c73d231">00011</a>                 <a class="code" href="classCell.html#ac067a6ec9c95bf9ae1c6a1e86c73d231">Cell</a>(<span class="keyword">const</span> <a class="code" href="classCell.html">Cell</a>&amp; c) { <a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a> = c.<a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a>-&gt;<a class="code" href="classAbstractCell.html#a6d1317ebdedf4e2ba77bffd9d227be4a">clone</a>(); }
+<a name="l00012"></a><a class="code" href="classCell.html#a9fa559f7a28e2b4336c6879ca09304d8">00012</a>                 <a class="code" href="classCell.html#acad0ce468a59cd5704c210f5aa84b2ee">Cell</a>(<a class="code" href="classAbstractCell.html">AbstractCell</a>* c) { <a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a> = c; }             <span class="comment">// for unit tests</span>
+<a name="l00013"></a><a class="code" href="classCell.html#ae0e877ff871f41a26b0f501932bc71fc">00013</a>                 <a class="code" href="classCell.html#a9fa559f7a28e2b4336c6879ca09304d8">~Cell</a>() { <span class="keyword">delete</span> <a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a>; }
+<a name="l00014"></a>00014                 <span class="keywordtype">bool</span> <a class="code" href="classCell.html#ae0e877ff871f41a26b0f501932bc71fc">isNeighbor</a>() { <span class="keywordflow">return</span> <a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a>-&gt;<a class="code" href="classAbstractCell.html#a746138d5bd467ee6b7a0a645c8592036">isNeighbor</a>(); }
+<a name="l00015"></a>00015                 <a class="code" href="classCell.html">Cell</a>&amp; <a class="code" href="classCell.html#a7159cd870e201a45ea84a3fdfa9e6581">operator= </a>(<span class="keyword">const</span> <a class="code" href="classCell.html">Cell</a>&amp; c);
+<a name="l00016"></a>00016                 <span class="keywordtype">bool</span> <a class="code" href="classCell.html#a8808f6ea4f6607981d24e785465c32c6">readChar</a>(<span class="keywordtype">char</span> c);
+<a name="l00017"></a>00017                 <span class="keywordtype">void</span> <a class="code" href="classCell.html#a0ab00be82aae2ad3a0f99066855a57ee">update</a>(<span class="keywordtype">int</span> , <span class="keywordtype">int</span> , <span class="keywordtype">unsigned</span>*);
+<a name="l00018"></a><a class="code" href="classCell.html#a0f5cc7074c0e0494a1ec889032f3fdbb">00018</a>                 
+<a name="l00019"></a>00019                 <span class="keyword">friend</span> ostream&amp; <a class="code" href="classCell.html#a0f5cc7074c0e0494a1ec889032f3fdbb">operator&lt;&lt; </a>(ostream &amp;strm, <span class="keyword">const</span> <a class="code" href="classCell.html">Cell</a>&amp; c) {
+<a name="l00020"></a>00020                         <span class="keywordflow">return</span> strm &lt;&lt; *(c.<a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a>);
+<a name="l00021"></a>00021                 }
+<a name="l00022"></a><a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">00022</a>         <span class="keyword">private</span>:
+<a name="l00023"></a>00023                 <a class="code" href="classAbstractCell.html">AbstractCell</a>* <a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a>;
+<a name="l00024"></a>00024 };
+<a name="l00025"></a>00025 
+<a name="l00026"></a><a class="code" href="classCell.html#a7159cd870e201a45ea84a3fdfa9e6581">00026</a> <a class="code" href="classCell.html">Cell</a>&amp; <a class="code" href="classCell.html#a7159cd870e201a45ea84a3fdfa9e6581">Cell::operator= </a>(<span class="keyword">const</span> <a class="code" href="classCell.html">Cell</a>&amp; c) {
+<a name="l00027"></a>00027         <span class="keyword">delete</span> <a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a>;
+<a name="l00028"></a>00028         <a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a> = c.<a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a>-&gt;<a class="code" href="classAbstractCell.html#a6d1317ebdedf4e2ba77bffd9d227be4a">clone</a>();
+<a name="l00029"></a>00029         <span class="keywordflow">return</span> *<span class="keyword">this</span>;
+<a name="l00030"></a>00030 }
+<a name="l00031"></a>00031 
+<a name="l00032"></a><a class="code" href="classCell.html#a8808f6ea4f6607981d24e785465c32c6">00032</a> <span class="keywordtype">bool</span> <a class="code" href="classCell.html#a8808f6ea4f6607981d24e785465c32c6">Cell::readChar</a>(<span class="keywordtype">char</span> c) {
+<a name="l00033"></a>00033         <span class="keywordflow">if</span>(c == <span class="charliteral">&#39;*&#39;</span>) {
+<a name="l00034"></a>00034                 <span class="keyword">delete</span> <a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a>;
+<a name="l00035"></a>00035                 <a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a> = <span class="keyword">new</span> <a class="code" href="classConwayCell.html">ConwayCell</a>();
+<a name="l00036"></a>00036         }
+<a name="l00037"></a>00037         <span class="keywordtype">bool</span> ret = <a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a>-&gt;<a class="code" href="classAbstractCell.html#a8d6cedefe54ca88ce26dba48091b0d7d">readChar</a>(c); 
+<a name="l00038"></a>00038         assert(<a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a>-&gt;<a class="code" href="classAbstractCell.html#a49ad9075c7b5e69fab1e980eeaaad3e4">print</a>() == <span class="charliteral">&#39;-&#39;</span> || <a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a>-&gt;<a class="code" href="classAbstractCell.html#a49ad9075c7b5e69fab1e980eeaaad3e4">print</a>() == <span class="charliteral">&#39;*&#39;</span> || <a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a>-&gt;<a class="code" href="classAbstractCell.html#a49ad9075c7b5e69fab1e980eeaaad3e4">print</a>() == <span class="charliteral">&#39;0&#39;</span> || <a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a>-&gt;<a class="code" href="classAbstractCell.html#a49ad9075c7b5e69fab1e980eeaaad3e4">print</a>() == <span class="charliteral">&#39;1&#39;</span>);
+<a name="l00039"></a>00039         <span class="keywordflow">return</span> ret;
+<a name="l00040"></a>00040 }
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042 <span class="keywordtype">void</span> <a class="code" href="classCell.html#a0ab00be82aae2ad3a0f99066855a57ee">Cell::update</a>(<span class="keywordtype">int</span> neighborsAdj, <span class="keywordtype">int</span> neighborsDiag, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>* population) {
+<a name="l00043"></a>00043         <a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a>-&gt;<a class="code" href="classAbstractCell.html#af5be7237f6093e0c5312125e5c7d87fa">update</a>(neighborsAdj, neighborsDiag, population);
+<a name="l00044"></a>00044         <span class="keywordflow">if</span>(<a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a>-&gt;<a class="code" href="classAbstractCell.html#a000b7cd5df28dc8c12d94cea7cb09185">transform</a>()) {
+<a name="l00045"></a>00045                 <span class="keyword">delete</span> <a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a>;
+<a name="l00046"></a>00046                 <a class="code" href="classCell.html#a44be65e98e00c0a2abc15dffa3d9a195">cell</a> = <span class="keyword">new</span> <a class="code" href="classConwayCell.html">ConwayCell</a>(<span class="keyword">true</span>);
+<a name="l00047"></a>00047         }
+<a name="l00048"></a>00048 }
+<a name="l00049"></a>00049 <span class="preprocessor">#endif // Cell_h</span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -93,7 +105,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Nov 9 15:36:12 2012 for My Project by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Nov 16 16:21:13 2012 for My Project by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

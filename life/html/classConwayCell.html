@@ -61,26 +61,45 @@ Inheritance diagram for ConwayCell:</div>
 <p><a href="classConwayCell-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConwayCell.html#aeff597ba7adcb28d4c386d075eddb196">ConwayCell</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConwayCell.html#a97cc47089e854a58357bb631d9996017">qux</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConwayCell.html#acd9a76ef28528ae54815ac0ef7b87830">update</a> (int neighbors)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConwayCell.html#aaff001757a743b41ed7600a189624335">ConwayCell</a> (bool a=false)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConwayCell.html#a0de3a4ee7fd126e24f9fb4d5cab01c31">ConwayCell</a> (const <a class="el" href="classConwayCell.html">ConwayCell</a> &amp;other)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConwayCell.html#aaa4e5f3534badb80609ac69293d8dbe9">isNeighbor</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConwayCell.html#ad4ce2de7c52e2296937b257699bc0c57">readChar</a> (char c)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConwayCell.html#a8431ae5417f7c05a8bf73b67c53d7140">isAlive</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConwayCell.html#a045a25b788a8779adcf8382c16f9c98f">ageCell</a> (int inc)</td></tr>
-<tr><td colspan="2"><h2>Public Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConwayCell.html#aedc5fb29eb7db8cb205ca53dcf31dbdb">alive</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConwayCell.html#aa6c520d5178f37f863e4b1263866f5e3">update</a> (int neighborsAdj, int neighborsDiag, unsigned *population)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classConwayCell.html">ConwayCell</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConwayCell.html#a92ca2af0f3e2a7ab2add439ca1928b04">clone</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConwayCell.html#a31f62876face8e3e4603e5efad1f5d1e">transform</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">char&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConwayCell.html#ab44aeabf42a5048425dc53aab1a08316">print</a> () const </td></tr>
 <tr><td colspan="2"><h2>Friends</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">ostream &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConwayCell.html#a3d1d298db91641d6ad2f3d17a244ecd3">operator&lt;&lt;</a> (ostream &amp;strm, const <a class="el" href="classConwayCell.html">ConwayCell</a> &amp;c)</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="aeff597ba7adcb28d4c386d075eddb196"></a><!-- doxytag: member="ConwayCell::ConwayCell" ref="aeff597ba7adcb28d4c386d075eddb196" args="()" -->
+<a class="anchor" id="aaff001757a743b41ed7600a189624335"></a><!-- doxytag: member="ConwayCell::ConwayCell" ref="aaff001757a743b41ed7600a189624335" args="(bool a=false)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">ConwayCell::ConwayCell </td>
           <td>(</td>
-          <td class="paramname"></td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>a</em> = <code>false</code></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0de3a4ee7fd126e24f9fb4d5cab01c31"></a><!-- doxytag: member="ConwayCell::ConwayCell" ref="a0de3a4ee7fd126e24f9fb4d5cab01c31" args="(const ConwayCell &amp;other)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ConwayCell::ConwayCell </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classConwayCell.html">ConwayCell</a> &amp;&nbsp;</td>
+          <td class="paramname"> <em>other</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td><code> [inline]</code></td>
         </tr>
@@ -91,32 +110,12 @@ Inheritance diagram for ConwayCell:</div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a045a25b788a8779adcf8382c16f9c98f"></a><!-- doxytag: member="ConwayCell::ageCell" ref="a045a25b788a8779adcf8382c16f9c98f" args="(int inc)" -->
+<a class="anchor" id="a92ca2af0f3e2a7ab2add439ca1928b04"></a><!-- doxytag: member="ConwayCell::clone" ref="a92ca2af0f3e2a7ab2add439ca1928b04" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ConwayCell::ageCell </td>
-          <td>(</td>
-          <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>inc</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline, virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="classAbstractCell.html#a0c219a1e657c19e3e07f39f17600004c">AbstractCell</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a8431ae5417f7c05a8bf73b67c53d7140"></a><!-- doxytag: member="ConwayCell::isAlive" ref="a8431ae5417f7c05a8bf73b67c53d7140" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool ConwayCell::isAlive </td>
+          <td class="memname"><a class="el" href="classConwayCell.html">ConwayCell</a>* ConwayCell::clone </td>
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
@@ -126,16 +125,16 @@ Inheritance diagram for ConwayCell:</div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classAbstractCell.html#ad799e7d9fed29d098293c76ac1dad5bb">AbstractCell</a>.</p>
+<p>Reimplemented from <a class="el" href="classAbstractCell.html#a6d1317ebdedf4e2ba77bffd9d227be4a">AbstractCell</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a97cc47089e854a58357bb631d9996017"></a><!-- doxytag: member="ConwayCell::qux" ref="a97cc47089e854a58357bb631d9996017" args="()" -->
+<a class="anchor" id="aaa4e5f3534badb80609ac69293d8dbe9"></a><!-- doxytag: member="ConwayCell::isNeighbor" ref="aaa4e5f3534badb80609ac69293d8dbe9" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ConwayCell::qux </td>
+          <td class="memname">bool ConwayCell::isNeighbor </td>
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
@@ -145,7 +144,26 @@ Inheritance diagram for ConwayCell:</div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classAbstractCell.html#ac27e778332731bf3316ee6119f26ceb9">AbstractCell</a>.</p>
+<p>Reimplemented from <a class="el" href="classAbstractCell.html#a746138d5bd467ee6b7a0a645c8592036">AbstractCell</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab44aeabf42a5048425dc53aab1a08316"></a><!-- doxytag: member="ConwayCell::print" ref="ab44aeabf42a5048425dc53aab1a08316" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char ConwayCell::print </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td> const<code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classAbstractCell.html#a49ad9075c7b5e69fab1e980eeaaad3e4">AbstractCell</a>.</p>
 
 </div>
 </div>
@@ -169,15 +187,14 @@ Inheritance diagram for ConwayCell:</div>
 
 </div>
 </div>
-<a class="anchor" id="acd9a76ef28528ae54815ac0ef7b87830"></a><!-- doxytag: member="ConwayCell::update" ref="acd9a76ef28528ae54815ac0ef7b87830" args="(int neighbors)" -->
+<a class="anchor" id="a31f62876face8e3e4603e5efad1f5d1e"></a><!-- doxytag: member="ConwayCell::transform" ref="a31f62876face8e3e4603e5efad1f5d1e" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int ConwayCell::update </td>
+          <td class="memname">bool ConwayCell::transform </td>
           <td>(</td>
-          <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>neighbors</em></td>
+          <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
           <td><code> [inline, virtual]</code></td>
         </tr>
@@ -185,7 +202,42 @@ Inheritance diagram for ConwayCell:</div>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classAbstractCell.html#a94e827a9c9b07e349c194ed92d797b10">AbstractCell</a>.</p>
+<p>Reimplemented from <a class="el" href="classAbstractCell.html#a000b7cd5df28dc8c12d94cea7cb09185">AbstractCell</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa6c520d5178f37f863e4b1263866f5e3"></a><!-- doxytag: member="ConwayCell::update" ref="aa6c520d5178f37f863e4b1263866f5e3" args="(int neighborsAdj, int neighborsDiag, unsigned *population)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ConwayCell::update </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>neighborsAdj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>neighborsDiag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned *&nbsp;</td>
+          <td class="paramname"> <em>population</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classAbstractCell.html#af5be7237f6093e0c5312125e5c7d87fa">AbstractCell</a>.</p>
 
 </div>
 </div>
@@ -217,20 +269,6 @@ Inheritance diagram for ConwayCell:</div>
 
 </div>
 </div>
-<hr/><h2>Member Data Documentation</h2>
-<a class="anchor" id="aedc5fb29eb7db8cb205ca53dcf31dbdb"></a><!-- doxytag: member="ConwayCell::alive" ref="aedc5fb29eb7db8cb205ca53dcf31dbdb" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool <a class="el" href="classConwayCell.html#aedc5fb29eb7db8cb205ca53dcf31dbdb">ConwayCell::alive</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="ConwayCell_8h_source.html">ConwayCell.h</a></li>
 </ul>
@@ -249,7 +287,7 @@ Inheritance diagram for ConwayCell:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Nov 9 15:36:12 2012 for My Project by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Nov 16 16:21:14 2012 for My Project by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
