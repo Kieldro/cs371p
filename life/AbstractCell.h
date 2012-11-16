@@ -17,7 +17,7 @@
 #include <stdexcept>
 #include <string>
 #include <fstream>
-#include <iostream>
+#include <iostream>  // cout, endl
 
 using std::vector;
 using std::deque;

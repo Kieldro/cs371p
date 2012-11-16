@@ -6,16 +6,33 @@ CPPFLAGS = -std=c++0x -pedantic -Wall
 TEST = TestLife.c++
 TESTOUT = TestLife.out
 
-RUN = RunLife.c++
+RUNCELL = RunLife.c++
 RUNOUT = RunLife.out
+
+RUNCONWAY = RunLifeConway.c++
+RUNFREDKIN = RunLifeFredkin.c++
 
 all: test run log doxygen zip clean
 
-run: $(RUN)
+run: Conway Fredkin Cell
+
+Cell: $(RUNCELL)
 	clear
-	$(CC) $(CPPFLAGS) $(RUN) -o $(RUN).app
+	$(CC) $(CPPFLAGS) $(RUNCELL) -o $(RUNCELL).app
 	#valgrind \
-	./$(RUN).app 2>&1 | tee $(RUNOUT)
+	./$(RUNCELL).app 2>&1 | tee $(RUNOUT)
+
+Conway: $(RUNCONWAY)
+	clear
+	$(CC) $(CPPFLAGS) $(RUNCONWAY) -o $(RUNCONWAY).app
+	#valgrind \
+	./$(RUNCONWAY).app 2>&1 | tee RunLifeConway.out
+
+Fredkin: $(RUNFREDKIN)
+	clear
+	$(CC) $(CPPFLAGS) $(RUNFREDKIN) -o $(RUNFREDKIN).app
+	#valgrind \
+	./$(RUNFREDKIN).app 2>&1 | tee RunLifeFredkin.out
 
 test: $(TEST)
 	clear
@@ -38,6 +55,9 @@ zip:
 	zip Life README.txt html/* AbstractCell.h Cell.h \
 		ConwayCell.h FredkinCell.h \
 		Life.h Life.log Life.pdf \
+		$(RUNCELL) $(RUNOUT) \
+		$(RUNCONWAY) RunLifeConway.out \
+		$(RUNFREDKIN) RunLifeFredkin.out \
 		$(TEST) $(TESTOUT)
 
 # turnin --submit reza cs371ppj6 Life.zip

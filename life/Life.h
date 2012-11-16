@@ -1,3 +1,10 @@
+/*
+Ian Buitrago
+Graham Benevelli
+11-28-2012
+CS 371p
+project 6 - Life
+*/
 #ifndef Life_h
 #define Life_h
 

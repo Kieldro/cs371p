@@ -1,22 +1,8 @@
 TestLife.c++
-..........................................................[H[2J[H[2JGeneration = 0, Population = 0.
-00
-
-Generation = 2, Population = 2.
-22
+.........................................................
 
 
-F
-
-
-!!!FAILURES!!!
-Test Results:
-Run:  58   Failures: 1   Errors: 0
-
-
-1) test: TestLife::testSimulate0 (F) line: 539 TestLife.c++
-assertion failed
-- Expression: w.str() == "11"
+OK (57 tests)
 
 
 Done.
