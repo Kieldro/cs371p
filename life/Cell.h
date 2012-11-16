@@ -15,7 +15,7 @@ class Cell : public AbstractCell {
 			cell = c.cell->clone();
 			//if(DEBUG) cerr <<  "Cell(const Cell&) BOOM " << endl;
 		}
-		~Cell() { //delete aCell; 
+		~Cell() { 
 			//if(DEBUG) cerr <<  "~Cell() BOOM " << endl;
 			delete cell;
 		}

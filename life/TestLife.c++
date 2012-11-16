@@ -525,18 +525,32 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(&c1 != c2);
 	}
 	
+	// ---------------------
+	// testSimulate
+	void testSimulate0 () {
+		Life<Cell> game(1, 2);
+		game._g[0][0][0].cell->alive = true;
+		game._g[0][0][1].cell->alive = true;
+		
+		std::ostringstream w;
+		game.simulate(2, 2, w);
+		//if(DEBUG) game.print();
+		if(DEBUG) cerr << w.str() << endl;
+		CPPUNIT_ASSERT(w.str() == "11");
+	}
+	
 	// -----
 	// suite
 	CPPUNIT_TEST_SUITE(TestLife);
 	
 	
-	CPPUNIT_TEST(testLife5);
-	CPPUNIT_TEST(testLife4);
 	CPPUNIT_TEST(testFredkinClone0);
 	CPPUNIT_TEST(testLife0);
 	CPPUNIT_TEST(testLife1);
 	CPPUNIT_TEST(testLife2);
 	CPPUNIT_TEST(testLife3);
+	CPPUNIT_TEST(testLife4);
+	CPPUNIT_TEST(testLife5);
 	CPPUNIT_TEST(testUpdate0);
 	CPPUNIT_TEST(testRunTurn0);
 	CPPUNIT_TEST(testSimulateTurn0);
@@ -587,6 +601,7 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testFredkinOperator0);
 	CPPUNIT_TEST(testFredkinOperator1);
 	CPPUNIT_TEST(testFredkinOperator2);
+	//CPPUNIT_TEST(testSimulate0);		// FIXME
 	
 	CPPUNIT_TEST_SUITE_END();
 };
