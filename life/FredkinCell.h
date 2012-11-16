@@ -59,5 +59,7 @@ void FredkinCell::update(int neighborsAdj, int neighborsDiag, unsigned* pop) {
 	
 	if(alive)
 		++*pop;
+	adjNeighbors = 0;
+	diagNeighbors = 0;
 }
 #endif // FredkinCell_h

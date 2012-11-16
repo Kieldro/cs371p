@@ -39,6 +39,8 @@ void ConwayCell::update(int neighborsAdj,  int neighborsDiag, unsigned* populati
 	
 	if(alive)
 		++*population;
+	adjNeighbors = 0;
+	diagNeighbors = 0;
 }
 
 #endif // ConwayCell_h

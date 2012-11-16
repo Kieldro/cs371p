@@ -27,6 +27,7 @@ class Life {
 		void updateCell(int r, int c);
 		int countNeighborsAdjacent(int row, int col);
 		int countNeighborsDiag(int row, int col);
+		void setNeighbors(int r, int c);
 		void print(ostream& out = cout);
 		void place(int r, int c);
 		int nRows() const{return _g->size();}
@@ -112,6 +113,14 @@ Runs a turn.
 template <typename T>
 void Life<T>::runTurn() {
 	population = 0;
+	/*
+	// distribute neigbors algorithm
+	for(int r = 0; r < nRows(); ++r) {
+		for(int c = 0; c < nCols(); ++c) {
+			setNeighbors(r, c);
+		}
+	}
+	*/
 	
 	for(int r = 0; r < nRows(); ++r) {
 		for(int c = 0; c < nCols(); ++c) {
@@ -119,6 +128,27 @@ void Life<T>::runTurn() {
 		}
 	}
 	++generation;
+}
+
+/**
+
+*/
+template <typename T>
+void Life<T>::setNeighbors(int r, int c) {
+	Tvector2D& grid = _g[generation % 2];
+	
+	// dead cell is neighbor to no one
+	if(!grid[r][c].isNeighbor())
+		return;
+	/*
+	if(r - 1 >= 0 and c - 1 >= 0 and grid[r-1][c-1].ad.isNeighbor())
+		grid[r-1][c-1].ad;
+	if(r - 1 >= 0 and c + 1 < nCols() and grid[r-1][c+1].isNeighbor())
+		++neighbors;
+	if(r + 1 < nRows() and c - 1 >= 0 and grid[r+1][c-1].isNeighbor())
+		++neighbors;
+	if(r + 1 < nRows() and c + 1 < nCols() and grid[r+1][c+1].isNeighbor())
+		++neighbors;*/
 }
 
 /**
