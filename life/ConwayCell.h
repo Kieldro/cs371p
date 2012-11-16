@@ -10,7 +10,7 @@ class ConwayCell : public AbstractCell
 		ConwayCell(){ alive = false; }
 		explicit ConwayCell(bool a){ alive = a; } // Why do we want it to be explicit?
 		ConwayCell(const ConwayCell &other) { alive = other.alive; }
-		bool isNeighbor() const { return alive; }
+		bool isNeighbor() { return alive; }
 		bool readChar(char c) { return alive = c == '*'; }
 		void update(int neighborsAdj,  int neighborsDiag, unsigned* population) {		// input params then output params.
 			int neighbors = neighborsAdj + neighborsDiag;

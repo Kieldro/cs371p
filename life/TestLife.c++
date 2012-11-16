@@ -515,7 +515,9 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(w.str() == "0-9");
 	}
 	
+	// ----------------
 	// testFredkinClone
+	// ----------------
 	
 	void testFredkinClone0 () {
 		FredkinCell c1(true, 3);
@@ -524,6 +526,154 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(((FredkinCell*) c2)->age == 3);
 		CPPUNIT_ASSERT(&c1 != c2);
 	}
+	
+	void testFredkinClone1 () {
+		FredkinCell c1(false, 5);
+		AbstractCell* c2 = c1.clone();
+		CPPUNIT_ASSERT(c2->alive == false);
+		CPPUNIT_ASSERT(((FredkinCell*) c2)->age == 5);
+		CPPUNIT_ASSERT(&c1 != c2);
+	}
+	
+	void testFredkinClone2 () {
+		FredkinCell c1(true, 10);
+		AbstractCell* c2 = c1.clone();
+		CPPUNIT_ASSERT(c2->alive == true);
+		CPPUNIT_ASSERT(((FredkinCell*) c2)->age == 10);
+		CPPUNIT_ASSERT(&c1 != c2);
+	}
+	
+	// -------------------
+	// testCellConstructor
+	// -------------------
+	
+	void testCellConstructor0 () {
+		Cell c;
+		CPPUNIT_ASSERT(c.cell != NULL);
+	}
+	
+	void testCellConstructor1 () {
+		Cell c1;
+		CPPUNIT_ASSERT(c1.cell != NULL);
+		Cell c2;
+		CPPUNIT_ASSERT(c2.cell != NULL);
+	}
+	
+	void testCellConstructor2 () {
+		Cell c1;
+		CPPUNIT_ASSERT(c1.cell != NULL);
+		Cell c2;
+		CPPUNIT_ASSERT(c2.cell != NULL);
+		Cell c3;
+		CPPUNIT_ASSERT(c3.cell != NULL);
+	}
+	
+	// --------------------------
+	// testCellPointerConstructor
+	// --------------------------
+	
+	void testCellPointerConstructor0 () {
+		Cell c = new ConwayCell;
+		CPPUNIT_ASSERT(c.cell->alive == false);
+		CPPUNIT_ASSERT(c.cell->print() == '.');
+	}
+	
+	void testCellPointerConstructor1 () {
+		Cell c = new FredkinCell(true, 5);
+		CPPUNIT_ASSERT(c.cell->alive == true);
+		CPPUNIT_ASSERT(c.cell->print() == '5');
+	}
+	
+	void testCellPointerConstructor2 () {
+		Cell c = new FredkinCell(false, 5);
+		CPPUNIT_ASSERT(c.cell->alive == false);
+		CPPUNIT_ASSERT(c.cell->print() == '-');
+	}
+	
+	// -----------------------
+	// testCellCopyConstructor
+	// -----------------------
+	
+	void testCellCopyConstructor0 () {
+		Cell c1;
+		Cell c2 = c1;
+		CPPUNIT_ASSERT(c1.cell != c2.cell);
+		CPPUNIT_ASSERT(c1.cell->alive == c2.cell->alive);
+		CPPUNIT_ASSERT(c1.cell->print() == c2.cell->print());
+	}
+	
+	void testCellCopyConstructor1 () {
+		ConwayCell* cc = new ConwayCell;
+		cc->readChar('*');
+		Cell c1 = cc;
+		Cell c2 = c1;
+		CPPUNIT_ASSERT(c1.cell != c2.cell);
+		CPPUNIT_ASSERT(c1.cell->alive == c2.cell->alive);
+		CPPUNIT_ASSERT(c1.cell->print() == c2.cell->print());
+	}
+	
+	void testCellCopyConstructor2 () {
+		FredkinCell* fc = new FredkinCell(true, 5);
+		Cell c1 = fc;
+		Cell c2 = c1;
+		CPPUNIT_ASSERT(c1.cell != c2.cell);
+		CPPUNIT_ASSERT(c1.cell->alive == c2.cell->alive);
+		CPPUNIT_ASSERT(c1.cell->print() == c2.cell->print());
+	}
+	
+	// ----------------
+	// testCellReadChar
+	// ----------------
+	
+	void testCellReadChar0 () {
+		Cell c;
+		c.readChar('0');
+		CPPUNIT_ASSERT(c.cell->alive == true);
+		CPPUNIT_ASSERT(c.cell->print() == '0');
+	}
+	
+	void testCellReadChar1 () {
+		Cell c;
+		c.readChar('-');
+		CPPUNIT_ASSERT(c.cell->alive == false);
+		CPPUNIT_ASSERT(c.cell->print() == '-');
+	}
+	
+	void testCellReadChar2 () {
+		Cell c;
+		c.readChar('*');
+		CPPUNIT_ASSERT(c.cell->alive == true);
+		CPPUNIT_ASSERT(c.cell->print() == '*');
+	}
+	
+	// --------------
+	// testIsNeighbor
+	// --------------
+	
+	void testIsNeighbor0 () {
+		Cell c;
+		c.readChar('0');
+		CPPUNIT_ASSERT(c.isNeighbor());
+	}
+	
+	void testIsNeighbor1 () {
+		Cell c;
+		c.readChar('*');
+		CPPUNIT_ASSERT(c.cell->alive == true);
+		CPPUNIT_ASSERT(c.isNeighbor());
+	}
+	
+	void testIsNeighbor2 () {
+		Cell c;
+		c.readChar('-');
+		CPPUNIT_ASSERT(!c.isNeighbor());
+	}
+	
+	// --------------
+	// testCellUpdate
+	// --------------
+	
+	
 	
 	// ---------------------
 	// testSimulate
@@ -535,14 +685,13 @@ struct TestLife : CppUnit::TestFixture {
 		std::ostringstream w;
 		game.simulate(2, 2, w);
 		//if(DEBUG) game.print();
-		if(DEBUG) cerr << w.str() << endl;
+		//if(DEBUG) cerr << w.str() << endl;
 		CPPUNIT_ASSERT(w.str() == "11");
 	}
 	
 	// -----
 	// suite
 	CPPUNIT_TEST_SUITE(TestLife);
-	
 	
 	CPPUNIT_TEST(testFredkinClone0);
 	CPPUNIT_TEST(testLife0);
@@ -601,6 +750,24 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testFredkinOperator0);
 	CPPUNIT_TEST(testFredkinOperator1);
 	CPPUNIT_TEST(testFredkinOperator2);
+	CPPUNIT_TEST(testFredkinClone0);
+	CPPUNIT_TEST(testFredkinClone1);
+	CPPUNIT_TEST(testFredkinClone2);
+	CPPUNIT_TEST(testCellConstructor0);
+	CPPUNIT_TEST(testCellConstructor1);
+	CPPUNIT_TEST(testCellConstructor2);
+	CPPUNIT_TEST(testCellCopyConstructor0);
+	CPPUNIT_TEST(testCellCopyConstructor1);
+	CPPUNIT_TEST(testCellCopyConstructor2);
+	CPPUNIT_TEST(testCellPointerConstructor0);
+	CPPUNIT_TEST(testCellPointerConstructor1);
+	CPPUNIT_TEST(testCellPointerConstructor2);
+	CPPUNIT_TEST(testCellReadChar0);
+	CPPUNIT_TEST(testCellReadChar1);
+	CPPUNIT_TEST(testCellReadChar2);
+	CPPUNIT_TEST(testIsNeighbor0);
+	CPPUNIT_TEST(testIsNeighbor1);
+	CPPUNIT_TEST(testIsNeighbor2);
 	//CPPUNIT_TEST(testSimulate0);		// FIXME
 	
 	CPPUNIT_TEST_SUITE_END();
