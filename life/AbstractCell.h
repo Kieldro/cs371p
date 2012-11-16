@@ -34,7 +34,7 @@ using std::allocator;
 class AbstractCell{
 	public:
 		virtual bool readChar(char c) { return 0; }
-		virtual void update(int neighborsAdj, int neighborsDiag, unsigned int* population) {}
+		virtual void update(int, int, unsigned* ) {}
 		virtual bool isNeighbor() { return 0; }
 		virtual AbstractCell* clone() { return NULL; }
 		virtual bool transform () { return false; }

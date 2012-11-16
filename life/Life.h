@@ -200,7 +200,7 @@ void Life<T>::simulate(int turns, int j, ostream& out) {
 */
 template <typename T>
 void Life<T>::place(int r, int c) {
-	//_g[generation % 2][r][c] = true;
+	_g[generation % 2][r][c] = true;
 }
 
 /**

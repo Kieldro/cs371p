@@ -38,7 +38,7 @@ test: $(TEST)
 	clear
 	$(CC) $(CPPFLAGS) $(TEST) -lcppunit -o $(TEST).app
 	#valgrind \
-	./$(TEST).app 2>&1 | tee $(TESTOUT)
+	./$(TEST).app 2>&1 #| tee $(TESTOUT)
 
 log:
 	git log > Life.log
