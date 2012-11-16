@@ -39,12 +39,12 @@ class Cell : public AbstractCell {
 			return ret;
 		}
 		bool isNeighbor() { return cell->isNeighbor(); }
-		void update(int neighborsAdj, int neighborsDiag, unsigned* population) {
+		void update(int neighborsAdj, int neighborsDiag, unsigned int* population) {
 			cell->update(neighborsAdj, neighborsDiag, population);
-			/*if(cell->transform()) {
+			if(cell->transform()) {
 				delete cell;
 				cell = new ConwayCell(true);
-			}*/
+			}
 		}
 		
 		friend ostream& operator<< (ostream &strm, const Cell& c) {

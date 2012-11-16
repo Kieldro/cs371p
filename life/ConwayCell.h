@@ -22,7 +22,7 @@ class ConwayCell : public AbstractCell
 					alive = false;
 			} else
 				alive = neighbors == 3;
-			
+				
 			if(alive)
 				++*population;
 		}

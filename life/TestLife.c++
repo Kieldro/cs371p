@@ -673,7 +673,86 @@ struct TestLife : CppUnit::TestFixture {
 	// testCellUpdate
 	// --------------
 	
+	void testCellUpdate0 () {
+		Cell c = new FredkinCell(true, 0);
+		unsigned int pop = 0;
+		c.update(1, 3, &pop);
+		CPPUNIT_ASSERT(pop == 1);
+		CPPUNIT_ASSERT(c.cell->alive == true);
+		CPPUNIT_ASSERT(c.cell->print() == '1');
+	}
 	
+	void testCellUpdate1 () {
+		Cell c = new FredkinCell(true, 1);
+		unsigned int pop = 0;
+		c.update(2, 3, &pop);
+		CPPUNIT_ASSERT(pop == 0);
+		CPPUNIT_ASSERT(c.cell->alive == false);
+		CPPUNIT_ASSERT(c.cell->print() == '-');
+	}
+	
+	void testCellUpdate2 () {
+		Cell c = new FredkinCell(false, 0);
+		unsigned int pop = 0;
+		c.update(1, 3, &pop);
+		CPPUNIT_ASSERT(pop == 1);
+		CPPUNIT_ASSERT(c.cell->alive == true);
+		CPPUNIT_ASSERT(c.cell->print() == '0');
+	}
+	
+	void testCellUpdate3 () {
+		Cell c = new FredkinCell(false, 0);
+		unsigned int pop = 0;
+		c.update(0, 3, &pop);
+		CPPUNIT_ASSERT(pop == 0);
+		CPPUNIT_ASSERT(c.cell->alive == false);
+		CPPUNIT_ASSERT(c.cell->print() == '-');
+	}
+	
+	void testCellUpdate4 () {
+		Cell c = new FredkinCell(true, 1);
+		unsigned int pop = 0;
+		c.update(1, 3, &pop);
+		CPPUNIT_ASSERT(pop == 1);
+		CPPUNIT_ASSERT(c.cell->alive == true);
+		CPPUNIT_ASSERT(c.cell->print() == '*');
+	}
+	
+	void testCellUpdate5 () {
+		Cell c = new ConwayCell(true);
+		unsigned int pop = 0;
+		c.update(2, 0, &pop);
+		CPPUNIT_ASSERT(pop == 1);
+		CPPUNIT_ASSERT(c.cell->alive == true);
+		CPPUNIT_ASSERT(c.cell->print() == '*');
+	}
+	
+	void testCellUpdate6 () {
+		Cell c = new ConwayCell(true);
+		unsigned int pop = 0;
+		c.update(1, 0, &pop);
+		CPPUNIT_ASSERT(pop == 0);
+		CPPUNIT_ASSERT(c.cell->alive == false);
+		CPPUNIT_ASSERT(c.cell->print() == '.');
+	}
+	
+	void testCellUpdate7 () {
+		Cell c = new ConwayCell(false);
+		unsigned int pop = 0;
+		c.update(3, 0, &pop);
+		CPPUNIT_ASSERT(pop == 1);
+		CPPUNIT_ASSERT(c.cell->alive == true);
+		CPPUNIT_ASSERT(c.cell->print() == '*');
+	}
+	
+	void testCellUpdate8 () {
+		Cell c = new ConwayCell(false);
+		unsigned int pop = 0;
+		c.update(2, 0, &pop);
+		CPPUNIT_ASSERT(pop == 0);
+		CPPUNIT_ASSERT(c.cell->alive == false);
+		CPPUNIT_ASSERT(c.cell->print() == '.');
+	}
 	
 	// ---------------------
 	// testSimulate
@@ -768,6 +847,15 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testIsNeighbor0);
 	CPPUNIT_TEST(testIsNeighbor1);
 	CPPUNIT_TEST(testIsNeighbor2);
+	CPPUNIT_TEST(testCellUpdate0);
+	CPPUNIT_TEST(testCellUpdate1);
+	CPPUNIT_TEST(testCellUpdate2);
+	CPPUNIT_TEST(testCellUpdate3);
+	CPPUNIT_TEST(testCellUpdate4);
+	CPPUNIT_TEST(testCellUpdate5);
+	CPPUNIT_TEST(testCellUpdate6);
+	CPPUNIT_TEST(testCellUpdate7);
+	CPPUNIT_TEST(testCellUpdate8);
 	//CPPUNIT_TEST(testSimulate0);		// FIXME
 	
 	CPPUNIT_TEST_SUITE_END();
