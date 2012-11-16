@@ -28,6 +28,7 @@ class Life {
 		int countNeighborsAdjacent(int row, int col);
 		int countNeighborsDiag(int row, int col);
 		void print(ostream& out = cout);
+		void place(int r, int c);
 		int nRows() const{return _g->size();}
 		int nCols() const{return _g->size() ? (*_g)[0].size() : 0;}
 		~Life();
@@ -190,6 +191,16 @@ void Life<T>::simulate(int turns, int j, ostream& out) {
 		if(i % j == 0)
 			print(out);
 	}
+}
+
+/**
+
+@param r
+@param c
+*/
+template <typename T>
+void Life<T>::place(int r, int c) {
+	//_g[generation % 2][r][c] = true;
 }
 
 /**

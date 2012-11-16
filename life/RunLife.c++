@@ -25,8 +25,8 @@ int main() {
 	ios_base::sync_with_stdio(false); // turn off synchronization with C I/O
 	
 	test0();
-	//test1();
-	//test2();
+	test1();
+	test2();
 
 	return 0;
 }
@@ -60,8 +60,10 @@ void test0() {
 */
 void test1() {
 	try {
+		cout << "*** Life<Cell> 0x0 ***" << endl;
+		Life<Cell> game(0, 0);
 		
-		
+		game.simulate(2, 1);
 	} catch (const invalid_argument&) {
 		assert(false);
 	} catch (const out_of_range&) {
@@ -77,8 +79,11 @@ void test1() {
 */
 void test2() {
 	try {
+		cout << "*** Life<Cell> 1x1 ***" << endl;
+		Life<Cell> game(1, 1);
+		game.place(0, 0);
 		
-		
+		game.simulate(2, 1);
 	} catch (const invalid_argument&) {
 		assert(false);
 	} catch (const out_of_range&) {

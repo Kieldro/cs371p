@@ -8,7 +8,7 @@ class ConwayCell : public AbstractCell
 {
 	public:
 		ConwayCell(){ alive = false; }
-		explicit ConwayCell(bool a){ alive = a; } // Why do we want it to be explicit?
+		ConwayCell(bool a){ alive = a; } // Why do we want it to be explicit?
 		ConwayCell(const ConwayCell &other) { alive = other.alive; }
 		bool isNeighbor() const { return alive; }
 		bool readChar(char c) { return alive = c == '*'; }

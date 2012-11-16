@@ -23,14 +23,16 @@ struct B{
 	allocator<A> x;
 	
 	B()
-	//: a(x.allocate(2))
+	: B(7)
 	{
 		std::cout << "B() BOOM " << NULL << std::endl;
 		//std::cout << "POW" << 1 << std::endl;
 		
 		i = 5;
 	}
-	
+	B(int x){
+		i = x;
+	}
 	B(const B& b){
 		std::cout << "B(const B&) BOOM " << NULL << std::endl;
 		i = b.i;
@@ -52,13 +54,7 @@ void qux(int* i){
 
 int main(){
 	
-	int* s;
-	qux(s);
-	//vector<A> v(4);
-	/*B b;
-	b.i = 7;
-	B b1(b);
-	*/
-	cout << "i = " << 1 << endl;
+	B b;
+	cout << "i = " << b.i << endl;
 	return 0;
 }
