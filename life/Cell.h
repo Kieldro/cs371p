@@ -41,10 +41,10 @@ class Cell : public AbstractCell {
 		bool isNeighbor() { return cell->isNeighbor(); }
 		void update(int neighborsAdj, int neighborsDiag, unsigned* population) {
 			cell->update(neighborsAdj, neighborsDiag, population);
-			/*if(cell->transform()) {
+			if(cell->transform()) {
 				delete cell;
 				cell = new ConwayCell(true);
-			}*/
+			}
 		}
 		
 		friend ostream& operator<< (ostream &strm, const Cell& c) {
