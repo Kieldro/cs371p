@@ -20,9 +20,9 @@ using namespace std;
 int main() {
 	ios_base::sync_with_stdio(false); // turn off synchronization with C I/O
 	
-	test0();
-	//test1();
-	//test2();
+	//test0();
+	test1();
+	test2();
 
 	return 0;
 }
@@ -60,8 +60,10 @@ void test0() {
 */
 void test1() {
 	try {
+		cout << "*** Life<Cell> 20x20 ***" << endl;
+		Life<ConwayCell> game("acceptancetests/RunConway1.in");
 		
-		
+		game.simulate(500, 1);
 	} catch (const invalid_argument&) {
 		assert(false);
 	} catch (const out_of_range&) {
