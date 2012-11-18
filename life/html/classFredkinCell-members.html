@@ -46,12 +46,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <h1>FredkinCell Member List</h1>This is the complete list of members for <a class="el" href="classFredkinCell.html">FredkinCell</a>, including all inherited members.<table>
-  <tr class="memlist"><td><a class="el" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a></td><td><a class="el" href="classFredkinCell.html">FredkinCell</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classFredkinCell.html#ab3a82816f341086dd80977ca29f12da9">ageCell</a>(int inc)</td><td><a class="el" href="classFredkinCell.html">FredkinCell</a></td><td><code> [inline, virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classFredkinCell.html#a836097b769671606f7203961ddd8a52e">isAlive</a>()</td><td><a class="el" href="classFredkinCell.html">FredkinCell</a></td><td><code> [inline, virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a></td><td><a class="el" href="classFredkinCell.html">FredkinCell</a></td><td><code> [private]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classAbstractCell.html#aa92e42d5bb67f3249d8e2dde2c3228e7">alive</a></td><td><a class="el" href="classAbstractCell.html">AbstractCell</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classFredkinCell.html#ae6156e7146f8c4558330a6364105c0b0">clone</a>()</td><td><a class="el" href="classFredkinCell.html">FredkinCell</a></td><td><code> [inline, virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classFredkinCell.html#ac5bd5726da496a3b3363d9c1b57dccc2">FredkinCell</a>()</td><td><a class="el" href="classFredkinCell.html">FredkinCell</a></td><td><code> [inline]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classFredkinCell.html#a63ffd2b7b0335c94ca685ce375071908">FredkinCell</a>(bool a1, int a2=0)</td><td><a class="el" href="classFredkinCell.html">FredkinCell</a></td><td><code> [inline]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classFredkinCell.html#aa1c358b7b8e42a1618b59d065cd0e551">FredkinCell</a>(const FredkinCell &amp;other)</td><td><a class="el" href="classFredkinCell.html">FredkinCell</a></td><td><code> [inline]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classFredkinCell.html#aa03b22b04b4d02cb78dccb4fd4450c25">isNeighbor</a>()</td><td><a class="el" href="classFredkinCell.html">FredkinCell</a></td><td><code> [inline, virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classFredkinCell.html#a49757c5c38d520a462cbd6314b9048c7">operator&lt;&lt;</a>(ostream &amp;strm, const FredkinCell &amp;c)</td><td><a class="el" href="classFredkinCell.html">FredkinCell</a></td><td><code> [friend]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classFredkinCell.html#a735d7f607030b5cbe7bbd281ec55d8c3">readChar</a>(char c)</td><td><a class="el" href="classFredkinCell.html">FredkinCell</a></td><td><code> [inline, virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classFredkinCell.html#a9f396d45663c397cc3e6b8273408bbb8">update</a>(int neighbors)</td><td><a class="el" href="classFredkinCell.html">FredkinCell</a></td><td><code> [inline, virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classAbstractCell.html#a7fdb14e73cb5510f4022c9588f84c59f">AbstractCell::operator&lt;&lt;</a>(ostream &amp;strm, const AbstractCell &amp;c)</td><td><a class="el" href="classAbstractCell.html">AbstractCell</a></td><td><code> [friend]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classFredkinCell.html#aca0055c7f2a487229e86ad3b274a035a">print</a>() const </td><td><a class="el" href="classFredkinCell.html">FredkinCell</a></td><td><code> [virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classFredkinCell.html#a735d7f607030b5cbe7bbd281ec55d8c3">readChar</a>(char c)</td><td><a class="el" href="classFredkinCell.html">FredkinCell</a></td><td><code> [virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classFredkinCell.html#a866c5b469ec83d4441dbb04513f0fc3d">transform</a>()</td><td><a class="el" href="classFredkinCell.html">FredkinCell</a></td><td><code> [inline, virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classFredkinCell.html#acdffbe0c66bbfb8146ade69be8874e5e">update</a>(int neighborsAdj, int neighborsDiag, unsigned *population)</td><td><a class="el" href="classFredkinCell.html">FredkinCell</a></td><td><code> [virtual]</code></td></tr>
 </table></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -67,7 +74,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Nov 9 15:36:12 2012 for My Project by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Nov 16 16:21:14 2012 for My Project by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

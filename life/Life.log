@@ -1,3 +1,174 @@
+commit 12f6ed82bcc604872a81f79a555aa4a78cd93cfd
+Merge: 717ff54 30e4170
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Nov 16 15:16:43 2012 -0600
+
+    Merge branch 'master' of github.com:Kieldro/cs371p
+
+commit 717ff5488aa9dcd45b2b560b704a9ac5709570a2
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Nov 16 15:16:38 2012 -0600
+
+    Wrote place method.
+
+commit 30e4170d7405a1e34f18d279268f091984a77ef0
+Author: Graham Benevelli <grahambenevelli@gmail.com>
+Date:   Fri Nov 16 14:36:49 2012 -0600
+
+    Did form acceptance tests
+
+commit 7290f54fbc24863beb756d886c0171ee97ddf4a5
+Merge: 126766f 8d298dc
+Author: Graham Benevelli <grahambenevelli@gmail.com>
+Date:   Fri Nov 16 13:52:48 2012 -0600
+
+    Merge fix
+
+commit 126766f0814de2351f7b582e9ff7428cc4ad25c2
+Author: Graham Benevelli <grahambenevelli@gmail.com>
+Date:   Fri Nov 16 13:47:33 2012 -0600
+
+    Finished testing Cell.h
+
+commit 8d298dc0688494c1566aa873cc43ec03943f12de
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Nov 16 13:47:30 2012 -0600
+
+    Adding acceptance tests.
+
+commit eef0c5130e3bb76df4dfb05ea2c2e92e1fa14c3f
+Merge: 60550ae bfef1dc
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Nov 16 13:29:26 2012 -0600
+
+    Merge branch 'master' of github.com:Kieldro/cs371p
+
+commit 60550ae022b643c9ee9face301dba1140e813702
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Nov 16 13:29:19 2012 -0600
+
+    Writing place() method.
+
+commit bfef1dc22373146ee23bc7f827e93cf786afbbd4
+Author: Graham Benevelli <grahambenevelli@gmail.com>
+Date:   Fri Nov 16 13:27:59 2012 -0600
+
+    Cell working like Fredkin
+
+commit 3d162897dddd85fd2d38f002d2db2e35eee70a1b
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Nov 16 12:14:03 2012 -0600
+
+    Makes different rules in Makefile for each Run file.
+
+commit bd71b70c93287037aa22e22df9f5a6f2e856b8d7
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Nov 16 11:03:37 2012 -0600
+
+    Adds new unit test.
+
+commit 467496bd11af853fb2af2a6c6a572581e30f6cd0
+Author: Graham Benevelli <grahambenevelli@gmail.com>
+Date:   Wed Nov 14 16:31:02 2012 -0600
+
+    Cell isn't crashing.
+
+commit e9258d14e2d9cb10801d7d55b0d6dc1701d008a1
+Author: Graham Benevelli <grahambenevelli@gmail.com>
+Date:   Wed Nov 14 15:52:03 2012 -0600
+
+    Fixed Cell seg fault, fixed #101, closes #102, virtual needed in abstractcell
+
+commit 75a40613edfbb4e2d5a2b2634a2553ec99a90894
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Nov 14 15:20:03 2012 -0600
+
+    Fixing Cell copy constructor/clone.
+
+commit d6e82422edd711cb8cd3fb58797ca0037724b762
+Author: Graham Benevelli <grahambenevelli@gmail.com>
+Date:   Wed Nov 14 14:05:00 2012 -0600
+
+    Changed neighbor count to two ints
+
+commit e1a04b5b00d6ba0cb39b9a3c696ebe6654c5bff7
+Author: Graham Benevelli <grahambenevelli@gmail.com>
+Date:   Wed Nov 14 13:45:44 2012 -0600
+
+    Added clone to abstract cell, used in Cell
+
+commit 7f8738ad77ca15f3fe1259ee47be20f747091efe
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Nov 14 13:25:14 2012 -0600
+
+    Writes Cell copy constructor.
+
+commit 1c0b2ee482f1391dd9998b9397d7858998615221
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Nov 14 10:07:35 2012 -0600
+
+    Changed spaces to tabs. @grahambenevelli !!!!
+
+commit 6b720074f176ac18ea65278280b317d2de5b9d57
+Author: Graham Benevelli <grahambenevelli@gmail.com>
+Date:   Wed Nov 14 08:28:41 2012 -0600
+
+    Finished unit tests for Conway and Fredkin Cells
+
+commit 36eb1d1abc5d2b0e404b41e0fa23b5fa413f4325
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Tue Nov 13 20:11:39 2012 -0600
+
+    Figuring out #101.
+
+commit 5f65a623f58d4a909b6bbff795ff7a37327aff5b
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Tue Nov 13 19:10:14 2012 -0600
+
+    Fixes output error.
+
+commit 7451f70abac435321b1309b38c07fa63d64a3514
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Nov 12 16:15:28 2012 -0600
+
+    Fixes some unit tests to comform to new method signatures.
+
+commit d02a6da8b9242858cb1ae27348404b55d54895b0
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Nov 12 15:44:20 2012 -0600
+
+    Adds Life::update().
+
+commit e4b2c11cb22d70f63b6266d8eb5dded9d2081d6a
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Nov 12 12:17:02 2012 -0600
+
+    Adds more unit tests.
+
+commit a2c1d4ca8b39027da11953634e4aaf206bcf18b4
+Author: Graham Benevelli <grahambenevelli@gmail.com>
+Date:   Fri Nov 9 16:39:38 2012 -0600
+
+    Updated Readme
+
+commit 7c945ef01e046551c9b9c8c1e45ac1c9d698112f
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Nov 9 16:31:47 2012 -0600
+
+    Creates new life constructor. Error with ambiguating declarations.
+
+commit c615cce8a03f79b88f1ed381c79a0bb2578fcb4e
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Nov 9 16:02:53 2012 -0600
+
+    Updates UML pdf.
+
+commit c4f2bb87296e0aca8ec8e1c1974d8c76f1eb325b
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Nov 9 15:55:21 2012 -0600
+
+    Starts implementation on cell.h.
+
 commit 3bce493bb538509d588985585dac8a7c1693297f
 Author: Ian Buitrago <kieldro@gmail.com>
 Date:   Fri Nov 9 15:32:16 2012 -0600

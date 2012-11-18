@@ -9,7 +9,7 @@ class ConwayCell : public AbstractCell
 	public:
 		//ConwayCell(){ alive = false; } // use delegation somehow?
 		ConwayCell(bool a = false){ alive = a; }
-		ConwayCell(const ConwayCell &other) { alive = other.alive; }
+		ConwayCell(const ConwayCell& other) { alive = other.alive; }
 		bool isNeighbor() { return alive; }
 		bool readChar(char c) { return alive = c == '*'; }
 		void update(int neighborsAdj,  int neighborsDiag, unsigned* population);
@@ -39,6 +39,8 @@ void ConwayCell::update(int neighborsAdj,  int neighborsDiag, unsigned* populati
 	
 	if(alive)
 		++*population;
+	adjNeighbors = 0;
+	diagNeighbors = 0;
 }
 
 #endif // ConwayCell_h

@@ -695,8 +695,6 @@ struct TestLife : CppUnit::TestFixture {
 	
 	// --------------
 	// testIsNeighbor
-	// --------------
-	
 	void testIsNeighbor0 () {
 		Cell c;
 		c.readChar('0');
@@ -718,8 +716,6 @@ struct TestLife : CppUnit::TestFixture {
 	
 	// --------------
 	// testCellUpdate
-	// --------------
-	
 	void testCellUpdate0 () {
 		Cell c = new FredkinCell(true, 0);
 		unsigned int pop = 0;

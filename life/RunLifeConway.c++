@@ -10,22 +10,7 @@ project 6 - Life
 // includes
 #include "Life.h"
 
-void test0();
-void test1();
-void test2();
-
 using namespace std;
-// ----
-// main
-int main() {
-	ios_base::sync_with_stdio(false); // turn off synchronization with C I/O
-	
-	//test0();
-	test1();
-	test2();
-
-	return 0;
-}
 
 // ------------------
 // Conway Cell 109x69
@@ -63,7 +48,7 @@ void test1() {
 		cout << "*** Life<Cell> 20x20 ***" << endl;
 		Life<ConwayCell> game("acceptancetests/RunConway1.in");
 		
-		game.simulate(500, 1);
+		game.simulate(90, 1);
 	} catch (const invalid_argument&) {
 		assert(false);
 	} catch (const out_of_range&) {
@@ -78,6 +63,10 @@ void test1() {
 */
 void test2() {
 	try {
+		cout << "*** Life<Cell> 20x20 ***" << endl;
+		Life<ConwayCell> game("acceptancetests/RunConway2.in");
+		
+		game.simulate(200, 1);
 		
 		
 	} catch (const invalid_argument&) {
@@ -85,4 +74,32 @@ void test2() {
 	} catch (const out_of_range&) {
 		assert(false);
 	}
+}
+
+void test3() {
+	try {
+		cout << "*** Life<Cell> 20x20 ***" << endl;
+		Life<ConwayCell> game("acceptancetests/RunConway3.in");
+		
+		game.simulate(9, 1);
+		
+		
+	} catch (const invalid_argument&) {
+		assert(false);
+	} catch (const out_of_range&) {
+		assert(false);
+	}
+}
+
+// ----
+// main
+int main() {
+	ios_base::sync_with_stdio(false);	// turn off synchronization with C I/O
+	
+	//test0();
+	//test1();
+	//test2();
+	test3();
+
+	return 0;
 }

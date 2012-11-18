@@ -49,49 +49,61 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00006"></a>00006 
 <a name="l00007"></a><a class="code" href="classFredkinCell.html">00007</a> <span class="keyword">class </span><a class="code" href="classFredkinCell.html">FredkinCell</a> : <span class="keyword">public</span> <a class="code" href="classAbstractCell.html">AbstractCell</a>{
 <a name="l00008"></a>00008         <span class="keyword">public</span>:
-<a name="l00009"></a>00009         
-<a name="l00010"></a><a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">00010</a>         <span class="keywordtype">int</span> <a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a>;
-<a name="l00011"></a>00011         
-<a name="l00012"></a><a class="code" href="classFredkinCell.html#a9f396d45663c397cc3e6b8273408bbb8">00012</a>         <span class="keywordtype">int</span> <a class="code" href="classFredkinCell.html#a9f396d45663c397cc3e6b8273408bbb8">update</a>(<span class="keywordtype">int</span> neighbors){
-<a name="l00013"></a>00013                         <span class="keywordflow">if</span>(<a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a> &gt;= 0) {
-<a name="l00014"></a>00014                                 <span class="keywordflow">if</span>(neighbors == 0 or neighbors == 2 or neighbors == 4) {
-<a name="l00015"></a>00015                                         <span class="keywordflow">return</span> -1;}
-<a name="l00016"></a>00016                                 <span class="keywordflow">else</span> {
-<a name="l00017"></a>00017                                         <span class="keywordflow">return</span> <a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a>+1;}}
-<a name="l00018"></a>00018                         
-<a name="l00019"></a>00019                         <span class="keywordflow">if</span> (neighbors == 1 or neighbors == 3) {
-<a name="l00020"></a>00020                                 <span class="keywordflow">return</span> 0;       
-<a name="l00021"></a>00021                         } <span class="keywordflow">else</span> {
-<a name="l00022"></a>00022                                 <span class="keywordflow">return</span> -1;      
-<a name="l00023"></a>00023                         }
-<a name="l00024"></a>00024                 }
-<a name="l00025"></a>00025                 
-<a name="l00026"></a><a class="code" href="classFredkinCell.html#a735d7f607030b5cbe7bbd281ec55d8c3">00026</a>         <span class="keywordtype">bool</span> <a class="code" href="classFredkinCell.html#a735d7f607030b5cbe7bbd281ec55d8c3">readChar</a>(<span class="keywordtype">char</span> c) {
-<a name="l00027"></a>00027                 <span class="keywordflow">if</span>(c == <span class="charliteral">&#39;+&#39;</span>) 
-<a name="l00028"></a>00028                         <a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a> = 10;
-<a name="l00029"></a>00029                 <span class="keywordflow">else</span> <span class="keywordflow">if</span>(c - <span class="charliteral">&#39;0&#39;</span> &gt;= 0 and c -<span class="charliteral">&#39;0&#39;</span> &lt;= 9) <a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a> = (int) c - <span class="charliteral">&#39;0&#39;</span>;
-<a name="l00030"></a>00030                 <span class="keywordflow">else</span> <a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a> = -1;
-<a name="l00031"></a>00031                 <span class="keywordflow">return</span> <a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a> &gt;= 0;
-<a name="l00032"></a>00032         }
-<a name="l00033"></a>00033         
-<a name="l00034"></a><a class="code" href="classFredkinCell.html#a836097b769671606f7203961ddd8a52e">00034</a>         <span class="keywordtype">bool</span> <a class="code" href="classFredkinCell.html#a836097b769671606f7203961ddd8a52e">isAlive</a>() {
-<a name="l00035"></a>00035                 <span class="keywordflow">return</span> <a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a> &gt;= 0;        
-<a name="l00036"></a>00036         }
-<a name="l00037"></a>00037         
-<a name="l00038"></a><a class="code" href="classFredkinCell.html#ab3a82816f341086dd80977ca29f12da9">00038</a>         <span class="keywordtype">void</span> <a class="code" href="classFredkinCell.html#ab3a82816f341086dd80977ca29f12da9">ageCell</a>(<span class="keywordtype">int</span> inc) {
-<a name="l00039"></a>00039                 <a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a> = inc;      
-<a name="l00040"></a>00040         }
-<a name="l00041"></a>00041         
-<a name="l00042"></a><a class="code" href="classFredkinCell.html#a49757c5c38d520a462cbd6314b9048c7">00042</a>         <span class="keyword">friend</span> ostream&amp; <a class="code" href="classFredkinCell.html#a49757c5c38d520a462cbd6314b9048c7">operator&lt;&lt; </a>(ostream &amp;strm, <span class="keyword">const</span> <a class="code" href="classFredkinCell.html">FredkinCell</a>&amp; c){
-<a name="l00043"></a>00043                         <span class="keywordflow">if</span> (c.<a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a> &lt; 0)
-<a name="l00044"></a>00044                                 <span class="keywordflow">return</span> strm &lt;&lt; <span class="stringliteral">&quot;-&quot;</span>;
-<a name="l00045"></a>00045                         <span class="keywordflow">if</span> (c.<a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a> &lt; 10)
-<a name="l00046"></a>00046                                 <span class="keywordflow">return</span> strm &lt;&lt; c.<a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a>;
-<a name="l00047"></a>00047                         <span class="keywordflow">return</span> strm &lt;&lt; <span class="stringliteral">&quot;+&quot;</span>;
-<a name="l00048"></a>00048                 }
-<a name="l00049"></a>00049         
-<a name="l00050"></a>00050 };
-<a name="l00051"></a>00051 <span class="preprocessor">#endif // FredkinCell_h</span>
+<a name="l00009"></a><a class="code" href="classFredkinCell.html#ac5bd5726da496a3b3363d9c1b57dccc2">00009</a>                 <a class="code" href="classFredkinCell.html#ac5bd5726da496a3b3363d9c1b57dccc2">FredkinCell</a>() { <a class="code" href="classAbstractCell.html#aa92e42d5bb67f3249d8e2dde2c3228e7">alive</a> = <span class="keyword">false</span>; <a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a> = 0; }
+<a name="l00010"></a><a class="code" href="classFredkinCell.html#a63ffd2b7b0335c94ca685ce375071908">00010</a>                 <a class="code" href="classFredkinCell.html#a63ffd2b7b0335c94ca685ce375071908">FredkinCell</a>(<span class="keywordtype">bool</span> a1, <span class="keywordtype">int</span> a2 = 0) { <a class="code" href="classAbstractCell.html#aa92e42d5bb67f3249d8e2dde2c3228e7">alive</a> = a1; <a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a> = a2; }
+<a name="l00011"></a><a class="code" href="classFredkinCell.html#aa1c358b7b8e42a1618b59d065cd0e551">00011</a>                 <a class="code" href="classFredkinCell.html#aa1c358b7b8e42a1618b59d065cd0e551">FredkinCell</a>(<span class="keyword">const</span> <a class="code" href="classFredkinCell.html">FredkinCell</a>&amp; other) { <a class="code" href="classAbstractCell.html#aa92e42d5bb67f3249d8e2dde2c3228e7">alive</a> = other.<a class="code" href="classAbstractCell.html#aa92e42d5bb67f3249d8e2dde2c3228e7">alive</a>; <a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a> = other.<a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a>; }
+<a name="l00012"></a><a class="code" href="classFredkinCell.html#aa03b22b04b4d02cb78dccb4fd4450c25">00012</a>                 <span class="keywordtype">bool</span> <a class="code" href="classFredkinCell.html#aa03b22b04b4d02cb78dccb4fd4450c25">isNeighbor</a>() { <span class="keywordflow">return</span> <a class="code" href="classAbstractCell.html#aa92e42d5bb67f3249d8e2dde2c3228e7">alive</a>; }
+<a name="l00013"></a>00013                 <span class="keywordtype">void</span> <a class="code" href="classFredkinCell.html#acdffbe0c66bbfb8146ade69be8874e5e">update</a>(<span class="keywordtype">int</span> neighborsAdj, <span class="keywordtype">int</span> neighborsDiag, <span class="keywordtype">unsigned</span>* population);
+<a name="l00014"></a><a class="code" href="classFredkinCell.html#ae6156e7146f8c4558330a6364105c0b0">00014</a>                 <a class="code" href="classFredkinCell.html">FredkinCell</a>* <a class="code" href="classFredkinCell.html#ae6156e7146f8c4558330a6364105c0b0">clone</a>() { <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classFredkinCell.html#ac5bd5726da496a3b3363d9c1b57dccc2">FredkinCell</a>(*<span class="keyword">this</span>); }
+<a name="l00015"></a><a class="code" href="classFredkinCell.html#a866c5b469ec83d4441dbb04513f0fc3d">00015</a>                 <span class="keywordtype">bool</span> <a class="code" href="classFredkinCell.html#a866c5b469ec83d4441dbb04513f0fc3d">transform</a>() { <span class="keywordflow">return</span> <a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a> &gt;= 2 &amp;&amp; <a class="code" href="classAbstractCell.html#aa92e42d5bb67f3249d8e2dde2c3228e7">alive</a>; }
+<a name="l00016"></a>00016                 <span class="keywordtype">bool</span> <a class="code" href="classFredkinCell.html#a735d7f607030b5cbe7bbd281ec55d8c3">readChar</a>(<span class="keywordtype">char</span> c);
+<a name="l00017"></a>00017                 <span class="keywordtype">char</span> <a class="code" href="classFredkinCell.html#aca0055c7f2a487229e86ad3b274a035a">print</a>() <span class="keyword">const</span>;
+<a name="l00018"></a><a class="code" href="classFredkinCell.html#a49757c5c38d520a462cbd6314b9048c7">00018</a>                 <span class="keyword">friend</span> ostream&amp; <a class="code" href="classFredkinCell.html#a49757c5c38d520a462cbd6314b9048c7">operator&lt;&lt; </a>(ostream &amp;strm, <span class="keyword">const</span> <a class="code" href="classFredkinCell.html">FredkinCell</a>&amp; c) {
+<a name="l00019"></a>00019                         <span class="keywordflow">return</span> strm &lt;&lt; c.<a class="code" href="classFredkinCell.html#aca0055c7f2a487229e86ad3b274a035a">print</a>();
+<a name="l00020"></a>00020                 }
+<a name="l00021"></a>00021         <span class="keyword">private</span>:
+<a name="l00022"></a><a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">00022</a>                 <span class="keywordtype">int</span> <a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a>;
+<a name="l00023"></a>00023 };
+<a name="l00024"></a>00024 
+<a name="l00025"></a><a class="code" href="classFredkinCell.html#a735d7f607030b5cbe7bbd281ec55d8c3">00025</a> <span class="keywordtype">bool</span> <a class="code" href="classFredkinCell.html#a735d7f607030b5cbe7bbd281ec55d8c3">FredkinCell::readChar</a>(<span class="keywordtype">char</span> c) {
+<a name="l00026"></a>00026         <a class="code" href="classAbstractCell.html#aa92e42d5bb67f3249d8e2dde2c3228e7">alive</a> = <span class="keyword">true</span>;
+<a name="l00027"></a>00027         
+<a name="l00028"></a>00028         <span class="keywordflow">if</span>(c == <span class="charliteral">&#39;+&#39;</span>) 
+<a name="l00029"></a>00029                 <a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a> = 10;
+<a name="l00030"></a>00030         <span class="keywordflow">else</span> <span class="keywordflow">if</span>(c - <span class="charliteral">&#39;0&#39;</span> &gt;= 0 and c -<span class="charliteral">&#39;0&#39;</span> &lt;= 9)
+<a name="l00031"></a>00031                 <a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a> = c - <span class="charliteral">&#39;0&#39;</span>;
+<a name="l00032"></a>00032         <span class="keywordflow">else</span>
+<a name="l00033"></a>00033                 <a class="code" href="classAbstractCell.html#aa92e42d5bb67f3249d8e2dde2c3228e7">alive</a> = <span class="keyword">false</span>;
+<a name="l00034"></a>00034         
+<a name="l00035"></a>00035         <span class="keywordflow">return</span> <a class="code" href="classAbstractCell.html#aa92e42d5bb67f3249d8e2dde2c3228e7">alive</a>;
+<a name="l00036"></a>00036 }
+<a name="l00037"></a>00037 
+<a name="l00038"></a><a class="code" href="classFredkinCell.html#aca0055c7f2a487229e86ad3b274a035a">00038</a> <span class="keywordtype">char</span> <a class="code" href="classFredkinCell.html#aca0055c7f2a487229e86ad3b274a035a">FredkinCell::print</a>()<span class="keyword"> const </span>{
+<a name="l00039"></a>00039         <span class="keywordflow">if</span> (!<a class="code" href="classAbstractCell.html#aa92e42d5bb67f3249d8e2dde2c3228e7">alive</a>)
+<a name="l00040"></a>00040                 <span class="keywordflow">return</span> <span class="charliteral">&#39;-&#39;</span>;
+<a name="l00041"></a>00041         <span class="keywordflow">if</span> (<a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a> &lt; 10)
+<a name="l00042"></a>00042                 <span class="keywordflow">return</span> <span class="charliteral">&#39;0&#39;</span> + <a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a>;
+<a name="l00043"></a>00043         <span class="keywordflow">else</span>
+<a name="l00044"></a>00044                 <span class="keywordflow">return</span> <span class="charliteral">&#39;+&#39;</span>;
+<a name="l00045"></a>00045 }
+<a name="l00046"></a>00046 
+<a name="l00047"></a><a class="code" href="classFredkinCell.html#acdffbe0c66bbfb8146ade69be8874e5e">00047</a> <span class="keywordtype">void</span> <a class="code" href="classFredkinCell.html#acdffbe0c66bbfb8146ade69be8874e5e">FredkinCell::update</a>(<span class="keywordtype">int</span> neighborsAdj, <span class="keywordtype">int</span> neighborsDiag, <span class="keywordtype">unsigned</span>* pop) {
+<a name="l00048"></a>00048         <span class="comment">//if(DEBUG) cerr &lt;&lt; &quot;neighbors: &quot; &lt;&lt; neighbors &lt;&lt; endl;</span>
+<a name="l00049"></a>00049         <span class="keywordtype">int</span> neighbors = neighborsAdj;
+<a name="l00050"></a>00050         assert(neighbors &gt;= 0 and neighbors &lt;= 4);
+<a name="l00051"></a>00051         
+<a name="l00052"></a>00052         <span class="keywordflow">if</span>(<a class="code" href="classAbstractCell.html#aa92e42d5bb67f3249d8e2dde2c3228e7">alive</a>) {
+<a name="l00053"></a>00053                 <span class="keywordflow">if</span>(neighbors == 0 or neighbors == 2 or neighbors == 4)
+<a name="l00054"></a>00054                         <a class="code" href="classAbstractCell.html#aa92e42d5bb67f3249d8e2dde2c3228e7">alive</a> = <span class="keyword">false</span>;
+<a name="l00055"></a>00055                 <span class="keywordflow">else</span>
+<a name="l00056"></a>00056                         ++<a class="code" href="classFredkinCell.html#a755dea54626a9742e4dad6a03755706b">age</a>;
+<a name="l00057"></a>00057         } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (neighbors == 1 or neighbors == 3)
+<a name="l00058"></a>00058                 <a class="code" href="classAbstractCell.html#aa92e42d5bb67f3249d8e2dde2c3228e7">alive</a> = <span class="keyword">true</span>;
+<a name="l00059"></a>00059         
+<a name="l00060"></a>00060         <span class="keywordflow">if</span>(<a class="code" href="classAbstractCell.html#aa92e42d5bb67f3249d8e2dde2c3228e7">alive</a>)
+<a name="l00061"></a>00061                 ++*pop;
+<a name="l00062"></a>00062 }
+<a name="l00063"></a>00063 <span class="preprocessor">#endif // FredkinCell_h</span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -107,7 +119,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Nov 9 15:36:12 2012 for My Project by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Nov 16 16:21:13 2012 for My Project by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
