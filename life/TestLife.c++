@@ -32,7 +32,6 @@ struct TestLife : CppUnit::TestFixture {
 	// testLife
 	void testLife0 () {
 		Life<ConwayCell> game("RunLifeConway.in");
-		//BOOYAKASHA
 		CPPUNIT_ASSERT(game.generation == 0);
 		CPPUNIT_ASSERT(game.population == 35);
 		CPPUNIT_ASSERT(game.nRows() == 109);
@@ -190,6 +189,13 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(c2.alive);
 	}
 
+  // --------------------
+  // testConwayTransform
+  void testConwayTransform0 () {
+    ConwayCell c;
+    CPPUNIT_ASSERT(!c.transform());
+  }
+
 	// ------------------
 	// testConwayReadChar
 	void testConwayReadChar0 () {
@@ -250,6 +256,25 @@ struct TestLife : CppUnit::TestFixture {
 		
 		CPPUNIT_ASSERT(!c.alive);
 	}
+
+  //----------------
+  // testConwayPrint
+  void testConwayPrint0 () {
+    ConwayCell c(false);
+    CPPUNIT_ASSERT(c.print() == '.');
+  }
+
+  void testConwayPrint1 () {
+    ConwayCell c(true);
+    CPPUNIT_ASSERT(c.print() =='*');
+  }
+
+  void testConwayPrint2 () {
+    ConwayCell c(false);
+    CPPUNIT_ASSERT(c.print() =='.');
+    c.alive = true;
+    CPPUNIT_ASSERT(c.print() =='*');
+  }
 
 	// --------------------
 	// testConwayOperator<<
@@ -542,6 +567,28 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(((FredkinCell*) c2)->age == 10);
 		CPPUNIT_ASSERT(&c1 != c2);
 	}
+
+  // --------------------
+  // testFredkinTransform
+  void testFredkinTransform0 () {
+    FredkinCell f(false, 0);
+    CPPUNIT_ASSERT(!f.transform());
+  }
+
+  void testFredkinTransform1 () {
+    FredkinCell f(false, 2);
+    CPPUNIT_ASSERT(!f.transform());
+  }
+
+  void testFredkinTransform2 () {
+    FredkinCell f(true, 0);
+    CPPUNIT_ASSERT(!f.transform());
+  }
+
+  void testFredkinTransform3 () {
+    FredkinCell f(true, 2);
+    CPPUNIT_ASSERT(f.transform());
+  }
 	
 	// -------------------
 	// testCellConstructor
@@ -821,6 +868,10 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testConwayUpdate1);
 	CPPUNIT_TEST(testConwayUpdate2);
 	CPPUNIT_TEST(testConwayUpdate3);
+        CPPUNIT_TEST(testConwayTransform0);
+  CPPUNIT_TEST(testConwayPrint0);
+  CPPUNIT_TEST(testConwayPrint1);
+  CPPUNIT_TEST(testConwayPrint2);
 	CPPUNIT_TEST(testFredkinUpdate0);
 	CPPUNIT_TEST(testFredkinUpdate1);
 	CPPUNIT_TEST(testFredkinUpdate2);
@@ -832,6 +883,10 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testFredkinClone0);
 	CPPUNIT_TEST(testFredkinClone1);
 	CPPUNIT_TEST(testFredkinClone2);
+  CPPUNIT_TEST(testFredkinTransform0);
+  CPPUNIT_TEST(testFredkinTransform1);
+  CPPUNIT_TEST(testFredkinTransform2);
+  CPPUNIT_TEST(testFredkinTransform3);
 	CPPUNIT_TEST(testCellConstructor0);
 	CPPUNIT_TEST(testCellConstructor1);
 	CPPUNIT_TEST(testCellConstructor2);
