@@ -589,6 +589,23 @@ struct TestLife : CppUnit::TestFixture {
     FredkinCell f(true, 2);
     CPPUNIT_ASSERT(f.transform());
   }
+
+  // ----------------
+  // testFredkinPrint
+  void testFredkinPrint0 () {
+    FredkinCell f(false, 9);
+    CPPUNIT_ASSERT(f.print() == '-');
+  }
+
+  void testFredkinPrint1 () {
+    FredkinCell f(true, 9);
+    CPPUNIT_ASSERT(f.print() =='9');
+  }
+
+  void testFredkinPrint2 () {
+    FredkinCell f(true, 10);
+    CPPUNIT_ASSERT(f.print() =='+');
+  }
 	
 	// -------------------
 	// testCellConstructor
@@ -796,21 +813,412 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(c.cell->alive == false);
 		CPPUNIT_ASSERT(c.cell->print() == '.');
 	}
-	
-	// ---------------------
-	// testSimulate
-	void testSimulate0 () {
-		Life<Cell> game(1, 2);
-		game._g[0][0][0].cell->alive = true;
-		game._g[0][0][1].cell->alive = true;
-		
-		std::ostringstream w;
-		game.simulate(2, 2, w);
-		//if(DEBUG) game.print();
-		//if(DEBUG) cerr << w.str() << endl;
-		CPPUNIT_ASSERT(w.str() == "11");
-	}
-	
+
+  // ----------------------
+  // testCellCopyAssignment
+  void testCellCopyAssignment0 () {
+    Cell c1 = new ConwayCell(true);
+    Cell c2;
+    c2 = c1;
+    CPPUNIT_ASSERT(c1.cell != c2.cell);
+    CPPUNIT_ASSERT(c2.cell->print() == '*');
+  }
+
+  void testCellCopyAssignment1 () {
+    Cell c1 = new ConwayCell(false);
+    Cell c2;
+    c2 = c1;
+    CPPUNIT_ASSERT(c1.cell != c2.cell);
+    CPPUNIT_ASSERT(c2.cell->print() == '.');
+  }
+
+  void testCellCopyAssignment2 () {
+    Cell c1 = new FredkinCell(true, 4);
+    Cell c2;
+    c2 = c1;
+    CPPUNIT_ASSERT(c1.cell != c2.cell);
+    CPPUNIT_ASSERT(c2.cell->print() == '4');
+  }	
+
+  // -----------------
+  // testConstructGrid
+  // -----------------
+
+  void testConstructGrid0 () {
+    Life<ConwayCell> l(0, 0);
+    l.constructGrids(1, 1);
+    CPPUNIT_ASSERT(l._g[0].size() == 1);
+    CPPUNIT_ASSERT(l._g[0][0].size() == 1);
+    CPPUNIT_ASSERT(l._g[1].size() == 1);
+    CPPUNIT_ASSERT(l._g[1][0].size() == 1);
+  }
+
+  void testConstructGrid1 () {
+    Life<ConwayCell> l(0, 0);
+    l.constructGrids(100, 100);
+    CPPUNIT_ASSERT(l._g[0].size() == 100);
+    CPPUNIT_ASSERT(l._g[0][0].size() == 100);
+    CPPUNIT_ASSERT(l._g[1].size() == 100);
+    CPPUNIT_ASSERT(l._g[1][0].size() == 100);
+  }
+
+  void testConstructGrid2 () {
+    Life<ConwayCell> l(0, 0);
+    l.constructGrids(100, 1);
+    CPPUNIT_ASSERT(l._g[0].size() == 100);
+    CPPUNIT_ASSERT(l._g[0][0].size() == 1);
+    CPPUNIT_ASSERT(l._g[1].size() == 100);
+    CPPUNIT_ASSERT(l._g[1][0].size() == 1);
+  }
+
+  // -------------
+  // testLifenRows
+  // -------------
+
+  void testLifenRows0 () {
+    Life<ConwayCell> l(100, 1);
+    CPPUNIT_ASSERT(l.nRows() == 100);
+  }
+
+  void testLifenRows1 () {
+    Life<ConwayCell> l(1, 100);
+    CPPUNIT_ASSERT(l.nRows() == 1);
+  }
+
+  void testLifenRows2 () {
+    Life<ConwayCell> l(9, 2);
+    CPPUNIT_ASSERT(l.nRows() == 9);
+  }
+
+  // -------------
+  // testLifenCols
+  // -------------
+
+  void testLifenCols0 () {
+    Life<ConwayCell> l(100, 1);
+    CPPUNIT_ASSERT(l.nCols() == 1);
+  }
+
+  void testLifenCols1 () {
+    Life<ConwayCell> l(1, 100);
+    CPPUNIT_ASSERT(l.nCols() == 100);
+  }
+
+  void testLifenCols2 () {
+    Life<ConwayCell> l(19, 2);
+    CPPUNIT_ASSERT(l.nCols() == 2);
+  }
+
+  // -------------------------
+  // testLifeConstructorString
+  // -------------------------
+
+  void testLiveonstrucotrString0 () {
+    Life<ConwayCell> l("./acceptancetests/RunConway1.in");
+    CPPUNIT_ASSERT(l.nRows() == 48);
+    CPPUNIT_ASSERT(l.nCols() == 50);
+    CPPUNIT_ASSERT(l._g[0][0][2].print() == '*');
+    CPPUNIT_ASSERT(l._g[0][0][1].print() == '.');
+  }
+
+  void testLiveonstrucotrString1 () {
+    Life<ConwayCell> l("./acceptancetests/RunConway2.in");
+    CPPUNIT_ASSERT(l.nRows() == 50);
+    CPPUNIT_ASSERT(l.nCols() == 80);
+    CPPUNIT_ASSERT(l._g[0][5][1].print() == '*');
+    CPPUNIT_ASSERT(l._g[0][5][0].print() == '.');
+  }
+
+  void testLiveonstrucotrString2 () {
+    Life<ConwayCell> l("./acceptancetests/RunConway3.in");
+    CPPUNIT_ASSERT(l.nRows() == 17);
+    CPPUNIT_ASSERT(l.nCols() == 17);
+    CPPUNIT_ASSERT(l._g[0][4][2].print() == '*');
+    CPPUNIT_ASSERT(l._g[0][4][1].print() == '.');
+  }
+
+  // -------------------------
+  // testLifeConstructorIntInt
+  // -------------------------
+
+  void testLifeConstructorIntInt0 () {
+    Life<ConwayCell> l(1, 1);
+    CPPUNIT_ASSERT(l.nRows() == 1);
+    CPPUNIT_ASSERT(l.nCols() == 1);
+  }
+
+  void testLifeConstructorIntInt1 () {
+    Life<ConwayCell> l(10, 10);
+    CPPUNIT_ASSERT(l.nRows() == 10);
+    CPPUNIT_ASSERT(l.nCols() == 10);
+  }
+
+  void testLifeConstructorIntInt2 () {
+    Life<ConwayCell> l(1, 1);
+    CPPUNIT_ASSERT(l.nRows() == 1);
+    CPPUNIT_ASSERT(l.nCols() == 1);
+  }
+
+  // ------------------------------
+  // testLifecountNeighborsAdjacent
+  // ------------------------------
+
+  void testLifecountNeighborsAdjacent0 () {
+    Life<ConwayCell> l(1, 1);
+    CPPUNIT_ASSERT(l.countNeighborsAdjacent(0, 0) == 0);
+  }
+
+  void testLifecountNeighborsAdjacent1 () {
+    Life<ConwayCell> l(3, 3);
+    /*
+      ...
+      ...
+      ...
+     */
+    CPPUNIT_ASSERT(l.countNeighborsAdjacent(1, 1) == 0);
+  }
+
+  void testLifecountNeighborsAdjacent2 () {
+    Life<ConwayCell> l(3, 3);
+    /*
+      **.
+      *..
+      ...
+    */
+    l._g[0][0][0].alive = true;
+    l._g[0][0][1].alive = true;
+    l._g[0][1][0].alive = true;
+    CPPUNIT_ASSERT(l.countNeighborsAdjacent(1, 1) == 2);
+  }
+
+  // --------------------------
+  // testLifecountNeighborsDiag
+  // --------------------------
+
+  void testLifecountNeighborsDiag0 () {
+    Life<ConwayCell> l(1, 1);
+    CPPUNIT_ASSERT(l.countNeighborsDiag(0, 0) == 0);
+  }
+
+  void testLifecountNeighborsDiag1 () {
+    Life<ConwayCell> l(3, 3);
+    CPPUNIT_ASSERT(l.countNeighborsDiag(1, 1) == 0);
+  }
+
+  void testLifecountNeighborsDiag2 () {
+    Life<ConwayCell> l(3, 3);
+    l._g[0][0][0].alive = true;
+    l._g[0][0][1].alive = true;
+    l._g[0][1][0].alive = true;
+    CPPUNIT_ASSERT(l.countNeighborsDiag(1, 1) == 1);
+  }
+
+  // -------------
+  // testLifePrint
+  // -------------
+
+  void testLifePrint0 () {
+    Life<ConwayCell> l(3, 3);
+    l._g[0][0][0].alive = true;
+    l._g[0][0][1].alive = true;
+    l._g[0][1][0].alive = true;
+    std::ostringstream w;
+    l.print(w);
+    string s = "Generation = 0, Population = 0.\n";
+    s       += "**.\n";
+    s       += "*..\n";
+    s       += "...\n\n";
+    l._g[0][0][0].alive = true;
+    l._g[0][0][1].alive = true;
+    l._g[0][1][0].alive = true;
+    CPPUNIT_ASSERT(w.str() == s);
+  }
+
+  void testLifePrint1 () {
+    Life<ConwayCell> l(3, 3);
+    l._g[0][2][2].alive = true;
+    l._g[0][0][1].alive = true;
+    l._g[0][1][0].alive = true;
+    std::ostringstream w;
+    l.print(w);
+    string s = "Generation = 0, Population = 0.\n";
+    s       += ".*.\n";
+    s       += "*..\n";
+    s       += "..*\n\n";
+    l._g[0][0][0].alive = true;
+    l._g[0][0][1].alive = true;
+    l._g[0][1][0].alive = true;
+    CPPUNIT_ASSERT(w.str() == s);
+  }
+
+  void testLifePrint2 () {
+    Life<FredkinCell> l(3, 3);
+    l._g[0][0][0].alive = true;
+    l._g[0][0][0].age = 0;
+    l._g[0][0][1].alive = true;
+    l._g[0][0][1].age = 1;
+    l._g[0][0][2].alive = true;
+    l._g[0][0][2].age = 2;
+    l._g[0][1][0].alive = true;
+    l._g[0][1][0].age = 3;
+    std::ostringstream w;
+    l.print(w);
+    string s = "Generation = 0, Population = 0.\n";
+    s       += "012\n";
+    s       += "3--\n";
+    s       += "---\n\n";
+    l._g[0][0][0].alive = true;
+    l._g[0][0][1].alive = true;
+    l._g[0][1][0].alive = true;
+    CPPUNIT_ASSERT(w.str() == s);
+  }
+
+  // ---------------
+  // testLifeRunTurn
+  // ---------------
+
+  void testLifeRunTurn0 () {
+    Life<ConwayCell> l(1,1);
+    l.runTurn();
+    CPPUNIT_ASSERT(l._g[1][0][0].alive == false);
+    CPPUNIT_ASSERT(l.generation == 1);
+  }
+
+  void testLifeRunTurn1 () {
+    Life<ConwayCell> l(3,3);
+    l._g[0][1][0].alive = true;
+    l._g[0][1][1].alive = true;
+    l._g[0][1][2].alive = true;
+    l.runTurn();
+    CPPUNIT_ASSERT(l._g[1][0][0].alive == false);
+    CPPUNIT_ASSERT(l._g[1][0][1].alive == true);
+    CPPUNIT_ASSERT(l._g[1][0][2].alive == false);
+    CPPUNIT_ASSERT(l._g[1][1][0].alive == false);
+    CPPUNIT_ASSERT(l._g[1][1][1].alive == true);
+    CPPUNIT_ASSERT(l._g[1][1][2].alive == false);
+    CPPUNIT_ASSERT(l._g[1][2][0].alive == false);
+    CPPUNIT_ASSERT(l._g[1][2][1].alive == true);
+    CPPUNIT_ASSERT(l._g[1][2][2].alive == false);
+    CPPUNIT_ASSERT(l.generation== 1);
+  }
+
+  void testLifeRunTurn2 () {
+    Life<FredkinCell> l(3,3);
+    /*
+      -2-
+      33-
+      -+-
+     */
+    l._g[0][0][1].alive = true;
+    l._g[0][0][1].age = 2;
+    l._g[0][1][0].alive = true;
+    l._g[0][1][0].age = 3;
+    l._g[0][1][1].alive = true;
+    l._g[0][1][1].age = 3;
+    l._g[0][2][1].alive = true;
+    l._g[0][2][1].age = 10;
+    l.runTurn();
+    /*
+      -30
+      4-0
+      -+0
+     */
+    CPPUNIT_ASSERT(l._g[1][0][0].alive == false);
+    CPPUNIT_ASSERT(l._g[1][0][0].age == 0);
+    CPPUNIT_ASSERT(l._g[1][0][1].alive == true);
+    CPPUNIT_ASSERT(l._g[1][0][1].age == 3);
+    CPPUNIT_ASSERT(l._g[1][0][2].alive == true);
+    CPPUNIT_ASSERT(l._g[1][0][2].age == 0);
+    CPPUNIT_ASSERT(l._g[1][1][0].alive == true);
+    CPPUNIT_ASSERT(l._g[1][1][0].age == 4);
+    CPPUNIT_ASSERT(l._g[1][1][1].alive == true);
+    CPPUNIT_ASSERT(l._g[1][1][1].age == 4);
+    CPPUNIT_ASSERT(l._g[1][1][2].alive == true);
+    CPPUNIT_ASSERT(l._g[1][1][2].age == 0);
+    CPPUNIT_ASSERT(l._g[1][2][0].alive == false);
+    CPPUNIT_ASSERT(l._g[1][2][0].age == 0);
+    CPPUNIT_ASSERT(l._g[1][2][1].alive == true);
+    CPPUNIT_ASSERT(l._g[1][2][1].age == 11);
+    CPPUNIT_ASSERT(l._g[1][2][2].alive == true);
+    CPPUNIT_ASSERT(l._g[1][2][2].age == 0);
+    CPPUNIT_ASSERT(l.generation== 1);
+  }
+
+  // ----------------
+  // testLifeSimulate
+  // ----------------
+
+  void testLifeSimulate0 () {
+    Life<ConwayCell> l(1,1);
+    l.runTurn();
+    std::ostringstream w;
+    l.simulate(100, 100, w);
+    CPPUNIT_ASSERT(l._g[1][0][0].alive == false);
+    CPPUNIT_ASSERT(l.generation == 101);
+  }
+
+  void testLifeSimulate1 () {
+    Life<ConwayCell> l(3,3);
+    l._g[0][1][0].alive = true;
+    l._g[0][1][1].alive = true;
+    l._g[0][1][2].alive = true;
+    std::ostringstream w;
+    l.simulate(9, 1, w);
+    CPPUNIT_ASSERT(l._g[1][0][0].alive == false);
+    CPPUNIT_ASSERT(l._g[1][0][1].alive == true);
+    CPPUNIT_ASSERT(l._g[1][0][2].alive == false);
+    CPPUNIT_ASSERT(l._g[1][1][0].alive == false);
+    CPPUNIT_ASSERT(l._g[1][1][1].alive == true);
+    CPPUNIT_ASSERT(l._g[1][1][2].alive == false);
+    CPPUNIT_ASSERT(l._g[1][2][0].alive == false);
+    CPPUNIT_ASSERT(l._g[1][2][1].alive == true);
+    CPPUNIT_ASSERT(l._g[1][2][2].alive == false);
+    CPPUNIT_ASSERT(l.generation== 9);
+  }
+
+  void testLifeSimulate2 () {
+    Life<FredkinCell> l(3,3);
+    /*      
+      -2-
+      33-
+      -+-
+    */
+    l._g[0][0][1].alive = true;
+    l._g[0][0][1].age = 2;
+    l._g[0][1][0].alive = true;
+    l._g[0][1][0].age = 3;
+    l._g[0][1][1].alive = true;
+    l._g[0][1][1].age = 3;
+    l._g[0][2][1].alive = true;
+    l._g[0][2][1].age = 10;
+    std::ostringstream w;
+    l.simulate(1, 1, w);
+    /*
+      -30
+      4-0
+      -+0
+    */
+    CPPUNIT_ASSERT(l._g[1][0][0].alive == false);
+    CPPUNIT_ASSERT(l._g[1][0][0].age == 0);
+    CPPUNIT_ASSERT(l._g[1][0][1].alive == true);
+    CPPUNIT_ASSERT(l._g[1][0][1].age == 3);
+    CPPUNIT_ASSERT(l._g[1][0][2].alive == true);
+    CPPUNIT_ASSERT(l._g[1][0][2].age == 0);
+    CPPUNIT_ASSERT(l._g[1][1][0].alive == true);
+    CPPUNIT_ASSERT(l._g[1][1][0].age == 4);
+    CPPUNIT_ASSERT(l._g[1][1][1].alive == true);
+    CPPUNIT_ASSERT(l._g[1][1][1].age == 4);
+    CPPUNIT_ASSERT(l._g[1][1][2].alive == true);
+    CPPUNIT_ASSERT(l._g[1][1][2].age == 0);
+    CPPUNIT_ASSERT(l._g[1][2][0].alive == false);
+    CPPUNIT_ASSERT(l._g[1][2][0].age == 0);
+    CPPUNIT_ASSERT(l._g[1][2][1].alive == true);
+    CPPUNIT_ASSERT(l._g[1][2][1].age == 11);
+    CPPUNIT_ASSERT(l._g[1][2][2].alive == true);
+    CPPUNIT_ASSERT(l._g[1][2][2].age == 0);
+    CPPUNIT_ASSERT(l.generation== 1);
+  }
+
 	// -----
 	// suite
 	CPPUNIT_TEST_SUITE(TestLife);
@@ -883,6 +1291,9 @@ struct TestLife : CppUnit::TestFixture {
   CPPUNIT_TEST(testFredkinTransform1);
   CPPUNIT_TEST(testFredkinTransform2);
   CPPUNIT_TEST(testFredkinTransform3);
+  CPPUNIT_TEST(testFredkinPrint0);
+  CPPUNIT_TEST(testFredkinPrint1);
+  CPPUNIT_TEST(testFredkinPrint2);
 	CPPUNIT_TEST(testCellConstructor0);
 	CPPUNIT_TEST(testCellConstructor1);
 	CPPUNIT_TEST(testCellConstructor2);
@@ -892,6 +1303,9 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testCellPointerConstructor0);
 	CPPUNIT_TEST(testCellPointerConstructor1);
 	CPPUNIT_TEST(testCellPointerConstructor2);
+  CPPUNIT_TEST(testCellCopyAssignment0);
+  CPPUNIT_TEST(testCellCopyAssignment1);
+  CPPUNIT_TEST(testCellCopyAssignment2);
 	CPPUNIT_TEST(testCellReadChar0);
 	CPPUNIT_TEST(testCellReadChar1);
 	CPPUNIT_TEST(testCellReadChar2);
@@ -908,6 +1322,36 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testCellUpdate7);
 	CPPUNIT_TEST(testCellUpdate8);
 	//CPPUNIT_TEST(testSimulate0);		// FIXME
+  CPPUNIT_TEST(testConstructGrid0);
+  CPPUNIT_TEST(testConstructGrid1);
+  CPPUNIT_TEST(testConstructGrid2);
+  CPPUNIT_TEST(testLifenRows0);
+  CPPUNIT_TEST(testLifenRows1);
+  CPPUNIT_TEST(testLifenRows2);
+  CPPUNIT_TEST(testLifenCols0);
+  CPPUNIT_TEST(testLifenCols1);
+  CPPUNIT_TEST(testLifenCols2);
+  CPPUNIT_TEST(testLiveonstrucotrString0);
+  CPPUNIT_TEST(testLiveonstrucotrString1);
+  CPPUNIT_TEST(testLiveonstrucotrString2);
+  CPPUNIT_TEST(testLifeConstructorIntInt0);
+  CPPUNIT_TEST(testLifeConstructorIntInt1);
+  CPPUNIT_TEST(testLifeConstructorIntInt2);
+  CPPUNIT_TEST(testLifecountNeighborsAdjacent0);
+  CPPUNIT_TEST(testLifecountNeighborsAdjacent1);
+  CPPUNIT_TEST(testLifecountNeighborsAdjacent2);
+  CPPUNIT_TEST(testLifecountNeighborsDiag0);
+  CPPUNIT_TEST(testLifecountNeighborsDiag1);
+  CPPUNIT_TEST(testLifecountNeighborsDiag2);
+  CPPUNIT_TEST(testLifePrint0);
+  CPPUNIT_TEST(testLifePrint1);
+  CPPUNIT_TEST(testLifePrint2);
+  CPPUNIT_TEST(testLifeRunTurn0);
+  CPPUNIT_TEST(testLifeRunTurn1);
+  CPPUNIT_TEST(testLifeRunTurn2);
+  CPPUNIT_TEST(testLifeSimulate0);
+  CPPUNIT_TEST(testLifeSimulate1);
+  CPPUNIT_TEST(testLifeSimulate2);
 	
 	CPPUNIT_TEST_SUITE_END();
 };
