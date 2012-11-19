@@ -1,21 +1,21 @@
 SHELL = /bin/sh
 
 CC = g++
-CPPFLAGS = -std=c++0x -pedantic -Wall
+CPPFLAGS = -std=c++0x #-pedantic -Wall
 
 TEST = TestLife.c++
 TESTOUT = TestLife.out
 
-RUNCELL = RunLife.c++
+RUN = RunLife.c++
 RUNOUT = RunLife.out
 
 all: test run log doxygen zip clean
 
-run: $(RUNCELL)
+run: $(RUN)
 	clear
-	$(CC) $(CPPFLAGS) $(RUNCELL) -o $(RUNCELL).app
+	$(CC) $(CPPFLAGS) $(RUN) -o $(RUN).app
 	#valgrind \
-	./$(RUNCELL).app 2>&1 #| tee $(RUNOUT)
+	./$(RUN).app 2>&1 #| tee $(RUNOUT)
 
 test: $(TEST)
 	clear
@@ -38,9 +38,8 @@ zip:
 	zip Life README.txt html/* AbstractCell.h Cell.h \
 		ConwayCell.h FredkinCell.h \
 		Life.h Life.log Life.pdf \
-		$(RUNCELL) $(RUNOUT) \
-		$(RUNCONWAY) RunLifeConway.out \
-		$(RUNFREDKIN) RunLifeFredkin.out \
+		$(RUN) $(RUNOUT) \
+		RunLifeConway.out RunLifeFredkin.out \
 		$(TEST) $(TESTOUT)
 
 # turnin --submit reza cs371ppj6 Life.zip

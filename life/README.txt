@@ -30,7 +30,7 @@ GitHub Repository Name: cs371p
 
 Comments:
 link to the UML: http://www.gliffy.com/pubdoc/4058932/L.png
-
+3.5 sec for test0 with original algo
 -2d vector of Cell or Cell*?
 
 ----------------

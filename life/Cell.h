@@ -2,6 +2,7 @@
 #ifndef Cell_h
 #define Cell_h
 
+//#include "AbstractCell.h"
 #include "ConwayCell.h"
 #include "FredkinCell.h"
 
@@ -12,6 +13,8 @@ class Cell : public AbstractCell {
 		Cell(AbstractCell* c) { cell = c; }		// for unit tests
 		~Cell() { delete cell; }
 		bool isNeighbor() { return cell->isNeighbor(); }
+		void addDiag() { ++diagNeighbors; }
+		void addAdj() { ++adjNeighbors; }
 		Cell& operator= (const Cell& c);
 		bool readChar(char c);
 		void update(int , int , unsigned*);
@@ -30,12 +33,13 @@ Cell& Cell::operator= (const Cell& c) {
 }
 
 bool Cell::readChar(char c) {
-	if(c == '*') {
+	if(c == '*' or c == '.') {
 		delete cell;
 		cell = new ConwayCell();
 	}
 	bool ret = cell->readChar(c); 
-	assert(cell->print() == '-' || cell->print() == '*' || cell->print() == '0' || cell->print() == '1');
+	assert(cell->print() == '-' || cell->print() == '*' 
+		|| cell->print() == '0' || cell->print() == '1' || cell->print() == '.');
 	return ret;
 }
 

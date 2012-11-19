@@ -14,7 +14,9 @@ To run the program:
 
 // --------
 // includes
-#include "Life.h"
+#include "ConwayCell.h"
+#include "FredkinCell.h"
+#include "Cell.h"
 
 using namespace std;
 
@@ -34,6 +36,8 @@ void testConway0() {
 	try {
 		cout << "*** Life<ConwayCell> 109x69 ***" << endl;
 		Life<ConwayCell> game("RunLifeConway.in");
+		//ostringstream out;
+		
 		game.simulate(283,  2500);
 		game.simulate(40,   2500);
 		game.simulate(2500, 2500);
@@ -43,7 +47,6 @@ void testConway0() {
 		assert(false);
 	}
 }
-
 
 void testConway1() {
 	try {
@@ -58,19 +61,12 @@ void testConway1() {
 	}
 }
 
-// ----------
-// 
-/*
-
-*/
 void testConway2() {
 	try {
 		cout << "*** Life<Cell> 20x20 ***" << endl;
 		Life<ConwayCell> game("acceptancetests/RunConway2.in");
 		
 		game.simulate(200, 1);
-		
-		
 	} catch (const invalid_argument&) {
 		assert(false);
 	} catch (const out_of_range&) {
@@ -84,8 +80,6 @@ void testConway3() {
 		Life<ConwayCell> game("acceptancetests/RunConway3.in");
 		
 		game.simulate(9, 1);
-		
-		
 	} catch (const invalid_argument&) {
 		assert(false);
 	} catch (const out_of_range&) {
@@ -103,23 +97,17 @@ Print every grid.
 */
 void testFredkin0() {
 	try {
-		
 		cout << "*** Life<FredkinCell> 20x20 ***" << endl;
 		Life<FredkinCell> game("RunLifeFredkin.in");
-		game.simulate(2, 1);
 		
+		game.simulate(2, 1);
 	} catch (const invalid_argument&) {
 		assert(false);
 	} catch (const out_of_range&) {
 		assert(false);
 	}
 }
-// ------------------
-// 
-/*
 
-
-*/
 void testCell0() {
 	try {
 		cout << "*** Life<Cell> 0x0 ***" << endl;
@@ -133,12 +121,6 @@ void testCell0() {
 	}
 }
 
-// ------------------
-// 
-/*
-
-
-*/
 void testCell1() {
 	try {
 		cout << "*** Life<Cell> 1x1 ***" << endl;
@@ -153,12 +135,6 @@ void testCell1() {
 	}
 }
 
-// ------------------
-// 
-/*
-
-
-*/
 void testCell2() {
 	try {
 		cout << "*** Life<Cell> 2x2 ***" << endl;
@@ -204,7 +180,7 @@ void testCell5() {
 		cout << "*** Life<Cell> 20x20 ***" << endl;
 		Life<Cell> game("acceptancetests/RunLife5.in");
 		
-		game.simulate(70, 1);	
+		game.simulate(53, 1);	
 	} catch (const invalid_argument&) {
 		assert(false);
 	} catch (const out_of_range&) {
@@ -217,7 +193,7 @@ void testCell6() {
 		cout << "*** Life<Cell> 20x20 ***" << endl;
 		Life<Cell> game("acceptancetests/RunLife6.in");
 		
-		game.simulate(700, 1);	
+		game.simulate(100, 1);	
 	} catch (const invalid_argument&) {
 		assert(false);
 	} catch (const out_of_range&) {
@@ -264,6 +240,10 @@ void testCell8() {
 int main() {
 	ios_base::sync_with_stdio(false); // turn off synchronization with C I/O
 	
+	double t0 = clock();
+	if(DEBUG) cerr << "t0: " << t0 << endl;
+	
+	testConway0();/*
 	// Conway tests
 	testConway0();
 	testConway1();
@@ -282,7 +262,11 @@ int main() {
 	testCell5();
 	testCell6();
 	testCell7();
-	testCell8();
+	testCell8();*/
+	
+	double t1 = clock();
+	if(DEBUG) cerr << "t1: " << t1 << endl;
+	if(DEBUG) cerr << "Clocks ticks elapsed: " << (t1 - t0)/CLOCKS_PER_SEC << endl;
 
 	return 0;
 }

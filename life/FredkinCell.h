@@ -6,10 +6,12 @@
 
 class FredkinCell : public AbstractCell{
 	public:
-		FredkinCell() { alive = false; age = 0; }
-		FredkinCell(bool a1, int a2 = 0) { alive = a1; age = a2; }
+		FredkinCell() { alive = false; age = 0; adjNeighbors = 0; diagNeighbors = 0; }
+		FredkinCell(bool a1, int a2 = 0) { alive = a1; age = a2; adjNeighbors = 0; diagNeighbors = 0; }
 		FredkinCell(const FredkinCell& other) { alive = other.alive; age = other.age; }
 		bool isNeighbor() { return alive; }
+		void addDiag() { ++diagNeighbors; }
+		void addAdj() { ++adjNeighbors; }
 		void update(int neighborsAdj, int neighborsDiag, unsigned* population);
 		FredkinCell* clone() { return new FredkinCell(*this); }
 		bool transform() { return age >= 2 && alive; }
@@ -59,6 +61,7 @@ void FredkinCell::update(int neighborsAdj, int neighborsDiag, unsigned* pop) {
 	
 	if(alive)
 		++*pop;
+	
 	adjNeighbors = 0;
 	diagNeighbors = 0;
 }

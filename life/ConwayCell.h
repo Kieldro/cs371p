@@ -8,9 +8,11 @@ class ConwayCell : public AbstractCell
 {
 	public:
 		//ConwayCell(){ alive = false; } // use delegation somehow?
-		ConwayCell(bool a = false){ alive = a; }
+		ConwayCell(bool a = false){ alive = a; adjNeighbors = 0; diagNeighbors = 0; }
 		ConwayCell(const ConwayCell& other) { alive = other.alive; }
 		bool isNeighbor() { return alive; }
+		void addDiag() { ++diagNeighbors; }
+		void addAdj() { ++adjNeighbors; }
 		bool readChar(char c) { return alive = c == '*'; }
 		void update(int neighborsAdj,  int neighborsDiag, unsigned* population);
 		ConwayCell* clone() { return new ConwayCell(*this); }
@@ -28,6 +30,14 @@ class ConwayCell : public AbstractCell
 // input params then output params.
 void ConwayCell::update(int neighborsAdj,  int neighborsDiag, unsigned* population) {
 	int neighbors = neighborsAdj + neighborsDiag;
+	//int neighbors = adjNeighbors + diagNeighbors;
+	
+	/*if(DEBUG) cerr << "aneighbors: " << adjNeighbors << endl;
+	if(DEBUG) cerr << "dneighbors: " << diagNeighbors << endl;
+	if(DEBUG) cerr << "neighbors: " << neighbors << endl;
+	assert(adjNeighbors == neighborsAdj);
+	assert(diagNeighbors == neighborsDiag);
+	*/
 	assert(neighbors >= 0 and neighbors <= 8);
 	if(alive) {
 		if(neighbors == 2 or neighbors == 3)
@@ -39,6 +49,7 @@ void ConwayCell::update(int neighborsAdj,  int neighborsDiag, unsigned* populati
 	
 	if(alive)
 		++*population;
+	
 	adjNeighbors = 0;
 	diagNeighbors = 0;
 }

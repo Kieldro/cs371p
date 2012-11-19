@@ -20,7 +20,10 @@ execute:
 
 #define private public
 #define protected public
-#include "Life.h"
+
+#include "ConwayCell.h"
+#include "FredkinCell.h"
+#include "Cell.h"
 
 using std::ostringstream;
 unsigned dummy = 0;
@@ -1315,7 +1318,6 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testCellUpdate6);
 	CPPUNIT_TEST(testCellUpdate7);
 	CPPUNIT_TEST(testCellUpdate8);
-	//CPPUNIT_TEST(testSimulate0);		// FIXME
 	CPPUNIT_TEST(testConstructGrid0);
 	CPPUNIT_TEST(testConstructGrid1);
 	CPPUNIT_TEST(testConstructGrid2);
@@ -1359,7 +1361,13 @@ int main () {
 
 	CppUnit::TextTestRunner tr;
 	tr.addTest(TestLife::suite());
+	long t0 = clock();
+	if(DEBUG) cerr << "t0: " << t0 << endl;
+	
 	tr.run();
+	long t1 = clock();
+	if(DEBUG) cerr << "t1: " << t1 << endl;
+	if(DEBUG) cerr << "Clocks ticks elapsed: " << t1 - t0 << endl;
 
 	cout << "Done." << endl;
 	return 0;

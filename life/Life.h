@@ -8,8 +8,40 @@ project 6 - Life
 #ifndef Life_h
 #define Life_h
 
-#include "Cell.h"
+//#include "Cell.h"
 
+// ------
+// macros
+#define DEBUG true
+#define BOOYAKASHA	if(DEBUG) cerr << "BOOYAKASHA!" <<  endl; else;
+
+// --------
+// includes
+#include <cstdlib>
+#include <cassert>		// assert
+#include <vector>		// vector
+#include <deque>
+#include <typeinfo>		// typeid
+#include <stdexcept>
+#include <string>
+#include <fstream>
+#include <sstream>		// stringstreams
+#include <iostream>  // cout, endl
+
+using namespace std;/*
+using std::vector;
+using std::deque;
+using std::cout;
+using std::cerr;
+using std::endl;
+using std::string;
+using std::logic_error;
+using std::out_of_range;
+using std::ostream;
+using std::ostringstream;
+using std::ifstream;
+using std::allocator;
+*/
 /**
 Life class.
 */
@@ -113,14 +145,14 @@ Runs a turn.
 template <typename T>
 void Life<T>::runTurn() {
 	population = 0;
-	/*
+	
 	// distribute neigbors algorithm
 	for(int r = 0; r < nRows(); ++r) {
 		for(int c = 0; c < nCols(); ++c) {
 			setNeighbors(r, c);
 		}
 	}
-	*/
+	
 	
 	for(int r = 0; r < nRows(); ++r) {
 		for(int c = 0; c < nCols(); ++c) {
@@ -128,27 +160,6 @@ void Life<T>::runTurn() {
 		}
 	}
 	++generation;
-}
-
-/**
-
-*/
-template <typename T>
-void Life<T>::setNeighbors(int r, int c) {
-	Tvector2D& grid = _g[generation % 2];
-	
-	// dead cell is neighbor to no one
-	if(!grid[r][c].isNeighbor())
-		return;
-	/*
-	if(r - 1 >= 0 and c - 1 >= 0 and grid[r-1][c-1].ad.isNeighbor())
-		grid[r-1][c-1].ad;
-	if(r - 1 >= 0 and c + 1 < nCols() and grid[r-1][c+1].isNeighbor())
-		++neighbors;
-	if(r + 1 < nRows() and c - 1 >= 0 and grid[r+1][c-1].isNeighbor())
-		++neighbors;
-	if(r + 1 < nRows() and c + 1 < nCols() and grid[r+1][c+1].isNeighbor())
-		++neighbors;*/
 }
 
 /**
@@ -209,6 +220,27 @@ int Life<T>::countNeighborsAdjacent(int r, int c) {
 }
 
 /**
+
+*/
+template <typename T>
+void Life<T>::setNeighbors(int r, int c) {
+	Tvector2D& grid = _g[generation % 2];
+	
+	// dead cell is neighbor to no one
+	if(!grid[r][c].isNeighbor())
+		return;
+	
+	if(r-1 >= 0 and c-1 >= 0)
+		grid[r-1][c-1].addDiag();
+	if(r-1 >= 0 and c+1 < nCols())
+		grid[r-1][c+1].addDiag();
+	if(r+1 < nRows() and c-1 >= 0)
+		grid[r+1][c-1].addDiag();
+	if(r+1 < nRows() and c+1 < nCols())
+		grid[r+1][c+1].addDiag();
+}
+
+/**
 @param turns the number turns to run the game.
 @param j print the grid every j turns.
 */
@@ -239,7 +271,7 @@ template <typename T>
 void Life<T>::print(ostream& out) {
 	Tvector2D& grid = _g[generation % 2];
 	
-	if(DEBUG) system("clear");
+	//if(DEBUG) system("clear");
 	out << "Generation = " << generation << ", ";
 	out << "Population = " << population << "." << endl;
 	
@@ -250,6 +282,6 @@ void Life<T>::print(ostream& out) {
 		out << endl;
 	}
 	out << endl;
-	if(DEBUG) usleep(100000);		// micro seconds
+	//if(DEBUG) usleep(100000);		// micro seconds
 }
 #endif // Life_h

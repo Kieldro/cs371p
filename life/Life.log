@@ -1,3 +1,40 @@
+commit 403bdf4e9da3d139bce412defd9f13002ad0d479
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Mon Nov 19 12:15:01 2012 -0600
+
+    Replaced spaces with proper indentation.
+
+commit c4d470decb1f72ad5eeebf72a45ee69b757888d1
+Author: Graham Benevelli <grahambenevelli@gmail.com>
+Date:   Sun Nov 18 16:21:57 2012 -0600
+
+    Finished Unit Tests
+
+commit 3c853608b904aed941a4c56eaa7166a432f7d94d
+Merge: 151d204 652a19d
+Author: Graham Benevelli <grahambenevelli@gmail.com>
+Date:   Sun Nov 18 11:58:16 2012 -0600
+
+    Merge branch 'master' of github.com:Kieldro/cs371p
+
+commit 151d204bd4ed9d3bca558a45ea7083254f7dbe48
+Author: Graham Benevelli <grahambenevelli@gmail.com>
+Date:   Sun Nov 18 11:58:13 2012 -0600
+
+    Adding Conway tests
+
+commit 652a19d8a6c1d90b86962e46dd158e7fd6dddf65
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Nov 16 16:49:35 2012 -0600
+
+    Implementing setNeighbors algorithm.
+
+commit 867beadc8af2cdaa071453d1a3d4512613b17357
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Fri Nov 16 16:22:11 2012 -0600
+
+    Adds 2 more acceptance tests.
+
 commit 12f6ed82bcc604872a81f79a555aa4a78cd93cfd
 Merge: 717ff54 30e4170
 Author: Ian Buitrago <kieldro@gmail.com>
