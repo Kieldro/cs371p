@@ -7,12 +7,14 @@
 class AbstractCell{
 	public:
 		virtual bool readChar(char c) { return 0; }
-		virtual void update(int, int, unsigned* ) {}
-		virtual bool isNeighbor() { return 0; }
+		virtual void update(int, int, unsigned*) {}
 		virtual AbstractCell* clone() { return NULL; }
 		virtual bool transform () { return false; }
 		virtual char print () const { return 'F'; }
 		//void incAdj() { return 'F'; }
+		bool isNeighbor() { return alive; }
+		virtual void addDiag() { ++diagNeighbors; }
+		virtual void addAdj() { ++adjNeighbors; }
 		friend ostream& operator<< (ostream &strm, const AbstractCell& c) {
 			return strm << c.print();
 		}

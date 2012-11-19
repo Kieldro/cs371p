@@ -113,7 +113,7 @@ void testCell0() {
 		cout << "*** Life<Cell> 0x0 ***" << endl;
 		Life<Cell> game(0, 0);
 		
-		game.simulate(2, 1);
+		//game.simulate(2, 1);		// TODO
 	} catch (const invalid_argument&) {
 		assert(false);
 	} catch (const out_of_range&) {
@@ -127,7 +127,7 @@ void testCell1() {
 		Life<Cell> game(1, 1);
 		game.place(0, 0);
 		
-		game.simulate(2, 1);
+		//game.simulate(2, 1);
 	} catch (const invalid_argument&) {
 		assert(false);
 	} catch (const out_of_range&) {
@@ -141,7 +141,7 @@ void testCell2() {
 		Life<Cell> game(1, 1);
 		game.place(0, 0);
 		
-		game.simulate(2, 1);
+		//game.simulate(2, 1);
 	} catch (const invalid_argument&) {
 		assert(false);
 	} catch (const out_of_range&) {
@@ -241,23 +241,23 @@ int main() {
 	ios_base::sync_with_stdio(false); // turn off synchronization with C I/O
 	
 	double t0 = clock();
-	if(DEBUG) cerr << "t0: " << t0 << endl;
 	
-	testConway0();/*
+	//testConway0();/*
 	// Conway tests
-	testConway0();
+/*	testConway0();
 	testConway1();
 	testConway2();
-	testConway3();
+	testConway3();*/
 	
 	// Fredkin tests
-	testFredkin0();
+	//testFredkin0();
 	
 	// Cell tests
+	
 	testCell0();
 	testCell1();
 	testCell2();
-	testCell3();
+	testCell3();/*
 	testCell4();
 	testCell5();
 	testCell6();

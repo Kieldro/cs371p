@@ -8,10 +8,7 @@ class FredkinCell : public AbstractCell{
 	public:
 		FredkinCell() { alive = false; age = 0; adjNeighbors = 0; diagNeighbors = 0; }
 		FredkinCell(bool a1, int a2 = 0) { alive = a1; age = a2; adjNeighbors = 0; diagNeighbors = 0; }
-		FredkinCell(const FredkinCell& other) { alive = other.alive; age = other.age; }
-		bool isNeighbor() { return alive; }
-		void addDiag() { ++diagNeighbors; }
-		void addAdj() { ++adjNeighbors; }
+		FredkinCell(const FredkinCell& other) { alive = other.alive; age = other.age; adjNeighbors = 0; diagNeighbors = 0; }
 		void update(int neighborsAdj, int neighborsDiag, unsigned* population);
 		FredkinCell* clone() { return new FredkinCell(*this); }
 		bool transform() { return age >= 2 && alive; }
@@ -47,8 +44,9 @@ char FredkinCell::print() const {
 }
 
 void FredkinCell::update(int neighborsAdj, int neighborsDiag, unsigned* pop) {
-	//if(DEBUG) cerr << "neighbors: " << neighbors << endl;
 	int neighbors = neighborsAdj;
+	//int neighbors = adjNeighbors;
+	//if(DEBUG) cerr << "neighbors: " << neighbors << endl;
 	assert(neighbors >= 0 and neighbors <= 4);
 	
 	if(alive) {

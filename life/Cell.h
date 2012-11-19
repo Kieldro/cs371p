@@ -13,8 +13,8 @@ class Cell : public AbstractCell {
 		Cell(AbstractCell* c) { cell = c; }		// for unit tests
 		~Cell() { delete cell; }
 		bool isNeighbor() { return cell->isNeighbor(); }
-		void addDiag() { ++diagNeighbors; }
-		void addAdj() { ++adjNeighbors; }
+		void addAdj() { cell->addAdj(); }
+		void addDiag() { cell->addDiag(); }
 		Cell& operator= (const Cell& c);
 		bool readChar(char c);
 		void update(int , int , unsigned*);

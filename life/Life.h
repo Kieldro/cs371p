@@ -224,12 +224,25 @@ int Life<T>::countNeighborsAdjacent(int r, int c) {
 */
 template <typename T>
 void Life<T>::setNeighbors(int r, int c) {
+	assert(r >= 0 and r < nRows() and c >= 0 and c < nCols());
+	
 	Tvector2D& grid = _g[generation % 2];
 	
 	// dead cell is neighbor to no one
 	if(!grid[r][c].isNeighbor())
 		return;
+	//BOOYAKASHA
+	// adjacent
+	if(r-1 >= 0)
+		grid[r-1][c].addAdj();
+	if(c+1 < nCols())
+		grid[r][c+1].addAdj();
+	if(r+1 < nRows())
+		grid[r+1][c].addAdj();
+	if(c-1 >= 0)
+		grid[r][c-1].addAdj();
 	
+	// diagonal
 	if(r-1 >= 0 and c-1 >= 0)
 		grid[r-1][c-1].addDiag();
 	if(r-1 >= 0 and c+1 < nCols())
