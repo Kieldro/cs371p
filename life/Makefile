@@ -9,30 +9,13 @@ TESTOUT = TestLife.out
 RUNCELL = RunLife.c++
 RUNOUT = RunLife.out
 
-RUNCONWAY = RunLifeConway.c++
-RUNFREDKIN = RunLifeFredkin.c++
-
 all: test run log doxygen zip clean
 
-run: Conway Fredkin Cell
-
-Cell: $(RUNCELL)
+run: $(RUNCELL)
 	clear
 	$(CC) $(CPPFLAGS) $(RUNCELL) -o $(RUNCELL).app
 	#valgrind \
 	./$(RUNCELL).app 2>&1 #| tee $(RUNOUT)
-
-Conway: $(RUNCONWAY)
-	clear
-	$(CC) $(CPPFLAGS) $(RUNCONWAY) -o $(RUNCONWAY).app
-	#valgrind \
-	./$(RUNCONWAY).app 2>&1 #| tee RunLifeConway.out
-
-Fredkin: $(RUNFREDKIN)
-	clear
-	$(CC) $(CPPFLAGS) $(RUNFREDKIN) -o $(RUNFREDKIN).app
-	#valgrind \
-	./$(RUNFREDKIN).app 2>&1 #| tee RunLifeFredkin.out
 
 test: $(TEST)
 	clear

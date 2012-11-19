@@ -1,8 +1,10 @@
-// -------------------------
-// projects/life/RunLife.c++
-// Copyright (C) 2012
-// Glenn P. Downing
-// -------------------------
+/*
+Ian Buitrago
+Graham Benevelli
+11-28-2012
+CS 371p
+project 6 - Life
+*/
 
 /*
 To run the program:
@@ -17,12 +19,108 @@ To run the program:
 using namespace std;
 
 // ------------------
+// Conway Cell 109x69
+/*
+read RunLifeConway.in // assume all Conway cells
+Print grid.
+Simulate 283 moves.
+Print grid.
+Simulate 40 moves.
+Print grid.
+Simulate 2500 moves.
+Print grid.
+*/
+void testConway0() {
+	try {
+		cout << "*** Life<ConwayCell> 109x69 ***" << endl;
+		Life<ConwayCell> game("RunLifeConway.in");
+		game.simulate(283,  2500);
+		game.simulate(40,   2500);
+		game.simulate(2500, 2500);
+	} catch (const invalid_argument&) {
+		assert(false);
+	} catch (const out_of_range&) {
+		assert(false);
+	}
+}
+
+
+void testConway1() {
+	try {
+		cout << "*** Life<Cell> 20x20 ***" << endl;
+		Life<ConwayCell> game("acceptancetests/RunConway1.in");
+		
+		game.simulate(90, 1);
+	} catch (const invalid_argument&) {
+		assert(false);
+	} catch (const out_of_range&) {
+		assert(false);
+	}
+}
+
+// ----------
+// 
+/*
+
+*/
+void testConway2() {
+	try {
+		cout << "*** Life<Cell> 20x20 ***" << endl;
+		Life<ConwayCell> game("acceptancetests/RunConway2.in");
+		
+		game.simulate(200, 1);
+		
+		
+	} catch (const invalid_argument&) {
+		assert(false);
+	} catch (const out_of_range&) {
+		assert(false);
+	}
+}
+
+void testConway3() {
+	try {
+		cout << "*** Life<Cell> 20x20 ***" << endl;
+		Life<ConwayCell> game("acceptancetests/RunConway3.in");
+		
+		game.simulate(9, 1);
+		
+		
+	} catch (const invalid_argument&) {
+		assert(false);
+	} catch (const out_of_range&) {
+		assert(false);
+	}
+}
+
+// ------------------
+// Fredkin Cell 20x20
+/*
+read RunLifeFredkin.in // assume all Fredkin cells
+Print grid.
+Simulate 2 moves.
+Print every grid.
+*/
+void testFredkin0() {
+	try {
+		
+		cout << "*** Life<FredkinCell> 20x20 ***" << endl;
+		Life<FredkinCell> game("RunLifeFredkin.in");
+		game.simulate(2, 1);
+		
+	} catch (const invalid_argument&) {
+		assert(false);
+	} catch (const out_of_range&) {
+		assert(false);
+	}
+}
+// ------------------
 // 
 /*
 
 
 */
-void test0() {
+void testCell0() {
 	try {
 		cout << "*** Life<Cell> 0x0 ***" << endl;
 		Life<Cell> game(0, 0);
@@ -41,7 +139,7 @@ void test0() {
 
 
 */
-void test1() {
+void testCell1() {
 	try {
 		cout << "*** Life<Cell> 1x1 ***" << endl;
 		Life<Cell> game(1, 1);
@@ -61,7 +159,7 @@ void test1() {
 
 
 */
-void test2() {
+void testCell2() {
 	try {
 		cout << "*** Life<Cell> 2x2 ***" << endl;
 		Life<Cell> game(1, 1);
@@ -75,7 +173,7 @@ void test2() {
 	}
 }
 
-void test3() {
+void testCell3() {
 	try {
 		cout << "*** Life<Cell> 20x20 ***" << endl;
 		Life<Cell> game("acceptancetests/RunLife3.in");
@@ -88,7 +186,7 @@ void test3() {
 	}
 }
 
-void test4() {
+void testCell4() {
 	try {
 		cout << "*** Life<Cell> 20x20 ***" << endl;
 		Life<Cell> game("acceptancetests/RunLife4.in");
@@ -101,7 +199,7 @@ void test4() {
 	}
 }
 
-void test5() {
+void testCell5() {
 	try {
 		cout << "*** Life<Cell> 20x20 ***" << endl;
 		Life<Cell> game("acceptancetests/RunLife5.in");
@@ -114,7 +212,7 @@ void test5() {
 	}
 }
 
-void test6() {
+void testCell6() {
 	try {
 		cout << "*** Life<Cell> 20x20 ***" << endl;
 		Life<Cell> game("acceptancetests/RunLife6.in");
@@ -127,7 +225,7 @@ void test6() {
 	}
 }
 
-void test7() {
+void testCell7() {
 	try {
 		cout << "*** Life<Cell> 20x20 ***" << endl;
 		Life<Cell> game("acceptancetests/RunLife7.in");
@@ -148,7 +246,7 @@ Print grid.
 Simulate 5 moves.
 Print every grid.
 */
-void test9() {
+void testCell8() {
 	try {
 		cout << "*** Life<Cell> 20x20 ***" << endl;
 		Life<Cell> game("RunLife.in");
@@ -166,15 +264,25 @@ void test9() {
 int main() {
 	ios_base::sync_with_stdio(false); // turn off synchronization with C I/O
 	
-	test0();
-	test1();
-	test2();
-	test3();
-	test4();
-	test5();
-	//test6();
-	test7();
-	test9();
+	// Conway tests
+	testConway0();
+	testConway1();
+	testConway2();
+	testConway3();
+	
+	// Fredkin tests
+	testFredkin0();
+	
+	// Cell tests
+	testCell0();
+	testCell1();
+	testCell2();
+	testCell3();
+	testCell4();
+	testCell5();
+	testCell6();
+	testCell7();
+	testCell8();
 
 	return 0;
 }
