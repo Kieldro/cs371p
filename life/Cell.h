@@ -8,7 +8,7 @@
 
 class Cell : public AbstractCell {
 	public:
-		Cell(bool a = false) { cell = new FredkinCell(a); }
+                Cell(bool a = false) { cell = FredkinCell(a).clone(); }
 		Cell(const Cell& c) { cell = c.cell->clone(); }
 		Cell(AbstractCell* c) { cell = c; }		// for unit tests
 		~Cell() { delete cell; }
