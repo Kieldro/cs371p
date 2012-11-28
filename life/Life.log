@@ -1,3 +1,9 @@
+commit d8579c9368af2fdb26b4aacb528da62f28fa0031
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Nov 28 11:58:51 2012 -0600
+
+    Outputs to correct files.
+
 commit 255dfdca0120c05234fec3b9e060ee0d535fc8d2
 Author: Graham Benevelli <grahambenevelli@gmail.com>
 Date:   Wed Nov 28 09:55:57 2012 -0600

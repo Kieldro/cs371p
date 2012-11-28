@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00026"></a>00026 <span class="preprocessor">#include &lt;string&gt;</span>
 <a name="l00027"></a>00027 <span class="preprocessor">#include &lt;fstream&gt;</span>
 <a name="l00028"></a>00028 <span class="preprocessor">#include &lt;sstream&gt;</span>              <span class="comment">// stringstreams</span>
-<a name="l00029"></a>00029 <span class="preprocessor">#include &lt;iostream&gt;</span>  <span class="comment">// cout, endl</span>
+<a name="l00029"></a>00029 <span class="preprocessor">#include &lt;iostream&gt;</span>             <span class="comment">// cout, endl</span>
 <a name="l00030"></a>00030 
 <a name="l00031"></a>00031 <span class="keyword">using namespace </span>std;<span class="comment">/*</span>
 <a name="l00032"></a>00032 <span class="comment">using std::vector;</span>
@@ -170,14 +170,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00145"></a>00145 <span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
 <a name="l00146"></a><a class="code" href="classLife.html#a5ad7be5cfcf7b981da28ffff4100a6e1">00146</a> <span class="keywordtype">void</span> <a class="code" href="classLife.html#a5ad7be5cfcf7b981da28ffff4100a6e1">Life&lt;T&gt;::runTurn</a>() {
 <a name="l00147"></a>00147         <a class="code" href="classLife.html#a3772966990f3bd9545e82f0e11e9c590">population</a> = 0;
-<a name="l00148"></a>00148         
-<a name="l00149"></a>00149         <span class="comment">// distribute neigbors algorithm</span>
-<a name="l00150"></a>00150         <span class="keywordflow">for</span>(<span class="keywordtype">int</span> r = 0; r &lt; <a class="code" href="classLife.html#ac5d3114b49fad283e9245dde982b3f74">nRows</a>(); ++r) {
-<a name="l00151"></a>00151                 <span class="keywordflow">for</span>(<span class="keywordtype">int</span> c = 0; c &lt; <a class="code" href="classLife.html#a1fb15a20d07fa91932712ef5daeca071">nCols</a>(); ++c) {
-<a name="l00152"></a>00152                         <a class="code" href="classLife.html#ac599865c1d8da851c120bcf9343ab638">setNeighbors</a>(r, c);
-<a name="l00153"></a>00153                 }
-<a name="l00154"></a>00154         }
-<a name="l00155"></a>00155         
+<a name="l00148"></a>00148         <span class="comment">/*</span>
+<a name="l00149"></a>00149 <span class="comment">        // distribute neigbors algorithm</span>
+<a name="l00150"></a>00150 <span class="comment">        for(int r = 0; r &lt; nRows(); ++r) {</span>
+<a name="l00151"></a>00151 <span class="comment">                for(int c = 0; c &lt; nCols(); ++c) {</span>
+<a name="l00152"></a>00152 <span class="comment">                        setNeighbors(r, c);</span>
+<a name="l00153"></a>00153 <span class="comment">                }</span>
+<a name="l00154"></a>00154 <span class="comment">        }</span>
+<a name="l00155"></a>00155 <span class="comment">        */</span>
 <a name="l00156"></a>00156         
 <a name="l00157"></a>00157         <span class="keywordflow">for</span>(<span class="keywordtype">int</span> r = 0; r &lt; <a class="code" href="classLife.html#ac5d3114b49fad283e9245dde982b3f74">nRows</a>(); ++r) {
 <a name="l00158"></a>00158                 <span class="keywordflow">for</span>(<span class="keywordtype">int</span> c = 0; c &lt; <a class="code" href="classLife.html#a1fb15a20d07fa91932712ef5daeca071">nCols</a>(); ++c) {
@@ -192,8 +192,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00170"></a>00170         <span class="keyword">auto</span>&amp; current = <a class="code" href="classLife.html#a667049d8194f28d3df3dda9e1a750647">_g</a>[<a class="code" href="classLife.html#a2bce38e2898c9ec7b3072e7527520cf7">generation</a> % 2];
 <a name="l00171"></a>00171         <span class="keyword">auto</span>&amp; next = <a class="code" href="classLife.html#a667049d8194f28d3df3dda9e1a750647">_g</a>[(<a class="code" href="classLife.html#a2bce38e2898c9ec7b3072e7527520cf7">generation</a> + 1) % 2];
 <a name="l00172"></a>00172         
-<a name="l00173"></a>00173         <span class="keywordtype">int</span> neighborsAdj = this-&gt;<a class="code" href="classLife.html#aaa7e14e4baf4e715d3766945aaa0e339">countNeighborsAdjacent</a>(r, c);
-<a name="l00174"></a>00174         <span class="keywordtype">int</span> neighborsDiag = this-&gt;<a class="code" href="classLife.html#ae97ca43c07b49d6d67ed8d7f986f6708">countNeighborsDiag</a>(r, c);
+<a name="l00173"></a>00173         <span class="keywordtype">int</span> neighborsAdj = <a class="code" href="classLife.html#aaa7e14e4baf4e715d3766945aaa0e339">countNeighborsAdjacent</a>(r, c);
+<a name="l00174"></a>00174         <span class="keywordtype">int</span> neighborsDiag = <a class="code" href="classLife.html#ae97ca43c07b49d6d67ed8d7f986f6708">countNeighborsDiag</a>(r, c);
 <a name="l00175"></a>00175         next[r][c] = current[r][c];
 <a name="l00176"></a>00176         next[r][c].update(neighborsAdj, neighborsDiag, &amp;<a class="code" href="classLife.html#a3772966990f3bd9545e82f0e11e9c590">population</a>);
 <a name="l00177"></a>00177 }
@@ -278,7 +278,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00269"></a>00269 
 <a name="l00275"></a>00275 <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
 <a name="l00276"></a><a class="code" href="classLife.html#a839fb211d9601f285ecaee5d72048a32">00276</a> <span class="keywordtype">void</span> <a class="code" href="classLife.html#a839fb211d9601f285ecaee5d72048a32">Life&lt;T&gt;::place</a>(<span class="keywordtype">int</span> r, <span class="keywordtype">int</span> c) {
-<a name="l00277"></a>00277         <a class="code" href="classLife.html#a667049d8194f28d3df3dda9e1a750647">_g</a>[<a class="code" href="classLife.html#a2bce38e2898c9ec7b3072e7527520cf7">generation</a> % 2][r][c] = <span class="keyword">true</span>;
+<a name="l00277"></a>00277         <a class="code" href="classLife.html#a667049d8194f28d3df3dda9e1a750647">_g</a>[<a class="code" href="classLife.html#a2bce38e2898c9ec7b3072e7527520cf7">generation</a> % 2][r][c] = T(<span class="keyword">true</span>);
 <a name="l00278"></a>00278 }
 <a name="l00279"></a>00279 
 <a name="l00283"></a>00283 <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
@@ -314,7 +314,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Nov 28 11:50:03 2012 for My Project by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Nov 28 16:05:34 2012 for My Project by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

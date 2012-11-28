@@ -26,8 +26,8 @@ class ConwayCell : public AbstractCell
 
 // input params then output params.
 void ConwayCell::update(int neighborsAdj,  int neighborsDiag, unsigned* population) {
-	//int neighbors = neighborsAdj + neighborsDiag;
-	int neighbors = adjNeighbors + diagNeighbors;
+	int neighbors = neighborsAdj + neighborsDiag;
+	//int neighbors = adjNeighbors + diagNeighbors;
 	
 	/*if(DEBUG) cerr << "aneighbors: " << adjNeighbors << endl;
 	if(DEBUG) cerr << "dneighbors: " << diagNeighbors << endl;

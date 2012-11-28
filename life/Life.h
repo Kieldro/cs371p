@@ -26,7 +26,7 @@ project 6 - Life
 #include <string>
 #include <fstream>
 #include <sstream>		// stringstreams
-#include <iostream>  // cout, endl
+#include <iostream>		// cout, endl
 
 using namespace std;/*
 using std::vector;
@@ -145,14 +145,14 @@ Runs a turn.
 template <typename T>
 void Life<T>::runTurn() {
 	population = 0;
-	
+	/*
 	// distribute neigbors algorithm
 	for(int r = 0; r < nRows(); ++r) {
 		for(int c = 0; c < nCols(); ++c) {
 			setNeighbors(r, c);
 		}
 	}
-	
+	*/
 	
 	for(int r = 0; r < nRows(); ++r) {
 		for(int c = 0; c < nCols(); ++c) {
@@ -170,8 +170,8 @@ void Life<T>::updateCell(int r, int c) {
 	auto& current = _g[generation % 2];
 	auto& next = _g[(generation + 1) % 2];
 	
-	int neighborsAdj = this->countNeighborsAdjacent(r, c);
-	int neighborsDiag = this->countNeighborsDiag(r, c);
+	int neighborsAdj = countNeighborsAdjacent(r, c);
+	int neighborsDiag = countNeighborsDiag(r, c);
 	next[r][c] = current[r][c];
 	next[r][c].update(neighborsAdj, neighborsDiag, &population);
 }
@@ -274,7 +274,7 @@ Set a cell in the current generation.
 */
 template <typename T>
 void Life<T>::place(int r, int c) {
-	_g[generation % 2][r][c] = true;
+	_g[generation % 2][r][c] = T(true);
 }
 
 /**

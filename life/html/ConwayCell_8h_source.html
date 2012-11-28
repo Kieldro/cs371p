@@ -69,8 +69,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00026"></a>00026 
 <a name="l00027"></a>00027 <span class="comment">// input params then output params.</span>
 <a name="l00028"></a><a class="code" href="classConwayCell.html#aa6c520d5178f37f863e4b1263866f5e3">00028</a> <span class="keywordtype">void</span> <a class="code" href="classConwayCell.html#aa6c520d5178f37f863e4b1263866f5e3">ConwayCell::update</a>(<span class="keywordtype">int</span> neighborsAdj,  <span class="keywordtype">int</span> neighborsDiag, <span class="keywordtype">unsigned</span>* population) {
-<a name="l00029"></a>00029         <span class="comment">//int neighbors = neighborsAdj + neighborsDiag;</span>
-<a name="l00030"></a>00030         <span class="keywordtype">int</span> neighbors = <a class="code" href="classAbstractCell.html#ac307ca251809b5deadce0741caacbc08">adjNeighbors</a> + <a class="code" href="classAbstractCell.html#a82843e92743988c3b78713b33c91cd7d">diagNeighbors</a>;
+<a name="l00029"></a>00029         <span class="keywordtype">int</span> neighbors = neighborsAdj + neighborsDiag;
+<a name="l00030"></a>00030         <span class="comment">//int neighbors = adjNeighbors + diagNeighbors;</span>
 <a name="l00031"></a>00031         
 <a name="l00032"></a>00032         <span class="comment">/*if(DEBUG) cerr &lt;&lt; &quot;aneighbors: &quot; &lt;&lt; adjNeighbors &lt;&lt; endl;</span>
 <a name="l00033"></a>00033 <span class="comment">        if(DEBUG) cerr &lt;&lt; &quot;dneighbors: &quot; &lt;&lt; diagNeighbors &lt;&lt; endl;</span>
@@ -87,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00044"></a>00044                 <a class="code" href="classAbstractCell.html#aa92e42d5bb67f3249d8e2dde2c3228e7">alive</a> = neighbors == 3;
 <a name="l00045"></a>00045         
 <a name="l00046"></a>00046         <a class="code" href="classAbstractCell.html#ac307ca251809b5deadce0741caacbc08">adjNeighbors</a> = 0;
-<a name="l00047"></a>00047         diagNeighbors = 0;
+<a name="l00047"></a>00047         <a class="code" href="classAbstractCell.html#a82843e92743988c3b78713b33c91cd7d">diagNeighbors</a> = 0;
 <a name="l00048"></a>00048 }
 <a name="l00049"></a>00049 
 <a name="l00050"></a>00050 <span class="preprocessor">#endif // ConwayCell_h</span>
@@ -107,7 +107,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Nov 28 11:50:02 2012 for My Project by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Nov 28 16:05:34 2012 for My Project by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

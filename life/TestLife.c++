@@ -35,6 +35,7 @@ struct TestLife : CppUnit::TestFixture {
 	// testLife
 	void testLife0 () {
 		Life<ConwayCell> game("RunLifeConway.in");
+		
 		CPPUNIT_ASSERT(game.generation == 0);
 		CPPUNIT_ASSERT(game.population == 35);
 		CPPUNIT_ASSERT(game.nRows() == 109);
@@ -309,8 +310,6 @@ struct TestLife : CppUnit::TestFixture {
 	
 	// ---------------
 	// testConwayClone
-	// ---------------
-	
 	void testConwayClone0 () {
 		ConwayCell c1;
 		c1.readChar('*');
@@ -545,8 +544,6 @@ struct TestLife : CppUnit::TestFixture {
 	
 	// ----------------
 	// testFredkinClone
-	// ----------------
-	
 	void testFredkinClone0 () {
 		FredkinCell c1(true, 3);
 		AbstractCell* c2 = c1.clone();
@@ -612,8 +609,6 @@ struct TestLife : CppUnit::TestFixture {
 	
 	// -------------------
 	// testCellConstructor
-	// -------------------
-	
 	void testCellConstructor0 () {
 		Cell c;
 		CPPUNIT_ASSERT(c.cell != NULL);
@@ -637,8 +632,6 @@ struct TestLife : CppUnit::TestFixture {
 	
 	// --------------------------
 	// testCellPointerConstructor
-	// --------------------------
-	
 	void testCellPointerConstructor0 () {
 		Cell c = new ConwayCell;
 		CPPUNIT_ASSERT(c.cell->alive == false);
@@ -659,8 +652,6 @@ struct TestLife : CppUnit::TestFixture {
 	
 	// -----------------------
 	// testCellCopyConstructor
-	// -----------------------
-	
 	void testCellCopyConstructor0 () {
 		Cell c1;
 		Cell c2 = c1;
@@ -690,8 +681,6 @@ struct TestLife : CppUnit::TestFixture {
 	
 	// ----------------
 	// testCellReadChar
-	// ----------------
-	
 	void testCellReadChar0 () {
 		Cell c;
 		c.readChar('0');

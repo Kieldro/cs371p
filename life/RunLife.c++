@@ -36,6 +36,7 @@ Print grid.
 void testConway0() {
 	try {
 		ofstream out("RunLifeConway.out");
+		//out = cout;
 		out << "*** Life<ConwayCell> 109x69 ***" << endl;
 		Life<ConwayCell> game("RunLifeConway.in");
 		
@@ -117,7 +118,7 @@ void testCell0() {
 		cout << "*** Life<Cell> 0x0 ***" << endl;
 		Life<Cell> game(0, 0);
 		
-		//game.simulate(2, 1);		// TODO
+		game.simulate(2, 1);		// TODO
 	} catch (const invalid_argument&) {
 		assert(false);
 	} catch (const out_of_range&) {
@@ -129,9 +130,8 @@ void testCell1() {
 	try {
 		cout << "*** Life<Cell> 1x1 ***" << endl;
 		Life<Cell> game(1, 1);
-		game.place(0, 0);
 		
-		//game.simulate(2, 1);
+		game.simulate(2, 1);
 	} catch (const invalid_argument&) {
 		assert(false);
 	} catch (const out_of_range&) {
@@ -145,7 +145,7 @@ void testCell2() {
 		Life<Cell> game(1, 1);
 		game.place(0, 0);
 		
-		//game.simulate(2, 1);
+		game.simulate(2, 1);
 	} catch (const invalid_argument&) {
 		assert(false);
 	} catch (const out_of_range&) {
@@ -257,7 +257,6 @@ int main() {
 	testFredkin0();
 	
 	// Cell tests
-	
 	testCell0();
 	testCell1();
 	testCell2();
