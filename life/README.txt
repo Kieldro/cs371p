@@ -29,6 +29,8 @@ GitHub ID: kieldro
 GitHub Repository Name: cs371p
 
 Comments:
+3 standards in and out files. Other test going into AcceptTest.out
+
 link to the UML: http://www.gliffy.com/pubdoc/4058932/L.png
 3.5 sec for test0 with original algo
 -2d vector of Cell or Cell*?

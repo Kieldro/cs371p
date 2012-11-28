@@ -917,7 +917,7 @@ struct TestLife : CppUnit::TestFixture {
 	// -------------------------
 
 	void testLiveonstrucotrString0 () {
-		Life<ConwayCell> l("./acceptancetests/RunConway1.in");
+		Life<ConwayCell> l("./keo-tests/RunConway1.in");
 		CPPUNIT_ASSERT(l.nRows() == 48);
 		CPPUNIT_ASSERT(l.nCols() == 50);
 		CPPUNIT_ASSERT(l._g[0][0][2].print() == '*');
@@ -925,7 +925,7 @@ struct TestLife : CppUnit::TestFixture {
 	}
 
 	void testLiveonstrucotrString1 () {
-		Life<ConwayCell> l("./acceptancetests/RunConway2.in");
+		Life<ConwayCell> l("./keo-tests/RunConway2.in");
 		CPPUNIT_ASSERT(l.nRows() == 50);
 		CPPUNIT_ASSERT(l.nCols() == 80);
 		CPPUNIT_ASSERT(l._g[0][5][1].print() == '*');
@@ -933,7 +933,7 @@ struct TestLife : CppUnit::TestFixture {
 	}
 
 	void testLiveonstrucotrString2 () {
-		Life<ConwayCell> l("./acceptancetests/RunConway3.in");
+		Life<ConwayCell> l("./keo-tests/RunConway3.in");
 		CPPUNIT_ASSERT(l.nRows() == 17);
 		CPPUNIT_ASSERT(l.nCols() == 17);
 		CPPUNIT_ASSERT(l._g[0][4][2].print() == '*');

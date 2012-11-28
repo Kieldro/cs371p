@@ -65,10 +65,12 @@ Inheritance diagram for AbstractCell:</div>
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAbstractCell.html#a8d6cedefe54ca88ce26dba48091b0d7d">readChar</a> (char c)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAbstractCell.html#af5be7237f6093e0c5312125e5c7d87fa">update</a> (int, int, unsigned *)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAbstractCell.html#a746138d5bd467ee6b7a0a645c8592036">isNeighbor</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classAbstractCell.html">AbstractCell</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAbstractCell.html#a6d1317ebdedf4e2ba77bffd9d227be4a">clone</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAbstractCell.html#a000b7cd5df28dc8c12d94cea7cb09185">transform</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual char&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAbstractCell.html#a49ad9075c7b5e69fab1e980eeaaad3e4">print</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAbstractCell.html#a043c9d093914acb496f41c7ad2bf3be7">isNeighbor</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAbstractCell.html#a196cfd0428d46858be7aa72531517aef">addDiag</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAbstractCell.html#af495dbed7482b6c568c8cf957ca87ddc">addAdj</a> ()</td></tr>
 <tr><td colspan="2"><h2>Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAbstractCell.html#aa92e42d5bb67f3249d8e2dde2c3228e7">alive</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAbstractCell.html#ac307ca251809b5deadce0741caacbc08">adjNeighbors</a></td></tr>
@@ -77,6 +79,44 @@ Inheritance diagram for AbstractCell:</div>
 <tr><td class="memItemLeft" align="right" valign="top">ostream &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAbstractCell.html#a7fdb14e73cb5510f4022c9588f84c59f">operator&lt;&lt;</a> (ostream &amp;strm, const <a class="el" href="classAbstractCell.html">AbstractCell</a> &amp;c)</td></tr>
 </table>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="af495dbed7482b6c568c8cf957ca87ddc"></a><!-- doxytag: member="AbstractCell::addAdj" ref="af495dbed7482b6c568c8cf957ca87ddc" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void AbstractCell::addAdj </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classCell.html#a6a59651b8490ae574b80f82e23f6cec0">Cell</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a196cfd0428d46858be7aa72531517aef"></a><!-- doxytag: member="AbstractCell::addDiag" ref="a196cfd0428d46858be7aa72531517aef" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void AbstractCell::addDiag </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classCell.html#a2cd5554d88c44d30c79322394fede224">Cell</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a6d1317ebdedf4e2ba77bffd9d227be4a"></a><!-- doxytag: member="AbstractCell::clone" ref="a6d1317ebdedf4e2ba77bffd9d227be4a" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -96,22 +136,22 @@ Inheritance diagram for AbstractCell:</div>
 
 </div>
 </div>
-<a class="anchor" id="a746138d5bd467ee6b7a0a645c8592036"></a><!-- doxytag: member="AbstractCell::isNeighbor" ref="a746138d5bd467ee6b7a0a645c8592036" args="()" -->
+<a class="anchor" id="a043c9d093914acb496f41c7ad2bf3be7"></a><!-- doxytag: member="AbstractCell::isNeighbor" ref="a043c9d093914acb496f41c7ad2bf3be7" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool AbstractCell::isNeighbor </td>
+          <td class="memname">bool AbstractCell::isNeighbor </td>
           <td>(</td>
           <td class="paramname"></td>
           <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline, virtual]</code></td>
+          <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classCell.html#ae0e877ff871f41a26b0f501932bc71fc">Cell</a>, <a class="el" href="classConwayCell.html#aaa4e5f3534badb80609ac69293d8dbe9">ConwayCell</a>, and <a class="el" href="classFredkinCell.html#aa03b22b04b4d02cb78dccb4fd4450c25">FredkinCell</a>.</p>
+<p>Reimplemented in <a class="el" href="classCell.html#ae0e877ff871f41a26b0f501932bc71fc">Cell</a>.</p>
 
 </div>
 </div>
@@ -294,7 +334,7 @@ Inheritance diagram for AbstractCell:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Nov 19 15:54:02 2012 for My Project by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Wed Nov 28 11:50:03 2012 for My Project by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
