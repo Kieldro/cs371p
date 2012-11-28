@@ -47,7 +47,7 @@ void Cell::update(int neighborsAdj, int neighborsDiag, unsigned int* population)
 	cell->update(neighborsAdj, neighborsDiag, population);
 	if(cell->transform()) {
 		delete cell;
-		cell = new ConwayCell(true);
+		cell = ConwayCell(true).clone();
 	}
 }
 #endif // Cell_h
