@@ -41,8 +41,7 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(game.nCols() == 69);
 	}
 	void testLife1 () {
-		Life<FredkinCell> game("RunLifeFredkin.in");
-		
+		Life<FredkinCell> game("RunLifeFredkin.in");	
 		CPPUNIT_ASSERT(game.generation == 0);
 		CPPUNIT_ASSERT(game.population == 4);
 		CPPUNIT_ASSERT(game.nRows() == 20);
@@ -316,6 +315,7 @@ struct TestLife : CppUnit::TestFixture {
 		c1.readChar('*');
 		ConwayCell* c2 = c1.clone();
 		CPPUNIT_ASSERT(c2->alive == true);
+		delete c2;
 	}
 	
 	void testConwayClone1 () {
@@ -323,6 +323,7 @@ struct TestLife : CppUnit::TestFixture {
 		c1.readChar('.');
 		ConwayCell* c2 = c1.clone();
 		CPPUNIT_ASSERT(c2->alive == false);
+		delete c2;
 	}
 	
 	void testConwayClone2 () {
@@ -330,6 +331,7 @@ struct TestLife : CppUnit::TestFixture {
 		c1.readChar('*');
 		ConwayCell* c2 = c1.clone();
 		CPPUNIT_ASSERT(c2->alive == true);
+		delete c2;
 	}
 
 	// ------------------------------
@@ -553,6 +555,7 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(c2->alive == true);
 		CPPUNIT_ASSERT(((FredkinCell*) c2)->age == 3);
 		CPPUNIT_ASSERT(&c1 != c2);
+		delete c2;
 	}
 	
 	void testFredkinClone1 () {
@@ -561,6 +564,7 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(c2->alive == false);
 		CPPUNIT_ASSERT(((FredkinCell*) c2)->age == 5);
 		CPPUNIT_ASSERT(&c1 != c2);
+		delete c2;
 	}
 	
 	void testFredkinClone2 () {
@@ -569,6 +573,7 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(c2->alive == true);
 		CPPUNIT_ASSERT(((FredkinCell*) c2)->age == 10);
 		CPPUNIT_ASSERT(&c1 != c2);
+		delete c2;
 	}
 
 	// --------------------
@@ -853,7 +858,7 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(l._g[0].size() == 1);
 		CPPUNIT_ASSERT(l._g[0][0].size() == 1);
 		CPPUNIT_ASSERT(l._g[1].size() == 1);
-			CPPUNIT_ASSERT(l._g[1][0].size() == 1);
+		CPPUNIT_ASSERT(l._g[1][0].size() == 1);
 	}
 
 	void testConstructGrid1 () {
@@ -862,7 +867,7 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(l._g[0].size() == 100);
 		CPPUNIT_ASSERT(l._g[0][0].size() == 100);
 		CPPUNIT_ASSERT(l._g[1].size() == 100);
-			CPPUNIT_ASSERT(l._g[1][0].size() == 100);
+	     	CPPUNIT_ASSERT(l._g[1][0].size() == 100);
 	}
 
 	void testConstructGrid2 () {
@@ -871,7 +876,7 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(l._g[0].size() == 100);
 		CPPUNIT_ASSERT(l._g[0][0].size() == 1);
 		CPPUNIT_ASSERT(l._g[1].size() == 100);
-			CPPUNIT_ASSERT(l._g[1][0].size() == 1);
+	       	CPPUNIT_ASSERT(l._g[1][0].size() == 1);
 	}
 
 	// -------------
@@ -1220,8 +1225,8 @@ struct TestLife : CppUnit::TestFixture {
 	// suite
 	CPPUNIT_TEST_SUITE(TestLife);
 	
-	CPPUNIT_TEST(testFredkinClone0);
-	CPPUNIT_TEST(testLife0);
+        CPPUNIT_TEST(testFredkinClone0);
+        CPPUNIT_TEST(testLife0);
 	CPPUNIT_TEST(testLife1);
 	CPPUNIT_TEST(testLife2);
 	CPPUNIT_TEST(testLife3);
@@ -1230,7 +1235,8 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testUpdate0);
 	CPPUNIT_TEST(testRunTurn0);
 	CPPUNIT_TEST(testSimulateTurn0);
-	CPPUNIT_TEST(testConwayDefaultConstructor2);
+        
+        CPPUNIT_TEST(testConwayDefaultConstructor2);
 	CPPUNIT_TEST(testConwayDefaultConstructor2);
 	CPPUNIT_TEST(testConwayDefaultConstructor2);
 	CPPUNIT_TEST(testConwayBoolConstructor0);
@@ -1248,8 +1254,10 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testConwayOperator0);
 	CPPUNIT_TEST(testConwayOperator1);
 	CPPUNIT_TEST(testConwayOperator2);
-	CPPUNIT_TEST(testConwayClone0);
-	CPPUNIT_TEST(testFredkinDefaultConstructor0);
+        CPPUNIT_TEST(testConwayClone0);
+        CPPUNIT_TEST(testConwayClone1);
+        CPPUNIT_TEST(testConwayClone2);
+        CPPUNIT_TEST(testFredkinDefaultConstructor0);
 	CPPUNIT_TEST(testFredkinDefaultConstructor1);
 	CPPUNIT_TEST(testFredkinDefaultConstructor2);
 	CPPUNIT_TEST(testFredkinBoolIntConstructor0);
@@ -1264,27 +1272,27 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testFredkinReadChar0);
 	CPPUNIT_TEST(testFredkinReadChar1);
 	CPPUNIT_TEST(testFredkinReadChar2);
-	CPPUNIT_TEST(testFredkinReadChar3);/*
+	CPPUNIT_TEST(testFredkinReadChar3);
 	CPPUNIT_TEST(testConwayUpdate0);
-	CPPUNIT_TEST(testConwayUpdate1);
-	CPPUNIT_TEST(testConwayUpdate2);
-	CPPUNIT_TEST(testConwayUpdate3);*/
-	CPPUNIT_TEST(testConwayTransform0);
+        CPPUNIT_TEST(testConwayUpdate1);
+        CPPUNIT_TEST(testConwayUpdate2);
+  	CPPUNIT_TEST(testConwayUpdate3);
+        CPPUNIT_TEST(testConwayTransform0);
 	CPPUNIT_TEST(testConwayPrint0);
 	CPPUNIT_TEST(testConwayPrint1);
-	CPPUNIT_TEST(testConwayPrint2);/*
+	CPPUNIT_TEST(testConwayPrint2);
 	CPPUNIT_TEST(testFredkinUpdate0);
 	CPPUNIT_TEST(testFredkinUpdate1);
 	CPPUNIT_TEST(testFredkinUpdate2);
 	CPPUNIT_TEST(testFredkinUpdate3);
-	CPPUNIT_TEST(testFredkinUpdate4);*/
-	CPPUNIT_TEST(testFredkinOperator0);
+	CPPUNIT_TEST(testFredkinUpdate4);
+        CPPUNIT_TEST(testFredkinOperator0);
 	CPPUNIT_TEST(testFredkinOperator1);
 	CPPUNIT_TEST(testFredkinOperator2);
 	CPPUNIT_TEST(testFredkinClone0);
 	CPPUNIT_TEST(testFredkinClone1);
 	CPPUNIT_TEST(testFredkinClone2);
-	CPPUNIT_TEST(testFredkinTransform0);
+  	CPPUNIT_TEST(testFredkinTransform0);
 	CPPUNIT_TEST(testFredkinTransform1);
 	CPPUNIT_TEST(testFredkinTransform2);
 	CPPUNIT_TEST(testFredkinTransform3);
@@ -1292,7 +1300,7 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testFredkinPrint1);
 	CPPUNIT_TEST(testFredkinPrint2);
 	CPPUNIT_TEST(testCellConstructor0);
-	CPPUNIT_TEST(testCellConstructor1);
+  	CPPUNIT_TEST(testCellConstructor1);
 	CPPUNIT_TEST(testCellConstructor2);
 	CPPUNIT_TEST(testCellCopyConstructor0);
 	CPPUNIT_TEST(testCellCopyConstructor1);
@@ -1308,7 +1316,7 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testCellReadChar2);
 	CPPUNIT_TEST(testIsNeighbor0);
 	CPPUNIT_TEST(testIsNeighbor1);
-	CPPUNIT_TEST(testIsNeighbor2);/*
+	CPPUNIT_TEST(testIsNeighbor2);
 	CPPUNIT_TEST(testCellUpdate0);
 	CPPUNIT_TEST(testCellUpdate1);
 	CPPUNIT_TEST(testCellUpdate2);
@@ -1317,17 +1325,17 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testCellUpdate5);
 	CPPUNIT_TEST(testCellUpdate6);
 	CPPUNIT_TEST(testCellUpdate7);
-	CPPUNIT_TEST(testCellUpdate8);*/
-	CPPUNIT_TEST(testConstructGrid0);
+	CPPUNIT_TEST(testCellUpdate8);
+        CPPUNIT_TEST(testConstructGrid0);
 	CPPUNIT_TEST(testConstructGrid1);
 	CPPUNIT_TEST(testConstructGrid2);
-	CPPUNIT_TEST(testLifenRows0);
+        CPPUNIT_TEST(testLifenRows0);
 	CPPUNIT_TEST(testLifenRows1);
 	CPPUNIT_TEST(testLifenRows2);
 	CPPUNIT_TEST(testLifenCols0);
 	CPPUNIT_TEST(testLifenCols1);
 	CPPUNIT_TEST(testLifenCols2);
-	CPPUNIT_TEST(testLiveonstrucotrString0);
+  	CPPUNIT_TEST(testLiveonstrucotrString0);
 	CPPUNIT_TEST(testLiveonstrucotrString1);
 	CPPUNIT_TEST(testLiveonstrucotrString2);
 	CPPUNIT_TEST(testLifeConstructorIntInt0);
