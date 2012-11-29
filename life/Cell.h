@@ -8,13 +8,11 @@
 
 class Cell : public AbstractCell {
 	public:
-                Cell(bool a = false) { cell = FredkinCell(a).clone(); }
+		Cell(bool a = false) { cell = FredkinCell(a).clone(); }
 		Cell(const Cell& c) { cell = c.cell->clone(); }
 		Cell(AbstractCell* c) { cell = c; }		// for unit tests
 		~Cell() { delete cell; }
 		bool isNeighbor() { return cell->isNeighbor(); }
-		void addAdj() { cell->addAdj(); }
-		void addDiag() { cell->addDiag(); }
 		Cell& operator= (const Cell& c);
 		bool readChar(char c);
 		void update(int , int , unsigned*);

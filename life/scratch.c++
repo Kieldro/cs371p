@@ -3,17 +3,24 @@
 
 using namespace std;
 
+struct Parent {
+	Parent() { cout << "Parent()" << endl; }
+	Parent(int) { cout << "Parent(int)" << endl; }
+	
+};
+
+
+struct Child : Parent {
+	Child() { cout << "Child()" << endl; }
+	Child(int) { cout << "Child(int)" << endl; }
+	
+};
+
 int main(){
 	
-	long t0 = clock();
-	cout << "time0: " << t0 << endl;
-	
-	
-	for(int i = 0; i < 444444444; ++i)
-		int y = i*35;
-	
-	long t1 = clock();
-	cout << "time: " << t1 - t0 << endl;
+	Parent p;
+	Parent(5);
+	Child c(7);
 	
 	return 0;
 }

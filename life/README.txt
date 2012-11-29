@@ -9,7 +9,7 @@ Last Name: Buitrago
 EID: ib
 E-mail: kieldro@gmail.com
 Estimated number of hours: 20
-Actual    number of hours: 25
+Actual    number of hours: 27
 4 hrs: 9p - 1a
 5 hrs: 1130a - 4:30
 4.5 hrs: 12p - 4:30
@@ -22,16 +22,18 @@ Partner Last Name: Benevelli
 Partner EID: grambo
 Partner E-mail: grahambenevelli@gmail.com
 Partner Estimated: 20
-Partner Actual   : -1
+Partner Actual   : 27
 
 Turnin CS Username: keo
 GitHub ID: kieldro
 GitHub Repository Name: cs371p
 
 Comments:
+3 standard in and out files. Other test going into AcceptTest.out
+Valgrind output is in AcceptTest.out and includes all the additional acceptance tests.
+
 link to the UML: http://www.gliffy.com/pubdoc/4058932/L.png
 3.5 sec for test0 with original algo
--2d vector of Cell or Cell*?
 
 ----------------
 Pair Programming

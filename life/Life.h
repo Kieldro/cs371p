@@ -8,8 +8,6 @@ project 6 - Life
 #ifndef Life_h
 #define Life_h
 
-//#include "Cell.h"
-
 // ------
 // macros
 #define DEBUG true
@@ -26,22 +24,10 @@ project 6 - Life
 #include <string>
 #include <fstream>
 #include <sstream>		// stringstreams
-#include <iostream>  // cout, endl
+#include <iostream>		// cout, endl
 
-using namespace std;/*
-using std::vector;
-using std::deque;
-using std::cout;
-using std::cerr;
-using std::endl;
-using std::string;
-using std::logic_error;
-using std::out_of_range;
-using std::ostream;
-using std::ostringstream;
-using std::ifstream;
-using std::allocator;
-*/
+using namespace std;
+
 /**
 Life class.
 */
@@ -49,26 +35,25 @@ template <typename T>
 class Life {
 	typedef vector< vector<T> > Tvector2D;
 	public:
-		unsigned generation;
-		unsigned population;
-		
 		Life(string);
 		Life(int rows = 0, int cols = 0);
 		void simulate(int turns, int j, ostream& out = cout);
+		void place(int r, int c);
+		~Life();
+	private:
+		unsigned generation;
+		unsigned population;
+		Tvector2D* _g;	// pointer to the grids
+		allocator<Tvector2D> _x;
+		
+		int nRows() const{return _g->size();}
+		int nCols() const{return _g->size() ? (*_g)[0].size() : 0;}
 		void runTurn();
 		void updateCell(int r, int c);
 		int countNeighborsAdjacent(int row, int col);
 		int countNeighborsDiag(int row, int col);
 		void setNeighbors(int r, int c);
 		void print(ostream& out = cout);
-		void place(int r, int c);
-		int nRows() const{return _g->size();}
-		int nCols() const{return _g->size() ? (*_g)[0].size() : 0;}
-		~Life();
-	private:
-		Tvector2D* _g;	// pointer to the grids
-		allocator<Tvector2D> _x;
-		
 		void constructGrids(int, int);
 };
 		
@@ -140,19 +125,19 @@ Life<T>::~Life() {
 // ---------
 // runTurn
 /**
-Runs a turn.
+Runs a turn, updating every cell.
 */
 template <typename T>
 void Life<T>::runTurn() {
 	population = 0;
-	
+	/*
 	// distribute neigbors algorithm
 	for(int r = 0; r < nRows(); ++r) {
 		for(int c = 0; c < nCols(); ++c) {
 			setNeighbors(r, c);
 		}
 	}
-	
+	*/
 	
 	for(int r = 0; r < nRows(); ++r) {
 		for(int c = 0; c < nCols(); ++c) {
@@ -164,22 +149,26 @@ void Life<T>::runTurn() {
 
 /**
 Updates cell to next generation and increment population accordingly.
+@param r The row in the grid.
+@param c The column in the grid.
 */
 template <typename T>
 void Life<T>::updateCell(int r, int c) {
 	auto& current = _g[generation % 2];
 	auto& next = _g[(generation + 1) % 2];
 	
-	int neighborsAdj = this->countNeighborsAdjacent(r, c);
-	int neighborsDiag = this->countNeighborsDiag(r, c);
+	int neighborsAdj = countNeighborsAdjacent(r, c);
+	int neighborsDiag = countNeighborsDiag(r, c);
 	next[r][c] = current[r][c];
 	next[r][c].update(neighborsAdj, neighborsDiag, &population);
 }
 
 /**
-Counts the neighbors of a ConwayCell.
+Counts the diagonal neighbors of a cell.
+@param r The row in the grid.
+@param c The column in the grid.
 */
-template <typename T>		// TODO cell is never used
+template <typename T>
 int Life<T>::countNeighborsDiag(int r, int c) {
 	int neighbors = 0;
 	Tvector2D& grid = _g[generation % 2];
@@ -199,7 +188,9 @@ int Life<T>::countNeighborsDiag(int r, int c) {
 }
 
 /**
-Counts the neighbors of a FredkinCell.
+Counts the adjecent neighbors of a cell.
+@param r The row in the grid.
+@param c The column in the grid.
 */
 template <typename T>
 int Life<T>::countNeighborsAdjacent(int r, int c) {
@@ -220,41 +211,8 @@ int Life<T>::countNeighborsAdjacent(int r, int c) {
 }
 
 /**
-
-*/
-template <typename T>
-void Life<T>::setNeighbors(int r, int c) {
-	assert(r >= 0 and r < nRows() and c >= 0 and c < nCols());
-	
-	Tvector2D& grid = _g[generation % 2];
-	
-	// dead cell is neighbor to no one
-	if(!grid[r][c].isNeighbor())
-		return;
-	//BOOYAKASHA
-	// adjacent
-	if(r-1 >= 0)
-		grid[r-1][c].addAdj();
-	if(c+1 < nCols())
-		grid[r][c+1].addAdj();
-	if(r+1 < nRows())
-		grid[r+1][c].addAdj();
-	if(c-1 >= 0)
-		grid[r][c-1].addAdj();
-	
-	// diagonal
-	if(r-1 >= 0 and c-1 >= 0)
-		grid[r-1][c-1].addDiag();
-	if(r-1 >= 0 and c+1 < nCols())
-		grid[r-1][c+1].addDiag();
-	if(r+1 < nRows() and c-1 >= 0)
-		grid[r+1][c-1].addDiag();
-	if(r+1 < nRows() and c+1 < nCols())
-		grid[r+1][c+1].addDiag();
-}
-
-/**
-@param turns the number turns to run the game.
+Simulates the game.
+@param turns the total number turns to run the game.
 @param j print the grid every j turns.
 */
 template <typename T>
@@ -269,16 +227,17 @@ void Life<T>::simulate(int turns, int j, ostream& out) {
 
 /**
 Set a cell in the current generation.
-@param r
-@param c
+@param r row of the grid.
+@param c column of the grid.
 */
 template <typename T>
 void Life<T>::place(int r, int c) {
-	_g[generation % 2][r][c] = true;
+	_g[generation % 2][r][c] = T(true);
 }
 
 /**
 Prints the grid and turn number.
+@param out Specifies which ostream to print to. Defaults to cout.
 */
 template <typename T>
 void Life<T>::print(ostream& out) {

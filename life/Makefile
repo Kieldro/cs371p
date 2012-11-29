@@ -1,6 +1,6 @@
 SHELL = /bin/sh
 
-CC = g++
+CC = g++-4.4
 CPPFLAGS = -std=c++0x #-pedantic -Wall
 
 TEST = TestLife.c++
@@ -14,19 +14,20 @@ all: test run log doxygen zip clean
 run: $(RUN)
 	clear
 	$(CC) $(CPPFLAGS) $(RUN) -o $(RUN).app
-	#valgrind \
-	./$(RUN).app 2>&1 #| tee $(RUNOUT)
+	valgrind \
+	./$(RUN).app 2>&1 | tee AcceptTest.out
 
 test: $(TEST)
 	clear
 	$(CC) $(CPPFLAGS) $(TEST) -lcppunit -o $(TEST).app
-	#valgrind \
-	./$(TEST).app 2>&1 #| tee $(TESTOUT)
+	valgrind \
+	./$(TEST).app 2>&1 | tee $(TESTOUT)
 
 log:
 	git log > Life.log
 
 doxygen:
+	rm -r html/
 	doxygen Doxyfile
 	#doxygen -g
 	# EXTRACT_ALL			= YES
@@ -40,7 +41,7 @@ zip:
 		Life.h Life.log Life.pdf \
 		$(RUN) $(RUNOUT) \
 		RunLifeConway.out RunLifeFredkin.out \
-		$(TEST) $(TESTOUT)
+		$(TEST) $(TESTOUT) keo-tests/ AcceptTest.out
 
 # turnin --submit reza cs371ppj6 Life.zip
 # turnin --list   reza cs371ppj6

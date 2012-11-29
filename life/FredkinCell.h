@@ -4,11 +4,11 @@
 
 #include "AbstractCell.h"
 
-class FredkinCell : public AbstractCell{
+class FredkinCell : public AbstractCell {
 	public:
-		FredkinCell() { alive = false; age = 0; adjNeighbors = 0; diagNeighbors = 0; }
-		FredkinCell(bool a1, int a2 = 0) { alive = a1; age = a2; adjNeighbors = 0; diagNeighbors = 0; }
-		FredkinCell(const FredkinCell& other) { alive = other.alive; age = other.age; adjNeighbors = 0; diagNeighbors = 0; }
+		FredkinCell() { alive = false; age = 0; }
+		FredkinCell(bool a1, int a2 = 0) { alive = a1; age = a2; }
+		FredkinCell(const FredkinCell& other) { alive = other.alive; age = other.age; }
 		void update(int neighborsAdj, int neighborsDiag, unsigned* population);
 		FredkinCell* clone() { return new FredkinCell(*this); }
 		bool transform() { return age >= 2 && alive; }
@@ -45,7 +45,6 @@ char FredkinCell::print() const {
 
 void FredkinCell::update(int neighborsAdj, int neighborsDiag, unsigned* pop) {
 	int neighbors = neighborsAdj;
-	//int neighbors = adjNeighbors;
 	//if(DEBUG) cerr << "neighbors: " << neighbors << endl;
 	assert(neighbors >= 0 and neighbors <= 4);
 	
@@ -59,8 +58,5 @@ void FredkinCell::update(int neighborsAdj, int neighborsDiag, unsigned* pop) {
 	
 	if(alive)
 		++*pop;
-	
-	adjNeighbors = 0;
-	diagNeighbors = 0;
 }
 #endif // FredkinCell_h

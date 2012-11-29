@@ -6,7 +6,7 @@ CS 371p
 project 6 - Life
 
 compile:
-	$ g++ -std=c++0x -ldl TestLife.c++ -lcppunit -o TestLife.c++.app
+	$ g++-4.4 -std=c++0x -ldl TestLife.c++ -lcppunit -o TestLife.c++.app
 execute:
 	$ valgrind ./TestLife.c++.app 2>&1 | tee TestLife.out
 */
@@ -35,6 +35,7 @@ struct TestLife : CppUnit::TestFixture {
 	// testLife
 	void testLife0 () {
 		Life<ConwayCell> game("RunLifeConway.in");
+		
 		CPPUNIT_ASSERT(game.generation == 0);
 		CPPUNIT_ASSERT(game.population == 35);
 		CPPUNIT_ASSERT(game.nRows() == 109);
@@ -227,7 +228,7 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(population == 0);
 	}
 	void testConwayUpdate1 () {
-		ConwayCell c;
+		ConwayCell c(true);
 		unsigned population = 0;
 		c.update(3, 0, &population);
 		
@@ -249,7 +250,11 @@ struct TestLife : CppUnit::TestFixture {
 		
 		c.update(1, 0, &population);
 		CPPUNIT_ASSERT(!c.alive);
-		CPPUNIT_ASSERT(population == 2);
+		CPPUNIT_ASSERT(population == 3);
+		
+		c.update(0, 0, &population);
+		CPPUNIT_ASSERT(!c.alive);
+		CPPUNIT_ASSERT(population == 3);
 	}
 	void testConwayUpdate3 () {
 		ConwayCell c;
@@ -308,8 +313,6 @@ struct TestLife : CppUnit::TestFixture {
 	
 	// ---------------
 	// testConwayClone
-	// ---------------
-	
 	void testConwayClone0 () {
 		ConwayCell c1;
 		c1.readChar('*');
@@ -547,8 +550,6 @@ struct TestLife : CppUnit::TestFixture {
 	
 	// ----------------
 	// testFredkinClone
-	// ----------------
-	
 	void testFredkinClone0 () {
 		FredkinCell c1(true, 3);
 		AbstractCell* c2 = c1.clone();
@@ -617,8 +618,6 @@ struct TestLife : CppUnit::TestFixture {
 	
 	// -------------------
 	// testCellConstructor
-	// -------------------
-	
 	void testCellConstructor0 () {
 		Cell c;
 		CPPUNIT_ASSERT(c.cell != NULL);
@@ -642,8 +641,6 @@ struct TestLife : CppUnit::TestFixture {
 	
 	// --------------------------
 	// testCellPointerConstructor
-	// --------------------------
-	
 	void testCellPointerConstructor0 () {
 		Cell c = new ConwayCell;
 		CPPUNIT_ASSERT(c.cell->alive == false);
@@ -664,8 +661,6 @@ struct TestLife : CppUnit::TestFixture {
 	
 	// -----------------------
 	// testCellCopyConstructor
-	// -----------------------
-	
 	void testCellCopyConstructor0 () {
 		Cell c1;
 		Cell c2 = c1;
@@ -695,8 +690,6 @@ struct TestLife : CppUnit::TestFixture {
 	
 	// ----------------
 	// testCellReadChar
-	// ----------------
-	
 	void testCellReadChar0 () {
 		Cell c;
 		c.readChar('0');
@@ -799,7 +792,7 @@ struct TestLife : CppUnit::TestFixture {
 		Cell c = new ConwayCell(true);
 		unsigned int pop = 0;
 		c.update(1, 0, &pop);
-		CPPUNIT_ASSERT(pop == 0);
+		CPPUNIT_ASSERT(pop == 1);
 		CPPUNIT_ASSERT(c.cell->alive == false);
 		CPPUNIT_ASSERT(c.cell->print() == '.');
 	}
@@ -808,7 +801,7 @@ struct TestLife : CppUnit::TestFixture {
 		Cell c = new ConwayCell(false);
 		unsigned int pop = 0;
 		c.update(3, 0, &pop);
-		CPPUNIT_ASSERT(pop == 1);
+		CPPUNIT_ASSERT(pop == 0);
 		CPPUNIT_ASSERT(c.cell->alive == true);
 		CPPUNIT_ASSERT(c.cell->print() == '*');
 	}
@@ -922,7 +915,7 @@ struct TestLife : CppUnit::TestFixture {
 	// -------------------------
 
 	void testLiveonstrucotrString0 () {
-		Life<ConwayCell> l("./acceptancetests/RunConway1.in");
+		Life<ConwayCell> l("./keo-tests/RunConway1.in");
 		CPPUNIT_ASSERT(l.nRows() == 48);
 		CPPUNIT_ASSERT(l.nCols() == 50);
 		CPPUNIT_ASSERT(l._g[0][0][2].print() == '*');
@@ -930,7 +923,7 @@ struct TestLife : CppUnit::TestFixture {
 	}
 
 	void testLiveonstrucotrString1 () {
-		Life<ConwayCell> l("./acceptancetests/RunConway2.in");
+		Life<ConwayCell> l("./keo-tests/RunConway2.in");
 		CPPUNIT_ASSERT(l.nRows() == 50);
 		CPPUNIT_ASSERT(l.nCols() == 80);
 		CPPUNIT_ASSERT(l._g[0][5][1].print() == '*');
@@ -938,7 +931,7 @@ struct TestLife : CppUnit::TestFixture {
 	}
 
 	void testLiveonstrucotrString2 () {
-		Life<ConwayCell> l("./acceptancetests/RunConway3.in");
+		Life<ConwayCell> l("./keo-tests/RunConway3.in");
 		CPPUNIT_ASSERT(l.nRows() == 17);
 		CPPUNIT_ASSERT(l.nCols() == 17);
 		CPPUNIT_ASSERT(l._g[0][4][2].print() == '*');
@@ -1234,8 +1227,7 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testLife5);
 	CPPUNIT_TEST(testUpdate0);
 	CPPUNIT_TEST(testRunTurn0);
-	CPPUNIT_TEST(testSimulateTurn0);
-        
+	CPPUNIT_TEST(testSimulateTurn0);        
         CPPUNIT_TEST(testConwayDefaultConstructor2);
 	CPPUNIT_TEST(testConwayDefaultConstructor2);
 	CPPUNIT_TEST(testConwayDefaultConstructor2);
@@ -1326,7 +1318,7 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testCellUpdate6);
 	CPPUNIT_TEST(testCellUpdate7);
 	CPPUNIT_TEST(testCellUpdate8);
-        CPPUNIT_TEST(testConstructGrid0);
+	CPPUNIT_TEST(testConstructGrid0);
 	CPPUNIT_TEST(testConstructGrid1);
 	CPPUNIT_TEST(testConstructGrid2);
         CPPUNIT_TEST(testLifenRows0);
