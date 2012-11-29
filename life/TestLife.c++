@@ -6,7 +6,7 @@ CS 371p
 project 6 - Life
 
 compile:
-	$ g++ -std=c++0x -ldl TestLife.c++ -lcppunit -o TestLife.c++.app
+	$ g++-4.4 -std=c++0x -ldl TestLife.c++ -lcppunit -o TestLife.c++.app
 execute:
 	$ valgrind ./TestLife.c++.app 2>&1 | tee TestLife.out
 */

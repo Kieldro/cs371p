@@ -1,3 +1,8 @@
+==12597== Memcheck, a memory error detector
+==12597== Copyright (C) 2002-2011, and GNU GPL'd, by Julian Seward et al.
+==12597== Using Valgrind-3.7.0 and LibVEX; rerun with -h for copyright info
+==12597== Command: ./TestLife.c++.app
+==12597== 
 TestLife.c++
 ................................................................................................................................
 
@@ -5,6 +10,21 @@ TestLife.c++
 OK (128 tests)
 
 
-t1: 0
+t1: 1520000
 Clocks ticks elapsed: 0
 Done.
+==12597== 
+==12597== HEAP SUMMARY:
+==12597==     in use at exit: 122,960 bytes in 11 blocks
+==12597==   total heap usage: 6,774 allocs, 6,763 frees, 1,617,744 bytes allocated
+==12597== 
+==12597== LEAK SUMMARY:
+==12597==    definitely lost: 80 bytes in 5 blocks
+==12597==    indirectly lost: 0 bytes in 0 blocks
+==12597==      possibly lost: 0 bytes in 0 blocks
+==12597==    still reachable: 122,880 bytes in 6 blocks
+==12597==         suppressed: 0 bytes in 0 blocks
+==12597== Rerun with --leak-check=full to see details of leaked memory
+==12597== 
+==12597== For counts of detected and suppressed errors, rerun with: -v
+==12597== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 2 from 2)

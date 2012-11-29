@@ -1,3 +1,15 @@
+commit 590f02a4770862a38287e8f4b1d7f41f0b73ec80
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Nov 28 19:11:25 2012 -0600
+
+    Fixes disabled unit tests.
+
+commit 7b85e7da9313240780100591a189747f55e6408f
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Nov 28 16:37:28 2012 -0600
+
+    Fixes 2 acceptance tests.
+
 commit d8579c9368af2fdb26b4aacb528da62f28fa0031
 Author: Ian Buitrago <kieldro@gmail.com>
 Date:   Wed Nov 28 11:58:51 2012 -0600
