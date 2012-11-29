@@ -1,6 +1,6 @@
 SHELL = /bin/sh
 
-CC = g++
+CC = g++-4.4
 CPPFLAGS = -std=c++0x #-pedantic -Wall
 
 TEST = TestLife.c++
@@ -14,13 +14,13 @@ all: test run log doxygen zip clean
 run: $(RUN)
 	clear
 	$(CC) $(CPPFLAGS) $(RUN) -o $(RUN).app
-	valgrind \
+	#valgrind \
 	./$(RUN).app 2>&1 | tee AcceptTest.out
 
 test: $(TEST)
 	clear
 	$(CC) $(CPPFLAGS) $(TEST) -lcppunit -o $(TEST).app
-	valgrind \
+	#valgrind \
 	./$(TEST).app 2>&1 | tee $(TESTOUT)
 
 log:

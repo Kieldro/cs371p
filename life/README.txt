@@ -30,11 +30,10 @@ GitHub Repository Name: cs371p
 
 Comments:
 3 standard in and out files. Other test going into AcceptTest.out
-Valgrind output is in AcceptTest.out and includes all accpetance tests.
+Valgrind output is in AcceptTest.out and includes all the additional acceptance tests.
 
 link to the UML: http://www.gliffy.com/pubdoc/4058932/L.png
 3.5 sec for test0 with original algo
--2d vector of Cell or Cell*?
 
 ----------------
 Pair Programming

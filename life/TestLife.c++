@@ -229,7 +229,7 @@ struct TestLife : CppUnit::TestFixture {
 		CPPUNIT_ASSERT(population == 0);
 	}
 	void testConwayUpdate1 () {
-		ConwayCell c;
+		ConwayCell c(true);
 		unsigned population = 0;
 		c.update(3, 0, &population);
 		
@@ -251,7 +251,11 @@ struct TestLife : CppUnit::TestFixture {
 		
 		c.update(1, 0, &population);
 		CPPUNIT_ASSERT(!c.alive);
-		CPPUNIT_ASSERT(population == 2);
+		CPPUNIT_ASSERT(population == 3);
+		
+		c.update(0, 0, &population);
+		CPPUNIT_ASSERT(!c.alive);
+		CPPUNIT_ASSERT(population == 3);
 	}
 	void testConwayUpdate3 () {
 		ConwayCell c;
@@ -783,7 +787,7 @@ struct TestLife : CppUnit::TestFixture {
 		Cell c = new ConwayCell(true);
 		unsigned int pop = 0;
 		c.update(1, 0, &pop);
-		CPPUNIT_ASSERT(pop == 0);
+		CPPUNIT_ASSERT(pop == 1);
 		CPPUNIT_ASSERT(c.cell->alive == false);
 		CPPUNIT_ASSERT(c.cell->print() == '.');
 	}
@@ -792,7 +796,7 @@ struct TestLife : CppUnit::TestFixture {
 		Cell c = new ConwayCell(false);
 		unsigned int pop = 0;
 		c.update(3, 0, &pop);
-		CPPUNIT_ASSERT(pop == 1);
+		CPPUNIT_ASSERT(pop == 0);
 		CPPUNIT_ASSERT(c.cell->alive == true);
 		CPPUNIT_ASSERT(c.cell->print() == '*');
 	}
@@ -1253,20 +1257,20 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testFredkinReadChar0);
 	CPPUNIT_TEST(testFredkinReadChar1);
 	CPPUNIT_TEST(testFredkinReadChar2);
-	CPPUNIT_TEST(testFredkinReadChar3);/*
+	CPPUNIT_TEST(testFredkinReadChar3);
 	CPPUNIT_TEST(testConwayUpdate0);
 	CPPUNIT_TEST(testConwayUpdate1);
 	CPPUNIT_TEST(testConwayUpdate2);
-	CPPUNIT_TEST(testConwayUpdate3);*/
+	CPPUNIT_TEST(testConwayUpdate3);
 	CPPUNIT_TEST(testConwayTransform0);
 	CPPUNIT_TEST(testConwayPrint0);
 	CPPUNIT_TEST(testConwayPrint1);
-	CPPUNIT_TEST(testConwayPrint2);/*
+	CPPUNIT_TEST(testConwayPrint2);
 	CPPUNIT_TEST(testFredkinUpdate0);
 	CPPUNIT_TEST(testFredkinUpdate1);
 	CPPUNIT_TEST(testFredkinUpdate2);
 	CPPUNIT_TEST(testFredkinUpdate3);
-	CPPUNIT_TEST(testFredkinUpdate4);*/
+	CPPUNIT_TEST(testFredkinUpdate4);
 	CPPUNIT_TEST(testFredkinOperator0);
 	CPPUNIT_TEST(testFredkinOperator1);
 	CPPUNIT_TEST(testFredkinOperator2);
@@ -1297,7 +1301,7 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testCellReadChar2);
 	CPPUNIT_TEST(testIsNeighbor0);
 	CPPUNIT_TEST(testIsNeighbor1);
-	CPPUNIT_TEST(testIsNeighbor2);/*
+	CPPUNIT_TEST(testIsNeighbor2);
 	CPPUNIT_TEST(testCellUpdate0);
 	CPPUNIT_TEST(testCellUpdate1);
 	CPPUNIT_TEST(testCellUpdate2);
@@ -1306,7 +1310,7 @@ struct TestLife : CppUnit::TestFixture {
 	CPPUNIT_TEST(testCellUpdate5);
 	CPPUNIT_TEST(testCellUpdate6);
 	CPPUNIT_TEST(testCellUpdate7);
-	CPPUNIT_TEST(testCellUpdate8);*/
+	CPPUNIT_TEST(testCellUpdate8);
 	CPPUNIT_TEST(testConstructGrid0);
 	CPPUNIT_TEST(testConstructGrid1);
 	CPPUNIT_TEST(testConstructGrid2);
