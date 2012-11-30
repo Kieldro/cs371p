@@ -1,3 +1,22 @@
+commit 80eec4a80deafc482f991112af22650b24fe7c9c
+Merge: 09caf0d 929b06a
+Author: Graham Benevelli <grahambenevelli@gmail.com>
+Date:   Thu Nov 29 07:10:50 2012 -0600
+
+    Merge Conflict
+
+commit 09caf0da45fd5ffda55f0c5de4545762cc1f0281
+Author: Graham Benevelli <grahambenevelli@gmail.com>
+Date:   Thu Nov 29 07:03:44 2012 -0600
+
+    Memory leak gone
+
+commit 929b06ab15b1db241b2aef9a2bd8cc261d0c6702
+Author: Ian Buitrago <kieldro@gmail.com>
+Date:   Wed Nov 28 19:26:35 2012 -0600
+
+    Turnin version.
+
 commit 590f02a4770862a38287e8f4b1d7f41f0b73ec80
 Author: Ian Buitrago <kieldro@gmail.com>
 Date:   Wed Nov 28 19:11:25 2012 -0600
